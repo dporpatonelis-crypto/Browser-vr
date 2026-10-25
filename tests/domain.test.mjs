@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
-import {filterScenarios,relevantHistory,latestPlans,materialChoices} from '../public/domain.mjs';
+import {filterScenarios,relevantHistory,latestPlans,materialChoices,sameTeachingSession} from '../public/domain.mjs';
 
 test('saved plan revisions use their chain even when timestamps are equal',()=>{
   const rows=[{id:'z',plan_id:'p',scenario_id:'s',created_at:'2026-10-25',previous_version_id:''},{id:'a',plan_id:'p',scenario_id:'s',created_at:'2026-10-25',previous_version_id:'z'}];
@@ -9,6 +9,22 @@ test('saved plan revisions use their chain even when timestamps are equal',()=>{
   const choices=materialChoices({activities:[{id:'new',label:'Current'}]},{planned_materials:[{id:'old',label:'Original',url:'https://example.org/'}]});
   assert.equal(choices.find(a=>a.id==='old').unavailable,true);
   assert.equal(choices.find(a=>a.id==='old').label,'Original');
+});
+test('older cross-class revisions remain visible as separate teaching sessions',()=>{
+  const base={scenario_id:'s',plan_id:'p',grade:'Β΄ Λυκείου',lesson_date:'2026-10-26',created_at:'2026-10-25'};
+  const b2={...base,id:'a',section:'Β2',previous_version_id:''};
+  const b3={...base,id:'b',section:'Β3',previous_version_id:'a'};
+  assert.equal(latestPlans([b2,b3],'s').length,2);
+  const editedB2={...b2,id:'c',previous_version_id:'b'};
+  assert.deepEqual(latestPlans([b2,b3,editedB2],'s').map(p=>p.id).sort(),['b','c']);
+  const nextDay={...editedB2,id:'d',lesson_date:'2026-10-27',previous_version_id:'c'};
+  assert.equal(latestPlans([b2,b3,editedB2,nextDay],'s').length,3);
+  assert.equal(sameTeachingSession(b2,{...b2,section:' β2 '}),true);
+  assert.equal(sameTeachingSession(b2,b3),false);
+});
+test('explicit new plans remain distinct even for the same class and date',()=>{
+  const a={scenario_id:'s',id:'a',plan_id:'a',grade:'Β΄ Λυκείου',section:'Β2',lesson_date:'2026-10-26',created_at:'2026-10-25',previous_version_id:''};
+  assert.equal(latestPlans([a,{...a,id:'b',plan_id:'b'}],'s').length,2);
 });
 
 const localRegistry=new URL('../public/data/scenario-registry.json',import.meta.url);

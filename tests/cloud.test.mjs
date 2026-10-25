@@ -50,6 +50,42 @@ test('private plans persist, revise without overwriting, and protect concurrent 
   assert.equal(restored.listPlans().plans.find(p=>p.id===first.id).notes,first.notes);
   assert.equal(restored.exportEvaluations().plans.length,2);
 });
+test('older clients changing class or date automatically create independent plans',()=>{
+  const {context}=environment();
+  const first=context.savePlan(planPayload()).plan;
+  const change=planPayload({request_id:'b2222222-2222-4222-8222-222222222222',plan_id:first.plan_id,previous_version_id:first.id,section:'Β3'});
+  const second=context.savePlan(change).plan;
+  assert.equal(second.plan_id,second.id);
+  assert.equal(second.previous_version_id,'');
+  assert.equal(second.source_version_id,first.id);
+  assert.equal(context.savePlan(change).created,false);
+  const third=context.savePlan({...change,request_id:'b3333333-3333-4333-8333-333333333333',plan_id:second.plan_id,previous_version_id:second.id,lesson_date:'2026-10-26'}).plan;
+  assert.equal(third.plan_id,third.id);
+  assert.equal(context.latestPlanVersions_(context.listPlans().plans).length,3);
+  assert.equal(context.listPlans().plans.find(p=>p.id===first.id).section,'Β2');
+});
+test('legacy cross-class chains can each be edited without hiding the other class',()=>{
+  const {context,storage}=environment();
+  const first=context.savePlan(planPayload()).plan;
+  const legacy={...first,id:'b4444444-4444-4444-8444-444444444444',previous_version_id:first.id,section:'Β3'};
+  storage.files.push({getName:()=>`plan-${legacy.id}.json`,getBlob:()=>({getDataAsString:()=>JSON.stringify(legacy)})});
+  assert.equal(context.latestPlanVersions_(context.listPlans().plans).length,2);
+  const edited=context.savePlan(planPayload({request_id:'b5555555-5555-4555-8555-555555555555',plan_id:first.plan_id,previous_version_id:first.id,notes:'Β2 updated'})).plan;
+  assert.equal(edited.plan_id,first.plan_id);
+  const latest=context.latestPlanVersions_(context.listPlans().plans);
+  assert.deepEqual(Array.from(latest,p=>p.section).sort(),['Β2','Β3']);
+});
+test('explicit independent copies preserve historical media and retries without duplicates',()=>{
+  const {context}=environment();
+  const first=context.savePlan(planPayload()).plan;
+  vm.runInContext(`CATALOG.scenarios.find(s=>s.scenario_id===${JSON.stringify(scenario.scenario_id)}).activities=[]`,context);
+  const data=planPayload({request_id:'b6666666-6666-4666-8666-666666666666',source_version_id:first.id,section:'Β3'});
+  const copy=context.savePlan(data).plan;
+  assert.equal(copy.plan_id,copy.id);
+  assert.equal(copy.planned_materials.length,2);
+  assert.equal(context.savePlan(data).created,false);
+  assert.throws(()=>context.savePlan({...data,request_id:'b7777777-7777-4777-8777-777777777777',source_version_id:'b8888888-8888-4888-8888-888888888888'}),/αντιγραφή/);
+});
 test('evaluation captures planned versus actually used media and private classroom context',()=>{
   const {context}=environment();
   const plan=context.savePlan(planPayload()).plan;

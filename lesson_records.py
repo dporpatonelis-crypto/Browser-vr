@@ -3,6 +3,27 @@ import json
 import re
 import uuid
 from datetime import date, datetime, timezone
+import unicodedata
+
+
+def same_teaching_session(a, b):
+    def section(row):
+        return ''.join(c for c in unicodedata.normalize('NFD', row.get('section', '').strip().casefold()) if not unicodedata.combining(c))
+    return all(a.get(k, '') == b.get(k, '') for k in ('scenario_id', 'grade', 'lesson_date')) and section(a) == section(b)
+
+
+def latest_plan_versions(rows):
+    by_id = {r['id']: r for r in rows}
+    superseded = set()
+    for row in rows:
+        parent = by_id.get(row.get('previous_version_id'))
+        visited = {row['id']}
+        while parent and parent['id'] not in visited:
+            visited.add(parent['id'])
+            if parent['plan_id'] == row['plan_id'] and same_teaching_session(parent, row):
+                superseded.add(parent['id'])
+            parent = by_id.get(parent.get('previous_version_id'))
+    return [r for r in rows if r['id'] not in superseded]
 
 
 def identity(value):
@@ -75,6 +96,7 @@ class PlanStore:
         request_id = identity(data.get('request_id'))
         plan_id = identity(data.get('plan_id') or request_id)
         previous = identity(data['previous_version_id']) if data.get('previous_version_id') else ''
+        source_id = identity(data['source_version_id']) if data.get('source_version_id') else ''
         scenario = next((s for s in registry['scenarios'] if s['scenario_id'] == data.get('scenario_id')), None)
         model = next((m for m in models['models'] if m['id'] == data.get('model_id')), None)
         if not scenario or not model:
@@ -91,20 +113,33 @@ class PlanStore:
             versions = self.read()
             old = next((r for r in versions if r['id'] == request_id), None)
             base = next((r for r in versions if r['id'] == previous), None)
-            ancestors = {r['previous_version_id'] for r in versions}
-            latest = next((r for r in versions if r['plan_id'] == plan_id and r['id'] not in ancestors), None)
+            if previous and not base:
+                raise ValueError('Δεν βρέθηκε η προηγούμενη έκδοση του σχεδίου.')
+            if base and base['plan_id'] != plan_id:
+                raise ValueError('Η έκδοση ανήκει σε άλλο σχέδιο.')
+            source = next((r for r in versions if r['id'] == source_id), None) if source_id else base
+            if source_id and not source:
+                raise ValueError('Δεν βρέθηκε το σχέδιο για αντιγραφή.')
+            if source and source['scenario_id'] != scenario['scenario_id']:
+                raise ValueError('Το σχέδιο ανήκει σε άλλο μάθημα.')
             if base and base['scenario_id'] != scenario['scenario_id']:
                 raise ValueError('Το σχέδιο ανήκει σε άλλο μάθημα.')
+            target_context = {'scenario_id': scenario['scenario_id'], 'grade': grade, 'section': section.strip(), **context_fields(data)}
+            # A class or day change is a separate teaching session, including older clients.
+            if base and not same_teaching_session(base, target_context):
+                source_id, source, plan_id, previous = base['id'], base, request_id, ''
+            latest = next((r for r in latest_plan_versions(versions) if r['plan_id'] == plan_id and same_teaching_session(r, target_context)), None)
             row = {'schema_version': 2, 'id': request_id, 'plan_id': plan_id, 'previous_version_id': previous,
+                   'source_version_id': source_id,
                    'scenario_id': scenario['scenario_id'], 'scenario_title': scenario['title'],
                    'grade': grade, 'section': section.strip(), 'model_id': model['id'], 'model_title': model['title'],
                    **context_fields(data), 'notes': notes.strip(),
-                   'planned_materials': select_materials(data.get('planned_material_ids'), scenario, base),
+                   'planned_materials': select_materials(data.get('planned_material_ids'), scenario, source),
                    'objectives': scenario['objectives'], 'duration': scenario.get('duration'),
                    'route': [s for s in model['steps'] if not s.get('requires') or any(a['kind'] == s['requires'] for a in scenario['activities'])]}
             if old:
                 keys = ['plan_id', 'previous_version_id', 'scenario_id', 'grade', 'section', 'model_id', 'class_profile', 'time_slot', 'lesson_date', 'notes']
-                if any(old.get(k) != row[k] for k in keys) or [a['id'] for a in old['planned_materials']] != list(dict.fromkeys(data['planned_material_ids'])):
+                if any(old.get(k) != row[k] for k in keys) or old.get('source_version_id', '') != source_id or [a['id'] for a in old['planned_materials']] != list(dict.fromkeys(data['planned_material_ids'])):
                     raise ValueError('Το αναγνωριστικό χρησιμοποιήθηκε για διαφορετικό σχέδιο.')
                 return old, False
             if latest and (not base or base['id'] != latest['id'] or base['plan_id'] != plan_id):

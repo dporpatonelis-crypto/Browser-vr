@@ -36,8 +36,22 @@ export function relevantHistory(records, scenarioId, grade = '', section = '') {
 
 export function latestPlans(plans, scenarioId) {
   const rows = plans.filter(p => p.scenario_id === scenarioId);
-  const previous = new Set(rows.map(p => p.previous_version_id));
-  return rows.filter(p => !previous.has(p.id)).sort((a,b) => b.created_at.localeCompare(a.created_at) || b.id.localeCompare(a.id));
+  const byId = new Map(rows.map(p => [p.id,p])), superseded = new Set();
+  for (const row of rows) {
+    let parent = byId.get(row.previous_version_id);
+    const visited = new Set([row.id]);
+    while (parent && !visited.has(parent.id)) {
+      visited.add(parent.id);
+      if (parent.plan_id === row.plan_id && sameTeachingSession(parent,row)) superseded.add(parent.id);
+      parent = byId.get(parent.previous_version_id);
+    }
+  }
+  return rows.filter(p => !superseded.has(p.id)).sort((a,b) => b.created_at.localeCompare(a.created_at) || b.id.localeCompare(a.id));
+}
+
+export function sameTeachingSession(a,b) {
+  return a.scenario_id === b.scenario_id && (a.grade || '') === (b.grade || '') &&
+    normalize(a.section?.trim()) === normalize(b.section?.trim()) && (a.lesson_date || '') === (b.lesson_date || '');
 }
 
 export function materialChoices(scenario, plan) {

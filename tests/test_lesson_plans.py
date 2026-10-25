@@ -5,7 +5,7 @@ import unittest
 import uuid
 from pathlib import Path
 
-from lesson_records import PlanStore
+from lesson_records import PlanStore, latest_plan_versions
 from server import EvaluationStore
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,6 +64,34 @@ class PlanTests(unittest.TestCase):
             with self.subTest(change=change),self.assertRaises(ValueError):
                 self.plans.append(self.plan_data(**change),self.registry,self.models)
         self.assertEqual([],self.plans.read())
+
+    def test_class_or_date_changes_fork_even_for_old_clients(self):
+        first,_ = self.plans.append(self.plan_data(),self.registry,self.models)
+        data = self.plan_data(plan_id=first['plan_id'],previous_version_id=first['id'],section='Β3')
+        second,_ = self.plans.append(data,self.registry,self.models)
+        self.assertEqual(second['id'],second['plan_id'])
+        self.assertEqual('',second['previous_version_id'])
+        self.assertEqual(first['id'],second['source_version_id'])
+        self.assertFalse(self.plans.append(data,self.registry,self.models)[1])
+        third,_ = self.plans.append(self.plan_data(plan_id=second['plan_id'],previous_version_id=second['id'],section='Β3',lesson_date='2026-10-26'),self.registry,self.models)
+        self.assertEqual(third['id'],third['plan_id'])
+        self.assertEqual(3,len(latest_plan_versions(self.plans.read())))
+
+    def test_legacy_cross_class_chain_keeps_both_sessions_visible(self):
+        first,_ = self.plans.append(self.plan_data(),self.registry,self.models)
+        second={**first,'id':str(uuid.uuid4()),'previous_version_id':first['id'],'section':'Β3'}
+        self.store.write_atomic(self.plans.directory/f"{second['id']}.json",second)
+        self.assertEqual(2,len(latest_plan_versions(self.plans.read())))
+        updated,_ = self.plans.append(self.plan_data(plan_id=first['plan_id'],previous_version_id=first['id'],notes='Β2 updated'),self.registry,self.models)
+        self.assertEqual(first['plan_id'],updated['plan_id'])
+        self.assertEqual(['Β2','Β3'],sorted(r['section'] for r in latest_plan_versions(self.plans.read())))
+
+    def test_independent_copy_can_use_media_from_its_saved_source(self):
+        first,_ = self.plans.append(self.plan_data(),self.registry,self.models)
+        self.scenario['activities']=[]
+        second,_ = self.plans.append(self.plan_data(source_version_id=first['id'],section='Β3'),self.registry,self.models)
+        self.assertEqual(self.ids[:2],[a['id'] for a in second['planned_materials']])
+        self.assertEqual(second['id'],second['plan_id'])
 
     def test_legacy_record_distinguishes_unknown_usage_from_explicit_empty(self):
         data={'request_id':str(uuid.uuid4()),'scenario_id':self.scenario['scenario_id'],'model_id':'guided-exploration','flags':['worked-well']}

@@ -1,4 +1,4 @@
-import {filterScenarios, relevantHistory, latestPlans, materialChoices} from './domain.mjs';
+import {filterScenarios, relevantHistory, latestPlans, materialChoices, sameTeachingSession} from './domain.mjs';
 
 const app = document.querySelector('#app');
 const cloud = window.__MISSION_CLOUD__ || null;
@@ -42,7 +42,7 @@ try { remembered = JSON.parse(sessionStorage.getItem('mission-context') || '{}')
 const state = {registry:null,models:null,view:'select',selected:null,grade:remembered.grade || '',section:remembered.section || '',
   modelId:remembered.modelId || 'guided-exploration',filters:{search:'',goal:'',subject:'',source:'',includeUnknown:false},
   classProfile:'',timeSlot:'',lessonDate:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Athens'}),
-  service:false,records:[],plans:[],planError:'',planDrafts:new Map(),teaching:false,historyError:'',drafts:new Map(),notice:'',refreshing:false,saving:false,planning:false};
+  service:false,records:[],plans:[],planError:'',historyEpoch:0,planDrafts:new Map(),teaching:false,historyError:'',drafts:new Map(),notice:'',refreshing:false,saving:false,planning:false};
 const selected = () => state.registry.scenarios.find(s => s.scenario_id === state.selected);
 const model = () => state.models.models.find(m => m.id === state.modelId) || state.models.models[0];
 function contextKey() { return state.selected; }
@@ -65,6 +65,40 @@ function planDirty() {
 function changed(evaluationOnly=false) {
   if (!evaluationOnly) {planDraft().requestId=uuid();planDraft().error='';planDraft().context=sessionData();}
   const d=draft();d.requestId=uuid();d.saved=false;d.error='';
+}
+function startNewPlan(copy=false) {
+  const old=planDraft();
+  state.planDrafts.set(state.selected,{ids:copy?[...old.ids]:[],notes:copy?old.notes:'',requestId:uuid(),saved:null,error:'',sourceVersionId:copy?(old.saved?.id||old.sourceVersionId||''):''});
+  state.drafts.delete(contextKey());state.teaching=false;
+  if(copy){state.section='';state.classProfile='';}
+  planDraft().context=sessionData();
+  state.notice=copy?'Δημιουργήθηκε ανεξάρτητο αντίγραφο. Συμπλήρωσε το άλλο τμήμα και πάτησε «Αποθήκευση σχεδίου».':'Νέο κενό σχέδιο. Τα αποθηκευμένα σχέδια διατηρούνται.';
+  remember();render();if(copy)document.querySelector('#section')?.focus();
+}
+function planStatus() {
+  const p=planDraft(),content=planContent(),count=latestPlans(state.plans,state.selected).length;
+  if(p.saved&&!planDirty())return `✓ Αποθηκεύτηκε για ${content.section||content.grade||'το μάθημα'}${content.lesson_date?' · '+date(content.lesson_date):''}. Αποθηκευμένα σχέδια για το μάθημα: ${count}.`;
+  if(p.saved&&!sameTeachingSession(p.saved,content))return `Θα αποθηκευτεί χωριστό σχέδιο για ${content.section||content.grade||'αυτή την ημερομηνία'}. Το προηγούμενο σχέδιο διατηρείται.`;
+  return p.saved?'Υπάρχουν αλλαγές προς αποθήκευση.':'Νέο προσχέδιο · δεν έχει αποθηκευτεί.';
+}
+function savedPlansHTML() {
+  if(!state.service)return '';
+  if(state.planError)return `<div class="notice error">${esc(state.planError)}</div>`;
+  const saved=latestPlans(state.plans,state.selected);
+  return `<details class="saved-plans" open><summary>Τα αποθηκευμένα σχέδια για αυτό το μάθημα (${saved.length})</summary>${saved.length?saved.map(x=>`<div><span><strong>${esc(x.section||x.grade||'Χωρίς τμήμα')}</strong> · ${esc(x.lesson_date?date(x.lesson_date):'Χωρίς ημερομηνία')}<small>${esc([x.grade,x.time_slot?timeLabel(x.time_slot):''].filter(Boolean).join(' · '))} · ${x.planned_materials.length} μέσα · ${esc(x.model_title)}</small></span><button class="button secondary" data-open-plan="${esc(x.id)}" aria-label="Άνοιγμα σχεδίου: ${esc(x.section||x.grade||'Χωρίς τμήμα')} · ${esc(x.lesson_date||'')}">Άνοιγμα σχεδίου</button></div>`).join(''):'<p class="muted">Δεν έχει αποθηκευτεί ακόμη σχέδιο για αυτό το μάθημα.</p>'}</details>`;
+}
+function syncContextUI(key) {
+  const p=planDraft(),summary=document.querySelector('.plan-context-summary');
+  if(summary)summary.textContent=[state.grade,state.section,state.timeSlot?timeLabel(state.timeSlot):'',state.lessonDate?date(state.lessonDate):''].filter(Boolean).join(' · ');
+  const profile=document.querySelector('.plan-profile');if(profile){profile.textContent=state.classProfile;profile.hidden=!state.classProfile;}
+  const status=document.querySelector('.plan-save>span');if(status)status.textContent=planStatus();
+  const saveButton=document.querySelector('#save-plan');if(saveButton)saveButton.disabled=!planDirty();
+  const section=document.querySelector('#section');if(section){section.disabled=!state.grade;if(key==='grade')section.value=state.section;}
+  if(key==='modelId'){
+    const route=document.querySelector('.plan-route');if(route)route.innerHTML=planRouteHTML();
+  }
+  const savedMessage=document.querySelector('.saved-message');if(savedMessage)savedMessage.remove();
+  const context=document.querySelector('.save-context');if(context)context.textContent=[state.grade,state.section,timeLabel(state.timeSlot)].filter(Boolean).join(' · ');
 }
 const timeLabel=slot=>({morning:'Πρωινή',midday:'Προς το μεσημέρι'}[slot] || 'Ώρα χωρίς χαρακτηρισμό');
 function openPlan(id) {
@@ -153,16 +187,20 @@ function activityCard(a) {
   return `<article class="material">${icon(a.kind==='slides'?'slides':a.kind==='book'||a.kind==='text'?'book':'play')}<div><span class="material-kind">${kind}${a.slide_count?' · '+a.slide_count+' διαφάνειες':''}</span><h3>${esc(a.label)}</h3>${a.note?`<p>${esc(a.note)}</p>`:''}<div class="material-links">${link(target,label+' '+icon('external'),'button secondary')}${a.drive_html?link(a.download_url,'Λήψη HTML','small-link'):''}${a.lesson_download_url?link(a.lesson_download_url,'Λήψη μαθήματος','small-link'):''}${state.service&&a.app==='interactive-sculpture'&&a.url?link(a.url,'Online εφαρμογή','small-link'):''}</div>
   ${choice}${a.content_preview?.length?`<details class="content-preview"><summary>Τι περιέχει η παρουσίαση;</summary><ol>${a.content_preview.map(p=>`<li>${link(p.url,esc(p.title))}<p>${esc(p.text)}</p></li>`).join('')}</ol></details>`:''}</div></article>`;
 }
-function planPanel() {
-  const p=planDraft(),s=selected(),choices=materialChoices(s,p.saved),saved=latestPlans(state.plans,state.selected);
-  const materials=p.ids.map(id=>choices.find(a=>a.id===id)).filter(Boolean);
+function planRouteHTML() {
+  const p=planDraft(),s=selected();
   const route=p.saved&&!planDirty()?p.saved.route:model().steps.filter(st=>!st.requires||s.activities.some(a=>a.kind===st.requires));
   const objectives=p.saved&&!planDirty()?p.saved.objectives:s.objectives;
-  return `<section class="panel lesson-plan ${state.teaching?'teaching-plan':''}" aria-label="Το σχέδιο μαθήματος"><div class="plan-heading"><div><p class="eyebrow">ΠΡΙΝ ΚΑΙ ΚΑΤΑ ΤΗ ΔΙΔΑΣΚΑΛΙΑ</p><h2>Το σχέδιο μαθήματός μου</h2><p class="muted">${esc([state.grade,state.section,state.timeSlot?timeLabel(state.timeSlot):'',state.lessonDate?date(state.lessonDate):''].filter(Boolean).join(' · '))}</p></div><div class="plan-actions"><button class="button secondary" id="teaching-mode">${state.teaching?'Επεξεργασία σχεδίου':'Προβολή για διδασκαλία'}</button><button class="text-button" id="new-plan">Νέο σχέδιο</button></div></div>
-  ${state.planError?`<div class="notice error">${esc(state.planError)}</div>`:''}${saved.length?`<details class="saved-plans"><summary>Τα αποθηκευμένα σχέδια για αυτό το μάθημα (${saved.length})</summary>${saved.map(x=>`<div><span>${esc([x.lesson_date?date(x.lesson_date):date(x.created_at),x.grade,x.section,x.time_slot?timeLabel(x.time_slot):''].filter(Boolean).join(' · '))}<small>${x.planned_materials.length} μέσα · ${esc(x.model_title)}</small></span><button class="button secondary" data-open-plan="${esc(x.id)}">Άνοιγμα σχεδίου</button></div>`).join('')}</details>`:''}
-  ${state.classProfile?`<p class="plan-profile">${esc(state.classProfile)}</p>`:''}<div class="plan-grid"><div><h3>Τα μέσα που επέλεξα <span class="count">${materials.length}</span></h3>${materials.length?`<ol class="plan-materials">${materials.map((a,i)=>{const current=s.activities.find(x=>x.id===a.id);const target=a.kind==='vr'?'':state.service&&current?.local_url?current.local_url:a.url;return `<li><div><strong>${esc(a.label)}</strong>${a.room?`<small>${esc(a.room)}</small>`:''}${a.unavailable?'<small class="missing-material">Η παλιά επιλογή απουσιάζει από τον σημερινό κατάλογο. Έλεγξε τη διαθεσιμότητά της.</small>':''}</div><div class="plan-actions">${target?link(target,'Άνοιγμα '+icon('external'),'button secondary'):'<small>Άνοιγμα από το Unity project</small>'}${!state.teaching?`<button class="text-button" data-move-material="${esc(a.id)}" ${i===0?'disabled':''} aria-label="Νωρίτερα: ${esc(a.label)}">↑</button><button class="text-button" data-remove-material="${esc(a.id)}" aria-label="Αφαίρεση: ${esc(a.label)}">Αφαίρεση</button>`:''}</div></li>`;}).join('')}</ol>`:'<p class="muted">Σημείωσε «Στο σχέδιο μαθήματος» στις κάρτες υλικού παρακάτω. Η σειρά των επιλογών είναι και η σειρά στο σχέδιο.</p>'}
-  <label for="plan-notes" class="field-label">Η δική μου πορεία / σημειώσεις <span class="optional">προαιρετικό</span></label>${state.teaching?`<p class="plan-notes">${esc(p.notes||'Δεν έχουν προστεθεί σημειώσεις.')}</p>`:`<textarea id="plan-notes" rows="3" maxlength="2000" placeholder="π.χ. Ερώτημα εκκίνησης → διαφάνειες → ομάδες στο VR → συζήτηση">${esc(p.notes)}</textarea>`}</div><div><h3>${esc(p.saved&&!planDirty()?p.saved.model_title:model().title)}</h3><ol class="compact-route">${route.map(st=>`<li><strong>${esc(st.title)}</strong><p>${esc(st.description)}</p></li>`).join('')}</ol>${objectives.length?`<details ${state.teaching?'open':''}><summary>Διδακτικοί στόχοι</summary><ul>${objectives.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></details>`:''}</div></div>
-  ${p.error?`<div class="notice error" role="alert">${esc(p.error)} Οι επιλογές σου παραμένουν εδώ.</div>`:''}<div class="plan-save"><span role="status">${p.saved&&!planDirty()?'✓ Αποθηκευμένο ιδιωτικά · '+date(p.saved.created_at):p.saved?'Υπάρχουν αλλαγές προς αποθήκευση.':'Προσχέδιο · δεν έχει αποθηκευτεί.'}</span>${state.service?`<button class="button primary" id="save-plan" ${state.planning||state.saving||!planDirty()?'disabled':''}>${state.planning?'Αποθηκεύεται…':'Αποθήκευση σχεδίου'}</button>`:`<div>${privateSpace('activity')}<p class="privacy-note">Οι επιλογές υλικού μεταφέρονται στον ιδιωτικό χώρο. Εκεί συμπλήρωσε τα στοιχεία και τις σημειώσεις και αποθήκευσε το σχέδιο.</p></div>`}</div></section>`;
+  return `<h3>${esc(p.saved&&!planDirty()?p.saved.model_title:model().title)}</h3><ol class="compact-route">${route.map(st=>`<li><strong>${esc(st.title)}</strong><p>${esc(st.description)}</p></li>`).join('')}</ol>${objectives.length?`<details ${state.teaching?'open':''}><summary>Διδακτικοί στόχοι</summary><ul>${objectives.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></details>`:''}`;
+}
+function planPanel() {
+  const p=planDraft(),s=selected(),choices=materialChoices(s,p.saved||state.plans.find(x=>x.id===p.sourceVersionId));
+  const materials=p.ids.map(id=>choices.find(a=>a.id===id)).filter(Boolean);
+  return `<section class="panel lesson-plan ${state.teaching?'teaching-plan':''}" aria-label="Το σχέδιο μαθήματος"><div class="plan-heading"><div><p class="eyebrow">ΠΡΙΝ ΚΑΙ ΚΑΤΑ ΤΗ ΔΙΔΑΣΚΑΛΙΑ</p><h2>Το σχέδιο μαθήματός μου</h2><p class="muted plan-context-summary">${esc([state.grade,state.section,state.timeSlot?timeLabel(state.timeSlot):'',state.lessonDate?date(state.lessonDate):''].filter(Boolean).join(' · '))}</p></div><div class="plan-actions"><button class="button secondary" id="teaching-mode">${state.teaching?'Επεξεργασία σχεδίου':'Προβολή για διδασκαλία'}</button><button class="button secondary" id="copy-plan">Αντίγραφο για άλλο τμήμα</button><button class="text-button" id="new-plan">Νέο σχέδιο</button></div></div>
+  <div id="saved-plan-list">${savedPlansHTML()}</div>
+  <p class="plan-profile" ${state.classProfile?'':'hidden'}>${esc(state.classProfile)}</p><div class="plan-grid"><div><h3>Τα μέσα που επέλεξα <span class="count">${materials.length}</span></h3>${materials.length?`<ol class="plan-materials">${materials.map((a,i)=>{const current=s.activities.find(x=>x.id===a.id);const target=a.kind==='vr'?'':state.service&&current?.local_url?current.local_url:a.url;return `<li><div><strong>${esc(a.label)}</strong>${a.room?`<small>${esc(a.room)}</small>`:''}${a.unavailable?'<small class="missing-material">Η παλιά επιλογή απουσιάζει από τον σημερινό κατάλογο. Έλεγξε τη διαθεσιμότητά της.</small>':''}</div><div class="plan-actions">${target?link(target,'Άνοιγμα '+icon('external'),'button secondary'):'<small>Άνοιγμα από το Unity project</small>'}${!state.teaching?`<button class="text-button" data-move-material="${esc(a.id)}" ${i===0?'disabled':''} aria-label="Νωρίτερα: ${esc(a.label)}">↑</button><button class="text-button" data-remove-material="${esc(a.id)}" aria-label="Αφαίρεση: ${esc(a.label)}">Αφαίρεση</button>`:''}</div></li>`;}).join('')}</ol>`:'<p class="muted">Σημείωσε «Στο σχέδιο μαθήματος» στις κάρτες υλικού παρακάτω. Η σειρά των επιλογών είναι και η σειρά στο σχέδιο.</p>'}
+  <label for="plan-notes" class="field-label">Η δική μου πορεία / σημειώσεις <span class="optional">προαιρετικό</span></label>${state.teaching?`<p class="plan-notes">${esc(p.notes||'Δεν έχουν προστεθεί σημειώσεις.')}</p>`:`<textarea id="plan-notes" rows="3" maxlength="2000" placeholder="π.χ. Ερώτημα εκκίνησης → διαφάνειες → ομάδες στο VR → συζήτηση">${esc(p.notes)}</textarea>`}</div><div class="plan-route">${planRouteHTML()}</div></div>
+  ${p.error?`<div class="notice error" role="alert">${esc(p.error)} Οι επιλογές σου παραμένουν εδώ.</div>`:''}<div class="plan-save"><span role="status">${esc(planStatus())}</span>${state.service?`<button class="button primary" id="save-plan" ${state.planning||state.saving||!planDirty()?'disabled':''}>${state.planning?'Αποθηκεύεται…':'Αποθήκευση σχεδίου'}</button>`:`<div>${privateSpace('activity')}<p class="privacy-note">Οι επιλογές υλικού μεταφέρονται στον ιδιωτικό χώρο. Εκεί συμπλήρωσε τα στοιχεία και τις σημειώσεις και αποθήκευσε το σχέδιο.</p></div>`}</div></section>`;
 }
 function activityView() {
   const s=selected(); const m=model();
@@ -181,11 +219,11 @@ function sourceNotes(s) {
 }
 function evaluationView() {
   const s=selected(), d=draft();
-  const p=planDraft(),choices=materialChoices(s,p.saved),planned=choices.filter(a=>p.ids.includes(a.id));
+  const p=planDraft(),choices=materialChoices(s,p.saved||state.plans.find(x=>x.id===p.sourceVersionId)),planned=choices.filter(a=>p.ids.includes(a.id));
   return `${selectedIntro(s,'Η ΔΙΚΗ ΣΟΥ ΑΝΑΤΡΟΦΟΔΟΤΗΣΗ')}${sessionContext()}<div class="evaluation-layout"><section class="panel evaluation-panel"><section class="actual-materials"><p class="eyebrow">ΑΠΟ ΤΟ ΣΧΕΔΙΟ ΣΤΗΝ ΠΡΑΞΗ</p><h2>Ποια μέσα χρησιμοποιήθηκαν;</h2><p class="muted"><strong>Στο σχέδιο:</strong> ${esc(planned.map(a=>a.label).join(' · ')||'Χωρίς επιλεγμένα μέσα')}. Μπορείς να αφαιρέσεις όσα δεν πρόλαβες ή να προσθέσεις μέσα που χρησιμοποίησες επιπλέον.</p><button class="text-button" id="use-planned">Επιλογή των μέσων του σχεδίου</button><div class="used-options" role="group" aria-label="Μέσα που χρησιμοποιήθηκαν">${choices.map(a=>`<label class="usage-choice"><input type="checkbox" data-used="${esc(a.id)}" ${d.used.has(a.id)?'checked':''} ${!state.service?'disabled':''}><span><strong>${esc(a.label)}</strong><small>${p.ids.includes(a.id)?'Στο σχέδιο':'Εκτός σχεδίου'}${a.room?' · '+esc(a.room):''}${a.unavailable?' · παλιά επιλογή καταλόγου':''}</small></span></label>`).join('')}</div><label class="usage-confirm"><input type="checkbox" id="usage-confirmed" ${d.usageConfirmed?'checked':''} ${!state.service?'disabled':''}><span>Επιβεβαιώνω ότι οι επιλογές δείχνουν τι χρησιμοποιήθηκε τελικά${d.used.size?' ('+d.used.size+' μέσα)':' · δεν χρησιμοποιήθηκε κανένα από τα παραπάνω'}.</span></label></section><p class="eyebrow">Η ΛΕΙΤΟΥΡΓΙΑ ΤΟΥ ΜΑΘΗΜΑΤΟΣ</p><h2>Πώς λειτούργησε η δραστηριότητα;</h2><p class="muted">Επίλεξε μία ή περισσότερες επισημάνσεις. Δεν χρειάζεται γραπτή αναφορά.</p><div class="flag-options" role="group" aria-label="Επισημάνσεις εφαρμογής">${state.models.flags.map(f=>`<button class="flag ${d.flags.has(f.id)?'chosen':''}" data-flag="${f.id}" aria-pressed="${d.flags.has(f.id)}" ${state.saving||!state.service?'disabled':''}><span class="flag-icon">${f.icon}</span><span>${esc(f.label)}</span><span class="flag-check" aria-hidden="true">${d.flags.has(f.id)?'✓':'+'}</span></button>`).join('')}</div>
   <details class="difficulty-select"><summary>Γνωστική δυσκολία σχεδιασμού · ${d.difficulty?d.difficulty+'/5':'προαιρετική'}</summary><label for="cognitive">Επίπεδο, εφόσον είναι γνωστό</label><select id="cognitive"><option value="">Προς επιβεβαίωση</option>${state.models.cognitive_scale.map(x=>`<option value="${x.level}" ${Number(d.difficulty)===x.level?'selected':''}>${x.level}. ${esc(x.label)}</option>`).join('')}</select></details>
   ${!state.service?`<div class="notice"><p>Οι αξιολογήσεις παραμένουν ιδιωτικές στον Google λογαριασμό σου. Άνοιξε τον ιδιωτικό χώρο για να αποθηκεύσεις και να δεις το ιστορικό από κάθε συσκευή.</p>${privateSpace()}</div>`:''}${d.error?`<div class="notice error" role="alert">${esc(d.error)} Οι επιλογές σου παραμένουν εδώ.</div>`:''}${d.saved?`<div class="saved-message" role="status">✓ ${cloud?'Αποθηκεύτηκε στο ιδιωτικό cloud.':'Αποθηκεύτηκε στον δίσκο.'} Θα εμφανιστεί στην επόμενη επιλογή του σεναρίου.</div>`:''}
-  <div class="save-row"><span>${state.grade?esc(state.grade)+(state.section?' · '+esc(state.section):''):'Χωρίς επιλογή τάξης'}<small>${esc(model().short_title || model().title)} · ${timeLabel(state.timeSlot)}</small></span><button class="button primary" id="save-evaluation" ${!state.service||!d.flags.size||!d.usageConfirmed||state.saving?'disabled':''}>${state.saving?'Αποθηκεύεται…':'Αποθήκευση αξιολόγησης'} ${icon('check')}</button></div><p class="privacy-note">Με την αξιολόγηση αποθηκεύεται και η τρέχουσα έκδοση του σχεδίου. Οι καταγραφές παραμένουν στον χώρο του εκπαιδευτικού.</p></section><aside class="evaluation-history"><h2>Από τις προηγούμενες εφαρμογές</h2>${previous(s)}<button class="text-button" data-view="activity">← Επιστροφή στο σχέδιο</button></aside></div>`;
+  <div class="save-row"><span class="save-context">${state.grade?esc(state.grade)+(state.section?' · '+esc(state.section):''):'Χωρίς επιλογή τάξης'}<small>${esc(model().short_title || model().title)} · ${timeLabel(state.timeSlot)}</small></span><button class="button primary" id="save-evaluation" ${!state.service||!d.flags.size||!d.usageConfirmed||state.saving?'disabled':''}>${state.saving?'Αποθηκεύεται…':'Αποθήκευση αξιολόγησης'} ${icon('check')}</button></div><p class="privacy-note">Με την αξιολόγηση αποθηκεύεται και η τρέχουσα έκδοση του σχεδίου. Οι καταγραφές παραμένουν στον χώρο του εκπαιδευτικού.</p></section><aside class="evaluation-history"><h2>Από τις προηγούμενες εφαρμογές</h2>${previous(s)}<button class="text-button" data-view="activity">← Επιστροφή στο σχέδιο</button></aside></div>`;
 }
 function footer() {
   const drive=state.registry.integrations.google_drive;
@@ -214,9 +252,9 @@ function bind() {
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
   document.querySelectorAll('[data-select]').forEach(b=>b.addEventListener('click',()=>{state.selected=b.dataset.select;state.teaching=false;go('activity');}));
   document.querySelectorAll('[data-context]').forEach(el=>el.addEventListener(['section','classProfile'].includes(el.dataset.context)?'input':'change',()=>{
-    const cursor=el.selectionStart;
-    const k=el.dataset.context;state[k]=el.value;if(k==='grade')state.section='';if(state.selected)changed(state.view==='evaluate');remember();render();
-    const replacement=document.getElementById(el.id);replacement?.focus();if(cursor!==null)replacement?.setSelectionRange?.(cursor,cursor);
+    const k=el.dataset.context;state[k]=el.value;if(k==='grade')state.section='';if(state.selected&&state.view!=='select')changed(state.view==='evaluate');remember();
+    // Keep the focused field and adjacent buttons mounted through Android blur/click.
+    if(state.view==='select')render();else syncContextUI(k);
   }));
   document.querySelectorAll('[data-filter]').forEach(el=>el.addEventListener(el.tagName==='INPUT'&&el.type!=='checkbox'?'input':'change',()=>{
     const id=el.id,start=el.selectionStart,end=el.selectionEnd;
@@ -234,7 +272,8 @@ function bind() {
   document.querySelectorAll('[data-move-material]').forEach(el=>el.addEventListener('click',()=>{const ids=planDraft().ids,i=ids.indexOf(el.dataset.moveMaterial);if(i>0)[ids[i-1],ids[i]]=[ids[i],ids[i-1]];changed();render();}));
   document.querySelector('#plan-notes')?.addEventListener('input',e=>{planDraft().notes=e.target.value;changed();const button=document.querySelector('#save-plan');if(button)button.disabled=false;document.querySelector('.plan-save>span').textContent='Υπάρχουν αλλαγές προς αποθήκευση.';});
   document.querySelector('#teaching-mode')?.addEventListener('click',()=>{state.teaching=!state.teaching;render();});
-  document.querySelector('#new-plan')?.addEventListener('click',()=>{state.planDrafts.delete(state.selected);state.drafts.delete(contextKey());state.teaching=false;state.lessonDate=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Athens'});render();});
+  document.querySelector('#new-plan')?.addEventListener('click',()=>startNewPlan());
+  document.querySelector('#copy-plan')?.addEventListener('click',()=>startNewPlan(true));
   document.querySelectorAll('[data-open-plan]').forEach(el=>el.addEventListener('click',()=>openPlan(el.dataset.openPlan)));
   document.querySelector('#save-plan')?.addEventListener('click',async()=>{try{await savePlan();}catch{}render();});
   document.querySelectorAll('[data-used]').forEach(el=>el.addEventListener('change',()=>{const d=draft();el.checked?d.used.add(el.dataset.used):d.used.delete(el.dataset.used);d.usageConfirmed=false;changed(true);render();document.querySelector(`[data-used="${el.dataset.used}"]`)?.focus();}));
@@ -246,16 +285,19 @@ function bind() {
 }
 async function loadHistory() {
   if (!state.service) return;
+  const epoch=++state.historyEpoch;
   const results=await Promise.allSettled([getJson('api/evaluations'),getJson('api/plans')]);
+  if(epoch!==state.historyEpoch)return;
   if(results[0].status==='fulfilled'){state.records=results[0].value.records;state.historyError='';}else state.historyError='Το ιστορικό δεν είναι διαθέσιμο: '+results[0].reason.message;
   if(results[1].status==='fulfilled'){state.plans=results[1].value.plans;state.planError='';}else state.planError='Τα σχέδια δεν είναι διαθέσιμα: '+results[1].reason.message;
 }
 async function savePlan() {
   const p=planDraft();if(!state.service)throw Error('Άνοιξε τον ιδιωτικό χώρο.');
   if(p.saved&&!planDirty())return p.saved;
-  const payload={...planContent(),request_id:p.requestId,plan_id:p.saved?.plan_id||p.requestId,previous_version_id:p.saved?.id||''};
+  const content=planContent(),fork=p.saved&&!sameTeachingSession(p.saved,content);
+  const payload={...content,request_id:p.requestId,plan_id:fork?p.requestId:p.saved?.plan_id||p.requestId,previous_version_id:fork?'':p.saved?.id||'',source_version_id:fork?p.saved.id:p.sourceVersionId||''};
   state.planning=true;p.error='';render();
-  try {const r=await postJson('api/plans',payload);p.saved=r.plan;p.requestId=uuid();state.plans=[...state.plans.filter(x=>x.id!==r.plan.id),r.plan];return r.plan;}
+  try {const r=await postJson('api/plans',payload);++state.historyEpoch;p.saved=r.plan;p.sourceVersionId='';state.notice='';p.requestId=uuid();state.plans=[...state.plans.filter(x=>x.id!==r.plan.id),r.plan];return r.plan;}
   catch(e){p.error=e.message;throw e;}
   finally{state.planning=false;render();}
 }
@@ -300,5 +342,5 @@ async function boot() {
     await loadHistory();render();
   } catch(e) {app.innerHTML=`<main class="loading"><h1>Δεν φορτώθηκε ο κατάλογος.</h1><p>${esc(e.message)}</p><p>Ανανέωσε τη σελίδα και έλεγξε τη σύνδεσή σου.</p><button class="button primary" id="retry">Δοκιμή ξανά</button></main>`;document.querySelector('#retry').addEventListener('click',boot);}
 }
-window.addEventListener('focus',async()=>{if(state.registry&&state.service&&!state.saving&&!state.planning){const before=JSON.stringify([state.records,state.plans,state.historyError,state.planError]);await loadHistory();if(before!==JSON.stringify([state.records,state.plans,state.historyError,state.planError]))render();}});
+window.addEventListener('focus',async()=>{if(state.registry&&state.service&&!state.saving&&!state.planning){const before=JSON.stringify([state.records,state.plans,state.historyError,state.planError]);await loadHistory();if(!state.saving&&!state.planning&&before!==JSON.stringify([state.records,state.plans,state.historyError,state.planError])){if(!document.activeElement?.matches('input,select,textarea,button,a'))render();}}});
 boot();

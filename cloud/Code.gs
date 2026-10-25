@@ -188,6 +188,23 @@ function readPlans_(folder) {
   }
   return rows.sort((a,b) => b.created_at.localeCompare(a.created_at) || b.id.localeCompare(a.id));
 }
+function sameTeachingSession_(a,b) {
+  const section = row => (row.section || '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ς/g,'σ');
+  return a.scenario_id === b.scenario_id && (a.grade || '') === (b.grade || '') && section(a) === section(b) && (a.lesson_date || '') === (b.lesson_date || '');
+}
+function latestPlanVersions_(rows) {
+  const byId = new Map(rows.map(r => [r.id,r])), superseded = new Set();
+  rows.forEach(row => {
+    let parent = byId.get(row.previous_version_id);
+    const visited = new Set([row.id]);
+    while (parent && !visited.has(parent.id)) {
+      visited.add(parent.id);
+      if (parent.plan_id === row.plan_id && sameTeachingSession_(parent,row)) superseded.add(parent.id);
+      parent = byId.get(parent.previous_version_id);
+    }
+  });
+  return rows.filter(r => !superseded.has(r.id));
+}
 function planVersion_(id, folder) {
   const key = uuid_(id), row = readPlans_(folder).find(p => p.id === key);
   if (!row) throw new Error('Δεν βρέθηκε η αποθηκευμένη έκδοση του σχεδίου.');
@@ -201,7 +218,9 @@ function listPlans() {
 function savePlan(data) {
   assertOwner_();
   if (!data || typeof data !== 'object' || Array.isArray(data) || JSON.stringify(data).length > 64000) throw new Error('Μη έγκυρο σχέδιο.');
-  const id = uuid_(data.request_id), planId = uuid_(data.plan_id || id), previous = data.previous_version_id ? uuid_(data.previous_version_id) : '';
+  const id = uuid_(data.request_id);
+  let planId = uuid_(data.plan_id || id), previous = data.previous_version_id ? uuid_(data.previous_version_id) : '';
+  let sourceId = data.source_version_id ? uuid_(data.source_version_id) : '';
   const scenario = CATALOG.scenarios.find(s => s.scenario_id === data.scenario_id), model = MODELS.models.find(m => m.id === data.model_id);
   if (!scenario || !model) throw new Error('Επίλεξε υπάρχον μάθημα και παιδαγωγικό μοντέλο.');
   // Reuse the same grade/section validation as evaluations, without creating an evaluation.
@@ -211,17 +230,24 @@ function savePlan(data) {
   try {
     const folder = folder_(), versions = readPlans_(folder);
     const old = versions.find(p => p.id === id), base = versions.find(p => p.id === previous);
-    const ancestors = new Set(versions.map(p => p.previous_version_id));
-    const latest = versions.find(p => p.plan_id === planId && !ancestors.has(p.id));
+    if (previous && !base) throw new Error('Δεν βρέθηκε η προηγούμενη έκδοση του σχεδίου.');
+    if (base && base.plan_id !== planId) throw new Error('Η έκδοση ανήκει σε άλλο σχέδιο.');
+    let source = sourceId ? versions.find(p => p.id === sourceId) : base;
+    if (sourceId && !source) throw new Error('Δεν βρέθηκε το σχέδιο για αντιγραφή.');
+    if (source && source.scenario_id !== scenario.scenario_id) throw new Error('Το σχέδιο ανήκει σε άλλο μάθημα.');
     if (base && base.scenario_id !== scenario.scenario_id) throw new Error('Το σχέδιο ανήκει σε άλλο μάθημα.');
-    const row = {schema_version:2, id, plan_id:planId, previous_version_id:previous, scenario_id:scenario.scenario_id,
+    if (base && !sameTeachingSession_(base,context)) {
+      sourceId = base.id; source = base; planId = id; previous = '';
+    }
+    const latest = latestPlanVersions_(versions).find(p => p.plan_id === planId && sameTeachingSession_(p,context));
+    const row = {schema_version:2, id, plan_id:planId, previous_version_id:previous, source_version_id:sourceId, scenario_id:scenario.scenario_id,
       scenario_title:scenario.title, grade:context.grade, section:context.section, model_id:model.id, model_title:model.title,
-      ...contextFields_(data), notes:data.notes.trim(), planned_materials:selectMaterials_(data.planned_material_ids,scenario,base),
+      ...contextFields_(data), notes:data.notes.trim(), planned_materials:selectMaterials_(data.planned_material_ids,scenario,source),
       objectives:scenario.objectives, duration:scenario.duration || null,
       route:model.steps.filter(s => !s.requires || scenario.activities.some(a => a.kind === s.requires))};
     if (old) {
       const keys = ['plan_id','previous_version_id','scenario_id','grade','section','model_id','class_profile','time_slot','lesson_date','notes'];
-      if (keys.some(k => JSON.stringify(old[k]) !== JSON.stringify(row[k])) || JSON.stringify(old.planned_materials.map(a => a.id)) !== JSON.stringify([...new Set(data.planned_material_ids)])) throw new Error('Το αναγνωριστικό χρησιμοποιήθηκε για διαφορετικό σχέδιο.');
+      if (keys.some(k => JSON.stringify(old[k]) !== JSON.stringify(row[k])) || (old.source_version_id || '') !== sourceId || JSON.stringify(old.planned_materials.map(a => a.id)) !== JSON.stringify([...new Set(data.planned_material_ids)])) throw new Error('Το αναγνωριστικό χρησιμοποιήθηκε για διαφορετικό σχέδιο.');
       return {ok:true, plan:old, created:false};
     }
     if (latest && (!base || base.id !== latest.id || base.plan_id !== planId)) throw new Error('Το σχέδιο άλλαξε από άλλη συσκευή. Άνοιξε την τελευταία έκδοση· οι επιλογές σου διατηρούνται.');

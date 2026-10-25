@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -21,6 +22,17 @@ LAYOUT = {
     'Interactive-sculpture': ('apps_root', 'interactive-sculpture', 'published'),
     'interactive-books': ('book_root', '', 'published'),
     'light-up-legacy': ('apps_root', 'light-up-legacy', 'published'),
+}
+SOURCE_SCOPES = {
+    'sacred-blueprint': r'^lessons/.+/(?:meta|lesson_plan|master_output|.*output)\.json$',
+    'idea-weaver-board': r'^src/data/(?:library/.*|clues)\.json$',
+    'Map-Timeline': r'^(?:data/.*|catalog|active_lesson)\.json$',
+    'history-explorer-3d': r'^public/data/.*\.json$',
+    'mind-palace-cases': r'^(?:cases/.*|catalog|active_lesson)\.json$',
+    'personal-page': r'^public/data/lessons/.*\.json$',
+    'Interactive-sculpture': r'^(?:data|scenarios)/.*\.json$',
+    'interactive-books': r'^Digital_Lessons/(?:book|data)\.json$',
+    'light-up-legacy': r'^public/(?:sculptures|contributions)\.json$',
 }
 
 
@@ -43,6 +55,12 @@ def blob_sha(content):
 
 def mirror_root(name):
     return ROOT/'imports/github'/name
+
+
+def tree_files(name, tree):
+    pattern = SOURCE_SCOPES.get(name, r'\.json$')
+    return {item['path']: item['sha'] for item in tree.get('tree', [])
+            if item.get('type') == 'blob' and re.search(pattern, item['path'])}
 
 
 def safe_path(base, relative):
@@ -72,6 +90,11 @@ def evidence_errors(receipt, state, current_time=None):
             continue
         if not record.get('files'):
             errors.append('Κενός κατάλογος πηγών: '+name)
+        tree = load(ROOT/'imports/github-trees'/(name+'.json'), {})
+        if not tree or tree.get('sha') != record.get('tree') or tree.get('truncated', True):
+            errors.append('Λείπει το πλήρες τρέχον δέντρο πηγών: '+name)
+        elif tree_files(name, tree) != {f['path']: f['sha'] for f in record.get('files', [])}:
+            errors.append('Η απογραφή παραλείπει ή προσθέτει αρχεία σε σχέση με το τρέχον δέντρο GitHub: '+name)
         if LAYOUT[name][2] == 'local-authoring':
             continue
         for item in record.get('files', []):

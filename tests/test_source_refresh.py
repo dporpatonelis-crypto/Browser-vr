@@ -49,18 +49,26 @@ class RefreshRegressionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             (root/'imports/github/app').mkdir(parents=True)
+            (root/'imports/github-trees').mkdir()
             (root/'imports/google-drive.json').write_text('{"files": [], "html_files": []}')
             target = root/'imports/github/app/data.json'
             content = b'{"id":"current"}'
             target.write_bytes(content)
             receipt = {'run_id': 'new', 'started_at': '2026-10-25T10:00:00Z'}
-            state = {'run_id': 'new', 'repositories': {'app': {'head': 'head', 'checked_at': '2026-10-25T10:00:01Z',
+            tree = {'sha': 'tree', 'truncated': False, 'tree': [{'path': 'data.json', 'type': 'blob', 'sha': blob_sha(content)}]}
+            (root/'imports/github-trees/app.json').write_text(json.dumps(tree))
+            state = {'run_id': 'new', 'repositories': {'app': {'head': 'head', 'tree': 'tree', 'checked_at': '2026-10-25T10:00:01Z',
                      'truncated': False, 'files': [{'path': 'data.json', 'sha': blob_sha(content)}]}},
                      'drive': {'checked_at': '2026-10-25T10:00:01Z', 'recursive_complete': True, 'files': []}}
             with patch('scripts.refresh_sources.ROOT', root), patch('scripts.refresh_sources.LAYOUT', {'app': ('apps_root', 'app', 'published')}):
                 check_time = datetime(2026, 10, 25, 10, 1, tzinfo=timezone.utc)
                 errors = lambda: evidence_errors(receipt, state, check_time)
                 self.assertEqual([], errors())
+                tree['tree'].append({'path': 'new-lesson.json', 'type': 'blob', 'sha': 'new-blob'})
+                (root/'imports/github-trees/app.json').write_text(json.dumps(tree))
+                self.assertTrue(errors())
+                tree['tree'].pop()
+                (root/'imports/github-trees/app.json').write_text(json.dumps(tree))
                 target.write_text('{"id":"stale"}')
                 self.assertTrue(errors())
                 target.write_bytes(content)

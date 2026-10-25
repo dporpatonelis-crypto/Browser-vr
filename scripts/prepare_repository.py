@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FILES = [
     '.gitignore', 'README.md', 'index.html', 'config.example.json', 'pedagogical-overrides.json',
+    'publishing.json',
     'server.py', 'start.command', '.github/workflows/pages.yml',
     'docs/publishing.md', 'docs/integration-contract.md',
     'cloud/Code.gs', 'cloud/appsscript.json',

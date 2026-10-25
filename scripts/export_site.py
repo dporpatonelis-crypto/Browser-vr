@@ -116,10 +116,11 @@ def export_site(output, site_url, cloud_url=''):
 
 
 if __name__ == '__main__':
+    defaults = json.loads((ROOT/'publishing.json').read_text()) if (ROOT/'publishing.json').exists() else {}
     parser = argparse.ArgumentParser(description='Εξαγωγή Πιλοτηρίου για GitHub Pages')
     parser.add_argument('--output', type=Path, default=ROOT/'site')
-    parser.add_argument('--site-url', default='https://dporpatonelis-crypto.github.io/Browser-vr/')
-    parser.add_argument('--cloud-url', default='')
+    parser.add_argument('--site-url', default=defaults.get('site_url', 'https://dporpatonelis-crypto.github.io/Browser-vr/'))
+    parser.add_argument('--cloud-url', default=defaults.get('cloud_url', ''))
     args = parser.parse_args()
     result = export_site(args.output, args.site_url, args.cloud_url)
     print(f'Εξήχθησαν {len(result["scenarios"])} μαθήματα στο {args.output}.')

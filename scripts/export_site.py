@@ -21,7 +21,7 @@ SCENARIO_FIELDS = {
 ACTIVITY_FIELDS = {
     'id', 'kind', 'label', 'url', 'note', 'app', 'native_id', 'drive_id', 'download_url',
     'drive_html', 'section_id', 'book_lesson_id', 'media_id', 'slide_count',
-    'checked_at', 'modified_at', 'access_note', 'room', 'exercise_count',
+    'checked_at', 'modified_at', 'access_note', 'room', 'exercise_count', 'stage_count', 'reveal_mode',
 }
 NATIVE_APPS = {'idea-weaver-board', 'Map-Timeline', 'history-explorer-3d', 'mind-palace-cases'}
 

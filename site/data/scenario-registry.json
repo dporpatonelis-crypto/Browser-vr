@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-24T13:05:56.184732Z",
+  "generated_at": "2026-10-25T08:50:02.535320Z",
   "grades": [
     "Α΄ Γυμνασίου",
     "Β΄ Γυμνασίου",
@@ -20,7 +20,7 @@
       "revision": 28
     },
     "google_drive": {
-      "checked_at": "2026-10-24T12:21:32.057Z",
+      "checked_at": "2026-10-25T08:46:02Z",
       "folder": {
         "id": "1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv",
         "title": "ChatGPT",
@@ -99,7 +99,7 @@
           "media_id": "SLD-029",
           "drive_id": "1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-17T10:33:06.382Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -276,12 +276,15 @@
         "αντιστοίχιση",
         "ερμηνεία",
         "παρατήρηση",
-        "αιτιολόγηση"
+        "αιτιολόγηση",
+        "συλλογή παπύρων",
+        "σταδιακή αποκάλυψη εικόνας"
       ],
       "formats": [
         "Κείμενο",
         "HTML",
-        "Slides"
+        "Slides",
+        "Unity VR"
       ],
       "duration": "2 διδακτικές ώρες × 45΄",
       "duration_status": "source",
@@ -308,7 +311,8 @@
         "personal-page",
         "Google Drive",
         "Drive HTML",
-        "drive-html"
+        "drive-html",
+        "Unity VR"
       ],
       "inquiry_question": "Γιατί τα βιβλία της Παλαιάς Διαθήκης είναι αχώριστα δεμένα με την Καινή Διαθήκη και πώς η υπόσχεση στον Αβραάμ εκπληρώνεται οικουμενικά στον Χριστό;",
       "sources": [
@@ -366,6 +370,16 @@
           "system": "drive-html",
           "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
           "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_jerusalem.unity",
+          "locator": "CovenantScenarioSelector"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CovenantTree.json",
+          "locator": ""
         }
       ],
       "activities": [
@@ -409,7 +423,7 @@
           "native_id": "",
           "drive_id": "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk",
           "slide_count": 15,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-03T06:14:03.548Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -425,6 +439,19 @@
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "id": "502db2dd6113f0e730fc",
+          "kind": "vr",
+          "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Δέντρο της Διαθήκης",
+          "url": "",
+          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 6 παπύρους, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "dentro_diathikis",
+          "room": "Ιεροσόλυμα",
+          "exercise_count": 6,
+          "stage_count": 0,
+          "reveal_mode": "συλλογή παπύρων και στόχευση εικόνας"
         }
       ]
     },
@@ -730,7 +757,7 @@
           "media_id": "SLD-021",
           "drive_id": "1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:25:22.015Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -804,7 +831,7 @@
           "media_id": "SLD-026",
           "drive_id": "17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:24:56.917Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -1277,11 +1304,14 @@
         "ανάγνωση",
         "συζήτηση",
         "αντιστοίχιση",
-        "αιτιολόγηση"
+        "αιτιολόγηση",
+        "συλλογή παπύρων",
+        "σταδιακή αποκάλυψη εικόνας"
       ],
       "formats": [
         "Digital Book",
-        "HTML"
+        "HTML",
+        "Unity VR"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -1301,7 +1331,8 @@
       "source_groups": [
         "Digital Book",
         "Drive HTML",
-        "drive-html"
+        "drive-html",
+        "Unity VR"
       ],
       "sources": [
         {
@@ -1332,6 +1363,16 @@
         {
           "system": "drive-html",
           "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_jerusalem.unity",
+          "locator": "CovenantScenarioSelector"
+        },
+        {
+          "system": "Unity VR",
+          "path": "ScienceReligion.json",
           "locator": ""
         }
       ],
@@ -1392,6 +1433,19 @@
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "id": "177bb44e58acba455022",
+          "kind": "vr",
+          "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Δύο τρόποι γνώσης",
+          "url": "",
+          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 6 παπύρους, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Οι έξι συνδέσεις αφορούν: Ένας κόσμος προς ανακάλυψη, Η δύναμη της διάνοιας, Κάθε μέθοδος έχει το πεδίο της, Μας το είπε η καρδιά μας, Η γνώση ως επικοινωνία, Εκτίμηση και συγκεκριμένη διαφωνία. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "two_ways_of_knowing",
+          "room": "Ιεροσόλυμα",
+          "exercise_count": 6,
+          "stage_count": 0,
+          "reveal_mode": "συλλογή παπύρων και στόχευση εικόνας"
         }
       ]
     },
@@ -1608,7 +1662,7 @@
           "media_id": "SLD-011",
           "drive_id": "1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-15T15:15:24.175Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1682,7 +1736,7 @@
           "media_id": "SLD-012",
           "drive_id": "1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-11T05:57:01.161Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1756,7 +1810,7 @@
           "media_id": "SLD-013",
           "drive_id": "1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-11T05:55:42.464Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1830,7 +1884,7 @@
           "media_id": "SLD-014",
           "drive_id": "1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-11T14:45:46.081Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1904,7 +1958,7 @@
           "media_id": "SLD-016",
           "drive_id": "1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-11T14:46:02.732Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1978,7 +2032,7 @@
           "media_id": "SLD-017",
           "drive_id": "1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-11T14:46:18.578Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2052,7 +2106,7 @@
           "media_id": "SLD-015",
           "drive_id": "1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-11T14:46:30.711Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2470,11 +2524,14 @@
         "ερμηνεία",
         "συζήτηση",
         "αντιστοίχιση",
-        "αιτιολόγηση"
+        "αιτιολόγηση",
+        "συλλογή παπύρων",
+        "σταδιακή αποκάλυψη εικόνας"
       ],
       "formats": [
         "HTML",
-        "Slides"
+        "Slides",
+        "Unity VR"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -2494,7 +2551,8 @@
       "source_groups": [
         "interactive-sculpture",
         "Drive HTML",
-        "drive-html"
+        "drive-html",
+        "Unity VR"
       ],
       "sources": [
         {
@@ -2510,6 +2568,16 @@
         {
           "system": "drive-html",
           "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_jerusalem.unity",
+          "locator": "CovenantScenarioSelector"
+        },
+        {
+          "system": "Unity VR",
+          "path": "SpiritualHealing.json",
           "locator": ""
         }
       ],
@@ -2545,6 +2613,19 @@
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "id": "e497245d426e41d26b9f",
+          "kind": "vr",
+          "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Πνευματική ελευθερία — από τα πάθη στη θεραπεία",
+          "url": "",
+          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 5 παπύρους σε 2 φάσεις, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "spiritual_healing",
+          "room": "Ιεροσόλυμα",
+          "exercise_count": 10,
+          "stage_count": 2,
+          "reveal_mode": "συλλογή παπύρων και στόχευση εικόνας"
         }
       ]
     },
@@ -2616,7 +2697,7 @@
           "media_id": "SLD-028",
           "drive_id": "1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-17T10:33:03.016Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2690,7 +2771,7 @@
           "media_id": "SLD-022",
           "drive_id": "11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:26:09.383Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2816,7 +2897,7 @@
           "media_id": "SLD-023",
           "drive_id": "182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:25:33.435Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2890,7 +2971,7 @@
           "media_id": "SLD-024",
           "drive_id": "19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:25:11.661Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2964,7 +3045,7 @@
           "media_id": "SLD-019",
           "drive_id": "1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:24:41.955Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3038,7 +3119,7 @@
           "media_id": "SLD-020",
           "drive_id": "1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:25:46.410Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3560,7 +3641,7 @@
           "native_id": "",
           "drive_id": "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA",
           "slide_count": 6,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-09-25T20:06:31.232Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3855,7 +3936,7 @@
           "media_id": "SLD-009",
           "drive_id": "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE",
           "slide_count": 6,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-08T17:49:43.102Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -3870,7 +3951,7 @@
           "media_id": "SLD-027",
           "drive_id": "1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-16T16:33:22.265Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -4006,7 +4087,7 @@
           "media_id": "SLD-025",
           "drive_id": "1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg",
           "slide_count": 7,
-          "checked_at": "2026-10-24T12:21:32.057Z",
+          "checked_at": "2026-10-25T08:46:02Z",
           "modified_at": "2026-10-13T16:25:58.850Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }

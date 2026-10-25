@@ -300,6 +300,75 @@ class Builder:
                           room=', '.join(r.get('scene_name','') for r in item.get('rooms',[])),
                           note='Καταχωρισμένο ως διαθέσιμο στο τοπικό manifest. Δεν ελέγχθηκε σε Quest.')
 
+    def covenant_tree(self):
+        """Index only CovenantTree scenarios that the Jerusalem scene can select."""
+        assets = self.unity/'Assets'
+        data_dir = assets/'CovenantTree/Data'
+        scene = assets/'Scenes/Room_jerusalem.unity'
+        selector_name = 'MindPalace.CovenantTree.CovenantScenarioSelector'
+        self.coverage.append({'system':'Unity VR · Σταδιακή αποκάλυψη εικόνας',
+                              'path':str(data_dir), 'available':data_dir.is_dir() and scene.is_file(),
+                              'check':'Μόνο σενάρια δεμένα στον επιλογέα του Room_jerusalem.'})
+        if not data_dir.is_dir() or not scene.is_file():
+            return
+        scene_text = scene.read_text(encoding='utf-8', errors='replace')
+        marker = scene_text.find(selector_name)
+        if marker < 0:
+            return
+        block_start = scene_text.rfind('--- !u!', 0, marker)
+        block_end = scene_text.find('\n--- !u!', marker)
+        selector_block = scene_text[block_start if block_start >= 0 else 0:block_end if block_end >= 0 else None]
+        lines = selector_block.splitlines()
+        scenario_list = next((i for i, line in enumerate(lines) if re.match(r'^[ ]{2}scenarios:\s*$', line)), None)
+        if scenario_list is None:
+            return
+        active_ids = []
+        for line in lines[scenario_list+1:]:
+            if re.match(r'^[ ]{2}[A-Za-z_]\w*:\s*$', line):
+                break
+            match = re.match(r'^[ ]{2}- id:\s*([A-Za-z0-9_-]+)\s*$', line)
+            if match:
+                active_ids.append(match.group(1))
+        if not active_ids:
+            return
+
+        for path in sorted(data_dir.glob('*.json')):
+            data = self.read(path, {})
+            native = data.get('lesson_id') if isinstance(data, dict) else None
+            if not native or native not in active_ids:
+                continue
+            mapped = self.config.get('html_scenario_links', {}).get(native)
+            sid = mapped or 'unity:'+native
+            title = data.get('short_title') or data.get('title') or native
+            # Keep the existing canonical Digital Book / lesson title when the activity
+            # is an additional source for that same scenario.
+            s = self.scenarios.get(sid) or self.scenario(sid, data.get('title') or title)
+            self.add_source(s, scene, 'Unity VR', native, 'CovenantScenarioSelector')
+            items = data.get('items', [])
+            stages = data.get('stages', [])
+            exercise_count = sum(len(stage.get('items', [])) for stage in stages) if stages else len(items)
+            phase_note = f' σε {len(stages)} φάσεις' if stages else ''
+            science_note = ''
+            if native == 'two_ways_of_knowing':
+                themes = [item.get('name') for item in items if item.get('name')]
+                if themes:
+                    science_note = 'Οι έξι συνδέσεις αφορούν: '+', '.join(themes)+'.'
+            note = (f'Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». '
+                    f'Ο μαθητής συλλέγει τους {len(items)} παπύρους{phase_note}, μελετά το περιεχόμενο και τις υποδείξεις, '
+                    f'στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. '
+                    f'{science_note + " " if science_note else ""}'
+                    'Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. '
+                    'Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.')
+            self.activity(s, 'vr', 'Unity VR · Σταδιακή αποκάλυψη εικόνας · '+title,
+                          path=path, app='Unity VR', native_id=native, note=note,
+                          room='Ιεροσόλυμα', exercise_count=exercise_count,
+                          stage_count=len(stages), reveal_mode='συλλογή παπύρων και στόχευση εικόνας')
+            for mode in ['συλλογή παπύρων','σταδιακή αποκάλυψη εικόνας','αντιστοίχιση','αιτιολόγηση']:
+                if mode not in s['modes']:
+                    s['modes'].append(mode)
+            if not s['objectives'] and data.get('subtitle'):
+                s['objectives'] = [data['subtitle']]
+
     def books(self):
         f=self.book/'Digital_Lessons/book.json'
         book=self.read(f,{})
@@ -507,6 +576,7 @@ class Builder:
         self.sculpture()
         self.drive()
         self.local_app_catalogs()
+        self.covenant_tree()
         return self.finish()
 
 

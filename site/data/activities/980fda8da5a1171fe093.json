@@ -1,0 +1,37 @@
+[
+  {
+    "id": "upper-room-prayer",
+    "year": "Πράξεις 1",
+    "title": "Προσευχή στο Υπερώο",
+    "image": "https://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/flame.webp",
+    "desc": "Η συγκεντρωμένη κοινότητα προσκαρτερεί στην προσευχή πριν από την Πεντηκοστή. Ιστορικό πλαίσιο: Πράξεις 1:13–14."
+  },
+  {
+    "id": "pentecost-teaching",
+    "year": "Πράξεις 2",
+    "title": "Πεντηκοστή και διδασκαλία",
+    "image": "https://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/scroll.webp",
+    "desc": "Οι γλώσσες σαν φωτιά παραπέμπουν στη δωρεά του Πνεύματος. Ο κύλινδρος συμβολίζει την αποστολική διδαχή. Πράξεις 2:1–4, 14–42."
+  },
+  {
+    "id": "eucharistic-community",
+    "year": "Πράξεις 2",
+    "title": "Ευχαριστία και κοινωνία αγαθών",
+    "image": "https://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/bread-wine.webp",
+    "desc": "Η κλάση του άρτου και το μοίρασμα σύμφωνα με την ανάγκη δείχνουν τη ζωή της κοινότητας. Ο οίνος συμπληρώνει τον λειτουργικό συμβολισμό. Πράξεις 2:42–47."
+  },
+  {
+    "id": "service-and-mission",
+    "year": "Πράξεις 6–8",
+    "title": "Διακονία, Στέφανος και αποστολή",
+    "image": "https://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/basket.webp",
+    "desc": "Η καθημερινή διακονία, το μαρτύριο του Στεφάνου και η διασπορά είναι μεταγενέστερα της Πεντηκοστής. Το καλάθι και τα σανδάλια με τον λίθο συνδέονται με αυτά τα γεγονότα."
+  },
+  {
+    "id": "liturgical-today",
+    "year": "Λειτουργικό σήμερα",
+    "title": "Προσευχή για όλον τον Αδάμ",
+    "image": "https://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/sandals.webp",
+    "desc": "Θεολογική ερμηνεία: η Εκκλησία συμμετέχει στη ζωή που φανερώνουν τα γεγονότα και προσεύχεται για ολόκληρη την ανθρωπότητα. Η συμβολική διεύρυνση του Υπερώου δεν αποτελεί πρόσθετο ιστορικό γεγονός."
+  }
+]

@@ -1,0 +1,129 @@
+{
+  "topic": "Η πρώτη Εκκλησία των Ιεροσολύμων",
+  "clues": [
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_01",
+      "title": "Φλόγα",
+      "description": "Γλώσσα φωτιάς.\nhttps://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/flame.webp",
+      "type": "evidence",
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_02",
+      "title": "Ευχαριστία / Σύναξη",
+      "description": "Η κοινότητα συνάγεται στην ευχαριστιακή τράπεζα.",
+      "type": "evidence",
+      "group": "ΣΗΜΑΣΙΕΣ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_03",
+      "title": "Κύλινδρος",
+      "description": "Ανοιχτός κύλινδρος με κείμενο.\nhttps://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/scroll.webp",
+      "type": "evidence",
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_04",
+      "title": "Διακονία / Φροντίδα",
+      "description": "Προσφορά και φροντίδα όσων έχουν ανάγκη.",
+      "type": "evidence",
+      "group": "ΣΗΜΑΣΙΕΣ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_05",
+      "title": "Σανδάλια",
+      "description": "Σανδάλια ψαρά.\nhttps://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/sandals.webp",
+      "type": "evidence",
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_06",
+      "title": "Άγιο Πνεύμα / Χαρίσματα",
+      "description": "Ζωοποιεί και συγκροτεί την Εκκλησία.",
+      "type": "evidence",
+      "group": "ΣΗΜΑΣΙΕΣ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_07",
+      "title": "Άρτος και οίνος",
+      "description": "Ψωμί και κύπελλο με κρασί.\nhttps://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/bread-wine.webp",
+      "type": "evidence",
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_08",
+      "title": "Κοινωνία / Κοινοκτημοσύνη",
+      "description": "Μοίρασμα αγαθών και κοινή ζωή.",
+      "type": "evidence",
+      "group": "ΣΗΜΑΣΙΕΣ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_09",
+      "title": "Νομίσματα",
+      "description": "Χρήματα συγκεντρωμένα μαζί.\nhttps://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/coins.webp",
+      "type": "evidence",
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_10",
+      "title": "Διδασκαλία / Σοφία",
+      "description": "«ἀγραμμάτους σοφίαν ἐδίδαξεν»",
+      "type": "evidence",
+      "group": "ΣΗΜΑΣΙΕΣ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_11",
+      "title": "Καλάθι",
+      "description": "Καλάθι με αγαθά.\nhttps://dporpatonelis-crypto.github.io/idea-weaver-board/images/upper-room/basket.webp",
+      "type": "evidence",
+      "group": "ΑΝΤΙΚΕΙΜΕΝΑ"
+    },
+    {
+      "id": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_12",
+      "title": "Αποστολή / Μαρτυρία",
+      "description": "«ἁλιεῖς θεολόγους ἀνέδειξεν»",
+      "type": "evidence",
+      "group": "ΣΗΜΑΣΙΕΣ"
+    }
+  ],
+  "connections": [],
+  "source": {
+    "type": "google-slides",
+    "presentationId": "1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw",
+    "presentationTitle": "Lovable 1st slide dynamic Template",
+    "slideObjectId": "upper_room_six_objects_v1",
+    "slideNumber": 1,
+    "revisionId": "NASiViRNFHQbsA"
+  },
+  "instruction": "Συνδέστε τα αντικείμενα με τις σημασίες τους και αιτιολογήστε με τον ύμνο της Πεντηκοστής.",
+  "matchingPuzzle": {
+    "itemGroup": "ΑΝΤΙΚΕΙΜΕΝΑ",
+    "slotGroup": "ΣΗΜΑΣΙΕΣ",
+    "answers": [
+      {
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_01",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_06"
+      },
+      {
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_03",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_10"
+      },
+      {
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_05",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_12"
+      },
+      {
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_07",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_02"
+      },
+      {
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_09",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_08"
+      },
+      {
+        "itemId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_11",
+        "slotId": "slides:1JOuvpoACUR5JpgLpPFAv5dHMsY4kJTVqhpXPqlH-nfw:upper_room_six_objects_v1:upper_evidence_04"
+      }
+    ]
+  }
+}

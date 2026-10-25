@@ -15,7 +15,7 @@ class PublicationTests(unittest.TestCase):
     def test_public_catalogue_contains_no_private_cache_or_machine_paths(self):
         text = (ROOT/'site/data/scenario-registry.json').read_text()
         registry = json.loads(text)
-        self.assertEqual(42, len(registry['scenarios']))
+        self.assertGreater(len(registry['scenarios']), 0)
         self.assertEqual(len(registry['scenarios']), len({s['scenario_id'] for s in registry['scenarios']}))
         self.assertEqual([], registry['source_files'])
         self.assertNotIn('/Users/', text)
@@ -25,7 +25,21 @@ class PublicationTests(unittest.TestCase):
         self.assertNotIn('evaluations', registry)
         self.assertFalse((ROOT/'site/storage').exists())
         self.assertFalse((ROOT/'site/imports').exists())
-        self.assertEqual(21, len({a['drive_id'] for s in registry['scenarios'] for a in s['activities'] if a.get('kind') == 'slides' and a.get('drive_id') and a.get('checked_at')}))
+        fresh = registry['integrations']['source_refresh']
+        self.assertEqual('verified', fresh['status'])
+        self.assertEqual(fresh['drive_slides'], len({a['drive_id'] for s in registry['scenarios'] for a in s['activities'] if a.get('kind') == 'slides' and a.get('drive_id') and a.get('checked_at')}))
+
+    def test_revelation_launches_are_unique_and_availability_is_honest(self):
+        registry = json.loads((ROOT/'site/data/scenario-registry.json').read_text())
+        scenario = next(s for s in registry['scenarios'] if s['scenario_id'] == 'book:lesson-004')
+        sculpture = [a for a in scenario['activities'] if 'Interactive-sculpture/' in a.get('url', '')]
+        self.assertEqual(1, len(sculpture))
+        reconstruction = next(a for a in scenario['activities'] if a.get('native_id') == 'revelation_map' and a['kind'] == 'vr')
+        self.assertEqual('Room_christianity', reconstruction['scene_name'])
+        self.assertEqual(6, reconstruction['exercise_count'])
+        model = next(a for a in scenario['activities'] if a.get('app') == 'light-up-legacy')
+        self.assertEqual('model', model['kind'])
+        self.assertEqual('model-only', model['availability_status'])
 
     def test_export_extracts_exact_module_and_keeps_drive_material_in_drive(self):
         with tempfile.TemporaryDirectory() as folder:

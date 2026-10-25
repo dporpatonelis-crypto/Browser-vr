@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T08:50:02.535320Z",
+  "generated_at": "2026-10-25T11:55:38.850230Z",
   "grades": [
     "Α΄ Γυμνασίου",
     "Β΄ Γυμνασίου",
@@ -20,13 +20,22 @@
       "revision": 28
     },
     "google_drive": {
-      "checked_at": "2026-10-25T08:46:02Z",
+      "checked_at": "2026-10-25T11:33:40.548Z",
       "folder": {
         "id": "1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv",
         "title": "ChatGPT",
         "url": "https://drive.google.com/drive/folders/1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv"
       },
       "mode": "connector-snapshot"
+    },
+    "source_refresh": {
+      "run_id": "5f796357-9656-4cdd-989f-c8790b1e813c",
+      "checked_at": "2026-10-25T11:33:40.548Z",
+      "status": "verified",
+      "github_repositories": 9,
+      "drive_folders": 3,
+      "drive_slides": 21,
+      "drive_html": 2
     }
   },
   "source_files": [],
@@ -99,7 +108,7 @@
           "media_id": "SLD-029",
           "drive_id": "1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-17T10:33:06.382Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -372,9 +381,34 @@
           "locator": ""
         },
         {
+          "system": "idea-weaver-board",
+          "path": "20261002_palaia-kai-kaini-diathiki-enotita.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "20261002_palaia-kai-kaini-diathiki-enotita.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "palaia-kai-kaini-diathiki-enotita.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "20261002_palaia-kai-kaini-diathiki-enotita.json",
+          "locator": ""
+        },
+        {
           "system": "Unity VR",
           "path": "Room_jerusalem.unity",
-          "locator": "CovenantScenarioSelector"
+          "locator": "image-reveal"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CovenantTree.json",
+          "locator": "image-reveal"
         },
         {
           "system": "Unity VR",
@@ -423,7 +457,7 @@
           "native_id": "",
           "drive_id": "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk",
           "slide_count": 15,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-03T06:14:03.548Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -441,17 +475,19 @@
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
         },
         {
-          "id": "502db2dd6113f0e730fc",
+          "id": "d995172189b55d65a386",
           "kind": "vr",
           "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Δέντρο της Διαθήκης",
           "url": "",
-          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 6 παπύρους, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 6 παπύρους, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
           "app": "Unity VR",
           "native_id": "dentro_diathikis",
           "room": "Ιεροσόλυμα",
+          "scene_name": "Room_jerusalem",
           "exercise_count": 6,
           "stage_count": 0,
-          "reveal_mode": "συλλογή παπύρων και στόχευση εικόνας"
+          "reveal_mode": "image-reveal",
+          "availability_status": "scene-bound"
         }
       ]
     },
@@ -471,12 +507,17 @@
         "εξερεύνηση",
         "ερμηνεία",
         "αντιστοίχιση",
-        "αιτιολόγηση"
+        "αιτιολόγηση",
+        "στόχευση χειρογράφων",
+        "συλλογή",
+        "ανασύνθεση εικόνας"
       ],
       "formats": [
         "Digital Book",
         "Slides",
-        "HTML"
+        "HTML",
+        "3D μοντέλο",
+        "Unity VR"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -498,7 +539,10 @@
         "Interactive Sculpture",
         "interactive-sculpture",
         "Drive HTML",
-        "drive-html"
+        "drive-html",
+        "Unity VR",
+        "Unity · υποστήριξη δραστηριότητας",
+        "Light Up Legacy"
       ],
       "sources": [
         {
@@ -524,6 +568,76 @@
         {
           "system": "drive-html",
           "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_christianity.unity",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_Map_Reconstruction.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "RevelationMap.json",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_head.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_trunk.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_arms.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_periphery.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_core.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_base.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_Map_Regions.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Revelation_Map_Reconstruction.asset",
+          "locator": ""
+        },
+        {
+          "system": "Unity · υποστήριξη δραστηριότητας",
+          "path": "RevelationSupportProfile.asset",
+          "locator": "Assembly-CSharp::MindPalace.TeacherSupport.TeacherSupportProfile"
+        },
+        {
+          "system": "Light Up Legacy",
+          "path": "sculptures.json",
+          "locator": ""
+        },
+        {
+          "system": "Light Up Legacy",
+          "path": "contributions.json",
           "locator": ""
         }
       ],
@@ -565,7 +679,7 @@
           "kind": "slides",
           "label": "Χάρτης της Αποκάλυψης · διαφάνεια 2",
           "url": "https://docs.google.com/presentation/d/1kmnmtbIiGHRrPHlaKNaJ_QJPtuPZXSzGALTppAGILY0/edit",
-          "note": "",
+          "note": "Σύνδεση που υπάρχει ήδη στο Digital Book.",
           "app": null,
           "native_id": "",
           "media_id": "SLD-018",
@@ -576,29 +690,21 @@
           "kind": "html",
           "label": "Interactive Sculpture · έξι ανακαλύψεις",
           "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=slides-discovery",
-          "note": "Σύνδεση που υπάρχει ήδη στο Digital Book.",
-          "app": null,
-          "native_id": "",
+          "note": "Περιεχόμενο από το υπάρχον Slides snapshot, 2026-10-05T06:04:01.001Z",
+          "app": "interactive-sculpture",
+          "native_id": "slides-discovery",
           "media_id": "WEB-001"
         },
         {
           "id": "5f9285aeacab7d12d1ff",
-          "kind": "html",
-          "label": "Light Up Legacy · τρισδιάστατο Δέντρο",
+          "kind": "model",
+          "label": "Light Up Legacy · μοντέλο «Δέντρο της Αποκάλυψης»",
           "url": "https://dporpatonelis-crypto.github.io/light-up-legacy/",
-          "note": "Σύνδεση που υπάρχει ήδη στο Digital Book.",
-          "app": null,
-          "native_id": "",
-          "media_id": "WEB-002"
-        },
-        {
-          "id": "e0486a6cc951a5800a54",
-          "kind": "html",
-          "label": "Interactive Sculpture · έξι ανακαλύψεις",
-          "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=slides-discovery",
-          "note": "Περιεχόμενο από το υπάρχον Slides snapshot, 2026-10-05T06:04:01.001Z",
-          "app": "interactive-sculpture",
-          "native_id": "slides-discovery"
+          "note": "Υπάρχει το τρισδιάστατο μοντέλο με έξι περιοχές. Στην εφαρμογή πάτησε «Γλυπτό μαθήματος» και επίλεξε «Δέντρο της Αποκάλυψης». Δεν είναι έτοιμο σενάριο Αποκάλυψης: το δημοσιευμένο περιεχόμενο συνεισφορών αφορά «Η ΕΝΝΟΙΑ ΤΗΣ ΠΙΣΤΗΣ».",
+          "app": "light-up-legacy",
+          "native_id": "tree-revelation",
+          "media_id": "WEB-002",
+          "availability_status": "model-only"
         },
         {
           "id": "2fd3322e7713aa25d06d",
@@ -612,6 +718,21 @@
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "id": "39dfe73c304ed4962d1e",
+          "kind": "vr",
+          "label": "Unity VR · Κυκλικό αναλόγιο · Οντολογικός χάρτης της Αποκάλυψης",
+          "url": "",
+          "note": "Στο δωμάτιο Χριστιανισμός ο μαθητής στοχεύει τα 6 χειρόγραφα με το τόξο, διαβάζει τις πηγές που αποκαλύπτονται και μεταφέρει τα χειρόγραφα από το αναλόγιο στις σωστές θέσεις της εικόνας. Η συλλογή και οι σωστές τοποθετήσεις μετρώνται χωριστά. Κάθε σωστή σύνδεση φωτίζει τη δική της περιοχή. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "revelation_map",
+          "room": "Χριστιανισμός",
+          "scene_name": "Room_christianity",
+          "exercise_count": 6,
+          "stage_count": 0,
+          "reveal_mode": "reconstruction",
+          "availability_status": "scene-bound"
         }
       ]
     },
@@ -757,7 +878,7 @@
           "media_id": "SLD-021",
           "drive_id": "1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:25:22.015Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -831,7 +952,7 @@
           "media_id": "SLD-026",
           "drive_id": "17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:24:56.917Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -1183,7 +1304,27 @@
           "locator": ""
         },
         {
+          "system": "idea-weaver-board",
+          "path": "eleftheria-kai-dogmatiki-syneidisi.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "eleftheria-kai-dogmatiki-syneidisi.json",
+          "locator": ""
+        },
+        {
           "system": "history-explorer-3d",
+          "path": "eleftheria-kai-dogmatiki-syneidisi.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "eleftheria-kai-dogmatiki-syneidisi.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
           "path": "eleftheria-kai-dogmatiki-syneidisi.json",
           "locator": ""
         }
@@ -1368,7 +1509,12 @@
         {
           "system": "Unity VR",
           "path": "Room_jerusalem.unity",
-          "locator": "CovenantScenarioSelector"
+          "locator": "image-reveal"
+        },
+        {
+          "system": "Unity VR",
+          "path": "ScienceReligion.json",
+          "locator": "image-reveal"
         },
         {
           "system": "Unity VR",
@@ -1435,17 +1581,66 @@
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
         },
         {
-          "id": "177bb44e58acba455022",
+          "id": "82ec311e076b554cae00",
           "kind": "vr",
           "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Δύο τρόποι γνώσης",
           "url": "",
-          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 6 παπύρους, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Οι έξι συνδέσεις αφορούν: Ένας κόσμος προς ανακάλυψη, Η δύναμη της διάνοιας, Κάθε μέθοδος έχει το πεδίο της, Μας το είπε η καρδιά μας, Η γνώση ως επικοινωνία, Εκτίμηση και συγκεκριμένη διαφωνία. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 6 παπύρους, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Οι έξι συνδέσεις αφορούν: Ένας κόσμος προς ανακάλυψη, Η δύναμη της διάνοιας, Κάθε μέθοδος έχει το πεδίο της, Μας το είπε η καρδιά μας, Η γνώση ως επικοινωνία, Εκτίμηση και συγκεκριμένη διαφωνία. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
           "app": "Unity VR",
           "native_id": "two_ways_of_knowing",
           "room": "Ιεροσόλυμα",
+          "scene_name": "Room_jerusalem",
           "exercise_count": 6,
           "stage_count": 0,
-          "reveal_mode": "συλλογή παπύρων και στόχευση εικόνας"
+          "reveal_mode": "image-reveal",
+          "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
+      "scenario_id": "app:idea-weaver-board:science-and-religion",
+      "title": "Επιστήμη και Θρησκεία",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "idea-weaver-board"
+      ],
+      "sources": [
+        {
+          "system": "idea-weaver-board",
+          "path": "science-and-religion.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "e0de25ec07f0a0e58a13",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://dporpatonelis-crypto.github.io/Browser-vr/apps/investigation/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fe0de25ec07f0a0e58a13.json",
+          "note": "Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "science-and-religion",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/e0de25ec07f0a0e58a13.json"
         }
       ]
     },
@@ -1662,7 +1857,7 @@
           "media_id": "SLD-011",
           "drive_id": "1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-15T15:15:24.175Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1736,7 +1931,7 @@
           "media_id": "SLD-012",
           "drive_id": "1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-11T05:57:01.161Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1810,7 +2005,7 @@
           "media_id": "SLD-013",
           "drive_id": "1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-11T05:55:42.464Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1884,7 +2079,7 @@
           "media_id": "SLD-014",
           "drive_id": "1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-11T14:45:46.081Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1958,7 +2153,7 @@
           "media_id": "SLD-016",
           "drive_id": "1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-11T14:46:02.732Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2032,7 +2227,7 @@
           "media_id": "SLD-017",
           "drive_id": "1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-11T14:46:18.578Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2106,7 +2301,7 @@
           "media_id": "SLD-015",
           "drive_id": "1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-11T14:46:30.711Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2207,6 +2402,11 @@
           "locator": ""
         },
         {
+          "system": "idea-weaver-board",
+          "path": "investigation_board_output.json",
+          "locator": ""
+        },
+        {
           "system": "Map-Timeline",
           "path": "timeline_item_output.json",
           "locator": ""
@@ -2214,6 +2414,11 @@
         {
           "system": "history-explorer-3d",
           "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mind_palace_output.json",
           "locator": ""
         },
         {
@@ -2401,8 +2606,28 @@
           "locator": ""
         },
         {
+          "system": "text",
+          "path": "source.txt",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_output.json",
+          "locator": ""
+        },
+        {
           "system": "history-explorer-3d",
           "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
           "locator": ""
         },
         {
@@ -2573,7 +2798,12 @@
         {
           "system": "Unity VR",
           "path": "Room_jerusalem.unity",
-          "locator": "CovenantScenarioSelector"
+          "locator": "image-reveal"
+        },
+        {
+          "system": "Unity VR",
+          "path": "SpiritualHealing.json",
+          "locator": "image-reveal"
         },
         {
           "system": "Unity VR",
@@ -2583,7 +2813,7 @@
       ],
       "activities": [
         {
-          "id": "9e421114be6336030ad0",
+          "id": "1fa0e781386cff109af7",
           "kind": "html",
           "label": "Interactive Sculpture",
           "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=spiritual-freedom",
@@ -2615,17 +2845,66 @@
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
         },
         {
-          "id": "e497245d426e41d26b9f",
+          "id": "68fb8a528fb7e3df5b2e",
           "kind": "vr",
           "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Πνευματική ελευθερία — από τα πάθη στη θεραπεία",
           "url": "",
-          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 5 παπύρους σε 2 φάσεις, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "note": "Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». Ο μαθητής συλλέγει τους 5 παπύρους σε 2 φάσεις, μελετά το περιεχόμενο και τις υποδείξεις, στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
           "app": "Unity VR",
           "native_id": "spiritual_healing",
           "room": "Ιεροσόλυμα",
+          "scene_name": "Room_jerusalem",
           "exercise_count": 10,
           "stage_count": 2,
-          "reveal_mode": "συλλογή παπύρων και στόχευση εικόνας"
+          "reveal_mode": "image-reveal",
+          "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
+      "scenario_id": "app:history-explorer-3d:jerusalem-time-of-christ",
+      "title": "Ιεροσόλυμα την εποχή του Χριστού",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "history-explorer-3d"
+      ],
+      "sources": [
+        {
+          "system": "history-explorer-3d",
+          "path": "jerusalem-time-of-christ.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "03d4bf47abcc9dcb984c",
+          "kind": "html",
+          "label": "History Explorer",
+          "url": "https://history-explorer-3d.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F03d4bf47abcc9dcb984c.json",
+          "note": "Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "history-explorer-3d",
+          "native_id": "jerusalem-time-of-christ",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/03d4bf47abcc9dcb984c.json"
         }
       ]
     },
@@ -2697,7 +2976,7 @@
           "media_id": "SLD-028",
           "drive_id": "1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-17T10:33:03.016Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2771,7 +3050,7 @@
           "media_id": "SLD-022",
           "drive_id": "11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:26:09.383Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2819,7 +3098,7 @@
       ],
       "activities": [
         {
-          "id": "08035ff926f513664319",
+          "id": "e0ca81bd8513e944cfb6",
           "kind": "html",
           "label": "Interactive Sculpture",
           "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=circular-table",
@@ -2897,7 +3176,7 @@
           "media_id": "SLD-023",
           "drive_id": "182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:25:33.435Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2971,7 +3250,7 @@
           "media_id": "SLD-024",
           "drive_id": "19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:25:11.661Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3045,7 +3324,7 @@
           "media_id": "SLD-019",
           "drive_id": "1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:24:41.955Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3119,7 +3398,7 @@
           "media_id": "SLD-020",
           "drive_id": "1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:25:46.410Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3266,6 +3545,72 @@
       ]
     },
     {
+      "scenario_id": "unity:christianity_free_discovery",
+      "title": "Ο κύκλος των χειρογράφων",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "στόχευση χειρογράφων",
+        "μελέτη πηγών",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "Room_christianity.unity",
+          "locator": "circular-discovery"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Current_Themes_Free_Discovery.asset",
+          "locator": "circular-discovery"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Current_Themes_Free_Discovery.asset",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "0c184e859a520d9546be",
+          "kind": "vr",
+          "label": "Unity VR · Κυκλικό αναλόγιο · Ο κύκλος των χειρογράφων",
+          "url": "",
+          "note": "Στο δωμάτιο Χριστιανισμός ο μαθητής στοχεύει τα 5 χειρόγραφα και μελετά τις θεματικές πηγές που αποκαλύπτονται. Η επιλογή διατίθεται από την εναλλαγή σεναρίου του κυκλικού αναλογίου. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "christianity_free_discovery",
+          "room": "Χριστιανισμός",
+          "scene_name": "Room_christianity",
+          "exercise_count": 5,
+          "stage_count": 0,
+          "reveal_mode": "circular-discovery",
+          "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
       "scenario_id": "unity:jerusalem_pentecost_hymn",
       "title": "Πεντηκοστή — Το Πνεύμα συγκροτεί την Εκκλησία",
       "subject": "Θρησκευτικά",
@@ -3300,13 +3645,18 @@
       "application_status": "proposal",
       "aliases": [],
       "notes": [
-        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z."
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z.",
+        "The same six Pentecost findings and six meanings: flame, scroll, sandals, bread/wine, basket and coins; independent board activity.",
+        "The published JSON is exactly equal to Assets/CollectionQuest/Pentecost/Source/upper-room-first-church-timeline.json."
       ],
       "source_groups": [
         "Unity VR",
         "Digital Book",
         "Drive HTML",
-        "drive-html"
+        "drive-html",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "Unity · υποστήριξη δραστηριότητας"
       ],
       "sources": [
         {
@@ -3363,6 +3713,21 @@
           "system": "drive-html",
           "path": "jerusalem-quiz.html",
           "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "upper-room-first-church-puzzle.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "upper-room-first-church.json",
+          "locator": ""
+        },
+        {
+          "system": "Unity · υποστήριξη δραστηριότητας",
+          "path": "PentecostBook.asset",
+          "locator": "MindPalace.InteractiveWebBook::MindPalace.InteractiveWebBook.BookWebLessonProfile"
         }
       ],
       "activities": [
@@ -3488,6 +3853,26 @@
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        },
+        {
+          "id": "12ad1f1aa8bf2e6e4853",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://dporpatonelis-crypto.github.io/Browser-vr/apps/investigation/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F12ad1f1aa8bf2e6e4853.json",
+          "note": "Ελεγμένο δημοσιευμένο υλικό για το συγκεκριμένο μάθημα. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "upper-room-first-church-puzzle",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/12ad1f1aa8bf2e6e4853.json"
+        },
+        {
+          "id": "980fda8da5a1171fe093",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F980fda8da5a1171fe093.json",
+          "note": "Ελεγμένο δημοσιευμένο υλικό για το συγκεκριμένο μάθημα. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "upper-room-first-church",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/980fda8da5a1171fe093.json"
         }
       ]
     },
@@ -3588,6 +3973,11 @@
           "system": "Google Drive",
           "path": "google-drive.json",
           "locator": "files/1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA"
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "pisti-exousia-kai-prosopo.json",
+          "locator": ""
         }
       ],
       "activities": [
@@ -3641,7 +4031,7 @@
           "native_id": "",
           "drive_id": "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA",
           "slide_count": 6,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-09-25T20:06:31.232Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3861,14 +4251,17 @@
       "aliases": [],
       "notes": [
         "Έξι ίδια ιερά ευρήματα και αντιστοιχίσεις Σκιάς–Πλήρωσης της υμνολογικής δραστηριότητας.",
-        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z."
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z.",
+        "The same six exact Shadow/Fulfilment objects and explanations as JerusalemCollectionQuiz and the Drive HTML."
       ],
       "source_groups": [
         "Unity VR",
         "Digital Book",
         "Google Drive",
         "Drive HTML",
-        "drive-html"
+        "drive-html",
+        "idea-weaver-board",
+        "Unity · υποστήριξη δραστηριότητας"
       ],
       "sources": [
         {
@@ -3900,6 +4293,16 @@
           "system": "drive-html",
           "path": "jerusalem-quiz.html",
           "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "typology-shadow-fulfillment-puzzle.json",
+          "locator": ""
+        },
+        {
+          "system": "Unity · υποστήριξη δραστηριότητας",
+          "path": "JerusalemTypologyBook.asset",
+          "locator": "MindPalace.InteractiveWebBook::MindPalace.InteractiveWebBook.BookWebLessonProfile"
         }
       ],
       "activities": [
@@ -3936,7 +4339,7 @@
           "media_id": "SLD-009",
           "drive_id": "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE",
           "slide_count": 6,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-08T17:49:43.102Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -3951,7 +4354,7 @@
           "media_id": "SLD-027",
           "drive_id": "1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-16T16:33:22.265Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -3967,6 +4370,16 @@
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        },
+        {
+          "id": "7db2071e218293b5700a",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://dporpatonelis-crypto.github.io/Browser-vr/apps/investigation/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F7db2071e218293b5700a.json",
+          "note": "Ελεγμένο δημοσιευμένο υλικό για το συγκεκριμένο μάθημα. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "typology-shadow-fulfillment-puzzle",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/7db2071e218293b5700a.json"
         }
       ]
     },
@@ -4087,7 +4500,7 @@
           "media_id": "SLD-025",
           "drive_id": "1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T08:46:02Z",
+          "checked_at": "2026-10-25T11:33:40.548Z",
           "modified_at": "2026-10-13T16:25:58.850Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }

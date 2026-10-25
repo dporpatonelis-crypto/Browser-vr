@@ -1,0 +1,432 @@
+{
+  "characters": [
+    {
+      "id": "moses",
+      "name": "Μωυσής",
+      "position_x": -3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Ο προφήτης της Εξόδου και της Διαθήκης",
+      "glbModel": "/models/jerusalem/biblical/Moses_VR_2K.glb"
+    },
+    {
+      "id": "apostle-paul",
+      "name": "Απόστολος Παύλος",
+      "position_x": 3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Ο απόστολος των εθνών",
+      "glbModel": "/models/jerusalem/biblical/Apostle_Paul_VR_2K.glb"
+    },
+    {
+      "id": "aristotle",
+      "name": "Αριστοτέλης",
+      "position_x": -8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πατέρας της επιστήμης",
+      "glbModel": "/models/aristotle.glb"
+    },
+    {
+      "id": "Constantine compressed (2).glb",
+      "name": "Μ. Κωνσταντίνος",
+      "position_x": 5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πρώτος Βυζαντινός Αυτοκράτορας",
+      "glbModel": "/models/constantine.glb"
+    },
+    {
+      "id": "monk compressed.glb",
+      "name": "Άγιος",
+      "position_x": 8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Άγιος",
+      "glbModel": "/models/monk.glb"
+    },
+    {
+      "id": "Alexander.glb",
+      "name": "Μ. Αλέξανδρος",
+      "position_x": -5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Βασιλιάς Μακεδονίας",
+      "glbModel": "/models/Alexander.glb"
+    }
+  ],
+  "dialogs": [
+    {
+      "character_id": "aristotle",
+      "question": "Πώς συνδέεται η επιστημονική έρευνα με την καλλιέργεια του ανθρώπου;",
+      "answer": "Η αναζήτηση αιτίων, η παρατήρηση και η λογική πειθαρχούν τον νου και αποκαλύπτουν τάξη και συνοχή στον κόσμο. Η δίψα για γνώση γίνεται δύναμη παιδείας και υπεύθυνης ελευθερίας."
+    },
+    {
+      "character_id": "aristotle",
+      "question": "Πώς μπορεί η γνώση να συμμετέχει στη θεραπεία των παθών;",
+      "answer": "Η γνώση φωτίζει συνέπειες, ξεσκεπάζει αυταπάτες και οργανώνει την κρίση. Όταν ενώνεται με άσκηση, σχέση και ταπείνωση, μετατρέπεται από πληροφορία σε σοφία ζωής."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "question": "Ποια θέση έχει ο ελληνιστικός κόσμος στη μεγάλη ιστορική πορεία του μαθήματος;",
+      "answer": "Η κοινή γλώσσα, οι πόλεις και τα δίκτυα επικοινωνίας δημιούργησαν έναν ευρύ πολιτισμικό ορίζοντα. Μέσα σε αυτόν τον κόσμο οι ιδέες, τα κείμενα και αργότερα το χριστιανικό μήνυμα μπορούσαν να ταξιδέψουν."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "question": "Τι μας διδάσκει η πολιτική ενοποίηση για την ανθρώπινη δίψα για ισχύ και ενότητα;",
+      "answer": "Δείχνει τη δύναμη της εξωτερικής οργάνωσης, αλλά και το ερώτημα του προσανατολισμού της. Η ισχύς μπορεί να ανοίξει δρόμους κοινωνίας ή να γίνει κυριαρχία, ανάλογα με την ελεύθερη χρήση της."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πώς αλλάζει η δημόσια ιστορία της Εκκλησίας τον τέταρτο αιώνα;",
+      "answer": "Η θρησκευτική ελευθερία, η δημόσια παρουσία και οι σύνοδοι εντάσσουν την εκκλησιαστική ζωή σε νέο ιστορικό ορίζοντα, όπου πίστη, κοινωνία, θεσμοί και εξουσία αλληλεπιδρούν."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πώς μπορεί η εξουσία να υπηρετήσει τη συνοχή χωρίς να γίνει καταναγκασμός;",
+      "answer": "Όταν προστατεύει την ελευθερία, την ειρήνη και τη δυνατότητα συνάντησης. Το ιστορικό ερώτημα είναι πάντοτε αν η ισχύς λειτουργεί ως διακονία του κοινού αγαθού ή ως αυτοσκοπός."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πώς ενώνονται οι βιβλικοί, φιλοσοφικοί και ιστορικοί σταθμοί σε μία συνεκτική εικόνα;",
+      "answer": "Η κλήση, η Έξοδος, οι προφήτες, το έργο του Χριστού και η Εκκλησία συναντούν τον πραγματικό κόσμο της ηθικής αναζήτησης, της επιστήμης, της παιδείας και της ιστορικής εξουσίας. Όλα μαζί συγκροτούν την πορεία του ανθρώπου και της ιστορίας προς την αλήθεια, τη θεραπεία και την κοινωνία."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Ποιο κοινό νήμα ενώνει θεολογία, φιλοσοφία και ιστορία στο μάθημα;",
+      "answer": "Η ελεύθερη ανθρώπινη δίψα για αλήθεια, γνώση, ενότητα και αγαθό — μια δίψα που μπορεί να γίνει σοφία και διακονία ή να εκτραπεί σε υπερηφάνεια και κυριαρχία."
+    },
+    {
+      "character_id": "moses",
+      "question": "Τι μας θυμίζουν οι Πλάκες της Διαθήκης;",
+      "answer": "Οι Πλάκες συνδέονται με τη Διαθήκη στο Σινά και τις εντολές που έλαβε ο Μωυσής. Στην παρουσίαση αποτελούν έναν σταθμό της προετοιμασίας: από τον γραπτό Νόμο προς τον Νόμο που εγγράφεται στην καρδιά του ανθρώπου."
+    },
+    {
+      "character_id": "moses",
+      "question": "Γιατί διατηρήθηκαν η Στάμνα του Μάννα και η Ράβδος του Ααρών;",
+      "answer": "Το μάννα θυμίζει την τροφή που δόθηκε στον λαό στην έρημο. Η βλαστήσασα ράβδος συνδέεται με την εκλογή του Ααρών. Η χριστιανική τυπολογία διαβάζει αυτά τα σημεία σε σχέση με την εκπλήρωση στην Καινή Διαθήκη."
+    },
+    {
+      "character_id": "apostle-paul",
+      "question": "Πώς συνδέονται η Παλαιά και η Καινή Διαθήκη;",
+      "answer": "Ο Παύλος παρουσιάζει τον Νόμο ως παιδαγωγό που οδηγεί προς τον Χριστό. Η ιστορία της Διαθήκης αποκτά ενότητα μέσα από την επαγγελία και την εκπλήρωσή της, με κέντρο την πίστη και τη ζωή εν Χριστώ."
+    },
+    {
+      "character_id": "apostle-paul",
+      "question": "Τι σημαίνει η εικόνα του Νόμου στην καρδιά;",
+      "answer": "Στη Β΄ προς Κορινθίους επιστολή ο Παύλος αντιπαραβάλλει τις λίθινες πλάκες με τις ανθρώπινες καρδιές. Η εικόνα φωτίζει τη μετάβαση από την εξωτερική καταγραφή στη ζωντανή σχέση και τη μεταμόρφωση του ανθρώπου."
+    }
+  ],
+  "facts": [
+    {
+      "character_id": "aristotle",
+      "fact": "Ο Αριστοτέλης έζησε το 384–322 π.Χ., δίδαξε τον Αλέξανδρο και συστηματοποίησε πεδία λογικής και φυσικής έρευνας."
+    },
+    {
+      "character_id": "aristotle",
+      "fact": "Η επιστημονική αναζήτηση αιτίων και τάξης καλλιεργεί τον νου και τη δίψα του ανθρώπου για γνώση."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "fact": "Ο Αλέξανδρος έζησε το 356–323 π.Χ. και οι κατακτήσεις του συνέβαλαν στη διαμόρφωση του ελληνιστικού κόσμου."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "fact": "Η κοινή ελληνική γλώσσα και τα ελληνιστικά δίκτυα συνέδεσαν λαούς και ιδέες στην ανατολική Μεσόγειο."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "Στις αρχές του 4ου αιώνα η αυτοκρατορική πολιτική αναγνώρισε τη θρησκευτική ελευθερία των χριστιανών."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "Η Α΄ Οικουμενική Σύνοδος συγκλήθηκε στη Νίκαια το 325 μ.Χ. μέσα στο νέο δημόσιο ιστορικό πλαίσιο της Εκκλησίας."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "Το μάθημα συνδέει βιβλική ιστορία, φιλοσοφική αναζήτηση, επιστήμη, παιδεία και πολιτική ιστορία σε μία συνεκτική παρουσίαση του ανθρώπινου κόσμου."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "Κοινός άξονας είναι ο προσανατολισμός της ελευθερίας, της γνώσης και της εξουσίας προς την αλήθεια, την κοινωνία και το αγαθό."
+    },
+    {
+      "character_id": "moses",
+      "fact": "Στη βιβλική αφήγηση ο Μωυσής οδηγεί τον λαό στην Έξοδο και παραλαμβάνει τις Πλάκες της Διαθήκης στο Σινά."
+    },
+    {
+      "character_id": "moses",
+      "fact": "Η Κιβωτός, το μάννα και η βλαστήσασα ράβδος συνδέονται με τη μνήμη της Διαθήκης και την πορεία του λαού στην έρημο."
+    },
+    {
+      "character_id": "apostle-paul",
+      "fact": "Ο απόστολος Παύλος έζησε τον 1ο αιώνα μ.Χ. και το κήρυγμα και οι επιστολές του συνέβαλαν στη διάδοση του χριστιανικού μηνύματος."
+    },
+    {
+      "character_id": "apostle-paul",
+      "fact": "Στη Γαλάτας 3:24 και στη Β΄ Κορινθίους 3:3 ο Παύλος χρησιμοποιεί εικόνες που φωτίζουν τη σχέση του Νόμου με τη ζωή εν Χριστώ."
+    }
+  ],
+  "screens": {
+    "left_image_url": "/media/old-testament/slide-01.webp#sb-slides=%2Fmedia%2Fold-testament%2Fslide-01.webp%7C%2Fmedia%2Fold-testament%2Fslide-02.webp%7C%2Fmedia%2Fold-testament%2Fslide-03.webp%7C%2Fmedia%2Fold-testament%2Fslide-04.webp%7C%2Fmedia%2Fold-testament%2Fslide-05.webp%7C%2Fmedia%2Fold-testament%2Fslide-06.webp%7C%2Fmedia%2Fold-testament%2Fslide-07.webp%7C%2Fmedia%2Fold-testament%2Fslide-08.webp%7C%2Fmedia%2Fold-testament%2Fslide-09.webp%7C%2Fmedia%2Fold-testament%2Fslide-10.webp%7C%2Fmedia%2Fold-testament%2Fslide-11.webp%7C%2Fmedia%2Fold-testament%2Fslide-12.webp%7C%2Fmedia%2Fold-testament%2Fslide-13.webp%7C%2Fmedia%2Fold-testament%2Fslide-14.webp%7C%2Fmedia%2Fold-testament%2Fslide-15.webp",
+    "right_image_url": "/media/jerusalem-timeline.png",
+    "left_label": "Από τη Σκιά στην Αλήθεια — Παλαιά και Καινή Διαθήκη",
+    "right_label": "Το γενικό Timeline της Θείας Οικονομίας — IMG-055"
+  },
+  "interactive": {
+    "video_url": "/media/theia-oikonomia-history-relay.mp4",
+    "target_screen": "right",
+    "label": "Θεία Οικονομία — ιστορική σύνθεση"
+  },
+  "character_interactives": {
+    "Alexander.glb": {
+      "video_url": "/media/alexander-bucephalus-relay-v5-web.mp4",
+      "target_screen": "right",
+      "label": "Αλέξανδρος και Βουκεφάλας — εικαστική αφήγηση"
+    }
+  },
+  "completion": {
+    "required_character_ids": [
+      "moses",
+      "apostle-paul",
+      "aristotle",
+      "Constantine compressed (2).glb",
+      "monk compressed.glb",
+      "Alexander.glb"
+    ],
+    "required_count": 3,
+    "reward_interactive": {
+      "video_url": "/media/jerusalem-shadow-to-truth.mp4",
+      "target_screen": "right",
+      "label": "Από τη Σκιά στην Αλήθεια: 4 Αρχαία Σύμβολα"
+    }
+  },
+  "quiz": {
+    "id": "jerusalem-biblical-typology",
+    "host_prop_id": "dimitris",
+    "host_name": "Δημήτρης",
+    "host_title": "Συντονιστής κατανόησης",
+    "intro": "Γνώρισες τρία διαφορετικά πρόσωπα και παρακολούθησες το βίντεο. Σύνδεσε τώρα τα έξι αντικείμενα της Παλαιάς Διαθήκης με την πλήρωσή τους στον Χριστιανισμό.",
+    "pass_score": 4,
+    "reward_text": "Μπράβο! Συνέδεσες τα αντικείμενα της Παλαιάς Διαθήκης με την πλήρωσή τους στον Χριστό και στη ζωή της Εκκλησίας.",
+    "reward_interactive": {
+      "video_url": "/media/jerusalem-quiz-success.mp4",
+      "target_screen": "right",
+      "label": "Επιτυχία quiz — Σκιά και αλήθεια",
+      "playback_rate": 0.6666666666666666,
+      "loop": false
+    },
+    "questions": [
+      {
+        "id": "covenant-tablets",
+        "prompt": "Πώς εκπληρώνεται η εικόνα των λίθινων Πλακών του Νόμου στη χριστιανική ζωή;",
+        "options": [
+          "Οι εντολές παραμένουν μόνο ένας εξωτερικός κανόνας.",
+          "Ο Νόμος γράφεται στις ανθρώπινες καρδιές και γίνεται βίωμα αγάπης και ελεύθερης συνέργειας.",
+          "Η πίστη καταργεί κάθε ευθύνη και ελεύθερη ανταπόκριση."
+        ],
+        "correct_index": 1,
+        "explanation": "Οι λίθινες πλάκες ήταν εξωτερικός παιδαγωγικός κανόνας. Στη Νέα Διαθήκη ο Νόμος γράφεται στην καρδιά με το Άγιο Πνεύμα και γίνεται ζωή αγάπης (Β΄ Κορ. 3:3· Ιερ. 31:33)."
+      },
+      {
+        "id": "ark-of-covenant",
+        "prompt": "Γιατί η Θεοτόκος ονομάζεται «Έμψυχος Κιβωτός»;",
+        "options": [
+          "Επειδή φύλαξε ένα αντίγραφο των λίθινων πλακών.",
+          "Επειδή η Κιβωτός ήταν απλώς ένα σύμβολο επίγειας εξουσίας.",
+          "Επειδή κυοφόρησε τον ίδιο τον Σαρκωμένο Λόγο του Θεού."
+        ],
+        "correct_index": 2,
+        "explanation": "Η Κιβωτός φύλασσε τα ιερά αντικείμενα και δήλωνε την παρουσία του Θεού. Η Θεοτόκος έφερε τον ίδιο τον Χριστό· και η καρδιά του πιστού καλείται να γίνει ναός του Αγίου Πνεύματος."
+      },
+      {
+        "id": "manna-jar",
+        "prompt": "Ποια σύνδεση εκφράζει η στάμνα με το μάννα;",
+        "options": [
+          "Το μάννα προτυπώνει τη Θεία Ευχαριστία: ο Χριστός, ο Άρτος της Ζωής, χαρίζει αιώνια ζωή.",
+          "Το μάννα χάρισε στους Ισραηλίτες σωματική αθανασία.",
+          "Το μάννα και η Θεία Ευχαριστία αφορούν μόνο τη σωματική τροφή."
+        ],
+        "correct_index": 0,
+        "explanation": "Το μάννα συντηρούσε τον λαό στην έρημο. Ο Χριστός αντιπαραβάλλει αυτή την πρόσκαιρη τροφή με τον Άρτο της Ζωής και την αιώνια ζωή της Θείας Ευχαριστίας (Ιωαν. 6:48–51)."
+      },
+      {
+        "id": "budding-rod",
+        "prompt": "Τι προτυπώνει η ξερή ράβδος του Ααρών που βλάστησε θαυματουργικά;",
+        "options": [
+          "Μόνο τη δύναμη του νερού να ζωντανεύει τα φυτά.",
+          "Την Αειπαρθενία της Θεοτόκου και τον Σταυρό που γίνεται ξύλο ζωής και Ανάστασης.",
+          "Την πεποίθηση ότι η ζωή τελειώνει οριστικά στον θάνατο."
+        ],
+        "correct_index": 1,
+        "explanation": "Η ράβδος βλάστησε χωρίς νερό, επιβεβαιώνοντας τη θεία εκλογή της ιερωσύνης. Στη χριστιανική τυπολογία παραπέμπει στη Θεοτόκο και στον Σταυρό, που από ξύλο θανάτου γίνεται ξύλο ζωής."
+      },
+      {
+        "id": "bronze-serpent",
+        "prompt": "Με ποιο γεγονός συνδέει ο Χριστός την ύψωση του χάλκινου όφεως από τον Μωυσή;",
+        "options": [
+          "Με την απόκτηση πολιτικής εξουσίας.",
+          "Με τη λατρεία των φιδιών ως θεών.",
+          "Με τη δική Του ύψωση στον Σταυρό και την ελευθέρωση από την αμαρτία και τον θάνατο."
+        ],
+        "correct_index": 2,
+        "explanation": "Όπως οι Ισραηλίτες θεραπεύονταν κοιτώντας τον υψωμένο όφι, έτσι ο Χριστός υψώνεται στον Σταυρό για τη σωτηρία του ανθρώπου (Ιωαν. 3:14)."
+      },
+      {
+        "id": "lamb",
+        "prompt": "Πώς εκπληρώνεται η εικόνα του πασχάλιου αμνού στον Χριστό;",
+        "options": [
+          "Ο Χριστός είναι ο Αμνός του Θεού· το Πάσχα γίνεται διάβαση από τη δουλεία και τη φθορά στην αιώνια ελευθερία.",
+          "Το Πάσχα αφορά αποκλειστικά την πολιτική απελευθέρωση ενός λαού.",
+          "Η θυσία του αμνού δεν έχει καμία σχέση με τον Σταυρό και τη Θεία Ευχαριστία."
+        ],
+        "correct_index": 0,
+        "explanation": "Το αίμα του αμνού συνδέθηκε με την Έξοδο από την Αίγυπτο. Ο Χριστός, ο Αμνός του Θεού, ανοίγει τη διάβαση προς την αιώνια ελευθερία με τη θυσία Του και τη μετοχή στη Θεία Ευχαριστία (Ιωαν. 1:29)."
+      }
+    ]
+  },
+  "props": [
+    {
+      "id": "dimitris",
+      "glbModel": "/models/Dimitris.glb",
+      "dialog_label": "Dimitris quiz",
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false,
+      "welcome": "Καλώς ήρθες στην Αρχαία Αγορά. Είμαι ο Δημήτρης και θα σε ξεναγήσω.",
+      "welcome_voice": "Melina",
+      "welcome_trigger": "both",
+      "welcome_delay_ms": 2500,
+      "welcome_radius": 2.5,
+      "welcome_audio": "/audio/dimitris.wav"
+    },
+    {
+      "id": "bishop",
+      "glbModel": "/models/bishop_face_lipsync_optimized_v5.glb",
+      "position_x": 6.875,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": true,
+      "idle_animation": "Idle_Retarget_FK",
+      "dialog_enabled": true,
+      "dialog_label": "Ιεράρχης",
+      "dialog_title": "Ιεράρχης",
+      "dialog_subtitle": "Διάλογος από το scenario JSON",
+      "dialog_prompt": "Μήνυμα",
+      "dialog_speech_enabled": false,
+      "dialog_text": "Το περιεχόμενο του διαλόγου μπορεί να αντικατασταθεί αργότερα απευθείας από το scenario JSON."
+    },
+    {
+      "id": "covenant-tablets",
+      "glbModel": "/models/jerusalem/biblical/Covenant_Tablets_VR_1K.glb",
+      "position_x": -3.5,
+      "position_y": 0.05,
+      "position_z": 2,
+      "rotation": 0,
+      "scale": 0.45,
+      "idle": false,
+      "dialog_label": "Πλάκες της Διαθήκης"
+    },
+    {
+      "id": "ark-of-covenant",
+      "glbModel": "/models/jerusalem/biblical/Ark_of_Covenant_VR_1K.glb",
+      "position_x": -5.75,
+      "position_y": 0.05,
+      "position_z": 2,
+      "rotation": 0,
+      "scale": 0.7,
+      "idle": false,
+      "dialog_label": "Κιβωτός της Διαθήκης"
+    },
+    {
+      "id": "budding-rod",
+      "glbModel": "/models/jerusalem/biblical/Budding_Rod_VR_1K.glb",
+      "position_x": -8,
+      "position_y": 0.05,
+      "position_z": 2,
+      "rotation": 0,
+      "scale": 0.65,
+      "idle": false,
+      "dialog_label": "Ράβδος του Ααρών"
+    },
+    {
+      "id": "manna-jar",
+      "glbModel": "/models/jerusalem/biblical/Manna_Jar_VR_1K.glb",
+      "position_x": 3.5,
+      "position_y": 0.05,
+      "position_z": 2,
+      "rotation": 0,
+      "scale": 0.45,
+      "idle": false,
+      "dialog_label": "Στάμνα του Μάννα"
+    },
+    {
+      "id": "bronze-serpent",
+      "glbModel": "/models/jerusalem/biblical/Bronze_Serpent_VR_1K.glb",
+      "position_x": 5.75,
+      "position_y": 0.05,
+      "position_z": 2,
+      "rotation": 0,
+      "scale": 0.6,
+      "idle": false,
+      "dialog_label": "Χάλκινος Όφις"
+    },
+    {
+      "id": "lamb",
+      "glbModel": "/models/jerusalem/biblical/Lamb_VR_1K.glb",
+      "position_x": 8,
+      "position_y": 0.05,
+      "position_z": 2,
+      "rotation": 0,
+      "scale": 0.55,
+      "idle": false,
+      "dialog_label": "Αμνός"
+    },
+    {
+      "id": "symbolic-tree-left",
+      "glbModel": "/models/jerusalem/sculptures/Symbolic_Tree_VR_1K.glb",
+      "position_x": -6.2,
+      "position_y": 0.05,
+      "position_z": -2.8,
+      "rotation": 0,
+      "scale": 1.5,
+      "idle": false,
+      "dialog_label": "Συμβολικό δέντρο της Διαθήκης"
+    },
+    {
+      "id": "symbolic-tree-right",
+      "glbModel": "/models/jerusalem/sculptures/Symbolic_Tree_VR_1K.glb",
+      "position_x": 6.2,
+      "position_y": 0.05,
+      "position_z": -2.8,
+      "rotation": 0,
+      "scale": 1.5,
+      "idle": false,
+      "dialog_label": "Συμβολικό δέντρο της Διαθήκης"
+    }
+  ],
+  "environment": "jerusalem-time-of-christ"
+}

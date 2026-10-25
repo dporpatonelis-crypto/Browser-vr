@@ -22,6 +22,7 @@ ACTIVITY_FIELDS = {
     'id', 'kind', 'label', 'url', 'note', 'app', 'native_id', 'drive_id', 'download_url',
     'drive_html', 'section_id', 'book_lesson_id', 'media_id', 'slide_count',
     'checked_at', 'modified_at', 'access_note', 'room', 'exercise_count', 'stage_count', 'reveal_mode',
+    'scene_name', 'availability_status',
 }
 NATIVE_APPS = {'idea-weaver-board', 'Map-Timeline', 'history-explorer-3d', 'mind-palace-cases'}
 
@@ -55,6 +56,8 @@ def portable_registry(registry, output, site_url, cloud_url=''):
     result = {k: copy.deepcopy(registry[k]) for k in ('schema_version', 'generated_at', 'grades')}
     result['publication'] = {'mode': 'catalogue', 'site_url': site_url, 'cloud_url': https_link(cloud_url)}
     result['integrations'] = {k: copy.deepcopy(registry['integrations'][k]) for k in ('digital_book', 'google_drive')}
+    refresh = registry['integrations'].get('source_refresh', {})
+    result['integrations']['source_refresh'] = {k: refresh.get(k) for k in ('run_id', 'checked_at', 'status', 'github_repositories', 'drive_folders', 'drive_slides', 'drive_html')}
     result['source_files'] = []
     result['scenarios'] = []
     for source_scenario in registry['scenarios']:

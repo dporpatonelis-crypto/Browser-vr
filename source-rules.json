@@ -1,0 +1,29 @@
+{
+  "unity_exclusions": {
+    "LessonSystem/LessonJson/lesson_demo_01.json": {
+      "sha256": "0e92b7daa4078e0e6c176daf3ac3523963ae4b631908f48db5520fb62574918e",
+      "reason": "Default authoring example in LessonTimelineBuilder.cs; no saved scene references this JSON. Recheck if its content or binding changes."
+    }
+  },
+  "unity_support_links": {
+    "upper-room-first-church": "unity:jerusalem_pentecost_hymn",
+    "jerusalem-typology": "unity:jerusalem_theotokos_hymn"
+  },
+  "app_scenario_links": {
+    "Map-Timeline:upper-room-first-church": {
+      "reviewed_blob_sha": "0d96639b996f08e689829d50c465d1e657d1e136",
+      "scenario_id": "unity:jerusalem_pentecost_hymn",
+      "evidence": "The published JSON is exactly equal to Assets/CollectionQuest/Pentecost/Source/upper-room-first-church-timeline.json."
+    },
+    "idea-weaver-board:upper-room-first-church-puzzle": {
+      "reviewed_blob_sha": "6e48d127a0fbfe802324c485f06d1fadf2f7c7e5",
+      "scenario_id": "unity:jerusalem_pentecost_hymn",
+      "evidence": "The same six Pentecost findings and six meanings: flame, scroll, sandals, bread/wine, basket and coins; independent board activity."
+    },
+    "idea-weaver-board:typology-shadow-fulfillment-puzzle": {
+      "reviewed_blob_sha": "94ae9c243e391a939416378fdd40fa3052eb281f",
+      "scenario_id": "unity:jerusalem_theotokos_hymn",
+      "evidence": "The same six exact Shadow/Fulfilment objects and explanations as JerusalemCollectionQuiz and the Drive HTML."
+    }
+  }
+}

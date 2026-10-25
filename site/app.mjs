@@ -113,10 +113,10 @@ function selectedIntro(s, eyebrow) {
 }
 function activityCard(a) {
   if (a.kind==='vr') return `<article class="material vr-material">${icon('vr')}<div><span class="material-kind">UNITY VR · ΤΟΠΙΚΗ ΑΠΟΣΤΟΛΗ</span><h3>${esc(a.label)}</h3><p>${esc(a.room || '')}</p><p>${esc(a.note)}</p><details><summary>Πληροφορία τοπικής αποστολής</summary><p class="source-path">${esc(state.registry.source_files.find(x=>x.key===a.source_key)?.path || '')}</p><p>Άνοιξε την αποστολή από την υπάρχουσα διαδικασία του Unity project.</p></details></div></article>`;
-  const kind={book:'DIGITAL BOOK',slides:'ΔΙΑΦΑΝΕΙΕΣ',html:'ΔΙΑΔΡΑΣΤΙΚΗ ΕΦΑΡΜΟΓΗ',quiz:'QUIZ',text:'ΚΕΙΜΕΝΟ'}[a.kind];
+  const kind={book:'DIGITAL BOOK',slides:'ΔΙΑΦΑΝΕΙΕΣ',html:'ΔΙΑΔΡΑΣΤΙΚΗ ΕΦΑΡΜΟΓΗ',quiz:'QUIZ',text:'ΚΕΙΜΕΝΟ',model:'3D ΜΟΝΤΕΛΟ · ΥΛΙΚΟ ΓΙΑ ΠΡΟΕΤΟΙΜΑΣΙΑ'}[a.kind];
   const target=state.service && a.local_url ? a.local_url : a.url;
   if (!target) return '';
-  const label= a.drive_html && !a.local_url?'Άνοιγμα στο Drive':a.kind==='book'?'Στο βιβλίο':a.kind==='slides'?'Άνοιγμα διαφανειών':'Άνοιγμα δραστηριότητας';
+  const label= a.drive_html && !a.local_url?'Άνοιγμα στο Drive':a.kind==='book'?'Στο βιβλίο':a.kind==='slides'?'Άνοιγμα διαφανειών':a.kind==='model'?'Άνοιγμα μοντέλων':'Άνοιγμα δραστηριότητας';
   return `<article class="material">${icon(a.kind==='slides'?'slides':a.kind==='book'||a.kind==='text'?'book':'play')}<div><span class="material-kind">${kind}${a.slide_count?' · '+a.slide_count+' διαφάνειες':''}</span><h3>${esc(a.label)}</h3>${a.note?`<p>${esc(a.note)}</p>`:''}<div class="material-links">${link(target,label+' '+icon('external'),'button secondary')}${a.drive_html?link(a.download_url,'Λήψη HTML','small-link'):''}${a.lesson_download_url?link(a.lesson_download_url,'Λήψη μαθήματος','small-link'):''}${state.service&&a.app==='interactive-sculpture'&&a.url?link(a.url,'Online εφαρμογή','small-link'):''}</div>
   ${a.content_preview?.length?`<details class="content-preview"><summary>Τι περιέχει η παρουσίαση;</summary><ol>${a.content_preview.map(p=>`<li>${link(p.url,esc(p.title))}<p>${esc(p.text)}</p></li>`).join('')}</ol></details>`:''}</div></article>`;
 }
@@ -132,7 +132,9 @@ function activityView() {
 }
 function difficulty(level,kind) { return level?`${level}/5 · ${esc(state.models[kind+'_scale'].find(d=>d.level===Number(level))?.label)}`:'Προς επιβεβαίωση'; }
 function sourceNotes(s) {
-  return `<details class="source-notes"><summary>Πηγές της χαρτογράφησης</summary><p>Ανάγνωση των υπαρχόντων αρχείων. Οι προτάσεις εφαρμογής είναι προτάσεις σχεδιασμού, όχι αποτελέσματα αξιολόγησης.</p>${s.notes.map(n=>`<p>${esc(n)}</p>`).join('')}<ul>${s.sources.map(src=>`<li><strong>${esc(src.system)}</strong><span class="source-path">${esc(src.path)}${src.locator?' · '+esc(src.locator):''}</span></li>`).join('')}</ul></details>`;
+  const check=state.registry.integrations.source_refresh;
+  const freshness=check?.checked_at?`<p>${check.status==='verified'?'Έλεγχος πηγών':'Έλεγχος με εκκρεμότητες'}: ${esc(date(check.checked_at))}. Η ημερομηνία συγχρονισμού μιας εφαρμογής διατηρείται χωριστά από τον σημερινό έλεγχο.</p>`:'';
+  return `<details class="source-notes"><summary>Πηγές της χαρτογράφησης</summary>${freshness}<p>Ανάγνωση των υπαρχόντων αρχείων. Οι προτάσεις εφαρμογής είναι προτάσεις σχεδιασμού, όχι αποτελέσματα αξιολόγησης.</p>${s.notes.map(n=>`<p>${esc(n)}</p>`).join('')}<ul>${s.sources.map(src=>`<li><strong>${esc(src.system)}</strong><span class="source-path">${esc(src.path)}${src.locator?' · '+esc(src.locator):''}</span></li>`).join('')}</ul></details>`;
 }
 function evaluationView() {
   const s=selected(), d=draft();

@@ -15,10 +15,17 @@
 Η δημιουργία και ο έλεγχος του δημόσιου καταλόγου γίνονται με:
 
 ```sh
+python3 scripts/refresh_sources.py begin
+# Fresh connector reads populate imports/remote-state.json and verified imports/github mirrors.
+python3 scripts/refresh_sources.py plan
+python3 scripts/refresh_sources.py verify
 python3 scripts/build_registry.py
+python3 scripts/refresh_sources.py verify --registry public/data/scenario-registry.json
 python3 scripts/build_pages_board.py
 python3 scripts/export_site.py
 ```
+
+Ο έλεγχος ξεκινά από τις πραγματικές σημερινές πηγές: κεφαλές και αρχεία των συνδεδεμένων repositories, όλους τους υποφακέλους Drive, το συγγραφικό υλικό και όλες τις αποθηκευμένες σκηνές Unity. Τα παλιά manifests και ο χάρτης του skill χρησιμοποιούνται ως οδηγοί αναζήτησης. Δεν υποκαθιστούν την επαλήθευση. Αν λείπει πηγή, υπάρχουν αλλοιωμένα αντίγραφα ή εντοπιστεί νέα μη ταξινομημένη πηγή, ο έλεγχος αναφέρει εκκρεμότητα και δεν επιτρέπει να χαρακτηριστεί η ενημέρωση πλήρης. Οι δοκιμές χρησιμοποιούν τα πραγματικά στοιχεία της νέας απογραφής και δεν κλειδώνουν τον αριθμό σεναρίων σε παλιό σταθερό σύνολο.
 
 Πριν από νέα δημοσίευση ελέγχονται τα `site/data/` και οι δοκιμές. Στη συνέχεια δημιουργείται το private bundle και ενημερώνεται ως νέα έκδοση το υπάρχον Apps Script project. Η δημοσίευση κρατά **Execute as: Me → Who has access: Only myself** και το ίδιο ιδιωτικό αρχείο αξιολογήσεων. Τέλος, η ενημέρωση του `main` δημοσιεύει αυτόματα το `site/` μέσω GitHub Actions. Οι εκπαιδευτικές εφαρμογές συνεχίζουν να έχουν τους δικούς τους χρόνους δημοσίευσης και ελέγχου.
 

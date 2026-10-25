@@ -13,6 +13,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
+try:
+    from .unity_inventory import UnityInventory
+    from .refresh_sources import blob_sha, mirror_root, summary as refresh_summary
+except ImportError:
+    from unity_inventory import UnityInventory
+    from refresh_sources import blob_sha, mirror_root, summary as refresh_summary
+
 ROOT = Path(__file__).resolve().parents[1]
 GRADES = ['Α΄ Γυμνασίου', 'Β΄ Γυμνασίου', 'Γ΄ Γυμνασίου', 'Α΄ Λυκείου', 'Β΄ Λυκείου', 'Γ΄ Λυκείου']
 APP_INFO = {
@@ -65,6 +72,20 @@ class Builder:
         self.warnings = []
         self.deck_targets = {}
         self.coverage = []
+        self.unity_scan = None
+        self.refresh = refresh_summary()
+        self.rules = self.read(ROOT/'source-rules.json', {})
+        self.classified_exclusions = []
+
+    def app_dir(self, name):
+        repository = 'Interactive-sculpture' if name == 'interactive-sculpture' else name
+        remote = mirror_root(repository)
+        return remote if remote.is_dir() else self.apps/name
+
+    def read_text(self, path):
+        content = Path(path).read_bytes()
+        self.audit[str(Path(path).resolve())] = hashlib.sha256(content).hexdigest()
+        return content.decode('utf-8', errors='replace')
 
     def read(self, path, default=None):
         path = Path(path)
@@ -116,17 +137,28 @@ class Builder:
             s['source_groups'].append(system)
         return src
 
-    def activity(self, s, kind, label, url='', path=None, app=None, native_id='', note='', **extra):
+    def activity(self, s, kind, label, url='', path=None, app=None, native_id='', note='', identity_key=None, **extra):
         identity = url or f'{app}:{path}:{native_id}'
-        if path:
+        if path and (not url or app in {x[0] for x in APP_INFO.values()} or app == 'drive-html'):
             identity = f'{app or kind}:{native_id}:{hashlib.sha256(Path(path).read_bytes()).hexdigest()}'
         # A Google presentation has one identity despite edit/preview URL variations.
         deck = re.search(r'docs\.google\.com/presentation/d/([^/\?#]+)', url)
         if deck:
             identity = 'slides:' + deck.group(1)
+        if identity_key:
+            identity = identity_key
         existing = next((a for a in s['activities'] if a.get('identity') == identity), None)
         if existing:
             existing.update(extra)
+            if path:
+                src = self.add_source(s, path, app or kind, native_id)
+                existing.update(source_key=src['key'], app=app, native_id=native_id,
+                                local_url=f'/launch/{existing["id"]}' if app else src['href'])
+            if note:
+                existing['note'] = note
+            if app:
+                existing['label'] = label
+                existing['kind'] = kind
             return existing
         aid = hashlib.sha256((s['scenario_id'] + '|' + identity).encode()).hexdigest()[:20]
         a = {'id': aid, 'identity': identity, 'kind': kind, 'label': label, 'url': url,
@@ -139,7 +171,7 @@ class Builder:
             a['drive_id'] = deck.group(1)
             self.deck_targets.setdefault(deck.group(1), s['scenario_id'])
         s['activities'].append(a)
-        fmt = {'book': 'Digital Book', 'slides': 'Slides', 'vr': 'Unity VR', 'html': 'HTML', 'quiz': 'HTML', 'text': 'Κείμενο'}.get(kind)
+        fmt = {'book': 'Digital Book', 'slides': 'Slides', 'vr': 'Unity VR', 'html': 'HTML', 'quiz': 'HTML', 'text': 'Κείμενο', 'model': '3D μοντέλο'}.get(kind)
         if fmt and fmt not in s['formats']:
             s['formats'].append(fmt)
         return a
@@ -217,7 +249,7 @@ class Builder:
                     s['modes'] += ['εξερεύνηση', 'ερμηνεία']
                 native = data.get('case_id', canonical) if isinstance(data, dict) else canonical
                 if kind == 'timeline' and not isinstance(data, list):
-                    target = self.apps/app_name/'data'/f'{folder.name}.json'
+                    target = self.app_dir(app_name)/'data'/f'{folder.name}.json'
                     candidate = self.read(target)
                     if isinstance(candidate, list):
                         path, data, source_module = target, candidate, None
@@ -231,7 +263,7 @@ class Builder:
                 if kind == 'history3d' and not (isinstance(data, dict) and all(k in data for k in ['characters', 'dialogs', 'facts', 'props', 'screens'])):
                     self.add_source(s, path, app_name, native)
                     s['notes'].append('Το παλαιότερο History3D JSON χρειάζεται τον υπάρχοντα μετατροπέα της εφαρμογής.')
-                    target = self.apps/app_name/'public/data'/f'{folder.name}.json'
+                    target = self.app_dir(app_name)/'public/data'/f'{folder.name}.json'
                     data = self.read(target)
                     if not isinstance(data, dict) or not all(k in data for k in ['characters', 'dialogs', 'facts', 'props', 'screens']):
                         continue
@@ -301,76 +333,97 @@ class Builder:
                           note='Καταχωρισμένο ως διαθέσιμο στο τοπικό manifest. Δεν ελέγχθηκε σε Quest.')
 
     def covenant_tree(self):
-        """Index only CovenantTree scenarios that the Jerusalem scene can select."""
-        assets = self.unity/'Assets'
-        data_dir = assets/'CovenantTree/Data'
-        scene = assets/'Scenes/Room_jerusalem.unity'
-        selector_name = 'MindPalace.CovenantTree.CovenantScenarioSelector'
-        self.coverage.append({'system':'Unity VR · Σταδιακή αποκάλυψη εικόνας',
-                              'path':str(data_dir), 'available':data_dir.is_dir() and scene.is_file(),
-                              'check':'Μόνο σενάρια δεμένα στον επιλογέα του Room_jerusalem.'})
-        if not data_dir.is_dir() or not scene.is_file():
-            return
-        scene_text = scene.read_text(encoding='utf-8', errors='replace')
-        marker = scene_text.find(selector_name)
-        if marker < 0:
-            return
-        block_start = scene_text.rfind('--- !u!', 0, marker)
-        block_end = scene_text.find('\n--- !u!', marker)
-        selector_block = scene_text[block_start if block_start >= 0 else 0:block_end if block_end >= 0 else None]
-        lines = selector_block.splitlines()
-        scenario_list = next((i for i, line in enumerate(lines) if re.match(r'^[ ]{2}scenarios:\s*$', line)), None)
-        if scenario_list is None:
-            return
-        active_ids = []
-        for line in lines[scenario_list+1:]:
-            if re.match(r'^[ ]{2}[A-Za-z_]\w*:\s*$', line):
-                break
-            match = re.match(r'^[ ]{2}- id:\s*([A-Za-z0-9_-]+)\s*$', line)
-            if match:
-                active_ids.append(match.group(1))
-        if not active_ids:
-            return
-
-        for path in sorted(data_dir.glob('*.json')):
-            data = self.read(path, {})
-            native = data.get('lesson_id') if isinstance(data, dict) else None
-            if not native or native not in active_ids:
-                continue
-            mapped = self.config.get('html_scenario_links', {}).get(native)
-            sid = mapped or 'unity:'+native
+        """Follow current scene references for every image/reconstruction mechanism."""
+        scan = self.unity_scan = UnityInventory(self.unity/'Assets', self.read_text).scan()
+        self.warnings.extend(scan.warnings)
+        self.coverage.append({'system': 'Unity · μηχανισμοί σκηνών', 'path': str(self.unity/'Assets/Scenes'),
+                              'available': bool(scan.scenes), 'scene_count': len(scan.scenes)})
+        for record in scan.records:
+            data, native = record['data'], record['native_id']
+            sid = self.config.get('html_scenario_links', {}).get(native) or 'unity:'+native
             title = data.get('short_title') or data.get('title') or native
-            # Keep the existing canonical Digital Book / lesson title when the activity
-            # is an additional source for that same scenario.
             s = self.scenarios.get(sid) or self.scenario(sid, data.get('title') or title)
-            self.add_source(s, scene, 'Unity VR', native, 'CovenantScenarioSelector')
-            items = data.get('items', [])
-            stages = data.get('stages', [])
-            exercise_count = sum(len(stage.get('items', [])) for stage in stages) if stages else len(items)
-            phase_note = f' σε {len(stages)} φάσεις' if stages else ''
-            science_note = ''
-            if native == 'two_ways_of_knowing':
-                themes = [item.get('name') for item in items if item.get('name')]
-                if themes:
-                    science_note = 'Οι έξι συνδέσεις αφορούν: '+', '.join(themes)+'.'
-            note = (f'Στα Ιεροσόλυμα υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». '
-                    f'Ο μαθητής συλλέγει τους {len(items)} παπύρους{phase_note}, μελετά το περιεχόμενο και τις υποδείξεις, '
-                    f'στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. '
-                    f'{science_note + " " if science_note else ""}'
-                    'Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου. '
-                    'Επιβεβαιώθηκε από τοπικά αρχεία και τη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.')
-            self.activity(s, 'vr', 'Unity VR · Σταδιακή αποκάλυψη εικόνας · '+title,
-                          path=path, app='Unity VR', native_id=native, note=note,
-                          room='Ιεροσόλυμα', exercise_count=exercise_count,
-                          stage_count=len(stages), reveal_mode='συλλογή παπύρων και στόχευση εικόνας')
-            for mode in ['συλλογή παπύρων','σταδιακή αποκάλυψη εικόνας','αντιστοίχιση','αιτιολόγηση']:
-                if mode not in s['modes']:
-                    s['modes'].append(mode)
+            for evidence in [record['scene']]+record['evidence']:
+                self.add_source(s, evidence, 'Unity VR', native, record['mechanism'])
+            items, stages = data.get('items', []), data.get('stages', [])
+            count = data.get('topic_count') or len(items)
+            exercises = sum(len(stage.get('items', [])) for stage in stages) if stages else count
+            if record['mechanism'] == 'reconstruction':
+                label = 'Unity VR · Κυκλικό αναλόγιο · '+title
+                note = (f"Στο δωμάτιο {record['room']} ο μαθητής στοχεύει τα {count} χειρόγραφα με το τόξο, "
+                        'διαβάζει τις πηγές που αποκαλύπτονται και μεταφέρει τα χειρόγραφα από το αναλόγιο στις σωστές θέσεις της εικόνας. '
+                        'Η συλλογή και οι σωστές τοποθετήσεις μετρώνται χωριστά. Κάθε σωστή σύνδεση φωτίζει τη δική της περιοχή.')
+                modes = ['στόχευση χειρογράφων', 'συλλογή', 'ανασύνθεση εικόνας', 'αιτιολόγηση']
+            elif record['mechanism'] == 'circular-discovery':
+                label = 'Unity VR · Κυκλικό αναλόγιο · '+title
+                note = (f"Στο δωμάτιο {record['room']} ο μαθητής στοχεύει τα {count} χειρόγραφα και μελετά τις θεματικές πηγές που αποκαλύπτονται. "
+                        'Η επιλογή διατίθεται από την εναλλαγή σεναρίου του κυκλικού αναλογίου.')
+                modes = ['στόχευση χειρογράφων', 'μελέτη πηγών', 'συζήτηση']
+            else:
+                label = 'Unity VR · Σταδιακή αποκάλυψη εικόνας · '+title
+                phases = f' σε {len(stages)} φάσεις' if stages else ''
+                note = (f"Στα {record['room']} υπάρχει επιλογή «Σταδιακή αποκάλυψη εικόνας». "
+                        f'Ο μαθητής συλλέγει τους {count} παπύρους{phases}, μελετά το περιεχόμενο και τις υποδείξεις, '
+                        'στοχεύει με τόξο τις αντίστοιχες περιοχές της εικόνας και απαντά στο ερώτημα ολοκλήρωσης. '
+                        'Η δραστηριότητα και η συλλογή της είναι ανεξάρτητες από το κανονικό quiz του δωματίου.')
+                if native == 'two_ways_of_knowing':
+                    note += ' Οι έξι συνδέσεις αφορούν: '+', '.join(item['name'] for item in items if item.get('name'))+'.'
+                modes = ['συλλογή παπύρων', 'σταδιακή αποκάλυψη εικόνας', 'αντιστοίχιση', 'αιτιολόγηση']
+            note += ' Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.'
+            self.activity(s, 'vr', label, path=record['path'], app='Unity VR', native_id=native, note=note,
+                          identity_key='unity:'+record['scene'].stem+':'+record['mechanism']+':'+native,
+                          room=record['room'], scene_name=record['scene'].stem, exercise_count=exercises,
+                          stage_count=len(stages), reveal_mode=record['mechanism'], availability_status='scene-bound')
+            s['modes'] += modes
             if not s['objectives'] and data.get('subtitle'):
                 s['objectives'] = [data['subtitle']]
+        for support in scan.support_records:
+            native = support['native_id']
+            sid = self.config.get('html_scenario_links', {}).get(native) or self.rules.get('unity_support_links', {}).get(native)
+            if sid in self.scenarios:
+                self.read_text(support['path'])
+                self.add_source(self.scenarios[sid], support['path'], 'Unity · υποστήριξη δραστηριότητας', native, support['class'])
+            else:
+                self.warnings.append({'path': str(support['path']), 'message': 'Προφίλ Unity χωρίς τεκμηριωμένη σύνδεση: '+native})
+        indexed = {a.get('native_id') for s in self.scenarios.values() for a in s['activities'] if a['kind'] == 'vr'}
+        for path in scan.candidates:
+            data = self.read(path, {})
+            native = data.get('lesson_id') or data.get('id')
+            if native not in indexed:
+                relative = str(path.relative_to(self.unity/'Assets'))
+                exclusion = self.rules.get('unity_exclusions', {}).get(relative, {})
+                bound = any(relative in scene['bindings'] for scene in scan.scenes)
+                if not bound and exclusion.get('sha256') == hashlib.sha256(path.read_bytes()).hexdigest():
+                    self.classified_exclusions.append({'path': str(path), 'reason': exclusion['reason']})
+                    continue
+                self.warnings.append({'path': str(path), 'message': 'Νέα παιδαγωγική πηγή Unity χωρίς ταξινόμηση: '+str(native)})
+
+    def light_up_legacy(self):
+        base = self.app_dir('light-up-legacy')
+        models = self.read(base/'public/sculptures.json', {})
+        contributions = self.read(base/'public/contributions.json', {})
+        self.coverage.append({'system': 'Light Up Legacy', 'path': str(base), 'available': bool(models),
+                              'check': 'Κατάλογος μοντέλων και πραγματικό τρέχον θέμα ελέγχονται χωριστά.'})
+        s = self.scenarios.get('book:lesson-004')
+        if not s:
+            return
+        model = next((m for m in models.get('models', []) if m.get('id') == 'tree-revelation'), None)
+        activity = next((a for a in s['activities'] if '/light-up-legacy/' in a.get('url', '')), None)
+        if activity and model:
+            self.add_source(s, base/'public/sculptures.json', 'Light Up Legacy', model['id'])
+            self.add_source(s, base/'public/contributions.json', 'Light Up Legacy', 'current-contributions')
+            activity.update(kind='model', app='light-up-legacy', native_id=model['id'],
+                            label='Light Up Legacy · μοντέλο «Δέντρο της Αποκάλυψης»', availability_status='model-only',
+                            note='Υπάρχει το τρισδιάστατο μοντέλο με έξι περιοχές. Στην εφαρμογή πάτησε «Γλυπτό μαθήματος» και επίλεξε «Δέντρο της Αποκάλυψης». '
+                                 'Δεν είναι έτοιμο σενάριο Αποκάλυψης: το δημοσιευμένο περιεχόμενο συνεισφορών αφορά «'+contributions.get('topic', 'θέμα προς επιβεβαίωση')+'».')
+        elif activity:
+            activity.update(kind='model', availability_status='unverified', url='',
+                            note='Ο σύνδεσμος υπάρχει στο βιβλίο, αλλά το αντίστοιχο μοντέλο δεν επαληθεύτηκε στον τρέχοντα κατάλογο.')
+            self.warnings.append({'path': str(base), 'message': 'Μη επαληθευμένο μοντέλο Light Up Legacy.'})
 
     def books(self):
-        f=self.book/'Digital_Lessons/book.json'
+        published_book = mirror_root('interactive-books')/'Digital_Lessons/book.json'
+        f=published_book if published_book.is_file() else self.book/'Digital_Lessons/book.json'
         book=self.read(f,{})
         self.coverage.append({'system':'Digital Book','path':str(f),'available':bool(book),'revision':book.get('revision')})
         self.book_revision=book.get('revision')
@@ -408,11 +461,18 @@ class Builder:
                     url=link.get('url','')
                     if not url:
                         continue
-                    self.activity(general,'slides' if 'docs.google.com/presentation' in url else 'html',link.get('label','Εφαρμογή'),url,
+                    supported = [v[2] for v in APP_INFO.values() if v[2]] + [
+                        'https://docs.google.com/presentation/',
+                        'https://dporpatonelis-crypto.github.io/Interactive-sculpture/',
+                        'https://dporpatonelis-crypto.github.io/light-up-legacy/']
+                    if not any(url.startswith(prefix) for prefix in supported):
+                        self.warnings.append({'path': str(f), 'message': 'Νέα συνδεδεμένη εφαρμογή χωρίς έλεγχο πηγής: '+url})
+                    kind = 'model' if '/light-up-legacy/' in url else 'slides' if 'docs.google.com/presentation' in url else 'html'
+                    self.activity(general,kind,link.get('label','Εφαρμογή'),url,
                                   note='Σύνδεση που υπάρχει ήδη στο Digital Book.',media_id=link.get('media_id'))
 
     def sculpture(self):
-        base=self.apps/'interactive-sculpture'
+        base=self.app_dir('interactive-sculpture')
         self.coverage.append({'system':'Interactive Sculpture','path':str(base),'available':base.is_dir()})
         for f in sorted((base/'scenarios').glob('*.json')):
             d=self.read(f,{})
@@ -505,8 +565,16 @@ class Builder:
             'personal-page':'public/data/lessons',
         }
         for name,relative in locations.items():
-            base=self.apps/name
+            base=self.app_dir(name)
             self.coverage.append({'system':name,'path':str(base),'available':base.is_dir()})
+            titles = {}
+            for catalog in [base/'catalog.json', base/relative/'manifest.json', base/relative/'index.json']:
+                entries = self.read(catalog, {})
+                entries = entries.get('scenarios', entries.get('lessons', [])) if isinstance(entries, dict) else entries
+                for entry in entries if isinstance(entries, list) else []:
+                    if isinstance(entry, dict) and entry.get('title'):
+                        key = entry.get('id') or Path(entry.get('file', entry.get('dataFile', ''))).stem
+                        titles[key] = entry['title']
             for p in sorted((base/relative).glob('*.json')):
                 if p.stem in {'manifest','catalog','index','active-scenario'}:
                     self.read(p)
@@ -514,18 +582,33 @@ class Builder:
                 data=self.read(p)
                 if not data:
                     continue
+                mapping = self.rules.get('app_scenario_links', {}).get(name+':'+p.stem, {})
+                if mapping and mapping.get('reviewed_blob_sha') != blob_sha(p.read_bytes()):
+                    self.warnings.append({'path': str(p), 'message': 'Άλλαξε το περιεχόμενο τεκμηριωμένης αντιστοίχισης: '+name+':'+p.stem})
+                    mapping = {}
+                if mapping.get('scenario_id') in self.scenarios:
+                    s = self.scenarios[mapping['scenario_id']]
+                    self.add_source(s, p, name, p.stem)
+                    info = next(v for v in APP_INFO.values() if v[0] == name)
+                    self.activity(s, 'html', info[1], info[2], path=p, app=name, native_id=p.stem,
+                                  note='Ελεγμένο δημοσιευμένο υλικό για το συγκεκριμένο μάθημα.')
+                    s['notes'].append(mapping['evidence'])
+                    continue
                 candidates=[s for s in self.scenarios.values() if s['scenario_id']=='sb:'+self.config.get('lesson_aliases',{}).get(p.stem,p.stem) or
                             any(a.get('native_id')==p.stem and a.get('app')==name for a in s['activities'])]
                 if candidates:
                     self.add_source(candidates[0],p,name,p.stem)
                 else:
-                    s=self.scenario('app:'+name+':'+p.stem,(data.get('title') or data.get('topic') or p.stem) if isinstance(data,dict) else p.stem)
+                    title = titles.get(p.stem) or (data.get('title') or data.get('topic') if isinstance(data, dict) else None) or p.stem
+                    s=self.scenario('app:'+name+':'+p.stem, title)
                     self.add_source(s,p,name,p.stem)
                     info=next((v for v in APP_INFO.values() if v[0]==name),None)
                     if info and name!='personal-page':
                         self.activity(s,'html',info[1],info[2],path=p,app=name,native_id=p.stem)
 
     def finish(self):
+        if self.warnings:
+            self.refresh['status'] = 'partial'
         for s in self.scenarios.values():
             s['modes']=list(dict.fromkeys(s['modes']))
             s['grades']=list(dict.fromkeys(s['grades']))
@@ -565,8 +648,11 @@ class Builder:
         return {'schema_version':1,'generated_at':now(),'scenarios':scenarios,'grades':GRADES,
                 'integrations':{'digital_book':{'url':getattr(self,'book_url',''),'revision':getattr(self,'book_revision',None)},
                                 'google_drive':{'checked_at':getattr(self,'drive_checked',None),'folder':getattr(self,'drive_folder',None),'mode':'connector-snapshot'},
-                                'skills':skills},
-                'inventory':{'coverage':self.coverage,'warnings':self.warnings,'source_count':len(self.audit),'scenario_count':len(scenarios)},
+                                'skills':skills,'source_refresh':self.refresh},
+                'inventory':{'coverage':self.coverage,'warnings':self.warnings,'source_count':len(self.audit),'scenario_count':len(scenarios),
+                             'unity_scenes':self.unity_scan.scenes if self.unity_scan else [],
+                             'unity_candidates':[str(p) for p in self.unity_scan.candidates] if self.unity_scan else [],
+                             'classified_exclusions':self.classified_exclusions},
                 'source_files':list(self.sources.values())}
 
     def build(self):
@@ -577,6 +663,7 @@ class Builder:
         self.drive()
         self.local_app_catalogs()
         self.covenant_tree()
+        self.light_up_legacy()
         return self.finish()
 
 

@@ -1,0 +1,121 @@
+{
+  "topic": "Τυπολογία Παλαιάς Διαθήκης — Σκιά και Πλήρωση",
+  "instruction": "Πώς συνδέεται κάθε «Σκιά» με την «Πλήρωση»; Δημιουργήστε και αιτιολογήστε τις συνδέσεις σας.",
+  "clues": [
+    {
+      "id": "typology-evidence-1",
+      "title": "Πλάκες του Νόμου",
+      "description": "Λίθινες, άψυχες πλάκες στο Σινά",
+      "type": "evidence",
+      "group": "Παλαιά Διαθήκη · Σκιά"
+    },
+    {
+      "id": "typology-evidence-3",
+      "title": "Κιβωτός της Διαθήκης",
+      "description": "Σημείο της παρουσίας της δόξας του Θεού",
+      "type": "evidence",
+      "group": "Παλαιά Διαθήκη · Σκιά"
+    },
+    {
+      "id": "typology-evidence-5",
+      "title": "Στάμνα με το Μάννα",
+      "description": "Υλική τροφή στην έρημο",
+      "type": "evidence",
+      "group": "Παλαιά Διαθήκη · Σκιά"
+    },
+    {
+      "id": "typology-evidence-7",
+      "title": "Ράβδος του Ααρών",
+      "description": "Ξύλο που βλάστησε επιβεβαιώνοντας την εκλογή",
+      "type": "evidence",
+      "group": "Παλαιά Διαθήκη · Σκιά"
+    },
+    {
+      "id": "typology-evidence-9",
+      "title": "Χάλκινος Όφις",
+      "description": "Σωτηρία από το δηλητήριο των φιδιών στην έρημο",
+      "type": "evidence",
+      "group": "Παλαιά Διαθήκη · Σκιά"
+    },
+    {
+      "id": "typology-evidence-11",
+      "title": "Πασχάλιος Αμνός",
+      "description": "Αίμα που σώζει από τον ολεθρευτή άγγελο",
+      "type": "evidence",
+      "group": "Παλαιά Διαθήκη · Σκιά"
+    },
+    {
+      "id": "typology-evidence-6",
+      "title": "Θεία Ευχαριστία",
+      "description": "Θεία Ευχαριστία, Ο «Άρτος της Ζωής»",
+      "type": "evidence",
+      "group": "Καινή Διαθήκη · Πλήρωση"
+    },
+    {
+      "id": "typology-evidence-8",
+      "title": "Αειπαρθενία και Τίμιο Ξύλο",
+      "description": "Αειπαρθενία Θεοτόκου, Το Τίμιο Ξύλο του Σταυρού",
+      "type": "evidence",
+      "group": "Καινή Διαθήκη · Πλήρωση"
+    },
+    {
+      "id": "typology-evidence-12",
+      "title": "Αμνός του Θεού",
+      "description": "Ο «Αμνός του Θεού», Το οικουμενικό Πάσχα",
+      "type": "evidence",
+      "group": "Καινή Διαθήκη · Πλήρωση"
+    },
+    {
+      "id": "typology-evidence-2",
+      "title": "Νόμος στις ανθρώπινες καρδιές",
+      "description": "Ο Νόμος γράφεται στις πλάκες των ανθρώπινων καρδιών",
+      "type": "evidence",
+      "group": "Καινή Διαθήκη · Πλήρωση"
+    },
+    {
+      "id": "typology-evidence-10",
+      "title": "Θυσία του Χριστού",
+      "description": "Θυσία του Χριστού που θεραπεύει το δηλητήριο της αμαρτίας",
+      "type": "evidence",
+      "group": "Καινή Διαθήκη · Πλήρωση"
+    },
+    {
+      "id": "typology-evidence-4",
+      "title": "Έμψυχος Κιβωτός",
+      "description": "Η «Έμψυχος Κιβωτός» (Θεοτόκος), Η καρδιά του πιστού",
+      "type": "evidence",
+      "group": "Καινή Διαθήκη · Πλήρωση"
+    }
+  ],
+  "connections": [],
+  "matchingPuzzle": {
+    "itemGroup": "Παλαιά Διαθήκη · Σκιά",
+    "slotGroup": "Καινή Διαθήκη · Πλήρωση",
+    "answers": [
+      {
+        "itemId": "typology-evidence-1",
+        "slotId": "typology-evidence-2"
+      },
+      {
+        "itemId": "typology-evidence-3",
+        "slotId": "typology-evidence-4"
+      },
+      {
+        "itemId": "typology-evidence-5",
+        "slotId": "typology-evidence-6"
+      },
+      {
+        "itemId": "typology-evidence-7",
+        "slotId": "typology-evidence-8"
+      },
+      {
+        "itemId": "typology-evidence-9",
+        "slotId": "typology-evidence-10"
+      },
+      {
+        "itemId": "typology-evidence-11",
+        "slotId": "typology-evidence-12"
+      }
+    ]
+  }
+}

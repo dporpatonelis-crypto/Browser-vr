@@ -23,7 +23,7 @@ def build_cloud(owner, site=ROOT/'site', output=ROOT/'cloud/generated'):
     models = json.loads((site/'data/pedagogical-models.json').read_text())
     css = (site/'styles.css').read_text()
     domain = (site/'domain.mjs').read_text().replace('export function ', 'function ')
-    app = (site/'app.mjs').read_text().replace("import {filterScenarios, relevantHistory} from './domain.mjs';", '')
+    app = (site/'app.mjs').read_text().split('\n', 1)[1]  # Domain helpers are inlined above.
     scripts = (domain + '\n' + app).replace('</script', '<\\/script')
     html = (site/'index.html').read_text()
     html = html.replace('<link rel="stylesheet" href="styles.css">', '<style>'+css+'</style>')

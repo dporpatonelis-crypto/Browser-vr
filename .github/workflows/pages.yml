@@ -19,6 +19,7 @@ jobs:
       - name: Verify public catalogue and private storage contract
         run: |
           python3 -m unittest discover -s tests -p 'test_publication.py' -v
+          python3 -m unittest discover -s tests -p 'test_lesson_plans.py' -v
           python3 -m unittest discover -s tests -p 'test_source_refresh.py' -v
           node --test tests/domain.test.mjs tests/cloud.test.mjs
           node --check site/app.mjs

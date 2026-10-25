@@ -33,3 +33,15 @@ export function relevantHistory(records, scenarioId, grade = '', section = '') {
     increased_difficulty: rows.filter(r => r.flags.includes('too-difficult')).length,
   }};
 }
+
+export function latestPlans(plans, scenarioId) {
+  const rows = plans.filter(p => p.scenario_id === scenarioId);
+  const previous = new Set(rows.map(p => p.previous_version_id));
+  return rows.filter(p => !previous.has(p.id)).sort((a,b) => b.created_at.localeCompare(a.created_at) || b.id.localeCompare(a.id));
+}
+
+export function materialChoices(scenario, plan) {
+  const choices = new Map((plan?.planned_materials || []).map(a => [a.id,{...a, unavailable:true}]));
+  for (const a of scenario.activities) choices.set(a.id,a);
+  return [...choices.values()];
+}

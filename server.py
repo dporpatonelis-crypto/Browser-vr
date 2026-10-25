@@ -21,6 +21,7 @@ from urllib.parse import parse_qs, quote, unquote, urlencode, urlsplit
 from zoneinfo import ZoneInfo
 
 from scripts.build_registry import ROOT, build_and_save
+from lesson_records import PlanStore, context_fields, select_materials
 
 
 def relevant_history(rows, scenario_id, grade='', section=''):
@@ -59,7 +60,7 @@ class EvaluationStore:
                 raise ValueError(f'Δεν διαβάζεται η καταγραφή {f.name}. Διατηρείται ανέπαφη για ανάκτηση.') from e
         return rows
 
-    def append(self, data, registry, models):
+    def append(self, data, registry, models, plans=None):
         if not isinstance(data, dict):
             raise ValueError('Μη έγκυρη καταγραφή.')
         try:
@@ -85,13 +86,24 @@ class EvaluationStore:
         difficulty = data.get('cognitive_difficulty', scenario.get('cognitive_difficulty'))
         if difficulty is not None and (type(difficulty) is not int or difficulty not in range(1, 6)):
             raise ValueError('Η γνωστική δυσκολία παίρνει τιμές 1–5 ή παραμένει κενή.')
+        lesson_plan = plans.version(data['plan_version_id']) if data.get('plan_version_id') and plans else None
+        if data.get('plan_version_id') and not lesson_plan:
+            raise ValueError('Δεν βρέθηκε το σχέδιο.')
+        if lesson_plan and lesson_plan['scenario_id'] != scenario['scenario_id']:
+            raise ValueError('Το σχέδιο ανήκει σε άλλο μάθημα.')
+        usage_recorded = data.get('media_usage_recorded', False)
+        if type(usage_recorded) is not bool or ('used_material_ids' in data and not usage_recorded):
+            raise ValueError('Επιβεβαίωσε ποια μέσα χρησιμοποιήθηκαν.')
+        used = select_materials(data.get('used_material_ids'), scenario, lesson_plan) if usage_recorded else []
         timestamp = datetime.now(timezone.utc)
-        row = {'schema_version': 1, 'id': request_id, 'scenario_id': scenario['scenario_id'], 'scenario_title': scenario['title'],
+        row = {'schema_version': 2, 'id': request_id, 'scenario_id': scenario['scenario_id'], 'scenario_title': scenario['title'],
                'created_at': timestamp.isoformat().replace('+00:00', 'Z'), 'date': timestamp.astimezone(ZoneInfo('Europe/Athens')).date().isoformat(),
                'timezone': 'Europe/Athens', 'grade': grade, 'section': section.strip(),
                'model_id': model['id'], 'model_title': model['title'], 'flags': list(dict.fromkeys(flags)),
                'flag_labels': {f['id']: f['label'] for f in models['flags'] if f['id'] in flags},
-               'cognitive_difficulty': difficulty, 'technical_difficulty': scenario.get('technical_difficulty')}
+               'cognitive_difficulty': difficulty, 'technical_difficulty': scenario.get('technical_difficulty'),
+               **context_fields(data), 'media_usage_recorded': usage_recorded, 'used_materials': used,
+               'lesson_plan': lesson_plan}
         with self.lock, (self.directory / '.append.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
             target = self.directory / f'{request_id}.json'
@@ -100,24 +112,31 @@ class EvaluationStore:
                 keys = ['scenario_id', 'grade', 'section', 'model_id', 'flags', 'cognitive_difficulty']
                 if any(old[k] != row[k] for k in keys):
                     raise ValueError('Το αναγνωριστικό έχει ήδη χρησιμοποιηθεί για διαφορετική καταγραφή.')
+                defaults = {'class_profile':'', 'time_slot':'', 'lesson_date':'', 'media_usage_recorded':False, 'used_materials':[], 'lesson_plan':None}
+                if any(old.get(k, default) != row[k] for k, default in defaults.items()):
+                    raise ValueError('Το αναγνωριστικό έχει ήδη χρησιμοποιηθεί για διαφορετική καταγραφή.')
                 return old, False
-            fd, temporary = tempfile.mkstemp(prefix='.pending-', dir=self.directory)
-            try:
-                with os.fdopen(fd, 'w', encoding='utf-8') as f:
-                    json.dump(row, f, ensure_ascii=False, indent=2)
-                    f.write('\n')
-                    f.flush()
-                    os.fsync(f.fileno())
-                os.replace(temporary, target)
-                directory_fd = os.open(self.directory, os.O_RDONLY)
-                try:
-                    os.fsync(directory_fd)
-                finally:
-                    os.close(directory_fd)
-            finally:
-                if os.path.exists(temporary):
-                    os.unlink(temporary)
+            self.write_atomic(target, row)
         return row, True
+
+    @staticmethod
+    def write_atomic(target, row):
+        fd, temporary = tempfile.mkstemp(prefix='.pending-', dir=target.parent)
+        try:
+            with os.fdopen(fd, 'w', encoding='utf-8') as f:
+                json.dump(row, f, ensure_ascii=False, indent=2)
+                f.write('\n')
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(temporary, target)
+            directory_fd = os.open(target.parent, os.O_RDONLY)
+            try:
+                os.fsync(directory_fd)
+            finally:
+                os.close(directory_fd)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
 
 
 class AppHandler(SimpleHTTPRequestHandler):
@@ -165,6 +184,7 @@ class MissionServer(ThreadingHTTPServer):
         self.registry = json.loads((self.root/'public/data/scenario-registry.json').read_text())
         self.models = json.loads((self.root/'public/data/pedagogical-models.json').read_text())
         self.store = EvaluationStore(storage or self.root/'storage/evaluations')
+        self.plans = PlanStore(self.store)
         self.preview_servers = {}
         self.preview_lock = threading.Lock()
         self.refresh_lock = threading.Lock()
@@ -281,8 +301,10 @@ class MissionHandler(BaseHTTPRequestHandler):
                 rows = self.server.store.read()
                 sid = query.get('scenario_id', [''])[0]
                 self.body(relevant_history(rows, sid, query.get('grade', [''])[0], query.get('section', [''])[0]) if sid else {'records':rows})
+            elif path == '/api/plans':
+                self.body({'plans':self.server.plans.read()})
             elif path == '/api/export':
-                self.body({'schema_version':1,'exported_at':datetime.now(timezone.utc).isoformat(),'evaluations':self.server.store.read()},
+                self.body({'schema_version':2,'exported_at':datetime.now(timezone.utc).isoformat(),'evaluations':self.server.store.read(),'plans':self.server.plans.read()},
                           headers={'Content-Disposition':'attachment; filename="teaching-evaluations.json"'})
             elif path.startswith('/sources/'):
                 key = path.removeprefix('/sources/')
@@ -342,13 +364,16 @@ class MissionHandler(BaseHTTPRequestHandler):
             return
         try:
             length=int(self.headers.get('Content-Length','0'))
-            if not 0 < length < 16000 or self.headers.get('Content-Type','').split(';')[0] != 'application/json':
+            if not 0 < length < 64000 or self.headers.get('Content-Type','').split(';')[0] != 'application/json':
                 raise ValueError('Μη έγκυρο μέγεθος ή περιεχόμενο αιτήματος.')
             data=json.loads(self.rfile.read(length))
             path=urlsplit(self.path).path
             if path=='/api/evaluations':
-                row,created=self.server.store.append(data,self.server.registry,self.server.models)
+                row,created=self.server.store.append(data,self.server.registry,self.server.models,self.server.plans)
                 self.body({'ok':True,'record':row,'created':created},status=201 if created else 200)
+            elif path=='/api/plans':
+                row,created=self.server.plans.append(data,self.server.registry,self.server.models)
+                self.body({'ok':True,'plan':row,'created':created},status=201 if created else 200)
             elif path=='/api/refresh':
                 with self.server.refresh_lock:
                     self.server.registry=build_and_save(self.server.root)

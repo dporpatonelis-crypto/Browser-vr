@@ -1,7 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
-import {filterScenarios,relevantHistory} from '../public/domain.mjs';
+import {filterScenarios,relevantHistory,latestPlans,materialChoices} from '../public/domain.mjs';
+
+test('saved plan revisions use their chain even when timestamps are equal',()=>{
+  const rows=[{id:'z',plan_id:'p',scenario_id:'s',created_at:'2026-10-25',previous_version_id:''},{id:'a',plan_id:'p',scenario_id:'s',created_at:'2026-10-25',previous_version_id:'z'}];
+  assert.equal(latestPlans(rows,'s')[0].id,'a');
+  const choices=materialChoices({activities:[{id:'new',label:'Current'}]},{planned_materials:[{id:'old',label:'Original',url:'https://example.org/'}]});
+  assert.equal(choices.find(a=>a.id==='old').unavailable,true);
+  assert.equal(choices.find(a=>a.id==='old').label,'Original');
+});
 
 const localRegistry=new URL('../public/data/scenario-registry.json',import.meta.url);
 const registry=JSON.parse(readFileSync(existsSync(localRegistry)?localRegistry:new URL('../site/data/scenario-registry.json',import.meta.url)));

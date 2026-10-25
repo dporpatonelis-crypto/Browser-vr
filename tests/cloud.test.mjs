@@ -26,8 +26,71 @@ const payload=(overrides={})=>({request_id:'7ed3a50f-991a-4eb9-964a-f2e5458a5de0
 test('private cloud rejects anonymous, other accounts and mismatched execution identity',()=>{
   for(const [active,effective] of [['',owner],['other@example.com',owner],[owner,'other@example.com']]){
     const {context}=environment(undefined,active,effective);
-    for(const name of ['doGet','listEvaluations','saveEvaluation','exportEvaluations','verifyPrivateStorage']) assert.throws(()=>context[name](payload()),/ιδιωτικός χώρος/);
+    for(const name of ['doGet','listEvaluations','saveEvaluation','listPlans','savePlan','exportEvaluations','verifyPrivateStorage']) assert.throws(()=>context[name](payload()),/ιδιωτικός χώρος/);
   }
+});
+
+const scenario=catalog.scenarios.find(s=>s.scenario_id==='book:lesson-004');
+const ids=scenario.activities.map(a=>a.id);
+const planPayload=(overrides={})=>({request_id:'a1111111-1111-4111-8111-111111111111',scenario_id:scenario.scenario_id,model_id:'guided-exploration',grade:'Β΄ Λυκείου',section:'Β2',class_profile:'Συμμετοχικό, χρειάζεται χρόνο για διάλογο',time_slot:'midday',lesson_date:'2026-10-25',notes:'Ερώτημα → διαφάνειες → VR → συζήτηση',planned_material_ids:ids.slice(0,2),...overrides});
+test('private plans persist, revise without overwriting, and protect concurrent edits',()=>{
+  const {context,storage}=environment();
+  const first=context.savePlan(planPayload()).plan;
+  assert.equal(first.planned_materials.length,2);
+  assert.equal(context.savePlan(planPayload()).created,false);
+  const update=planPayload({request_id:'a2222222-2222-4222-8222-222222222222',plan_id:first.plan_id,previous_version_id:first.id,notes:'Νέα πορεία',planned_material_ids:ids.slice(0,1)});
+  const second=context.savePlan(update).plan;
+  assert.equal(second.previous_version_id,first.id);
+  assert.equal(context.savePlan(update).created,false);
+  assert.equal(context.listPlans().plans.length,2);
+  assert.equal(context.listEvaluations().records.length,0);
+  assert.throws(()=>context.savePlan({...update,request_id:'a3333333-3333-4333-8333-333333333333'}),/άλλη συσκευή/);
+  assert.throws(()=>context.savePlan({...update,notes:'Άλλο περιεχόμενο'}),/διαφορετικό σχέδιο/);
+  const restored=environment(storage).context;
+  assert.equal(restored.listPlans().plans.find(p=>p.id===first.id).notes,first.notes);
+  assert.equal(restored.exportEvaluations().plans.length,2);
+});
+test('evaluation captures planned versus actually used media and private classroom context',()=>{
+  const {context}=environment();
+  const plan=context.savePlan(planPayload()).plan;
+  const data=payload({scenario_id:scenario.scenario_id,plan_version_id:plan.id,class_profile:plan.class_profile,time_slot:'morning',lesson_date:'2026-10-25',media_usage_recorded:true,used_material_ids:[ids[1],ids[2]]});
+  const saved=context.saveEvaluation(data).record;
+  assert.equal(saved.lesson_plan.id,plan.id);
+  assert.deepEqual(Array.from(saved.lesson_plan.planned_materials,a=>a.id),ids.slice(0,2));
+  assert.deepEqual(Array.from(saved.used_materials,a=>a.id),[ids[1],ids[2]]);
+  assert.equal(saved.time_slot,'morning');
+  assert.equal(saved.lesson_plan.time_slot,'midday');
+  assert.equal(saved.class_profile,plan.class_profile);
+  assert.equal(context.saveEvaluation(data).created,false);
+  assert.throws(()=>context.saveEvaluation({...data,time_slot:'midday'}),/διαφορετική καταγραφή/);
+  const empty=context.saveEvaluation({...data,request_id:'a4444444-4444-4444-8444-444444444444',used_material_ids:[]}).record;
+  assert.equal(empty.media_usage_recorded,true);
+  assert.equal(empty.used_materials.length,0);
+});
+test('plans and evaluations reject foreign media, invalid context and cross-lesson plans',()=>{
+  const {context,storage}=environment();
+  for(const change of [{planned_material_ids:['unknown']},{time_slot:'night'},{class_profile:'x'.repeat(241)},{lesson_date:'2026-02-30'},{notes:'x'.repeat(2001)}]) assert.throws(()=>context.savePlan(planPayload(change)));
+  assert.equal(storage.files.length,0);
+  const plan=context.savePlan(planPayload()).plan;
+  for(const change of [{scenario_id:'book:abraham-journey'},{used_material_ids:['unknown']},{media_usage_recorded:false},{time_slot:'night'}]) assert.throws(()=>context.saveEvaluation(payload({scenario_id:scenario.scenario_id,plan_version_id:plan.id,media_usage_recorded:true,used_material_ids:[ids[0]],...change})));
+  assert.equal(context.listEvaluations().records.length,0);
+});
+test('old evaluations remain readable and do not imply no media were used',()=>{
+  const {context,storage}=environment();
+  const saved=context.saveEvaluation(payload()).record;
+  const legacy={...saved,schema_version:1};
+  for(const key of ['lesson_plan','class_profile','time_slot','lesson_date','used_materials','media_usage_recorded'])delete legacy[key];
+  storage.files[0]={getName:()=>legacy.id+'.json',getBlob:()=>({getDataAsString:()=>JSON.stringify(legacy)})};
+  assert.equal(context.saveEvaluation(payload()).record.schema_version,1);
+  assert.equal(context.listEvaluations().records[0].media_usage_recorded,undefined);
+});
+test('a saved plan preserves media removed by a later catalogue refresh',()=>{
+  const {context}=environment();
+  const plan=context.savePlan(planPayload()).plan;
+  vm.runInContext(`CATALOG.scenarios.find(s=>s.scenario_id===${JSON.stringify(scenario.scenario_id)}).activities=[]`,context);
+  const saved=context.saveEvaluation(payload({scenario_id:scenario.scenario_id,plan_version_id:plan.id,media_usage_recorded:true,used_material_ids:[ids[0]]})).record;
+  assert.equal(saved.used_materials[0].label,plan.planned_materials[0].label);
+  assert.equal(saved.lesson_plan.planned_materials.length,2);
 });
 test('cloud keeps individual records across a fresh runtime and retry is idempotent',()=>{
   const {context,storage}=environment();

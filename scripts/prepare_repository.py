@@ -11,6 +11,7 @@ FILES = [
     'cloud/Code.gs', 'cloud/appsscript.json',
     'scripts/build_registry.py', 'scripts/prepare_apps.py', 'scripts/start.py',
     'scripts/export_site.py', 'scripts/build_cloud.py', 'scripts/prepare_repository.py',
+    'scripts/build_pages_board.py',
     'public/index.html', 'public/styles.css', 'public/icon.svg', 'public/app.mjs', 'public/domain.mjs',
     'public/data/pedagogical-models.json', 'tests/domain.test.mjs', 'tests/cloud.test.mjs',
     'tests/test_publication.py', 'tests/test_mission_control.py', 'storage/.gitkeep',

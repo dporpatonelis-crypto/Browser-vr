@@ -61,6 +61,7 @@ function privateSpace(view='evaluate') {
   if (state.selected) { target.searchParams.set('scenario',state.selected);target.searchParams.set('view',view); }
   if (state.grade) target.searchParams.set('grade',state.grade);
   if (state.grade && state.section) target.searchParams.set('section',state.section);
+  target.searchParams.set('model',state.modelId);
   return link(target.href,'Στον ιδιωτικό χώρο '+icon('external'),'button secondary');
 }
 function header() {
@@ -168,7 +169,7 @@ function bind() {
     const id=el.id,start=el.selectionStart,end=el.selectionEnd;
     state.filters[el.dataset.filter]=el.type==='checkbox'?el.checked:el.value;
     render();const replacement=document.getElementById(id);replacement?.focus();if(start!==null) replacement?.setSelectionRange?.(start,end);
-    announce(document.querySelectorAll('.scenario-card').length+' διαθέσιμα μαθήματα');
+    const count=document.querySelectorAll('.scenario-card').length;announce(count+(count===1?' διαθέσιμο μάθημα':' διαθέσιμα μαθήματα'));
   }));
   document.querySelector('#clear-filters')?.addEventListener('click',()=>{state.filters={search:'',goal:'',subject:'',source:'',includeUnknown:false};state.grade='';state.section='';remember();render();});
   document.querySelectorAll('[data-flag]').forEach(b=>b.addEventListener('click',()=>{
@@ -215,7 +216,7 @@ async function boot() {
     if (cloud) state.service=true;
     else if (!catalogueMode) { try {const h=await getJson('api/health');state.service=h.service==='teaching-mission-control';} catch {} }
     [state.registry,state.models]=await Promise.all([getJson(state.service?'api/registry':'data/scenario-registry.json'),getJson(state.service?'api/models':'data/pedagogical-models.json')]);
-    if (cloud?.initial) { const i=cloud.initial;state.selected=i.scenario||null;state.view=i.view||'select';state.grade=i.grade||state.grade;state.section=i.section||''; }
+    if (cloud?.initial) { const i=cloud.initial;state.selected=i.scenario||null;state.view=i.view||'select';state.grade=i.grade||state.grade;state.section=i.section||'';state.modelId=i.modelId||state.modelId; }
     if(!state.registry.grades.includes(state.grade)){state.grade='';state.section='';}
     if(!state.models.models.some(m=>m.id===state.modelId))state.modelId=state.models.models[0].id;
     const match=location.hash.match(/^#(activity|evaluate)\/(.+)$/);

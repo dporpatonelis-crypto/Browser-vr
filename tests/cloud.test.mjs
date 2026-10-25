@@ -26,7 +26,7 @@ const payload=(overrides={})=>({request_id:'7ed3a50f-991a-4eb9-964a-f2e5458a5de0
 test('private cloud rejects anonymous, other accounts and mismatched execution identity',()=>{
   for(const [active,effective] of [['',owner],['other@example.com',owner],[owner,'other@example.com']]){
     const {context}=environment(undefined,active,effective);
-    for(const name of ['doGet','listEvaluations','saveEvaluation','exportEvaluations']) assert.throws(()=>context[name](payload()),/ιδιωτικός χώρος/);
+    for(const name of ['doGet','listEvaluations','saveEvaluation','exportEvaluations','verifyPrivateStorage']) assert.throws(()=>context[name](payload()),/ιδιωτικός χώρος/);
   }
 });
 test('cloud keeps individual records across a fresh runtime and retry is idempotent',()=>{

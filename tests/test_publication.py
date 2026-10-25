@@ -2,6 +2,7 @@ import json
 import re
 import tempfile
 import unittest
+from urllib.parse import urlsplit
 from pathlib import Path
 import sys
 
@@ -55,6 +56,18 @@ class PublicationTests(unittest.TestCase):
                     data = (ROOT/'site'/filename).read_text()
                     self.assertNotIn('/Users/', data)
                     self.assertIsNotNone(json.loads(data))
+
+    def test_hosted_board_entry_and_its_compiled_assets_exist(self):
+        root = ROOT/'site'
+        html = (root/'apps/investigation/index.html').read_text()
+        for value in re.findall(r'(?:src|href)="([^"]+)"', html):
+            if value.startswith('/Browser-vr/apps/investigation/'):
+                self.assertTrue((root/value.removeprefix('/Browser-vr/')).is_file(), value)
+        registry = json.loads((root/'data/scenario-registry.json').read_text())
+        for s in registry['scenarios']:
+            for a in s['activities']:
+                if a.get('app') == 'idea-weaver-board':
+                    self.assertEqual('/Browser-vr/apps/investigation/', urlsplit(a['url']).path)
 
 
 if __name__ == '__main__':

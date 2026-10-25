@@ -21,6 +21,7 @@ function doGet(e) {
     initial.view = parameters.view === 'evaluate' ? 'evaluate' : 'activity';
   }
   if (CATALOG.grades.includes(parameters.grade)) initial.grade = parameters.grade;
+  if (MODELS.models.some(m => m.id === parameters.model)) initial.modelId = parameters.model;
   if (initial.grade && typeof parameters.section === 'string') initial.section = parameters.section.slice(0, 40);
   const bootstrap = JSON.stringify({registry: CATALOG, models: MODELS, initial,
     assetBase: CATALOG.publication.site_url}).replace(/</g, '\\u003c');

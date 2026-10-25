@@ -55,7 +55,7 @@ python3 scripts/build_registry.py
 
 Η απογραφή καλύπτει Sacred Blueprint, Investigation Board, Timeline, History Explorer, Mind Palace, Interactive Sculpture, το Digital Book έκδοσης 28, 21 native παρουσιάσεις στο ChatGPT/Slides και επτά ενσωματωμένα σενάρια από τα δύο HTML αρχεία του ChatGPT/html apps. Οι μορφές συνδέονται στον ίδιο κατάλογο· οι φάκελοι των αρχικών μαθημάτων δεν συγχωνεύονται ούτε διαγράφονται.
 
-Το `docs/inventory.md` περιέχει σύντομη απογραφή. Οι ακριβείς πηγές, παραλλαγές, hashes, ενότητες βιβλίου, Drive IDs και ελλείψεις βρίσκονται στο `public/data/scenario-registry.json`. Το `docs/source-status-before.json` καταγράφει τις προϋπάρχουσες αλλαγές των αρχικών repositories.
+Η πλήρης απογραφή πηγών, παραλλαγών και τοπικών διαδρομών παραμένει στον αρχικό υπολογιστή και εξαιρείται από τη δημοσίευση. Το `site/data/scenario-registry.json` είναι ο φορητός κατάλογος της online έκδοσης.
 
 Δεν έγινε δοκιμή Unity Play Mode ή Quest. Η παρουσία JSON δεν πιστοποιεί ότι το αντίστοιχο APK είναι εγκατεστημένο. Οι ιδιωτικές παρουσιάσεις συνεχίζουν να απαιτούν τον υπάρχοντα Google λογαριασμό. Τα HTML ανοίγουν από αντίγραφα ανάγνωσης και διατηρούν τον δικό τους επιλογέα σεναρίων.
 

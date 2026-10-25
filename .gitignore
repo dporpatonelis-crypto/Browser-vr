@@ -9,5 +9,6 @@ public/data/scenario-registry.json
 docs/source-status-before.json
 docs/source-hashes.json
 docs/github-publication-state.json
-storage/
 cloud/generated/
+docs/inventory.md
+docs/verification.md

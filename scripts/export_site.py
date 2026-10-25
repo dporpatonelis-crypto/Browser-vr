@@ -73,6 +73,8 @@ def portable_registry(registry, output, site_url, cloud_url=''):
                 relative = f'data/activities/{activity["id"]}.json'
                 write_json(output / relative, without_paths(data))
                 activity['lesson_download_url'] = site_url + relative
+                if activity['app'] == 'idea-weaver-board':
+                    activity['url'] = site_url + 'apps/investigation/'
                 parts = urlsplit(activity['url'])
                 query = dict(parse_qsl(parts.query))
                 query['dataUrl'] = activity['lesson_download_url']
@@ -93,6 +95,10 @@ def export_site(output, site_url, cloud_url=''):
     if urlsplit(site_url).scheme != 'https' or not site_url.endswith('/'):
         raise ValueError('Η διεύθυνση δημοσίευσης πρέπει να είναι HTTPS και να τελειώνει σε /.')
     output.mkdir(parents=True, exist_ok=True)
+    prepared_board = ROOT/'storage/pages-app-builds/idea-weaver-board'
+    if prepared_board.is_dir():
+        shutil.copytree(prepared_board, output/'apps/investigation', dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns('.source-hash'))
     # Remove obsolete educational payloads as part of a repeat export, never source files.
     if (output/'data/activities').is_dir():
         shutil.rmtree(output/'data/activities')

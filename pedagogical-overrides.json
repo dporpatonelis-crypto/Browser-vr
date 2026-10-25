@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "description": "Χαρτογράφηση από πραγματικά ζητούμενα των πηγών. Δεν είναι εμπειρική μέτρηση αποτελεσματικότητας ή αυθαίρετη ανάθεση τάξης.",
+  "scenarios": {
+    "sb:vivlos-dialogos-kai-drasi": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "sb:to-schedio-tis-theias-oikonomias": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "sb:i-ypothesi-tou-areiou": {
+      "cognitive_difficulty": 5,
+      "cognitive_status": "mapped"
+    },
+    "sb:20261002_palaia-kai-kaini-diathiki-enotita": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "sb:eleftheria-kai-dogmatiki-syneidisi": {
+      "cognitive_difficulty": 5,
+      "cognitive_status": "mapped"
+    },
+    "sb:pisti-exousia-kai-prosopo": {
+      "cognitive_difficulty": 5,
+      "cognitive_status": "mapped"
+    },
+    "unity:agora_paul_logos": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "unity:byzantium_paul_cross": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "unity:jerusalem_theotokos_hymn": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "unity:jerusalem_pentecost_hymn": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "unity:byzantium_fall_restoration": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "book:lesson-004": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    },
+    "sculpture:spiritual-freedom": {
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped"
+    }
+  },
+  "mapping_evidence": {
+    "level_4": "Ρητή απαίτηση σύνδεσης ευρημάτων/πηγών και προφορικής αιτιολόγησης, ή σύγκρισης με τεκμήρια. Οι αντιστοιχίσεις μαζί με αιτιολόγηση χαρτογραφούνται στη βαθμίδα 4, όχι μόνο στη βαθμίδα ανάκλησης.",
+    "level_5": "Το σενάριο του Αρείου ζητά τεκμηριωμένη ετυμηγορία. Η Ελευθερία ζητά διάκριση ιστορικού δεδομένου/ερμηνείας/εφαρμογής. Η Πίστη/Εξουσία ζητά κριτική αναγνώριση εκτροπών και εφαρμογή κριτηρίου αγάπης.",
+    "grades": "Διατηρούνται μόνο οι δηλωμένες τάξεις στο lesson_plan ή στο βιβλίο. Οι παραδοχές ηλικίας και διάρκειας μένουν προς επιβεβαίωση.",
+    "technical_difficulty": "Παραμένει κενή: δεν υπάρχει τεκμηριωμένη βαθμονόμηση χειρισμών."
+  },
+  "display": {
+    "sb:20260702_091526_the-triple-testimony-of-the-one-god": {
+      "title": "Η Τριπλή Μαρτυρία του Ενός Θεού",
+      "note": "Ο ελληνικός τίτλος προέρχεται από τα υπάρχοντα app catalogs. Το Investigation Board εστιάζει στην Οικονομία της Σιωπής και στο Άγιο Πνεύμα."
+    },
+    "sb:20260702_174242_participation": {
+      "title": "Διονύσιος και Ωριγένης · υλικό διερεύνησης",
+      "note": "Ο φάκελος participation περιέχει διαφορετικά θέματα: Investigation Board για τον Διονύσιο, Timeline και Mind Palace για το Αίνιγμα του Ωριγένη. Η ενιαία παιδαγωγική τους χρήση χρειάζεται επιβεβαίωση. Δεν συμπεραίνεται σύνδεση από τον κοινό φάκελο."
+    },
+    "sb:20260720_143615_": {
+      "title": "Ο Απόστολος των Εθνών και το Στόμα της Εκκλησίας",
+      "note": "Τίτλος από το υπάρχον σενάριο paul-chrysostom-logos."
+    }
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "characters": [
+    {
+      "id": "socrates",
+      "name": "Ο Φιλόσοφος",
+      "position_x": -3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Ο πατέρας της φιλοσοφίας",
+      "glbModel": "/models/Socrates.glb"
+    },
+    {
+      "id": "hypatia",
+      "name": "Υπατία",
+      "position_x": 3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Η φιλόσοφος της Αλεξάνδρειας",
+      "glbModel": "/models/hypatia.glb"
+    },
+    {
+      "id": "aristotle",
+      "name": "Αριστοτέλης",
+      "position_x": -8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πατέρας της επιστήμης",
+      "glbModel": "/models/aristotle.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "Constantine compressed (2).glb",
+      "name": "Μ. Κωνσταντίνος",
+      "position_x": 5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πρώτος Βυζαντινός Αυτοκράτορας",
+      "glbModel": "/models/constantine.glb"
+    },
+    {
+      "id": "monk compressed.glb",
+      "name": "Άγιος",
+      "position_x": 8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Άγιος",
+      "glbModel": "/models/monk.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ψηφιδωτό Πέλλας compressed (2).glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/pella_mosaic.glb"
+    },
+    {
+      "id": "Αλεξάνδρεια compressed (1).glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/alexandria.glb"
+    },
+    {
+      "id": "Λιβελο compressed (2).glb",
+      "name": "tree",
+      "position_x": 0,
+      "position_y": 1,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/libelo.glb"
+    },
+    {
+      "id": "Αθήνα.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/solomon_temple_optimized_v1.glb"
+    },
+    {
+      "id": "Valhalla grok compress.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": -0.5,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/valhalla.glb"
+    },
+    {
+      "id": "Alexander.glb",
+      "name": "Μ. Αλέξανδρος",
+      "position_x": -5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Βασιλιάς Μακεδονίας",
+      "glbModel": "/models/Alexander.glb"
+    }
+  ],
+  "dialogs": [
+    {
+      "character_id": "aristotle",
+      "question": "Ποια είναι η λογική δομή του επιχειρήματος του Αρείου για το αγέννητον;",
+      "answer": "Η υπεράσπιση ξεκινά από την προϋπόθεση ότι μόνο ο Πατήρ είναι αγέννητος, συνδέει το αγέννητον με την πλήρη θεότητα και συμπεραίνει ότι ο Υιός πρέπει να έχει αρχή. Το κρίσιμο ερώτημα είναι αν η διάκριση Πατρός και Υιού απαιτεί πράγματι διαφορά ουσίας."
+    },
+    {
+      "character_id": "aristotle",
+      "question": "Πού βρίσκεται το πιθανό λογικό άλμα στην αρειανική θέση;",
+      "answer": "Το άλμα εμφανίζεται όταν ένας τρόπος προσωπικής διάκρισης μετατρέπεται χωρίς πρόσθετη απόδειξη σε οντολογική κατωτερότητα. Ο μαθητής πρέπει να ξεχωρίσει την πρόθεση προστασίας της θείας μοναρχίας από τη συνέπεια ότι ο Λόγος γίνεται κτίσμα."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Γιατί η κτιστότητα του Λόγου δημιουργεί σωτηριολογικό πρόβλημα;",
+      "answer": "Στο πλαίσιο του μαθήματος, ένας κτιστός μεσίτης παραμένει στην πλευρά της δημιουργίας που χρειάζεται σωτηρία. Η πατερική αντίκρουση εξετάζει αν μόνο ο αληθινός Θεός μπορεί να ενώσει πραγματικά τον άνθρωπο με την άκτιστη ζωή."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πώς συνδέονται η λατρεία και το τρεπτόν με την κρίση της διδασκαλίας;",
+      "answer": "Αν ο Χριστός είναι κτίσμα, η προσκύνησή Του γεννά πρόβλημα λατρείας της δημιουργίας· αν είναι τρεπτός, η σωτηρία εξαρτάται από μια μεταβλητή ύπαρξη. Τα δύο κριτήρια ελέγχουν τις συνέπειες της θέσης και όχι μόνο τη λεκτική της συνοχή."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Ποιο ιστορικό πρόβλημα έφθασε στη Νίκαια το 325;",
+      "answer": "Η διαμάχη που ξέσπασε στην Αλεξάνδρεια αφορούσε τη σχέση του Υιού με τον Πατέρα και τις συνέπειες της θέσης ότι υπήρξε χρόνος κατά τον οποίο ο Υιός δεν υπήρχε. Η Σύνοδος κλήθηκε να ορίσει ένα κοινό εκκλησιαστικό όριο."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Τι λειτουργία έχει ο όρος ομοούσιος στην ετυμηγορία της Συνόδου;",
+      "answer": "Ο όρος λειτουργεί ως όριο που αποκλείει την κατάταξη του Υιού στα κτίσματα και διασφαλίζει την πλήρη θεότητά Του. Δεν εξαντλεί το μυστήριο της Τριάδας· δηλώνει τι δεν μπορεί να χαθεί χωρίς να αλλάξει το νόημα της σωτηρίας."
+    },
+    {
+      "character_id": "socrates",
+      "question": "Πώς πρέπει να εξετάσουμε το Παροιμιών 8,22 ως πειστήριο;",
+      "answer": "Πρώτα διακρίνουμε τι λέει το κείμενο, ποιο πρόσωπο ταυτίζεται με τη Σοφία και ποια ερμηνευτική προϋπόθεση οδηγεί από τη λέξη «έκτισέ» στο συμπέρασμα περί κτιστού Λόγου. Το πειστήριο και η ερμηνεία του δεν είναι το ίδιο πράγμα."
+    },
+    {
+      "character_id": "socrates",
+      "question": "Με ποια κριτήρια θα διατυπώσεις τελική ετυμηγορία;",
+      "answer": "Σύνδεσε τρία επίπεδα: βιβλικό πειστήριο, λογική συνοχή και σωτηριολογικές ή λατρευτικές συνέπειες. Η τελική κρίση πρέπει να αναγνωρίζει την πρόθεση του επιχειρήματος, αλλά και να εξηγεί τεκμηριωμένα γιατί το αποτέλεσμά του γίνεται αποδεκτό ή απορρίπτεται."
+    }
+  ],
+  "facts": [
+    {
+      "character_id": "aristotle",
+      "fact": "Η φράση «ἦν ποτε ὅτε οὐκ ἦν» συνοψίζει την αρειανική άρνηση της συναιωνιότητας του Υιού."
+    },
+    {
+      "character_id": "aristotle",
+      "fact": "Το αγέννητον χρησιμοποιείται στην υπεράσπιση ως γνώρισμα που ανήκει αποκλειστικά στον Πατέρα."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "Η πατερική αντίκρουση συνδέει άμεσα την ταυτότητα του Χριστού με τη δυνατότητα θέωσης και νίκης κατά του θανάτου."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "Η λατρεία του Χριστού λειτουργεί στο μάθημα ως έλεγχος συνέπειας: η Εκκλησία δεν μπορεί να προσκυνά ένα κτίσμα ως Θεό."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "Η Α΄ Οικουμενική Σύνοδος συγκλήθηκε στη Νίκαια το 325 μ.Χ."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "Το ομοούσιο αποκλείει την ιδέα ότι ο Υιός ανήκει στην τάξη των δημιουργημάτων."
+    },
+    {
+      "character_id": "socrates",
+      "fact": "Το Παροιμιών 8,22 είναι βασικό βιβλικό πειστήριο της αρειανικής επιχειρηματολογίας, αλλά η χρήση του προϋποθέτει συγκεκριμένη χριστολογική ερμηνεία της Σοφίας."
+    },
+    {
+      "character_id": "socrates",
+      "fact": "Ο φόβος σύγχυσης Πατρός και Υιού με τον Σαβελλιανισμό εξηγεί μέρος της πρόθεσης του Αρείου, χωρίς να δικαιώνει αναγκαστικά το συμπέρασμά του."
+    }
+  ],
+  "screens": {
+    "right_label": "Νίκαια 325 — από το επιχείρημα στην ετυμηγορία",
+    "right_image_url": "",
+    "left_label": "Παροιμίες 8,22 — πειστήριο και ερμηνεία",
+    "left_image_url": ""
+  },
+  "props": [
+    {
+      "id": "dimitris",
+      "glbModel": "/models/Dimitris.glb",
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false,
+      "welcome": "Καλώς ήρθες στην Αρχαία Αγορά. Είμαι ο Δημήτρης και θα σε ξεναγήσω.",
+      "welcome_voice": "Melina",
+      "welcome_trigger": "both",
+      "welcome_delay_ms": 2500,
+      "welcome_radius": 2.5,
+      "welcome_audio": "/audio/dimitris.wav"
+    }
+  ]
+}

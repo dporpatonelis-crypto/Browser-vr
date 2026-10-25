@@ -1,0 +1,344 @@
+{
+  "characters": [
+    {
+      "id": "socrates",
+      "name": "Ο Φιλόσοφος",
+      "position_x": -3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Ο πατέρας της φιλοσοφίας",
+      "glbModel": "/models/Socrates.glb"
+    },
+    {
+      "id": "hypatia",
+      "name": "Υπατία",
+      "position_x": 3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Η φιλόσοφος της Αλεξάνδρειας",
+      "glbModel": "/models/hypatia.glb"
+    },
+    {
+      "id": "aristotle",
+      "name": "Αριστοτέλης",
+      "position_x": -8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πατέρας της επιστήμης",
+      "glbModel": "/models/aristotle.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "Constantine compressed (2).glb",
+      "name": "Μ. Κωνσταντίνος",
+      "position_x": 5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πρώτος Βυζαντινός Αυτοκράτορας",
+      "glbModel": "/models/constantine.glb"
+    },
+    {
+      "id": "monk compressed.glb",
+      "name": "Άγιος",
+      "position_x": 8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Άγιος",
+      "glbModel": "/models/monk.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ψηφιδωτό Πέλλας compressed (2).glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/pella_mosaic.glb"
+    },
+    {
+      "id": "Αλεξάνδρεια compressed (1).glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/alexandria.glb"
+    },
+    {
+      "id": "Λιβελο compressed (2).glb",
+      "name": "tree",
+      "position_x": 0,
+      "position_y": 1,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/libelo.glb"
+    },
+    {
+      "id": "Αθήνα.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/solomon_temple_optimized_v1.glb"
+    },
+    {
+      "id": "Valhalla grok compress.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": -0.5,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/valhalla.glb"
+    },
+    {
+      "id": "Alexander.glb",
+      "name": "Μ. Αλέξανδρος",
+      "position_x": -5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Βασιλιάς Μακεδονίας",
+      "glbModel": "/models/Alexander.glb"
+    },
+    {
+      "id": "acropolis",
+      "name": "tree",
+      "position_x": -3.5,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/acropolis_optimized_v1.glb"
+    }
+  ],
+  "props": [
+    {
+      "id": "dimitris",
+      "glbModel": "/models/Dimitris.glb",
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false,
+      "welcome": "Καλώς ήρθες στην Αρχαία Αγορά. Είμαι ο Δημήτρης και θα σε ξεναγήσω.",
+      "welcome_voice": "Melina",
+      "welcome_trigger": "both",
+      "welcome_delay_ms": 2500,
+      "welcome_radius": 2.5,
+      "welcome_audio": "/audio/dimitris.wav"
+    },
+    {
+      "id": "bishop",
+      "glbModel": "/models/bishop_face_lipsync_optimized_v5.glb",
+      "position_x": 6.875,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": true,
+      "idle_animation": "Idle_Retarget_FK",
+      "dialog_enabled": true,
+      "dialog_label": "Ιεράρχης",
+      "dialog_title": "Ιεράρχης",
+      "dialog_subtitle": "Διάλογος από το scenario JSON",
+      "dialog_prompt": "Μήνυμα",
+      "dialog_speech_enabled": false,
+      "dialog_text": "Το περιεχόμενο του διαλόγου μπορεί να αντικατασταθεί αργότερα απευθείας από το scenario JSON."
+    },
+    {
+      "id": "agia_sophia",
+      "glbModel": "/models/agia_sophia_optimized_v1.glb",
+      "position_x": 6.3,
+      "position_y": 0.05,
+      "position_z": 2.3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false
+    }
+  ],
+  "dialogs": [
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πότε η τήρηση των εντολών γίνεται αυτοδικαίωση;",
+      "answer": "Η εξωτερική τήρηση γίνεται ατομικό κατόρθωμα όταν χρησιμοποιείται ως αξίωση δικαίωσης από τον Θεό."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πώς η αυτοκρατορική λατρεία υποτάσσει την πίστη στην πολιτική;",
+      "answer": "Η επιβολή της αυτοκρατορικής λατρείας απαιτεί κοινωνική συμμόρφωση και δοκιμάζει την ελευθερία της πίστης."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πώς η χάρη συνδέεται με την ελεύθερη ανθρώπινη ανταπόκριση;",
+      "answer": "Η χάρη καλεί τον άνθρωπο σε ελεύθερη ανταπόκριση που εκφράζεται στην αγάπη, χωρίς οι πράξεις να εξαγοράζουν τη σωτηρία."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πότε το δόγμα γίνεται εργαλείο κρατικής σκοπιμότητας;",
+      "answer": "Οι δογματικοί συμβιβασμοί υπηρετούν την πολιτική ηρεμία όταν η εξουσία μεταχειρίζεται την πίστη ως κρατικό εργαλείο."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πώς μια εκκλησιαστική τοποθέτηση γίνεται εθνικιστικό άλλοθι;",
+      "answer": "Μια μεμονωμένη εκκλησιαστική τοποθέτηση νομιμοποιεί εθνικιστική πολιτική όταν παρουσιάζεται ως κριτήριο χριστιανικής πιστότητας και αποκλείει τον διαφορετικό."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πότε η θρησκευτική παρουσία γίνεται μέσο κοινωνικού κύρους;",
+      "answer": "Η δημόσια θρησκευτική παρουσία γίνεται συναλλαγή όταν επιδιώκει καλή φήμη, γνωριμίες ή προνομιακή μεταχείριση."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πώς η πνευματική ομάδα μετατρέπεται σε ελίτ;",
+      "answer": "Η γνώση και η ένταξη σε μια πνευματική ομάδα γίνονται τίτλοι ανωτερότητας όταν υποτιμάται ο άνθρωπος έξω από τον κύκλο."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Ποιο κοινό κριτήριο ελέγχει όλες αυτές τις εκτροπές;",
+      "answer": "Η έμπρακτη αγάπη προς κάθε πρόσωπο, ακόμη και προς τον εχθρό, ελέγχει την αυτοδικαίωση, τη σκοπιμότητα και την ομαδική υπεροχή."
+    }
+  ],
+  "facts": [
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "1ος αιώνας μ.Χ. · Η πίστη γίνεται ηθικισμός όταν η εξωτερική τήρηση θεωρείται ατομικό κατόρθωμα που εξασφαλίζει δικαίωση από τον Θεό, απομακρύνοντας τον άνθρωπο από τη ζωντανή σχέση αγάπης."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "1ος–3ος αιώνας μ.Χ. · Η επιβολή της αυτοκρατορικής λατρείας μετατρέπει τη θρησκεία σε μέσο πολιτικής υποταγής και κοινωνικής πειθαρχίας, ενώ η ομολογία των μαρτύρων υπερασπίζεται την ελευθερία της πίστης."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "4ος–7ος αιώνας μ.Χ. · Η σωτηρία ως κατόρθωμα των έργων ή η χάρη ως άλλοθι αδράνειας αποκόπτουν την πίστη από την ελεύθερη ανταπόκριση του ανθρώπου στην αγάπη του Θεού."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "4ος–8ος αιώνας μ.Χ. · Οι δογματικοί συμβιβασμοί και τα αυτοκρατορικά διατάγματα μετατρέπουν την πίστη σε εργαλείο κρατικής σκοπιμότητας, απέναντι στο οποίο οι Πατέρες υπερασπίζονται την ελευθερία της Εκκλησίας."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "20ός αιώνας–σήμερα · Όταν μεμονωμένες εκκλησιαστικές τοποθετήσεις νομιμοποιούν μια εθνικιστική πολιτική, η πίστη γίνεται ιδεολογία που αποκλείει τον διαφορετικό και υπονομεύει την αγάπη προς κάθε πρόσωπο."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "20ός αιώνας–σήμερα · Όταν η θρησκευτική παρουσία χρησιμοποιείται για καλή φήμη, γνωριμίες ή προνόμια, η πίστη γίνεται μέσο κοινωνικής καταξίωσης και η προσφορά χάνει τον χαρακτήρα της ανιδιοτελούς αγάπης."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "20ός αιώνας–σήμερα · Όταν η θεολογική γνώση και η συμμετοχή σε μια πνευματική ομάδα θεωρούνται τίτλοι υπεροχής, η πίστη γίνεται ελιτισμός που υποτιμά τον άνθρωπο έξω από τον κύκλο."
+    }
+  ],
+  "screens": {
+    "left_image_url": "https://i.ibb.co/vvd2b1LW/Codex-Image-Sep-8-2026-12-31-37-AM.png",
+    "right_image_url": "",
+    "left_label": "Δογματική συνείδηση και ελευθερία",
+    "right_label": "Το κριτήριο είναι η αγάπη προς κάθε πρόσωπο"
+  }
+}

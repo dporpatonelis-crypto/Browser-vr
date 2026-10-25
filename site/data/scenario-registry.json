@@ -1,0 +1,4375 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-24T13:05:56.184732Z",
+  "grades": [
+    "Α΄ Γυμνασίου",
+    "Β΄ Γυμνασίου",
+    "Γ΄ Γυμνασίου",
+    "Α΄ Λυκείου",
+    "Β΄ Λυκείου",
+    "Γ΄ Λυκείου"
+  ],
+  "publication": {
+    "mode": "catalogue",
+    "site_url": "https://dporpatonelis-crypto.github.io/Browser-vr/",
+    "cloud_url": ""
+  },
+  "integrations": {
+    "digital_book": {
+      "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/",
+      "revision": 28
+    },
+    "google_drive": {
+      "checked_at": "2026-10-24T12:21:32.057Z",
+      "folder": {
+        "id": "1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv",
+        "title": "ChatGPT",
+        "url": "https://drive.google.com/drive/folders/1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv"
+      },
+      "mode": "connector-snapshot"
+    }
+  },
+  "source_files": [],
+  "scenarios": [
+    {
+      "scenario_id": "book:father-sophrony",
+      "title": "Άγιος Σωφρόνιος Σαχάρωφ",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-sophrony"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg"
+        }
+      ],
+      "activities": [
+        {
+          "id": "82f9215a774720b3700e",
+          "kind": "book",
+          "label": "Digital Book · Άγιος Σωφρόνιος Σαχάρωφ",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-sophrony",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-sophrony",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "c8022412f881ca467aa2",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-029",
+          "drive_id": "1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-17T10:33:06.382Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:lesson-001",
+      "title": "Αγορά, Ιερουσαλήμ και Βυζάντιο",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Digital Book"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/s-81491e8e-e56e-5a32-b73e-0f268cf4fb57"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/s-d4a85ee8-310b-552f-b22e-b107eafa8b7f"
+        }
+      ],
+      "activities": [
+        {
+          "id": "e48475a0cba00383ba19",
+          "kind": "book",
+          "label": "Digital Book · Εισαγωγή",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-s-81491e8e-e56e-5a32-b73e-0f268cf4fb57",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "s-81491e8e-e56e-5a32-b73e-0f268cf4fb57",
+          "book_lesson_id": "lesson-001"
+        },
+        {
+          "id": "099318ccd2d3d07640e8",
+          "kind": "book",
+          "label": "Digital Book · Σύνοψη",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-s-d4a85ee8-310b-552f-b22e-b107eafa8b7f",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "s-d4a85ee8-310b-552f-b22e-b107eafa8b7f",
+          "book_lesson_id": "lesson-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:agora_paul_logos",
+      "title": "Αθήνα και Ιερουσαλήμ — από την αναζήτηση στον Λόγο",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Στην αρχαία αγορά συναντάς διαφορετικούς τρόπους αναζήτησης: παρατήρηση, συλλογισμό, γραφή και θρησκευτική αναζήτηση.\n\nΟ Παύλος χρησιμοποιεί οικεία στοιχεία της ελληνικής παιδείας για να αναπτύξει το χριστιανικό μήνυμα. Ο Ιωάννης χρησιμοποιεί τη λέξη «Λόγος» με συγκεκριμένο χριστολογικό περιεχόμενο.\n\nΣύνδεσε τα έξι ευρήματα με αυτές τις ιδέες και εξήγησε κάθε σύνδεση."
+      ],
+      "modes": [
+        "quiz",
+        "αντιστοίχιση",
+        "αιτιολόγηση",
+        "ανάγνωση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Unity VR",
+        "Digital Book"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: η τάξη αιτιολογεί την αντιστοίχιση πριν επιλεγεί η απάντηση. Συζητήστε μία επιλογή μετά τον γύρο.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR",
+        "Digital Book"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "AgoraPaulLogosQuiz.json",
+          "locator": ""
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/s-4c4c2f7c-92aa-5e18-85aa-7e5f5a1e0535"
+        }
+      ],
+      "activities": [
+        {
+          "id": "6b893387b0df2a04726a",
+          "kind": "vr",
+          "label": "Αποστολή αντικειμένων στο Unity",
+          "url": "",
+          "note": "Διαθέσιμο τοπικό quiz. Ray, τόξο και τοποθέτηση χρησιμοποιούνται όπου έχουν οριστεί. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "agora_paul_logos",
+          "room": "Room_agora_classical",
+          "exercise_count": 14
+        },
+        {
+          "id": "f2137ac66aad6992f042",
+          "kind": "book",
+          "label": "Digital Book · Αρχαία Αγορά: Ο Ελληνικός Στοχασμός ως Γέφυρα Διαλόγου",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-s-4c4c2f7c-92aa-5e18-85aa-7e5f5a1e0535",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "s-4c4c2f7c-92aa-5e18-85aa-7e5f5a1e0535",
+          "book_lesson_id": "lesson-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:20261002_palaia-kai-kaini-diathiki-enotita",
+      "title": "Από τη Σκιά στην Αλήθεια: Η Ενότητα Παλαιάς και Καινής Διαθήκης",
+      "subject": "Θρησκευτικά",
+      "grades": [
+        "Α΄ Γυμνασίου",
+        "Β΄ Γυμνασίου",
+        "Γ΄ Γυμνασίου",
+        "Α΄ Λυκείου",
+        "Β΄ Λυκείου",
+        "Γ΄ Λυκείου"
+      ],
+      "grade_status": "source",
+      "audience_source": "Α΄ Γυμνασίου έως Γ΄ Λυκείου· κοινό θεολογικό περιεχόμενο, με διαβαθμισμένες δραστηριότητες",
+      "objectives": [
+        "Να κατανοούν την οντολογική ενότητα Παλαιάς και Καινής Διαθήκης ως μία αδιάσπαστη Ιερή Ιστορία.",
+        "Να διακρίνουν την προοδευτικότητα της Θείας Αποκαλύψεως από την προετοιμασία στην πλήρη φανέρωση εν Χριστώ.",
+        "Να συνδέουν την ιδιαίτερη κλήση του Ισραήλ και την υπόσχεση στον Αβραάμ με την οικουμενικότητα της Καινής Διαθήκης.",
+        "Να ερμηνεύουν τον Νόμο ως παιδαγωγό εις Χριστόν και τη Νέα Διαθήκη ως νόμο της καρδιάς.",
+        "Να αναγνωρίζουν τη Διαθήκη ως ζώσα σχέση και θεανθρώπινη συνέργεια, με προοπτική τη θέωση και την ευχαριστιακή κοινωνία.",
+        "Να τεκμηριώνουν τη σύνδεση Νόμου, Προφητών και Χριστού και να συνδέουν την οικουμενικότητα με την έμπρακτη φιλανθρωπία."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία",
+        "παρατήρηση",
+        "αιτιολόγηση"
+      ],
+      "formats": [
+        "Κείμενο",
+        "HTML",
+        "Slides"
+      ],
+      "duration": "2 διδακτικές ώρες × 45΄",
+      "duration_status": "source",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Τίτλος και δεκαπέντε σταθμοί της ίδιας διαδρομής Σκιά–Αλήθεια, Αβραάμ–Νόμος–Προφήτες–Χριστός–Πεντηκοστή.",
+        "Έξι χειρόγραφα για υπόσχεση, Νόμο, Ενανθρώπηση, καρδιά, έλεος, Χριστό και οικουμενικότητα· ίδιο περιεχόμενο της ενότητας των δύο Διαθηκών.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+      ],
+      "source_groups": [
+        "Sacred Blueprint",
+        "text",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "mind-palace-cases",
+        "personal-page",
+        "Google Drive",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "inquiry_question": "Γιατί τα βιβλία της Παλαιάς Διαθήκης είναι αχώριστα δεμένα με την Καινή Διαθήκη και πώς η υπόσχεση στον Αβραάμ εκπληρώνεται οικουμενικά στον Χριστό;",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "lesson_plan.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "text",
+          "path": "source.txt",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "system": "drive-html",
+          "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "808647825cdb5bb6cee1",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F808647825cdb5bb6cee1.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "20261002_palaia-kai-kaini-diathiki-enotita",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/808647825cdb5bb6cee1.json"
+        },
+        {
+          "id": "2ea23a928be93d30a38c",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F2ea23a928be93d30a38c.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "20261002_palaia-kai-kaini-diathiki-enotita",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/2ea23a928be93d30a38c.json"
+        },
+        {
+          "id": "52a0c50ba6726b7bdaa4",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F52a0c50ba6726b7bdaa4.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "palaia-kai-kaini-diathiki-enotita",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/52a0c50ba6726b7bdaa4.json"
+        },
+        {
+          "id": "4a3febfaa7dc005d9654",
+          "kind": "slides",
+          "label": "Από τη Σκιά στην Αλήθεια — Νεοβυζαντινή παρουσίαση",
+          "url": "https://docs.google.com/presentation/d/1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "drive_id": "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk",
+          "slide_count": 15,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-03T06:14:03.548Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "093ebb370aa041a903e5",
+          "kind": "html",
+          "label": "HTML · Το Δέντρο της Διαθήκης",
+          "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Το Δέντρο της Διαθήκης». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "app": "drive-html",
+          "native_id": "dentro_diathikis",
+          "modified_at": "2026-10-24T12:34:53.912Z",
+          "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:lesson-004",
+      "title": "Αποκάλυψη",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Πώς φανερώνεται ο Θεός στην ιστορία και την κτίση; Σύνδεσε τα έξι χειρόγραφα με τα σύμβολα του δέντρου και αιτιολόγησε τη θέση τους."
+      ],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "ερμηνεία",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides",
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Ίδια έξι σημεία του χάρτη της Αποκάλυψης με το Digital Book και το Slides snapshot του γλυπτού.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+      ],
+      "source_groups": [
+        "Digital Book",
+        "Interactive Sculpture",
+        "interactive-sculpture",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-004/sections/apokalypsi"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-004/sections/apokalypsi-materials"
+        },
+        {
+          "system": "Interactive Sculpture",
+          "path": "slides-discoveries.json",
+          "locator": ""
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "system": "drive-html",
+          "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "8cfabeb0e66b1446d977",
+          "kind": "book",
+          "label": "Digital Book · Η Αποκάλυψη σε έξι σημεία",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-apokalypsi",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "apokalypsi",
+          "book_lesson_id": "lesson-004"
+        },
+        {
+          "id": "2aa6f8e0c77aba8d5bb5",
+          "kind": "slides",
+          "label": "Αναζήτηση του Θείου · PowerPoint · 7 διαφάνειες",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/assets/christianity-study/divine-search/divine-search-slides.pptx",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-030"
+        },
+        {
+          "id": "ee8132d94c3bc54a008c",
+          "kind": "book",
+          "label": "Digital Book · Το υλικό μας στις εφαρμογές και στο VR",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-apokalypsi-materials",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "apokalypsi-materials",
+          "book_lesson_id": "lesson-004"
+        },
+        {
+          "id": "9acdd25e2c589b740255",
+          "kind": "slides",
+          "label": "Χάρτης της Αποκάλυψης · διαφάνεια 2",
+          "url": "https://docs.google.com/presentation/d/1kmnmtbIiGHRrPHlaKNaJ_QJPtuPZXSzGALTppAGILY0/edit",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-018",
+          "drive_id": "1kmnmtbIiGHRrPHlaKNaJ_QJPtuPZXSzGALTppAGILY0"
+        },
+        {
+          "id": "f9291079002b06bc12f4",
+          "kind": "html",
+          "label": "Interactive Sculpture · έξι ανακαλύψεις",
+          "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=slides-discovery",
+          "note": "Σύνδεση που υπάρχει ήδη στο Digital Book.",
+          "app": null,
+          "native_id": "",
+          "media_id": "WEB-001"
+        },
+        {
+          "id": "5f9285aeacab7d12d1ff",
+          "kind": "html",
+          "label": "Light Up Legacy · τρισδιάστατο Δέντρο",
+          "url": "https://dporpatonelis-crypto.github.io/light-up-legacy/",
+          "note": "Σύνδεση που υπάρχει ήδη στο Digital Book.",
+          "app": null,
+          "native_id": "",
+          "media_id": "WEB-002"
+        },
+        {
+          "id": "e0486a6cc951a5800a54",
+          "kind": "html",
+          "label": "Interactive Sculpture · έξι ανακαλύψεις",
+          "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=slides-discovery",
+          "note": "Περιεχόμενο από το υπάρχον Slides snapshot, 2026-10-05T06:04:01.001Z",
+          "app": "interactive-sculpture",
+          "native_id": "slides-discovery"
+        },
+        {
+          "id": "2fd3322e7713aa25d06d",
+          "kind": "html",
+          "label": "HTML · Οντολογικός χάρτης της Αποκάλυψης",
+          "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Οντολογικός χάρτης της Αποκάλυψης». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "app": "drive-html",
+          "native_id": "revelation_map",
+          "modified_at": "2026-10-24T12:34:53.912Z",
+          "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:byzantium_paul_cross",
+      "title": "Βυζάντιο — Σοφία, σημεῖον και Σταυρός",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "22 ἐπειδὴ καὶ Ἰουδαῖοι σημεῖον αἰτοῦσι καὶ Ἕλληνες σοφίαν ζητοῦσιν,\n23 ἡμεῖς δὲ κηρύσσομεν Χριστὸν ἐσταυρωμένον, Ἰουδαίοις μὲν σκάνδαλον, Ἕλλησι δὲ μωρίαν,\n24 αὐτοῖς δὲ τοῖς κλητοῖς, Ἰουδαίοις τε καὶ Ἕλλησι, Χριστὸν Θεοῦ δύναμιν καὶ Θεοῦ σοφίαν·\n25 ὅτι τὸ μωρὸν τοῦ Θεοῦ σοφώτερον τῶν ἀνθρώπων ἐστί, καὶ τὸ ἀσθενὲς τοῦ Θεοῦ ἰσχυρότερον τῶν ἀνθρώπων ἐστί.\n\nΣτο χωρίο εξετάζουμε τρόπους αναζήτησης της αλήθειας, όχι χαρακτηρισμούς λαών."
+      ],
+      "modes": [
+        "quiz",
+        "αντιστοίχιση",
+        "αιτιολόγηση",
+        "ανάγνωση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Unity VR",
+        "Digital Book"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: η τάξη αιτιολογεί την αντιστοίχιση πριν επιλεγεί η απάντηση. Συζητήστε μία επιλογή μετά τον γύρο.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR",
+        "Digital Book"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "ByzantiumPaulCrossQuiz.json",
+          "locator": ""
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/s-0b2bee9f-337b-5288-bfee-1054a9131e97"
+        }
+      ],
+      "activities": [
+        {
+          "id": "f6a1c894d7d0606685fc",
+          "kind": "vr",
+          "label": "Αποστολή αντικειμένων στο Unity",
+          "url": "",
+          "note": "Διαθέσιμο τοπικό quiz. Ray, τόξο και τοποθέτηση χρησιμοποιούνται όπου έχουν οριστεί. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "byzantium_paul_cross",
+          "room": "Room_byzantium",
+          "exercise_count": 14
+        },
+        {
+          "id": "b8f9b30e1052e28b6a7f",
+          "kind": "book",
+          "label": "Digital Book · Βυζάντιο: Τα Όρια της Σοφίας, το Σημείο και ο Σταυρός",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-s-0b2bee9f-337b-5288-bfee-1054a9131e97",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "s-0b2bee9f-337b-5288-bfee-1054a9131e97",
+          "book_lesson_id": "lesson-001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-gregory-theologian",
+      "title": "Γρηγόριος ο Θεολόγος",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-gregory-theologian"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI"
+        }
+      ],
+      "activities": [
+        {
+          "id": "a5f05ff438bf20c5b952",
+          "kind": "book",
+          "label": "Digital Book · Γρηγόριος ο Θεολόγος",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-gregory-theologian",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-gregory-theologian",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "e83ac4e8723bbee89804",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-021",
+          "drive_id": "1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:25:22.015Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-palamas",
+      "title": "Γρηγόριος Παλαμάς",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-palamas"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A"
+        }
+      ],
+      "activities": [
+        {
+          "id": "35580761c1e2e2f63300",
+          "kind": "book",
+          "label": "Digital Book · Γρηγόριος Παλαμάς",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-palamas",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-palamas",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "2cad9b0ff24c76270f85",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-026",
+          "drive_id": "17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:24:56.917Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "99aac5e238d59f0bb216",
+          "kind": "slides",
+          "label": "Κρίση — φως και πύρινος έλεγχος · PowerPoint · 7 διαφάνειες",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/assets/christianity-study/judgement-palamas/judgement-palamas-slides.pptx",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-033"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:lesson-creation-world",
+      "title": "Δημιουργία του Κόσμου",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-creation-world/sections/creation-world"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-creation-world/sections/creation-image-likeness"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-creation-world/sections/creation-restoration-christ"
+        }
+      ],
+      "activities": [
+        {
+          "id": "a345af9265ed29b5a19c",
+          "kind": "book",
+          "label": "Digital Book · Δημιουργία του Κόσμου",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-creation-world",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "creation-world",
+          "book_lesson_id": "lesson-creation-world"
+        },
+        {
+          "id": "b4c114f70711bdd45452",
+          "kind": "slides",
+          "label": "Δημιουργία και ανθρώπινη ελευθερία · PowerPoint · 7 διαφάνειες",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/assets/christianity-study/creation/creation-slides.pptx",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-031"
+        },
+        {
+          "id": "222d4d72b10385363877",
+          "kind": "book",
+          "label": "Digital Book · Κατ’ εικόνα και καθ’ ομοίωση",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-creation-image-likeness",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "creation-image-likeness",
+          "book_lesson_id": "lesson-creation-world"
+        },
+        {
+          "id": "d2905d04ded531d35a3f",
+          "kind": "book",
+          "label": "Digital Book · Επανόρθωση εν Χριστώ",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-creation-restoration-christ",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "creation-restoration-christ",
+          "book_lesson_id": "lesson-creation-world"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:20260702_174242_participation",
+      "title": "Διονύσιος και Ωριγένης · υλικό διερεύνησης",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Διονύσιος Αρεοπαγίτης: Εργαλείο ή Σκοπός; Φιλοσοφία στην Υπηρεσία της Θεολογίας"
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το παλαιότερο History3D JSON χρειάζεται τον υπάρχοντα μετατροπέα της εφαρμογής.",
+        "Ο φάκελος participation περιέχει διαφορετικά θέματα: Investigation Board για τον Διονύσιο, Timeline και Mind Palace για το Αίνιγμα του Ωριγένη. Η ενιαία παιδαγωγική τους χρήση χρειάζεται επιβεβαίωση. Δεν συμπεραίνεται σύνδεση από τον κοινό φάκελο."
+      ],
+      "source_groups": [
+        "Sacred Blueprint",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "history-explorer-3d",
+        "mind-palace-cases",
+        "personal-page"
+      ],
+      "inquiry_question": "Διονύσιος Αρεοπαγίτης: Εργαλείο ή Σκοπός; Φιλοσοφία στην Υπηρεσία της Θεολογίας",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "20260702_174242_participation.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "20260702_174242_participation.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "20260702_174242_participation.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "origen-enigma.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "20260702_174242_participation.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "97d827e0ff68113ca1bd",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F97d827e0ff68113ca1bd.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "20260702_174242_participation",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/97d827e0ff68113ca1bd.json"
+        },
+        {
+          "id": "706668cb02a54f20b56a",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F706668cb02a54f20b56a.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "20260702_174242_participation",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/706668cb02a54f20b56a.json"
+        },
+        {
+          "id": "3f35f56e502181e613bd",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F3f35f56e502181e613bd.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "origen-enigma",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/3f35f56e502181e613bd.json"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:eleftheria-kai-dogmatiki-syneidisi",
+      "title": "Ελευθερία και δογματική συνείδηση",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": "Μαθητές Λυκείου, 16+ (παραδοχή προς έλεγχο)",
+      "objectives": [
+        "Συνδέουν τους πέντε σταθμούς της δογματικής συνείδησης με την πράξη της ζωής και την πνευματική ελευθερία.",
+        "Εξετάζουν τη διαμάχη Αντιοχειανής και Αλεξανδρινής σχολής και αναγνωρίζουν τα δύο άκρα του Φαρισαϊσμού της αυτοδικαίωσης και της αμετανοησίας χωρίς πράξη, όπως αποδίδονται στο αρχείο αναφοράς.",
+        "Συγκρίνουν τη διδασκαλία του Αποστόλου Παύλου και του Γέροντος Σωφρονίου για την ελευθερία και τη δογματική συνείδηση.",
+        "Χαρτογραφούν στις έξι περιοχές του Ανδριάντα της Ελευθερίας τις θέσεις του Σχολικού Βιβλίου και του Γέροντος Σωφρονίου.",
+        "Διακρίνουν στο History Explorer την οπτική του εκκλησιαστικού αξιώματος από την οπτική του μοναχικού χαρίσματος μέσα από δύο διαφορετικά πρόσωπα."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "Κείμενο",
+        "HTML",
+        "Unity VR"
+      ],
+      "duration": "2 διδακτικές ώρες × 45 λεπτά (παραδοχή προς έλεγχο)",
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 5,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Sacred Blueprint",
+        "text",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "history-explorer-3d",
+        "mind-palace-cases",
+        "personal-page",
+        "Unity VR"
+      ],
+      "inquiry_question": "Πώς η δογματική συνείδηση γίνεται ελευθερία; Μελέτησε τα πειστήρια και δημιούργησε τις δικές σου σχέσεις.",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "lesson_plan.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "text",
+          "path": "source.txt",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "eleftheria-kai-dogmatiki-syneidisi.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "eleftheria-kai-dogmatiki-syneidisi.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "2df2e2f7e53d9d01e709",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F2df2e2f7e53d9d01e709.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "eleftheria-kai-dogmatiki-syneidisi",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/2df2e2f7e53d9d01e709.json"
+        },
+        {
+          "id": "d4dd3dec01ecaab47edc",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fd4dd3dec01ecaab47edc.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "eleftheria-kai-dogmatiki-syneidisi",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/d4dd3dec01ecaab47edc.json"
+        },
+        {
+          "id": "16c345af37f4d5572c7d",
+          "kind": "html",
+          "label": "History Explorer",
+          "url": "https://history-explorer-3d.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F16c345af37f4d5572c7d.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "history-explorer-3d",
+          "native_id": "eleftheria-kai-dogmatiki-syneidisi",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/16c345af37f4d5572c7d.json"
+        },
+        {
+          "id": "71c04d9c0da624dbed98",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F71c04d9c0da624dbed98.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "eleftheria-kai-dogmatiki-syneidisi",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/71c04d9c0da624dbed98.json"
+        },
+        {
+          "id": "ef45b94573e6cf0e99e2",
+          "kind": "vr",
+          "label": "Τοπική αποστολή Unity",
+          "url": "",
+          "note": "Υπάρχει τοπικό JSON μαθήματος. Η ενεργοποίηση και η χρήση γίνονται από την υπάρχουσα διαδικασία Unity. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "eleftheria-kai-dogmatiki-syneidisi",
+          "room": "Room_library / Room_temple"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:lesson_logos_concept_map",
+      "title": "Εννοιολογικός χάρτης του Λόγου",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Περιγραφικός τίτλος από το όνομα του τοπικού αρχείου. Η διδακτική ετοιμότητα χρειάζεται επιβεβαίωση."
+      ],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "lesson_logos_concept_map.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "f201a4000559c80c2972",
+          "kind": "vr",
+          "label": "Τοπική αποστολή Unity",
+          "url": "",
+          "note": "Υπάρχει τοπικό JSON μαθήματος. Η ενεργοποίηση και η χρήση γίνονται από την υπάρχουσα διαδικασία Unity. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "lesson_logos_concept_map",
+          "room": "Room_library / Room_temple"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:lesson-005",
+      "title": "Επιστήμη και θρησκεία",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Διάβασε τον άγιο Λουκά, σύνδεσε τα έξι χειρόγραφα με τα σύμβολα και εξήγησε τη σκέψη του."
+      ],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το κείμενο του αγίου Λουκά και οι έξι αντιστοιχίσεις διάνοιας/καρδιάς τεκμηριώνουν την υπάρχουσα ενότητα επιστήμης και θρησκείας. Δεν ταυτίζεται με το επιμέρους quiz της Αγοράς.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+      ],
+      "source_groups": [
+        "Digital Book",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-005/sections/science-religion-overview"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-005/sections/science-religion-worksheet"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-005/sections/science-religion-agora-quiz"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-005/sections/science-religion-agora-artifact-talk"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "system": "drive-html",
+          "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "7ecee8c7848fba4fc68f",
+          "kind": "book",
+          "label": "Digital Book · Επιστήμη και θρησκεία",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-science-religion-overview",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "science-religion-overview",
+          "book_lesson_id": "lesson-005"
+        },
+        {
+          "id": "1a2f86ab607b132c7996",
+          "kind": "book",
+          "label": "Digital Book · Φύλλο εργασίας μαθητή",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-science-religion-worksheet",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "science-religion-worksheet",
+          "book_lesson_id": "lesson-005"
+        },
+        {
+          "id": "1d36ab52eb7043b6ffff",
+          "kind": "book",
+          "label": "Digital Book · Quiz στην Κλασική Αγορά",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-science-religion-agora-quiz",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "science-religion-agora-quiz",
+          "book_lesson_id": "lesson-005"
+        },
+        {
+          "id": "fc11aafec7f4773cf280",
+          "kind": "book",
+          "label": "Digital Book · Συζήτηση με τον Δημήτρη",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-science-religion-agora-artifact-talk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "science-religion-agora-artifact-talk",
+          "book_lesson_id": "lesson-005"
+        },
+        {
+          "id": "6fd70c360ae0989004b3",
+          "kind": "html",
+          "label": "HTML · Ο άνθρωπος και οι δύο τρόποι γνώσης",
+          "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Ο άνθρωπος και οι δύο τρόποι γνώσης». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "app": "drive-html",
+          "native_id": "two_ways_of_knowing",
+          "modified_at": "2026-10-24T12:34:53.912Z",
+          "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:vivlos-dialogos-kai-drasi",
+      "title": "Η Βίβλος: ιστορίες που μας καλούν σε διάλογο και δράση",
+      "subject": "Θρησκευτικά",
+      "grades": [
+        "Α΄ Γυμνασίου"
+      ],
+      "grade_status": "source",
+      "audience_source": "Α΄ Γυμνασίου · 12–13 ετών",
+      "objectives": [
+        "Να τοποθετούν στη σωστή σειρά τους Πατριάρχες, τον Μωυσή, τους βασιλείς και προφήτες, τον Χριστό και τους αποστόλους.",
+        "Να εξηγούν με στοιχεία από τα αποσπάσματα τι δείχνουν οι βιβλικές ιστορίες για τη δράση του Θεού.",
+        "Να διακρίνουν το απρόσμενο και ανοιχτό τέλος από ένα υποχρεωτικά ευτυχές τέλος.",
+        "Να αναγνωρίζουν τον διάλογο, τις ερωτήσεις και τη διαφωνία στις βιβλικές αφηγήσεις.",
+        "Να συγκρίνουν τη ρεαλιστική παρουσίαση προσώπων με μια εξιδανικευμένη εικόνα και να προτείνουν μία πράξη συμπαράστασης ή φροντίδας της κτίσης."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση"
+      ],
+      "formats": [
+        "Κείμενο",
+        "HTML"
+      ],
+      "duration": "45 λεπτά · προτεινόμενη διάρκεια",
+      "duration_status": "source",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Sacred Blueprint",
+        "text",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "personal-page"
+      ],
+      "inquiry_question": "Πώς μια βιβλική ιστορία γίνεται πρόσκληση σε διάλογο και συμπαράσταση;",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "lesson_plan.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "text",
+          "path": "source.txt",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "71be2217caa3c23f96cc",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F71be2217caa3c23f96cc.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "vivlos-dialogos-kai-drasi",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/71be2217caa3c23f96cc.json"
+        },
+        {
+          "id": "b1780f844940e1de71ab",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fb1780f844940e1de71ab.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "vivlos-dialogos-kai-drasi",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/b1780f844940e1de71ab.json"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:trial_of_conscience",
+      "title": "Η Δίκη της Συνείδησης",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Το υπάρχον εξειδικευμένο σενάριο για τον Σωκράτη, τον Πλάτωνα και τον Αριστοτέλη."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συζήτηση",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "demo.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "570871fc535804948f79",
+          "kind": "vr",
+          "label": "Σενάριο διερεύνησης στο Unity",
+          "url": "",
+          "note": "Καταχωρισμένο ως διαθέσιμο στο τοπικό manifest. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "trial_of_conscience",
+          "room": "Room_library, Room_temple, Room_agora"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:abraham-journey",
+      "title": "Η πορεία του Αβραάμ",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/abraham-journey"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg"
+        }
+      ],
+      "activities": [
+        {
+          "id": "763cea1aaf7067a9b3f1",
+          "kind": "book",
+          "label": "Digital Book · Η πορεία του Αβραάμ",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-abraham-journey",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "abraham-journey",
+          "book_lesson_id": "lesson-001"
+        },
+        {
+          "id": "45dfb2ba6e6222b534ed",
+          "kind": "slides",
+          "label": "Άνοιξε τις διαφάνειες · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-011",
+          "drive_id": "1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-15T15:15:24.175Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:david-journey",
+      "title": "Η πορεία του Δαυίδ",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/david-journey"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8"
+        }
+      ],
+      "activities": [
+        {
+          "id": "599e1877b7bb5bcdd919",
+          "kind": "book",
+          "label": "Digital Book · Η πορεία του Δαυίδ",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-david-journey",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "david-journey",
+          "book_lesson_id": "lesson-001"
+        },
+        {
+          "id": "3420caa145bf085ea32e",
+          "kind": "slides",
+          "label": "Άνοιξε τις διαφάνειες · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-012",
+          "drive_id": "1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-11T05:57:01.161Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:elijah-journey",
+      "title": "Η πορεία του Ηλία",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/elijah-journey"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow"
+        }
+      ],
+      "activities": [
+        {
+          "id": "cbfcf9203eac577de6ca",
+          "kind": "book",
+          "label": "Digital Book · Η πορεία του Ηλία",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-elijah-journey",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "elijah-journey",
+          "book_lesson_id": "lesson-001"
+        },
+        {
+          "id": "cc5af417e7ed840a0072",
+          "kind": "slides",
+          "label": "Άνοιξε τις διαφάνειες · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-013",
+          "drive_id": "1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-11T05:55:42.464Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:john-evangelist-journey",
+      "title": "Η πορεία του Ιωάννη",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-003/sections/john-evangelist-journey"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc"
+        }
+      ],
+      "activities": [
+        {
+          "id": "324c53e5b1e90765c5f1",
+          "kind": "book",
+          "label": "Digital Book · Η πορεία του Ιωάννη",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-john-evangelist-journey",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "john-evangelist-journey",
+          "book_lesson_id": "lesson-003"
+        },
+        {
+          "id": "8f650c75d0fcec28f28f",
+          "kind": "slides",
+          "label": "Παρουσίαση Google Slides · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-014",
+          "drive_id": "1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-11T14:45:46.081Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:john-baptist-journey",
+      "title": "Η πορεία του Ιωάννη του Βαπτιστή",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-003/sections/john-baptist-journey"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4"
+        }
+      ],
+      "activities": [
+        {
+          "id": "d09c86fe40f161f21d3d",
+          "kind": "book",
+          "label": "Digital Book · Η πορεία του Ιωάννη του Βαπτιστή",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-john-baptist-journey",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "john-baptist-journey",
+          "book_lesson_id": "lesson-003"
+        },
+        {
+          "id": "15b41a1584dccfd2b4e3",
+          "kind": "slides",
+          "label": "Παρουσίαση Google Slides · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-016",
+          "drive_id": "1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-11T14:46:02.732Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:paul-journey",
+      "title": "Η πορεία του Παύλου",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-003/sections/paul-journey"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI"
+        }
+      ],
+      "activities": [
+        {
+          "id": "c2266527964e1bbe7583",
+          "kind": "book",
+          "label": "Digital Book · Η πορεία του Παύλου",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-paul-journey",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "paul-journey",
+          "book_lesson_id": "lesson-003"
+        },
+        {
+          "id": "ad2a4c0469587668da5e",
+          "kind": "slides",
+          "label": "Παρουσίαση Google Slides · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-017",
+          "drive_id": "1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-11T14:46:18.578Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:peter-journey",
+      "title": "Η πορεία του Πέτρου",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-003/sections/peter-journey"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg"
+        }
+      ],
+      "activities": [
+        {
+          "id": "e3b22d73f42cd5a69d86",
+          "kind": "book",
+          "label": "Digital Book · Η πορεία του Πέτρου",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-peter-journey",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "peter-journey",
+          "book_lesson_id": "lesson-003"
+        },
+        {
+          "id": "1b8264de360997d3be19",
+          "kind": "slides",
+          "label": "Παρουσίαση Google Slides · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-015",
+          "drive_id": "1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-11T14:46:30.711Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:20260702_091526_the-triple-testimony-of-the-one-god",
+      "title": "Η Τριπλή Μαρτυρία του Ενός Θεού",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Η Οικονομία της Σιωπής και το Άγιο Πνεύμα"
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [
+        "20260816_080042_three-theologians"
+      ],
+      "notes": [
+        "Το παλαιότερο History3D JSON χρειάζεται τον υπάρχοντα μετατροπέα της εφαρμογής.",
+        "Ίδιο ακριβώς master_output.json με την καταχώριση της 2ας Ιουλίου. Οι δύο φάκελοι διατηρούνται ως πηγές.",
+        "Ο ελληνικός τίτλος προέρχεται από τα υπάρχοντα app catalogs. Το Investigation Board εστιάζει στην Οικονομία της Σιωπής και στο Άγιο Πνεύμα."
+      ],
+      "source_groups": [
+        "Sacred Blueprint",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "history-explorer-3d",
+        "mind-palace-cases",
+        "personal-page"
+      ],
+      "inquiry_question": "Η Οικονομία της Σιωπής και το Άγιο Πνεύμα",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_board_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_item_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mind_palace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personal_page_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_item_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personal_page_output.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "20260702_091526_the-triple-testimony-of-the-one-god.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "20260816_080042_three-theologians.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "20260702_091526_the-triple-testimony-of-the-one-god.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "20260816_080042_three-theologians.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "20260702_091526_the-triple-testimony-of-the-one-god.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "20260816_080042_three-theologians.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "trinity-revelation.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "20260702_091526_the-triple-testimony-of-the-one-god.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "20260816_080042_three-theologians.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "76d00ebe363167b5a41a",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F76d00ebe363167b5a41a.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "20260702_091526_the-triple-testimony-of-the-one-god",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/76d00ebe363167b5a41a.json"
+        },
+        {
+          "id": "caf60d24e6dce68edaa2",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fcaf60d24e6dce68edaa2.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "trinity-revelation",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/caf60d24e6dce68edaa2.json"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:i-ypothesi-tou-areiou",
+      "title": "Η υπόθεση του Αρείου",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": "Ενήλικοι και ανώτεροι μαθητές θεολογίας με βασική εξοικείωση σε χριστολογικούς όρους",
+      "objectives": [
+        "Να ανασυνθέσουν με ακρίβεια τα βασικά επιχειρήματα του Αρείου.",
+        "Να αξιολογήσουν τις σωτηριολογικές και λατρευτικές συνέπειες της αρειανικής θέσης.",
+        "Να διακρίνουν την ορθή πρόθεση από το δογματικό αποτέλεσμα.",
+        "Να διατυπώσουν τεκμηριωμένη ετυμηγορία συνδέοντας Γραφή, λογική και εκκλησιαστική εμπειρία.",
+        "Να τοποθετούν την αρειανική έριδα μέσα στο προγενέστερο πεδίο γνωστικών, μαρκιωνιτικών, μοντανιστικών και μοναρχιανικών απαντήσεων χωρίς να υποθέτουν άμεση γενεαλογία."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "Κείμενο",
+        "HTML",
+        "Unity VR"
+      ],
+      "duration": "25–30 λεπτά",
+      "duration_status": "source",
+      "cognitive_difficulty": 5,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [
+        "20260825_093143_lesson"
+      ],
+      "notes": [
+        "Ίδιο case_id i-ypothesi-tou-areiou, ίδιο mindpalace_output και ίδιο κείμενο/στόχοι σχεδίου μαθήματος. Οι παραλλαγές υλικού διατηρούνται."
+      ],
+      "source_groups": [
+        "Sacred Blueprint",
+        "text",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "mind-palace-cases",
+        "personal-page",
+        "history-explorer-3d",
+        "Unity VR"
+      ],
+      "inquiry_question": "Είναι ο Χριστός κτιστός μεσίτης ή ο ίδιος ο Θεός που εισέρχεται στην ιστορία για να σώσει;",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "lesson_plan.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "text",
+          "path": "source.txt",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "lesson_plan.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "i-ypothesi-tou-areiou.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "20260825_093143_lesson.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "i-ypothesi-tou-areiou.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "20260825_093143_lesson.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "i-ypothesi-tou-areiou.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "20260825_093143_lesson.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "i-ypothesi-tou-areiou.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "20260825_093143_lesson.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "i-ypothesi-tou-areiou.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "a9eedfd31a5eba07ef4c",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fa9eedfd31a5eba07ef4c.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "i-ypothesi-tou-areiou",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/a9eedfd31a5eba07ef4c.json"
+        },
+        {
+          "id": "5df1bb2591815becd3b3",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F5df1bb2591815becd3b3.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "i-ypothesi-tou-areiou",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/5df1bb2591815becd3b3.json"
+        },
+        {
+          "id": "3ced35a919286dcefec6",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F3ced35a919286dcefec6.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "i-ypothesi-tou-areiou",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/3ced35a919286dcefec6.json"
+        },
+        {
+          "id": "37405d4cb6077ca078dd",
+          "kind": "html",
+          "label": "History Explorer",
+          "url": "https://history-explorer-3d.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F37405d4cb6077ca078dd.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "history-explorer-3d",
+          "native_id": "i-ypothesi-tou-areiou",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/37405d4cb6077ca078dd.json"
+        },
+        {
+          "id": "ccf8b844313c72baca0a",
+          "kind": "vr",
+          "label": "Τοπική αποστολή Unity",
+          "url": "",
+          "note": "Υπάρχει τοπικό JSON μαθήματος. Η ενεργοποίηση και η χρήση γίνονται από την υπάρχουσα διαδικασία Unity. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "i-ypothesi-tou-areiou",
+          "room": "Room_library / Room_temple"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sculpture:spiritual-freedom",
+      "title": "Ίαση των παθών και πνευματική ελευθερία",
+      "subject": "Δόγμα και βίωμα · Η πνευματική ελευθερία",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Πώς γίνεται το δόγμα πράξη στη ζωή; Βρείτε τα πέντε clues για να αποκαλύψετε το πάθος και τη θεραπεία σε κάθε όψη του ανθρώπου. Με την τελευταία ανακάλυψη φωτίζονται το γλυπτό και ο καμβάς."
+      ],
+      "modes": [
+        "εξερεύνηση",
+        "ερμηνεία",
+        "συζήτηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
+      ],
+      "formats": [
+        "HTML",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Ίδια πέντε πάθη και αντίστοιχες θεραπείες με το spiritual-freedom του Interactive Sculpture.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+      ],
+      "source_groups": [
+        "interactive-sculpture",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "interactive-sculpture",
+          "path": "spiritual-freedom.json",
+          "locator": ""
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "system": "drive-html",
+          "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "9e421114be6336030ad0",
+          "kind": "html",
+          "label": "Interactive Sculpture",
+          "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=spiritual-freedom",
+          "note": "",
+          "app": "interactive-sculpture",
+          "native_id": "spiritual-freedom"
+        },
+        {
+          "id": "42f3da051baa64a31be5",
+          "kind": "slides",
+          "label": "Παρουσίαση αναφοράς",
+          "url": "https://docs.google.com/presentation/d/1kmnmtbIiGHRrPHlaKNaJ_QJPtuPZXSzGALTppAGILY0/edit#slide=id.christ_events_response_board_v1",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "drive_id": "1kmnmtbIiGHRrPHlaKNaJ_QJPtuPZXSzGALTppAGILY0"
+        },
+        {
+          "id": "818b4dd6628e198e7e1b",
+          "kind": "html",
+          "label": "HTML · Πνευματική ελευθερία — από τα πάθη στη θεραπεία",
+          "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Πνευματική ελευθερία — από τα πάθη στη θεραπεία». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "app": "drive-html",
+          "native_id": "spiritual_healing",
+          "modified_at": "2026-10-24T12:34:53.912Z",
+          "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-john-damascene",
+      "title": "Ιωάννης Δαμασκηνός",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-john-damascene"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg"
+        }
+      ],
+      "activities": [
+        {
+          "id": "4cb2080dcfcc5a29c007",
+          "kind": "book",
+          "label": "Digital Book · Ιωάννης Δαμασκηνός",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-john-damascene",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-john-damascene",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "394d198695cb7ca9d1e9",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-028",
+          "drive_id": "1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-17T10:33:03.016Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-john-chrysostom",
+      "title": "Ιωάννης ο Χρυσόστομος",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-john-chrysostom"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o"
+        }
+      ],
+      "activities": [
+        {
+          "id": "2d639f507d00e5d70b0d",
+          "kind": "book",
+          "label": "Digital Book · Ιωάννης ο Χρυσόστομος",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-john-chrysostom",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-john-chrysostom",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "b1dd9162898218c705b3",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-022",
+          "drive_id": "11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:26:09.383Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "sculpture:circular-table",
+      "title": "Κυκλική Τράπεζα της Εκκλησίας",
+      "subject": "Εκκλησία και ενότητα",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Κάθε clue που βρίσκει η τάξη αποκαλύπτει μία ακτίνα και στέλνει φως στην κεντρική φλόγα. Με έξι ευρήματα ενώνεται ο δακτύλιος και αποκαλύπτεται ο ύμνος."
+      ],
+      "modes": [
+        "εξερεύνηση",
+        "ερμηνεία",
+        "συζήτηση"
+      ],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "interactive-sculpture"
+      ],
+      "sources": [
+        {
+          "system": "interactive-sculpture",
+          "path": "circular-table.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "08035ff926f513664319",
+          "kind": "html",
+          "label": "Interactive Sculpture",
+          "url": "https://dporpatonelis-crypto.github.io/Interactive-sculpture/?scenario=circular-table",
+          "note": "",
+          "app": "interactive-sculpture",
+          "native_id": "circular-table"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-cyril",
+      "title": "Κύριλλος Αλεξανδρείας",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-cyril"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc"
+        }
+      ],
+      "activities": [
+        {
+          "id": "cbd65c23e8638951e394",
+          "kind": "book",
+          "label": "Digital Book · Κύριλλος Αλεξανδρείας",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-cyril",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-cyril",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "96539c82769a0ace1391",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-023",
+          "drive_id": "182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:25:33.435Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-maximus",
+      "title": "Μάξιμος Ομολογητής",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-maximus"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4"
+        }
+      ],
+      "activities": [
+        {
+          "id": "1283aa6e9d9cff25e300",
+          "kind": "book",
+          "label": "Digital Book · Μάξιμος Ομολογητής",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-maximus",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-maximus",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "64bb41e9934001614ba7",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-024",
+          "drive_id": "19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:25:11.661Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-athanasius",
+      "title": "Μέγας Αθανάσιος",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-athanasius"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8"
+        }
+      ],
+      "activities": [
+        {
+          "id": "2cf8805fc496cb5ce608",
+          "kind": "book",
+          "label": "Digital Book · Μέγας Αθανάσιος",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-athanasius",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-athanasius",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "f36cfd8d13c789dd94f3",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-019",
+          "drive_id": "1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:24:41.955Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-basil",
+      "title": "Μέγας Βασίλειος",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-basil"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4"
+        }
+      ],
+      "activities": [
+        {
+          "id": "73033519e2d1bd77d8f8",
+          "kind": "book",
+          "label": "Digital Book · Μέγας Βασίλειος",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-basil",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-basil",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "edd93929d6e020bd405f",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-020",
+          "drive_id": "1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:25:46.410Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:20260720_143615_",
+      "title": "Ο Απόστολος των Εθνών και το Στόμα της Εκκλησίας",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Ρητορική ή Αποστολική Παρρησία; Ο Χρυσόστομος Ερμηνεύει τον Παύλο εν Μέσω Αυτοκρατορικής Ισχύος"
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το παλαιότερο History3D JSON χρειάζεται τον υπάρχοντα μετατροπέα της εφαρμογής.",
+        "Τίτλος από το υπάρχον σενάριο paul-chrysostom-logos."
+      ],
+      "source_groups": [
+        "Sacred Blueprint",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "history-explorer-3d",
+        "mind-palace-cases",
+        "personal-page"
+      ],
+      "inquiry_question": "Ρητορική ή Αποστολική Παρρησία; Ο Χρυσόστομος Ερμηνεύει τον Παύλο εν Μέσω Αυτοκρατορικής Ισχύος",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "20260720_143615_.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "20260720_143615_.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "20260720_143615_.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "paul-chrysostom-logos.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "20260720_143615_.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "b729f6cbf1e0d5151594",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fb729f6cbf1e0d5151594.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "20260720_143615_",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/b729f6cbf1e0d5151594.json"
+        },
+        {
+          "id": "c7616667f1e7cea3de2e",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fc7616667f1e7cea3de2e.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "20260720_143615_",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/c7616667f1e7cea3de2e.json"
+        },
+        {
+          "id": "a05869782fa76389b800",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fa05869782fa76389b800.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "paul-chrysostom-logos",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/a05869782fa76389b800.json"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:jerusalem_pentecost_hymn",
+      "title": "Πεντηκοστή — Το Πνεύμα συγκροτεί την Εκκλησία",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Πάντα χορηγεῖ τὸ Πνεῦμα τὸ Ἅγιον·\nβρύει προφητείας, ἱερέας τελειοῖ,\nἀγραμμάτους σοφίαν ἐδίδαξεν, ἁλιεῖς θεολόγους ἀνέδειξεν·\nὅλον συγκροτεῖ τὸν θεσμὸν τῆς Ἐκκλησίας.\nὉμοούσιε καὶ ὁμόθρονε τῷ Πατρὶ καὶ τῷ Υἱῷ, Παράκλητε, δόξα σοι.\n\nΣύνδεσε το εύρημα με τη φράση του ύμνου και το θεολογικό νόημα. Αιτιολόγησε προφορικά πριν επιλέξεις."
+      ],
+      "modes": [
+        "quiz",
+        "αντιστοίχιση",
+        "αιτιολόγηση",
+        "ανάγνωση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Unity VR",
+        "Digital Book",
+        "Slides",
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: η τάξη αιτιολογεί την αντιστοίχιση πριν επιλεγεί η απάντηση. Συζητήστε μία επιλογή μετά τον γύρο.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z."
+      ],
+      "source_groups": [
+        "Unity VR",
+        "Digital Book",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "JerusalemPentecostQuiz.json",
+          "locator": ""
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-upper-room"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-six-stations"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-liturgical-time"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-prayer-all-adam"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-vr-learning"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-summary"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-advanced-theology"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-002/sections/pentecost-selected-materials"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        },
+        {
+          "system": "drive-html",
+          "path": "jerusalem-quiz.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "385df58cb90138841868",
+          "kind": "vr",
+          "label": "Αποστολή αντικειμένων στο Unity",
+          "url": "",
+          "note": "Διαθέσιμο τοπικό quiz. Ray, τόξο και τοποθέτηση χρησιμοποιούνται όπου έχουν οριστεί. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "jerusalem_pentecost_hymn",
+          "room": "Room_jerusalem",
+          "exercise_count": 13
+        },
+        {
+          "id": "40cdb800a09142d0285f",
+          "kind": "book",
+          "label": "Digital Book · Πεντηκοστή: Από το Ιστορικό Υπερώο στην Οικουμενική Εκκλησία",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-upper-room",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-upper-room",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "4570dafacabfe118e146",
+          "kind": "book",
+          "label": "Digital Book · Οι έξι σταθμοί ανακάλυψης",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-six-stations",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-six-stations",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "08c53876d293a249ef5c",
+          "kind": "book",
+          "label": "Digital Book · Ιστορικός χρόνος και λειτουργικό «Σήμερον»",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-liturgical-time",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-liturgical-time",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "3bc1716d2835465a5f44",
+          "kind": "book",
+          "label": "Digital Book · Η προσευχή υπέρ όλου του Αδάμ",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-prayer-all-adam",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-prayer-all-adam",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "8fa9e76f8af1af1d5b11",
+          "kind": "book",
+          "label": "Digital Book · Η βιωματική διαδρομή στο VR",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-vr-learning",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-vr-learning",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "21a483dddff15b49062c",
+          "kind": "book",
+          "label": "Digital Book · Συνοψίζοντας: Τα κύρια σημεία",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-summary",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-summary",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "6cd51ce5b78809d47b47",
+          "kind": "slides",
+          "label": "Πεντηκοστή — Τα έξι αντικείμενα του Υπερώου · 10 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1knOyKV-Y--uiukPz-u_Ny29PLHK2cv7doeZBJogoQgQ",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-010",
+          "drive_id": "1knOyKV-Y--uiukPz-u_Ny29PLHK2cv7doeZBJogoQgQ"
+        },
+        {
+          "id": "8f846d3bd5410560a661",
+          "kind": "book",
+          "label": "Digital Book · Προχωρημένο επίπεδο: Η λειτουργική προσευχή και το Υπερώο",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-advanced-theology",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-advanced-theology",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "3e8ea3b6b720fafee1fc",
+          "kind": "book",
+          "label": "Digital Book · Επιλεγμένο υλικό",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-pentecost-selected-materials",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "pentecost-selected-materials",
+          "book_lesson_id": "lesson-002"
+        },
+        {
+          "id": "594ed1b6996e5b629f0b",
+          "kind": "quiz",
+          "label": "HTML · Πεντηκοστή — Το Πνεύμα συγκροτεί την Εκκλησία",
+          "url": "https://drive.google.com/file/d/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Πεντηκοστή — Το Πνεύμα συγκροτεί την Εκκλησία». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "app": "drive-html",
+          "native_id": "jerusalem_pentecost_hymn",
+          "modified_at": "2026-10-22T11:22:05.245Z",
+          "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:pisti-exousia-kai-prosopo",
+      "title": "Πίστη, εξουσία και πρόσωπο: από τον ηθικισμό στην καθολική αγάπη",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Να αναγνωρίζουν πότε η τήρηση των εντολών εκτρέπεται σε αυτοδικαίωση.",
+        "Να εξηγούν πώς η λατρεία και το δόγμα μπορούν να υπηρετήσουν πολιτική υποταγή ή κρατική σκοπιμότητα.",
+        "Να διακρίνουν τον εθνικισμό με εκκλησιαστικό άλλοθι, την κοινωνική καταξίωση και τον πνευματικό ελιτισμό σε καθημερινές περιπτώσεις.",
+        "Να εφαρμόζουν το κριτήριο της έμπρακτης αγάπης προς κάθε πρόσωπο για να προτείνουν μια συγκεκριμένη ανταπόκριση."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Κείμενο",
+        "HTML",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 5,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Πέντε ίδιοι σταθμοί ιδεολογικοποίησης και αντίδοτα της έμπρακτης αγάπης, σύμφωνα με το master και το χρονολόγιο."
+      ],
+      "source_groups": [
+        "Sacred Blueprint",
+        "text",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "history-explorer-3d",
+        "mind-palace-cases",
+        "personal-page",
+        "Google Drive"
+      ],
+      "inquiry_question": "Ποιος αποκλείεται όταν η πίστη υπηρετεί την υπεροχή ή την εξουσία;",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "lesson_plan.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "text",
+          "path": "source.txt",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA"
+        }
+      ],
+      "activities": [
+        {
+          "id": "4406e7cd14bb2ba27105",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F4406e7cd14bb2ba27105.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "pisti-exousia-kai-prosopo",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/4406e7cd14bb2ba27105.json"
+        },
+        {
+          "id": "a970f25a64aa5aa9dd56",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fa970f25a64aa5aa9dd56.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "pisti-exousia-kai-prosopo",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/a970f25a64aa5aa9dd56.json"
+        },
+        {
+          "id": "22467dfffd14143d915a",
+          "kind": "html",
+          "label": "History Explorer",
+          "url": "https://history-explorer-3d.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F22467dfffd14143d915a.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "history-explorer-3d",
+          "native_id": "pisti-exousia-kai-prosopo",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/22467dfffd14143d915a.json"
+        },
+        {
+          "id": "3aa1cf8724cc8f46d979",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F3aa1cf8724cc8f46d979.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "pisti-exousia-prosopo",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/3aa1cf8724cc8f46d979.json"
+        },
+        {
+          "id": "a6bbe5f6b9564e21f888",
+          "kind": "slides",
+          "label": "Ιδεολογία και Πίστη — Χρονολόγιο και Κέντρα",
+          "url": "https://docs.google.com/presentation/d/1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "drive_id": "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA",
+          "slide_count": 6,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-09-25T20:06:31.232Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:byzantium_fall_restoration",
+      "title": "Πτώση και Αποκατάσταση",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Η διαδρομή συνδέει τη διήγηση της Πτώσης με τον Σταυρό και την Ανάσταση του Χριστού. Συλλέγουμε οκτώ ευρήματα και αναζητούμε τι θυμίζει το καθένα από τη Γένεση και πώς φωτίζεται από την αποκατάσταση εν Χριστώ.\n\nΤα χειρόγραφα των δέκα Πατέρων ανοίγουν με ελεύθερη βολή και προσφέρουν προαιρετική εμβάθυνση. Όλες οι βασικές πληροφορίες και οι συνόψεις διατίθενται και στον πίνακα. Το quiz απαιτεί τα οκτώ αντικείμενα, χωρίς υποχρεωτικό χειρόγραφο, χρονόμετρο ή βαθμολογία. Περιλαμβάνει αναγνώριση με ray, ερμηνεία με τόξο και τελική αντιστοίχιση. Η έναρξη κάθε γύρου γίνεται χειροκίνητα.\n\nΤα πατερικά κείμενα αποδίδονται ως σύντομες διδακτικές παραφράσεις. Οι εικόνες και τα αντικείμενα αποτελούν βοηθήματα μελέτης· οι πηγές εξηγούν το νόημά τους."
+      ],
+      "modes": [
+        "quiz",
+        "αντιστοίχιση",
+        "αιτιολόγηση",
+        "ανάγνωση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Unity VR",
+        "Digital Book",
+        "Slides",
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: η τάξη αιτιολογεί την αντιστοίχιση πριν επιλεγεί η απάντηση. Συζητήστε μία επιλογή μετά τον γύρο.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z."
+      ],
+      "source_groups": [
+        "Unity VR",
+        "Digital Book",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "byzantium_fall_restoration.json",
+          "locator": ""
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-fall-restoration/sections/fall-restoration-introduction"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-fall-restoration/sections/fall-restoration-thorns"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-fall-restoration/sections/fall-restoration-parallel-texts"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-fall-restoration/sections/fall-restoration-anastasis"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-fall-restoration/sections/fall-restoration-conclusion"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        },
+        {
+          "system": "drive-html",
+          "path": "jerusalem-quiz.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "77da1da949c86ab92a78",
+          "kind": "vr",
+          "label": "Αποστολή αντικειμένων στο Unity",
+          "url": "",
+          "note": "Διαθέσιμο τοπικό quiz. Ray, τόξο και τοποθέτηση χρησιμοποιούνται όπου έχουν οριστεί. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "byzantium_fall_restoration",
+          "room": "Room_byzantium",
+          "exercise_count": 18
+        },
+        {
+          "id": "02e4b2b93ba3bd47c3f8",
+          "kind": "book",
+          "label": "Digital Book · Η Εδέμ, η πτώση και η υπόσχεση",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-fall-restoration-introduction",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "fall-restoration-introduction",
+          "book_lesson_id": "lesson-fall-restoration"
+        },
+        {
+          "id": "b42444486fd51d3cd6f3",
+          "kind": "book",
+          "label": "Digital Book · Ο Σταυρός — από την εξορία στη ζωή",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-fall-restoration-thorns",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "fall-restoration-thorns",
+          "book_lesson_id": "lesson-fall-restoration"
+        },
+        {
+          "id": "76425a23a216a31d4a45",
+          "kind": "book",
+          "label": "Digital Book · Από την Εδέμ στην Ανάσταση — παράλληλα χωρία",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-fall-restoration-parallel-texts",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "fall-restoration-parallel-texts",
+          "book_lesson_id": "lesson-fall-restoration"
+        },
+        {
+          "id": "6e898e21598be784d07a",
+          "kind": "book",
+          "label": "Digital Book · Η Ανάσταση και η ανακαίνιση του ανθρώπου",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-fall-restoration-anastasis",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "fall-restoration-anastasis",
+          "book_lesson_id": "lesson-fall-restoration"
+        },
+        {
+          "id": "28ba83be25ec163b5c33",
+          "kind": "slides",
+          "label": "Θάνατος και Ανάσταση · PowerPoint · 7 διαφάνειες",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/assets/christianity-study/death-resurrection/death-resurrection-slides.pptx",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-032"
+        },
+        {
+          "id": "5ec3c913092e5b2b1e53",
+          "kind": "book",
+          "label": "Digital Book · Θέωση και αγάπη για όλο τον Αδάμ",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-fall-restoration-conclusion",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "fall-restoration-conclusion",
+          "book_lesson_id": "lesson-fall-restoration"
+        },
+        {
+          "id": "c5e1735d1e6cbbe0f4de",
+          "kind": "quiz",
+          "label": "HTML · Πτώση και επανόρθωση-σύμβολα",
+          "url": "https://drive.google.com/file/d/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Πτώση και επανόρθωση-σύμβολα». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "app": "drive-html",
+          "native_id": "byzantium_fall_restoration",
+          "modified_at": "2026-10-22T11:22:05.245Z",
+          "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:jerusalem_theotokos_hymn",
+      "title": "Σκιά και Πλήρωση — Η Θεοτόκος στην υμνολογία",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Αντιπροσωπευτικό υμνολογικό απόσπασμα\n«Χαῖρε, πλάξ θεόγραφος καὶ χάριτος· χαῖρε, στάμνε χρυσῆ τὸ Μάννα φέρουσα· χαῖρε, κιβωτὲ ἔμψυχε τοῦ Νομοθέτου· χαῖρε, ράβδε Ἀαρὼν ἡ ἀσπόρως βλαστήσασα…»\n\nΈχεις ήδη γνωρίσει τα ευρήματα στην παρουσίαση του Δημήτρη. Τώρα ο ύμνος σε καλεί να σκεφτείς πώς αποκτούν βαθύτερο νόημα.\n\nΣκιά: το αντικείμενο και το γεγονός της Παλαιάς Διαθήκης.\nΠλήρωση: το νόημα που αναγνωρίζει η ορθόδοξη υμνολογία στο πρόσωπο της Θεοτόκου και στον Χριστό.\n\nΣε κάθε απάντηση σύνδεσε τρία στοιχεία: εύρημα, φράση του ύμνου και θεολογικό νόημα. Εξήγησε προφορικά τη σύνδεση πριν επιλέξεις.\n\nΤρεις μαθητές αναλαμβάνουν διαδοχικά τρεις γύρους: επιλογή με δείκτη, τόξο, χρήση των αντικειμένων. Κάθε γύρος περιλαμβάνει και τα έξι ευρήματα."
+      ],
+      "modes": [
+        "quiz",
+        "αντιστοίχιση",
+        "αιτιολόγηση",
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Unity VR",
+        "Digital Book",
+        "Slides",
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: η τάξη αιτιολογεί την αντιστοίχιση πριν επιλεγεί η απάντηση. Συζητήστε μία επιλογή μετά τον γύρο.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Έξι ίδια ιερά ευρήματα και αντιστοιχίσεις Σκιάς–Πλήρωσης της υμνολογικής δραστηριότητας.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z."
+      ],
+      "source_groups": [
+        "Unity VR",
+        "Digital Book",
+        "Google Drive",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "JerusalemCollectionQuiz.json",
+          "locator": ""
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-001/sections/s-851e860a-84d7-5377-a1f6-f6a88b0a17ce"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        },
+        {
+          "system": "drive-html",
+          "path": "jerusalem-quiz.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "e1ce0531b777c8404087",
+          "kind": "vr",
+          "label": "Αποστολή αντικειμένων στο Unity",
+          "url": "",
+          "note": "Διαθέσιμο τοπικό quiz. Ray, τόξο και τοποθέτηση χρησιμοποιούνται όπου έχουν οριστεί. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "jerusalem_theotokos_hymn",
+          "room": "Ιεροσόλυμα · ανάθεση προς επιβεβαίωση",
+          "exercise_count": 14
+        },
+        {
+          "id": "562bee8aadaf94c6fdf3",
+          "kind": "book",
+          "label": "Digital Book · Ιερουσαλήμ: Από τη Σκιά της Παλαιάς Διαθήκης στην Υμνολογική Πλήρωση",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-s-851e860a-84d7-5377-a1f6-f6a88b0a17ce",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "s-851e860a-84d7-5377-a1f6-f6a88b0a17ce",
+          "book_lesson_id": "lesson-001"
+        },
+        {
+          "id": "2f5b648bdc3123453c9f",
+          "kind": "slides",
+          "label": "Παλαιά Διαθήκη - Τυπολογία και λατρεία",
+          "url": "https://docs.google.com/presentation/d/11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE/preview",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-009",
+          "drive_id": "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE",
+          "slide_count": 6,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-08T17:49:43.102Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "e1ff5b4996f95b80d077",
+          "kind": "slides",
+          "label": "Άνοιξε τις διαφάνειες · 7 εικόνες",
+          "url": "https://docs.google.com/presentation/d/1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs/edit?usp=drivesdk",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-027",
+          "drive_id": "1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-16T16:33:22.265Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "3eafa1c31184c3e990e8",
+          "kind": "quiz",
+          "label": "HTML · Σκιά και Πλήρωση — Η Θεοτόκος στην υμνολογία",
+          "url": "https://drive.google.com/file/d/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Σκιά και Πλήρωση — Η Θεοτόκος στην υμνολογία». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "app": "drive-html",
+          "native_id": "jerusalem_theotokos_hymn",
+          "modified_at": "2026-10-22T11:22:05.245Z",
+          "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:lesson_proximity_comparison_ladder",
+      "title": "Σύγκριση και κλίμακα διερεύνησης",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Περιγραφικός τίτλος από το όνομα του τοπικού αρχείου. Η διδακτική ετοιμότητα χρειάζεται επιβεβαίωση."
+      ],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "lesson_proximity_comparison_ladder.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "7b30c769193b958c30de",
+          "kind": "vr",
+          "label": "Τοπική αποστολή Unity",
+          "url": "",
+          "note": "Υπάρχει τοπικό JSON μαθήματος. Η ενεργοποίηση και η χρήση γίνονται από την υπάρχουσα διαδικασία Unity. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "lesson_proximity_comparison_ladder",
+          "room": "Room_library / Room_temple"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:father-symeon",
+      "title": "Συμεών ο Νέος Θεολόγος",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Google Drive"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-church-fathers/sections/father-symeon"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg"
+        }
+      ],
+      "activities": [
+        {
+          "id": "be5a0b8eb19799d231bd",
+          "kind": "book",
+          "label": "Digital Book · Συμεών ο Νέος Θεολόγος",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-father-symeon",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "father-symeon",
+          "book_lesson_id": "lesson-church-fathers"
+        },
+        {
+          "id": "257cb8a68409c69354da",
+          "kind": "slides",
+          "label": "Παρουσίαση · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-025",
+          "drive_id": "1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg",
+          "slide_count": 7,
+          "checked_at": "2026-10-24T12:21:32.057Z",
+          "modified_at": "2026-10-13T16:25:58.850Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:generic_socratic",
+      "title": "Σωκρατικό Εργαστήριο Διερεύνησης",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Γενική εισαγωγή στη διερεύνηση οποιουδήποτε μαθήματος μέσα από πλαίσιο, τεκμήρια, οπτικές, σύγκριση και σύνθεση."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συζήτηση",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "case.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "edc370554d529159db9c",
+          "kind": "vr",
+          "label": "Σενάριο διερεύνησης στο Unity",
+          "url": "",
+          "note": "Καταχωρισμένο ως διαθέσιμο στο τοπικό manifest. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "generic_socratic",
+          "room": "Room_library, Room_temple, Room_agora"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sb:to-schedio-tis-theias-oikonomias",
+      "title": "Το Σχέδιο της Θείας Οικονομίας",
+      "subject": "Θρησκευτικά",
+      "grades": [
+        "Α΄ Γυμνασίου",
+        "Β΄ Γυμνασίου",
+        "Γ΄ Γυμνασίου",
+        "Α΄ Λυκείου",
+        "Β΄ Λυκείου",
+        "Γ΄ Λυκείου"
+      ],
+      "grade_status": "source",
+      "audience_source": "Για όλες τις τάξεις",
+      "objectives": [
+        "Να εξηγούν τη Θεία Οικονομία ως σταδιακό σχέδιο σωτηρίας και θεραπείας του ανθρώπου.",
+        "Να διακρίνουν τις τρεις φάσεις: προετοιμασία στην Παλαιά Διαθήκη, έργο του Χριστού, συνέχεια στην Εκκλησία.",
+        "Να συσχετίζουν την ελευθερία και τη συγκατάθεση του ανθρώπου με τη συνεργασία προς το αγαθό.",
+        "Να διερευνούν το πρόβλημα του καλού και του κακού χωρίς να καταργούν την ανθρώπινη ευθύνη.",
+        "Να συγκρίνουν ιστορικές και φιλοσοφικές μορφές ως ερμηνευτικούς σταθμούς της παιδείας και της ιστορίας.",
+        "Να αναγνωρίζουν τα πάθη ως πνευματική ασθένεια και να συνδέουν τη θεραπεία με πίστη, μετάνοια, αγάπη και εκκλησιαστική ζωή."
+      ],
+      "modes": [
+        "διερεύνηση",
+        "συσχέτιση",
+        "συζήτηση",
+        "εξερεύνηση",
+        "αντιστοίχιση",
+        "ερμηνεία",
+        "ανάγνωση"
+      ],
+      "formats": [
+        "Κείμενο",
+        "HTML",
+        "Unity VR",
+        "Digital Book"
+      ],
+      "duration": "2 × 45 λεπτά",
+      "duration_status": "source",
+      "cognitive_difficulty": 4,
+      "cognitive_status": "mapped",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "source-draft",
+      "readiness_note": "Υπάρχει διαθέσιμο υλικό· το σχέδιο μαθήματος έχει ένδειξη προσχεδίου.",
+      "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Sacred Blueprint",
+        "text",
+        "idea-weaver-board",
+        "Map-Timeline",
+        "history-explorer-3d",
+        "mind-palace-cases",
+        "personal-page",
+        "quiz",
+        "Unity VR",
+        "Digital Book"
+      ],
+      "inquiry_question": "Αν ο Θεός προσφέρει τη σωτηρία, ποιος είναι ο ρόλος της ανθρώπινης ελευθερίας απέναντι στο καλό και το κακό;",
+      "sources": [
+        {
+          "system": "Sacred Blueprint",
+          "path": "meta.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "lesson_plan.json",
+          "locator": ""
+        },
+        {
+          "system": "Sacred Blueprint",
+          "path": "master_output.json",
+          "locator": ""
+        },
+        {
+          "system": "text",
+          "path": "source.txt",
+          "locator": ""
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "investigation_output.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "timeline_output.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "history3d_output.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "mindpalace_output.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "personalpage_output.json",
+          "locator": ""
+        },
+        {
+          "system": "quiz",
+          "path": "theia-oikonomia-History-explorer.docx",
+          "locator": ""
+        },
+        {
+          "system": "quiz",
+          "path": "theia-oikonomia-holistic-worksheet.docx",
+          "locator": ""
+        },
+        {
+          "system": "quiz",
+          "path": "theia-oikonomia-worksheet.docx",
+          "locator": ""
+        },
+        {
+          "system": "quiz",
+          "path": "therapeia-patron-worksheet.docx",
+          "locator": ""
+        },
+        {
+          "system": "quiz",
+          "path": "Έρευνα-υλικού-σε-Πατρολογία-βασικά-συγγράμματα.docx",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "to-schedio-tis-theias-oikonomias.json",
+          "locator": ""
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-foundations/sections/divine-economy-worksheet"
+        },
+        {
+          "system": "idea-weaver-board",
+          "path": "to-schedio-tis-theias-oikonomias.json",
+          "locator": ""
+        },
+        {
+          "system": "Map-Timeline",
+          "path": "to-schedio-tis-theias-oikonomias.json",
+          "locator": ""
+        },
+        {
+          "system": "history-explorer-3d",
+          "path": "to-schedio-tis-theias-oikonomias.json",
+          "locator": ""
+        },
+        {
+          "system": "mind-palace-cases",
+          "path": "freedom-divine-economy-moses-paisios.json",
+          "locator": ""
+        },
+        {
+          "system": "personal-page",
+          "path": "to-schedio-tis-theias-oikonomias.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "fd4661cc2c41d296e377",
+          "kind": "html",
+          "label": "Πίνακας διερεύνησης",
+          "url": "https://idea-weaver-board.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Ffd4661cc2c41d296e377.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "idea-weaver-board",
+          "native_id": "to-schedio-tis-theias-oikonomias",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/fd4661cc2c41d296e377.json"
+        },
+        {
+          "id": "d3c292609be3e9f43c2f",
+          "kind": "html",
+          "label": "Χρονολόγιο",
+          "url": "https://dporpatonelis-crypto.github.io/Map-Timeline/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2Fd3c292609be3e9f43c2f.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "Map-Timeline",
+          "native_id": "to-schedio-tis-theias-oikonomias",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/d3c292609be3e9f43c2f.json"
+        },
+        {
+          "id": "45c97371b2daab1d20fc",
+          "kind": "html",
+          "label": "History Explorer",
+          "url": "https://history-explorer-3d.vercel.app/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F45c97371b2daab1d20fc.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "history-explorer-3d",
+          "native_id": "to-schedio-tis-theias-oikonomias",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/45c97371b2daab1d20fc.json"
+        },
+        {
+          "id": "08a59a989ac9094524bc",
+          "kind": "html",
+          "label": "Mind Palace",
+          "url": "https://dporpatonelis-crypto.github.io/mind-palace-cases/?dataUrl=https%3A%2F%2Fdporpatonelis-crypto.github.io%2FBrowser-vr%2Fdata%2Factivities%2F08a59a989ac9094524bc.json",
+          "note": "Ανοίγει το συγκεκριμένο υπάρχον υλικό, χωρίς αλλαγή του τρέχοντος μαθήματος. Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.",
+          "app": "mind-palace-cases",
+          "native_id": "freedom-divine-economy-moses-paisios",
+          "lesson_download_url": "https://dporpatonelis-crypto.github.io/Browser-vr/data/activities/08a59a989ac9094524bc.json"
+        },
+        {
+          "id": "9232c8d8c6e1f0a931a9",
+          "kind": "vr",
+          "label": "Τοπική αποστολή Unity",
+          "url": "",
+          "note": "Υπάρχει τοπικό JSON μαθήματος. Η ενεργοποίηση και η χρήση γίνονται από την υπάρχουσα διαδικασία Unity. Δεν ελέγχθηκε σε Quest.",
+          "app": "Unity VR",
+          "native_id": "to-schedio-tis-theias-oikonomias",
+          "room": "Room_library / Room_temple"
+        },
+        {
+          "id": "ca4189b8c0510217c898",
+          "kind": "book",
+          "label": "Digital Book · Η θεία οικονομία — συμπλήρωσε τα κενά",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-divine-economy-worksheet",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "divine-economy-worksheet",
+          "book_lesson_id": "lesson-foundations"
+        }
+      ]
+    },
+    {
+      "scenario_id": "book:lesson-trinity-dogmatic-consciousness",
+      "title": "Τριάδα και δογματική συνείδηση",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Slides"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-trinity-dogmatic-consciousness/sections/trinity-dogmatic-consciousness"
+        }
+      ],
+      "activities": [
+        {
+          "id": "52001d468b7ac44206e9",
+          "kind": "book",
+          "label": "Digital Book · Πίστη στον Τριαδικό Θεό και δογματική συνείδηση",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-trinity-dogmatic-consciousness",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "trinity-dogmatic-consciousness",
+          "book_lesson_id": "lesson-trinity-dogmatic-consciousness"
+        },
+        {
+          "id": "319246a53f4460439e30",
+          "kind": "slides",
+          "label": "Google Slides · 7 διαφάνειες",
+          "url": "https://docs.google.com/presentation/d/1z3aTR6G9M6K2DbyN9Izi6HxJewJvkt4sqIKyHXgQYvM/edit?usp=sharing",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-034",
+          "drive_id": "1z3aTR6G9M6K2DbyN9Izi6HxJewJvkt4sqIKyHXgQYvM"
+        },
+        {
+          "id": "486a4ec60c49c39e97e3",
+          "kind": "slides",
+          "label": "Πίστη και δογματική συνείδηση · PowerPoint · 7 διαφάνειες",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/assets/christianity-study/trinity-dogma/trinity-dogma-slides.pptx",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "media_id": "SLD-035"
+        }
+      ]
+    }
+  ]
+}

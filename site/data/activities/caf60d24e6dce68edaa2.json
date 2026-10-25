@@ -1,0 +1,54 @@
+{
+  "case_id": "trinity-revelation",
+  "method": "comparative_theology",
+  "status": "complete",
+  "figures": [
+    {
+      "name": "Μέγας Βασίλειος",
+      "work": "Εις το 'Εν αρχή ήν ο Λόγος'",
+      "era": "4ος αιώνας"
+    },
+    {
+      "name": "Γρηγόριος Ναζιανζηνός",
+      "work": "Πέντε Θεολογικοί Λόγοι",
+      "era": "4ος αιώνας"
+    }
+  ],
+  "concepts": {
+    "core": "Υποστατική Αρχή και Άκτιστο Φως [5, 6]"
+  },
+  "clues": [
+    {
+      "id": "mp1",
+      "title": "Ουσία vs Υπόσταση",
+      "content": "Το κοινό έναντι του ιδιαιτέρου για τη νίκη επί του Ευνομίου [7].",
+      "source": "Γρηγόριος Θεολόγος",
+      "type": "concept",
+      "difficulty": 3
+    }
+  ],
+  "rooms": [
+    {
+      "id": "r1",
+      "name": "Αίθουσα του Φωτός",
+      "theme": "mystical",
+      "unlock_requirements": [
+        "mp1"
+      ],
+      "central_question": "Είναι ο Θεός γνώσιμος;"
+    }
+  ],
+  "dialogues": [
+    {
+      "room_id": "r1",
+      "greeting": "Συμεών",
+      "questions": [
+        "Πώς βιώνεται το Πνεύμα;"
+      ],
+      "suggested_answers": [
+        "Ως Φως"
+      ],
+      "revelation": "Ο Θεός είναι Φως και εν τω Φωτί Του οψόμεθα Φως [7, 8]."
+    }
+  ]
+}

@@ -1,0 +1,460 @@
+{
+  "characters": [
+    {
+      "id": "socrates",
+      "name": "Ο Φιλόσοφος",
+      "position_x": -3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Ο πατέρας της φιλοσοφίας",
+      "glbModel": "/models/Socrates.glb"
+    },
+    {
+      "id": "hypatia",
+      "name": "Υπατία",
+      "position_x": 3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Η φιλόσοφος της Αλεξάνδρειας",
+      "glbModel": "/models/hypatia.glb"
+    },
+    {
+      "id": "aristotle",
+      "name": "Αριστοτέλης",
+      "position_x": -8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πατέρας της επιστήμης",
+      "glbModel": "/models/aristotle.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "Constantine compressed (2).glb",
+      "name": "Μ. Κωνσταντίνος",
+      "position_x": 5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πρώτος Βυζαντινός Αυτοκράτορας",
+      "glbModel": "/models/constantine.glb"
+    },
+    {
+      "id": "monk compressed.glb",
+      "name": "Άγιος",
+      "position_x": 8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Άγιος",
+      "glbModel": "/models/monk.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ψηφιδωτό Πέλλας compressed (2).glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/pella_mosaic.glb"
+    },
+    {
+      "id": "Αλεξάνδρεια compressed (1).glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/alexandria.glb"
+    },
+    {
+      "id": "Λιβελο compressed (2).glb",
+      "name": "tree",
+      "position_x": 0,
+      "position_y": 1,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/libelo.glb"
+    },
+    {
+      "id": "Αθήνα.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/solomon_temple_optimized_v1.glb"
+    },
+    {
+      "id": "Valhalla grok compress.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": -0.5,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/valhalla.glb"
+    },
+    {
+      "id": "Alexander.glb",
+      "name": "Μ. Αλέξανδρος",
+      "position_x": -5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Βασιλιάς Μακεδονίας",
+      "glbModel": "/models/Alexander.glb"
+    },
+    {
+      "id": "acropolis",
+      "name": "tree",
+      "position_x": -3.5,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/acropolis_optimized_v1.glb"
+    }
+  ],
+  "dialogs": [
+    {
+      "character_id": "socrates",
+      "question": "Πώς προετοιμάζει η σωκρατική αναζήτηση της αρετής την ελεύθερη στροφή προς το αγαθό;",
+      "answer": "Η εξέταση του βίου καλλιεργεί τη συνείδηση, την ευθύνη και τη γλώσσα της αρετής. Έτσι η ηθική αναζήτηση του ελληνικού κόσμου γίνεται ουσιαστικό νήμα στην ιστορική προετοιμασία του ανθρώπου για την αλήθεια."
+    },
+    {
+      "character_id": "socrates",
+      "question": "Γιατί η εξέταση του βίου έχει θέση στην πάλη ανάμεσα στο καλό και το κακό;",
+      "answer": "Μετακινεί τον άνθρωπο από την αφηρημένη απορία στην προσωπική ευθύνη: πώς κρίνω, πώς επιλέγω και πώς μεταμορφώνω τον τρόπο της ζωής μου;"
+    },
+    {
+      "character_id": "aristotle",
+      "question": "Πώς συνδέεται η επιστημονική έρευνα με την καλλιέργεια του ανθρώπου;",
+      "answer": "Η αναζήτηση αιτίων, η παρατήρηση και η λογική πειθαρχούν τον νου και αποκαλύπτουν τάξη και συνοχή στον κόσμο. Η δίψα για γνώση γίνεται δύναμη παιδείας και υπεύθυνης ελευθερίας."
+    },
+    {
+      "character_id": "aristotle",
+      "question": "Πώς μπορεί η γνώση να συμμετέχει στη θεραπεία των παθών;",
+      "answer": "Η γνώση φωτίζει συνέπειες, ξεσκεπάζει αυταπάτες και οργανώνει την κρίση. Όταν ενώνεται με άσκηση, σχέση και ταπείνωση, μετατρέπεται από πληροφορία σε σοφία ζωής."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "question": "Ποια θέση έχει ο ελληνιστικός κόσμος στη μεγάλη ιστορική πορεία του μαθήματος;",
+      "answer": "Η κοινή γλώσσα, οι πόλεις και τα δίκτυα επικοινωνίας δημιούργησαν έναν ευρύ πολιτισμικό ορίζοντα. Μέσα σε αυτόν τον κόσμο οι ιδέες, τα κείμενα και αργότερα το χριστιανικό μήνυμα μπορούσαν να ταξιδέψουν."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "question": "Τι μας διδάσκει η πολιτική ενοποίηση για την ανθρώπινη δίψα για ισχύ και ενότητα;",
+      "answer": "Δείχνει τη δύναμη της εξωτερικής οργάνωσης, αλλά και το ερώτημα του προσανατολισμού της. Η ισχύς μπορεί να ανοίξει δρόμους κοινωνίας ή να γίνει κυριαρχία, ανάλογα με την ελεύθερη χρήση της."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πώς αλλάζει η δημόσια ιστορία της Εκκλησίας τον τέταρτο αιώνα;",
+      "answer": "Η θρησκευτική ελευθερία, η δημόσια παρουσία και οι σύνοδοι εντάσσουν την εκκλησιαστική ζωή σε νέο ιστορικό ορίζοντα, όπου πίστη, κοινωνία, θεσμοί και εξουσία αλληλεπιδρούν."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πώς μπορεί η εξουσία να υπηρετήσει τη συνοχή χωρίς να γίνει καταναγκασμός;",
+      "answer": "Όταν προστατεύει την ελευθερία, την ειρήνη και τη δυνατότητα συνάντησης. Το ιστορικό ερώτημα είναι πάντοτε αν η ισχύς λειτουργεί ως διακονία του κοινού αγαθού ή ως αυτοσκοπός."
+    },
+    {
+      "character_id": "hypatia",
+      "question": "Τι φανερώνει η Υπατία για την έξωθεν παιδεία μετά Χριστόν;",
+      "answer": "Φανερώνει τη συνέχεια της μαθηματικής και φιλοσοφικής καλλιέργειας στον ύστερο αρχαίο κόσμο. Η παιδεία διατηρεί ζωντανή τη δίψα για γνώση και τον διάλογο των πολιτισμών."
+    },
+    {
+      "character_id": "hypatia",
+      "question": "Πώς μπορεί η γνώση να υπηρετεί την ελευθερία και την ανθρώπινη κοινωνία;",
+      "answer": "Όταν διδάσκει έλεγχο των ισχυρισμών, αναγνώριση ορίων και διάλογο χωρίς βία. Η γνώση γίνεται κοινωνική δύναμη όταν συνοδεύεται από ταπείνωση και ευθύνη."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πώς ενώνονται οι βιβλικοί, φιλοσοφικοί και ιστορικοί σταθμοί σε μία συνεκτική εικόνα;",
+      "answer": "Η κλήση, η Έξοδος, οι προφήτες, το έργο του Χριστού και η Εκκλησία συναντούν τον πραγματικό κόσμο της ηθικής αναζήτησης, της επιστήμης, της παιδείας και της ιστορικής εξουσίας. Όλα μαζί συγκροτούν την πορεία του ανθρώπου και της ιστορίας προς την αλήθεια, τη θεραπεία και την κοινωνία."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Ποιο κοινό νήμα ενώνει θεολογία, φιλοσοφία και ιστορία στο μάθημα;",
+      "answer": "Η ελεύθερη ανθρώπινη δίψα για αλήθεια, γνώση, ενότητα και αγαθό — μια δίψα που μπορεί να γίνει σοφία και διακονία ή να εκτραπεί σε υπερηφάνεια και κυριαρχία."
+    }
+  ],
+  "facts": [
+    {
+      "character_id": "socrates",
+      "fact": "Ο Σωκράτης έζησε στην Αθήνα τον 5ο αιώνα π.Χ. και συνέδεσε τη φιλοσοφική έρευνα με την αρετή και την εξέταση του βίου."
+    },
+    {
+      "character_id": "socrates",
+      "fact": "Η σωκρατική ηθική αναζήτηση καλλιέργησε τη συνείδηση και τη γλώσσα του αγαθού στον ελληνικό κόσμο."
+    },
+    {
+      "character_id": "aristotle",
+      "fact": "Ο Αριστοτέλης έζησε το 384–322 π.Χ., δίδαξε τον Αλέξανδρο και συστηματοποίησε πεδία λογικής και φυσικής έρευνας."
+    },
+    {
+      "character_id": "aristotle",
+      "fact": "Η επιστημονική αναζήτηση αιτίων και τάξης καλλιεργεί τον νου και τη δίψα του ανθρώπου για γνώση."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "fact": "Ο Αλέξανδρος έζησε το 356–323 π.Χ. και οι κατακτήσεις του συνέβαλαν στη διαμόρφωση του ελληνιστικού κόσμου."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "fact": "Η κοινή ελληνική γλώσσα και τα ελληνιστικά δίκτυα συνέδεσαν λαούς και ιδέες στην ανατολική Μεσόγειο."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "Στις αρχές του 4ου αιώνα η αυτοκρατορική πολιτική αναγνώρισε τη θρησκευτική ελευθερία των χριστιανών."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "Η Α΄ Οικουμενική Σύνοδος συγκλήθηκε στη Νίκαια το 325 μ.Χ. μέσα στο νέο δημόσιο ιστορικό πλαίσιο της Εκκλησίας."
+    },
+    {
+      "character_id": "hypatia",
+      "fact": "Η Υπατία δίδαξε μαθηματικά και φιλοσοφία στην Αλεξάνδρεια στα τέλη του 4ου και στις αρχές του 5ου αιώνα μ.Χ."
+    },
+    {
+      "character_id": "hypatia",
+      "fact": "Η Υπατία εκπροσωπεί τη μετά Χριστόν έξωθεν παιδεία και τη συνεχή καλλιέργεια του ανθρώπου διά της γνώσης."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "Το μάθημα συνδέει βιβλική ιστορία, φιλοσοφική αναζήτηση, επιστήμη, παιδεία και πολιτική ιστορία σε μία συνεκτική παρουσίαση του ανθρώπινου κόσμου."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "Κοινός άξονας είναι ο προσανατολισμός της ελευθερίας, της γνώσης και της εξουσίας προς την αλήθεια, την κοινωνία και το αγαθό."
+    }
+  ],
+  "screens": {
+    "left_image_url": "https://i.ibb.co/8n06X9KY/Slide-01.png#sb-slides=https%3A%2F%2Fi.ibb.co%2F8n06X9KY%2FSlide-01.png%7Chttps%3A%2F%2Fi.ibb.co%2FmCTRf7Hd%2FSlide-02.png%7Chttps%3A%2F%2Fi.ibb.co%2FGvWhjgSw%2FSlide-03.png%7Chttps%3A%2F%2Fi.ibb.co%2FJW30jQ8t%2FSlide-04.png%7Chttps%3A%2F%2Fi.ibb.co%2FbgDPJHS1%2FSlide-05.png%7Chttps%3A%2F%2Fi.ibb.co%2F7tQjnv5H%2FSlide-06.png%7Chttps%3A%2F%2Fi.ibb.co%2FVcR3sTjT%2FSlide-07.png%7Chttps%3A%2F%2Fi.ibb.co%2FG4HQV7r3%2FSlide-08.png",
+    "right_image_url": "https://i.ibb.co/5h8N13sp/image.png",
+    "left_label": "Διαφάνειες — Θεία Οικονομία",
+    "right_label": "Το γενικό Timeline της Θείας Οικονομίας — IMG-055"
+  },
+  "interactive": {
+    "video_url": "/media/theia-oikonomia-history-relay.mp4",
+    "target_screen": "right",
+    "label": "Θεία Οικονομία — ιστορική σύνθεση"
+  },
+  "character_interactives": {
+    "Alexander.glb": {
+      "video_url": "/media/alexander-bucephalus-relay-v5-web.mp4",
+      "target_screen": "right",
+      "label": "Αλέξανδρος και Βουκεφάλας — εικαστική αφήγηση"
+    }
+  },
+  "completion": {
+    "required_character_ids": [
+      "socrates",
+      "aristotle",
+      "Alexander.glb",
+      "Constantine compressed (2).glb",
+      "hypatia"
+    ],
+    "reward_interactive": {
+      "video_url": "/media/alexander-bucephalus-relay-v5-web.mp4",
+      "target_screen": "right",
+      "label": "Επιβράβευση εξερεύνησης — Αλέξανδρος και Βουκεφάλας"
+    }
+  },
+  "quiz": {
+    "id": "history3d-understanding",
+    "host_prop_id": "dimitris",
+    "host_name": "Δημήτρης",
+    "host_title": "Συντονιστής κατανόησης",
+    "intro": "Η ιστορική εξερεύνηση ολοκληρώθηκε. Απάντησε σε τρεις σύντομες ερωτήσεις κατανόησης.",
+    "pass_score": 2,
+    "reward_text": "Μπράβο! Ολοκλήρωσες με επιτυχία το quiz κατανόησης.",
+    "reward_interactive": {
+      "video_url": "/media/theia-oikonomia-history-relay.mp4",
+      "target_screen": "right",
+      "label": "Τελική επιβράβευση — Θεία Οικονομία"
+    },
+    "questions": [
+      {
+        "id": "socratic-virtue",
+        "prompt": "Πώς προετοίμασε η σωκρατική αναζήτηση τον ελληνικό κόσμο για την ελεύθερη αποδοχή της αλήθειας;",
+        "options": [
+          "Με την εξέταση του βίου, την αναζήτηση της αρετής και την προσωπική ευθύνη.",
+          "Με την απόρριψη κάθε αμφιβολίας και την άκριτη υπακοή.",
+          "Με την απομάκρυνση της ηθικής από την καθημερινή ζωή."
+        ],
+        "correct_index": 0,
+        "explanation": "Η σωκρατική εξέταση συνδέει την αλήθεια με την ελεύθερη κρίση, την αρετή και την ευθύνη του προσώπου."
+      },
+      {
+        "id": "aristotelian-knowledge",
+        "prompt": "Πότε η γνώση μπορεί να βοηθήσει πραγματικά στη θεραπεία των παθών;",
+        "options": [
+          "Όταν παραμένει μόνο συσσώρευση πληροφοριών.",
+          "Όταν η λογική έρευνα συνδυάζεται με ταπεινή άσκηση και σχέση.",
+          "Όταν καταργεί την ελευθερία και επιβάλλει μία έτοιμη απάντηση."
+        ],
+        "correct_index": 1,
+        "explanation": "Η γνώση γίνεται σοφία ζωής όταν φωτίζει την κρίση και ενώνεται με άσκηση, σχέση και ταπείνωση."
+      },
+      {
+        "id": "alexander-constantine",
+        "prompt": "Ποιος συνδυασμός αποδίδει σωστά τον ιστορικό ρόλο του Αλεξάνδρου και του Κωνσταντίνου;",
+        "options": [
+          "Ο Αλέξανδρος διεύρυνε την κοινή γλώσσα και τα πολιτισμικά δίκτυα, ενώ ο Κωνσταντίνος διαμόρφωσε νέο δημόσιο πλαίσιο θρησκευτικής ελευθερίας.",
+          "Ο Αλέξανδρος καθιέρωσε τη θρησκευτική ελευθερία, ενώ ο Κωνσταντίνος δημιούργησε την ελληνιστική κοινή γλώσσα.",
+          "Και οι δύο επηρέασαν την ιστορία μόνο με στρατιωτικές κατακτήσεις."
+        ],
+        "correct_index": 0,
+        "explanation": "Τα ελληνιστικά δίκτυα διευκόλυναν τη διάδοση ιδεών, ενώ η θρησκευτική ελευθερία άνοιξε νέο δημόσιο ορίζοντα για την Εκκλησία."
+      }
+    ]
+  },
+  "props": [
+    {
+      "id": "dimitris",
+      "glbModel": "/models/Dimitris.glb",
+      "dialog_label": "Dimitris quiz",
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false,
+      "welcome": "Καλώς ήρθες στην Αρχαία Αγορά. Είμαι ο Δημήτρης και θα σε ξεναγήσω.",
+      "welcome_voice": "Melina",
+      "welcome_trigger": "both",
+      "welcome_delay_ms": 2500,
+      "welcome_radius": 2.5,
+      "welcome_audio": "/audio/dimitris.wav"
+    },
+    {
+      "id": "bishop",
+      "glbModel": "/models/bishop_face_lipsync_optimized_v5.glb",
+      "position_x": 6.875,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": true,
+      "idle_animation": "Idle_Retarget_FK",
+      "dialog_enabled": true,
+      "dialog_label": "Ιεράρχης",
+      "dialog_title": "Ιεράρχης",
+      "dialog_subtitle": "Διάλογος από το scenario JSON",
+      "dialog_prompt": "Μήνυμα",
+      "dialog_speech_enabled": false,
+      "dialog_text": "Το περιεχόμενο του διαλόγου μπορεί να αντικατασταθεί αργότερα απευθείας από το scenario JSON."
+    },
+    {
+      "id": "agia_sophia",
+      "glbModel": "/models/agia_sophia_optimized_v1.glb",
+      "position_x": 6.3,
+      "position_y": 0.05,
+      "position_z": 2.3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false
+    }
+  ]
+}

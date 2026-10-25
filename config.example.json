@@ -1,0 +1,49 @@
+{
+  "sacred_blueprint_root": "../../sacred-blueprint",
+  "apps_root": "..",
+  "book_root": "../../Documents/Codex/digital-books/interactive-books",
+  "unity_root": "../../Documents/Unity/MindPalaceVR",
+  "lesson_aliases": {
+    "20260816_080042_three-theologians": "20260702_091526_the-triple-testimony-of-the-one-god",
+    "20260825_093143_lesson": "i-ypothesi-tou-areiou"
+  },
+  "alias_evidence": {
+    "20260816_080042_three-theologians": "Ίδιο ακριβώς master_output.json με την καταχώριση της 2ας Ιουλίου. Οι δύο φάκελοι διατηρούνται ως πηγές.",
+    "20260825_093143_lesson": "Ίδιο case_id i-ypothesi-tou-areiou, ίδιο mindpalace_output και ίδιο κείμενο/στόχοι σχεδίου μαθήματος. Οι παραλλαγές υλικού διατηρούνται."
+  },
+  "book_section_links": {
+    "divine-economy-worksheet": "sb:to-schedio-tis-theias-oikonomias",
+    "apokalypsi": "book:lesson-004",
+    "s-4c4c2f7c-92aa-5e18-85aa-7e5f5a1e0535": "unity:agora_paul_logos",
+    "s-851e860a-84d7-5377-a1f6-f6a88b0a17ce": "unity:jerusalem_theotokos_hymn",
+    "s-0b2bee9f-337b-5288-bfee-1054a9131e97": "unity:byzantium_paul_cross",
+    "pentecost-upper-room": "unity:jerusalem_pentecost_hymn",
+    "fall-restoration-introduction": "unity:byzantium_fall_restoration"
+  },
+  "book_lesson_links": {
+    "lesson-002": "unity:jerusalem_pentecost_hymn",
+    "lesson-fall-restoration": "unity:byzantium_fall_restoration"
+  },
+  "drive_links": {
+    "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk": "sb:20261002_palaia-kai-kaini-diathiki-enotita",
+    "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA": "sb:pisti-exousia-kai-prosopo",
+    "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE": "unity:jerusalem_theotokos_hymn"
+  },
+  "drive_link_evidence": {
+    "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk": "Τίτλος και δεκαπέντε σταθμοί της ίδιας διαδρομής Σκιά–Αλήθεια, Αβραάμ–Νόμος–Προφήτες–Χριστός–Πεντηκοστή.",
+    "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA": "Πέντε ίδιοι σταθμοί ιδεολογικοποίησης και αντίδοτα της έμπρακτης αγάπης, σύμφωνα με το master και το χρονολόγιο.",
+    "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE": "Έξι ίδια ιερά ευρήματα και αντιστοιχίσεις Σκιάς–Πλήρωσης της υμνολογικής δραστηριότητας."
+  },
+  "html_scenario_links": {
+    "dentro_diathikis": "sb:20261002_palaia-kai-kaini-diathiki-enotita",
+    "two_ways_of_knowing": "book:lesson-005",
+    "revelation_map": "book:lesson-004",
+    "spiritual_healing": "sculpture:spiritual-freedom"
+  },
+  "html_link_evidence": {
+    "dentro_diathikis": "Έξι χειρόγραφα για υπόσχεση, Νόμο, Ενανθρώπηση, καρδιά, έλεος, Χριστό και οικουμενικότητα· ίδιο περιεχόμενο της ενότητας των δύο Διαθηκών.",
+    "two_ways_of_knowing": "Το κείμενο του αγίου Λουκά και οι έξι αντιστοιχίσεις διάνοιας/καρδιάς τεκμηριώνουν την υπάρχουσα ενότητα επιστήμης και θρησκείας. Δεν ταυτίζεται με το επιμέρους quiz της Αγοράς.",
+    "revelation_map": "Ίδια έξι σημεία του χάρτη της Αποκάλυψης με το Digital Book και το Slides snapshot του γλυπτού.",
+    "spiritual_healing": "Ίδια πέντε πάθη και αντίστοιχες θεραπείες με το spiritual-freedom του Interactive Sculpture."
+  }
+}

@@ -1,0 +1,40 @@
+name: Publish classroom dashboard
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify public catalogue and private storage contract
+        run: |
+          python3 -m unittest discover -s tests -p 'test_publication.py' -v
+          node --test tests/domain.test.mjs tests/cloud.test.mjs
+          node --check site/app.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+  deploy:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4

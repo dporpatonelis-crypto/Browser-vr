@@ -1,0 +1,360 @@
+{
+  "characters": [
+    {
+      "id": "socrates",
+      "name": "Ο Φιλόσοφος",
+      "position_x": -3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Ο πατέρας της φιλοσοφίας",
+      "glbModel": "/models/Socrates.glb"
+    },
+    {
+      "id": "hypatia",
+      "name": "Υπατία",
+      "position_x": 3.5,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Η φιλόσοφος της Αλεξάνδρειας",
+      "glbModel": "/models/hypatia.glb"
+    },
+    {
+      "id": "aristotle",
+      "name": "Αριστοτέλης",
+      "position_x": -8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πατέρας της επιστήμης",
+      "glbModel": "/models/aristotle.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "Constantine compressed (2).glb",
+      "name": "Μ. Κωνσταντίνος",
+      "position_x": 5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Πρώτος Βυζαντινός Αυτοκράτορας",
+      "glbModel": "/models/constantine.glb"
+    },
+    {
+      "id": "monk compressed.glb",
+      "name": "Άγιος",
+      "position_x": 8,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Άγιος",
+      "glbModel": "/models/monk.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": 5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ancient_tiles.glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/ancient_tiles.glb"
+    },
+    {
+      "id": "ψηφιδωτό Πέλλας compressed (2).glb",
+      "name": "tree",
+      "position_x": -5.75,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/pella_mosaic.glb"
+    },
+    {
+      "id": "Αλεξάνδρεια compressed (1).glb",
+      "name": "tree",
+      "position_x": 3.5,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/alexandria.glb"
+    },
+    {
+      "id": "Λιβελο compressed (2).glb",
+      "name": "tree",
+      "position_x": 0,
+      "position_y": 1,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/libelo.glb"
+    },
+    {
+      "id": "Αθήνα.glb",
+      "name": "tree",
+      "position_x": -8,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/solomon_temple_optimized_v1.glb"
+    },
+    {
+      "id": "Valhalla grok compress.glb",
+      "name": "tree",
+      "position_x": 8,
+      "position_y": -0.5,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/valhalla.glb"
+    },
+    {
+      "id": "Alexander.glb",
+      "name": "Μ. Αλέξανδρος",
+      "position_x": -5.75,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "Βασιλιάς Μακεδονίας",
+      "glbModel": "/models/Alexander.glb"
+    },
+    {
+      "id": "acropolis",
+      "name": "tree",
+      "position_x": -3.5,
+      "position_y": 0,
+      "position_z": 2,
+      "rotation": 0,
+      "color": "",
+      "robeColor": "",
+      "description": "",
+      "glbModel": "/models/acropolis_optimized_v1.glb"
+    }
+  ],
+  "dialogs": [
+    {
+      "character_id": "socrates",
+      "question": "Πώς η ηθική ακεραιότητα χαρίζει ελευθερία;",
+      "answer": "Διδακτική φωνή Σωκράτη: Όταν εξετάζω τον εαυτό μου και αρνούμαι να πράξω το άδικο, παραμένω εσωτερικά ελεύθερος ακόμη και μπροστά στην πίεση ή στην τιμωρία. Η συνέπεια ανάμεσα στην αλήθεια, τη συνείδηση και την πράξη με ελευθερώνει από τον φόβο και από την ανάγκη αποδοχής του πλήθους."
+    },
+    {
+      "character_id": "socrates",
+      "question": "Μπορεί κανείς να είναι ελεύθερος όταν πράττει αντίθετα προς τη συνείδησή του;",
+      "answer": "Διδακτική φωνή Σωκράτη: Ο ανεξέταστος συμβιβασμός δένει τον άνθρωπο με τον φόβο, την επιθυμία και τη γνώμη των άλλων. Η ηθική ακεραιότητα δεν καταργεί τη δυσκολία· δίνει όμως την ελευθερία να πράττει κανείς αυτό που αναγνωρίζει ως δίκαιο."
+    },
+    {
+      "character_id": "aristotle",
+      "question": "Πώς επηρέασε η δική μου φιλοσοφική μέθοδος την Αντιοχειανή σχολή;",
+      "answer": "Διδακτική φωνή Αριστοτέλη: Η έμφαση στη λογική ανάλυση, στις διακρίσεις και στη συγκεκριμένη ιστορική πραγματικότητα ενίσχυσε την αναλυτική κατεύθυνση που συνδέεται με την Αντιοχειανή σχολή. Έτσι δόθηκε ιδιαίτερη προσοχή στην πλήρη ανθρωπότητα του Χριστού, στην ανθρώπινη θέληση και στην ενεργή πράξη."
+    },
+    {
+      "character_id": "aristotle",
+      "question": "Ποιο όφελος και ποιος κίνδυνος προκύπτουν από αυτή την επίδραση;",
+      "answer": "Διδακτική φωνή Αριστοτέλη: Το όφελος είναι η προσοχή στο συγκεκριμένο ανθρώπινο πρόσωπο, στην ευθύνη και στην καλλιέργεια της αρετής. Ο κίνδυνος εμφανίζεται όταν η μέθοδος γίνεται μονομερής ορθολογισμός ή ανθρωποκεντρική αυτάρκεια και η σωτηρία αντιμετωπίζεται ως ατομικό κατόρθωμα."
+    },
+    {
+      "character_id": "hypatia",
+      "question": "Πώς συνδέονται η αναζήτηση της γνώσης και η ελευθερία της κοινότητας;",
+      "answer": "Διδακτική φωνή Υπατίας: Η φιλοσοφική έρευνα στην Αλεξάνδρεια μας διδάσκει ότι ο διάλογος είναι δυνατός μόνο όταν υπάρχει σεβασμός στη διαφορετική φωνή. Η βία και ο δογματικός εξαναγκασμός δεν έχουν θέση στην πνευματική αναζήτηση της Αλήθειας."
+    },
+    {
+      "character_id": "hypatia",
+      "question": "Είναι κάθε φιλοσοφική έρευνα δίψα κυριαρχίας;",
+      "answer": "Διδακτική σύνθεση: Η γνώση μπορεί να ανοίξει ορίζοντες ή να χρησιμοποιηθεί ως εργαλείο εξουσίας και ελέγχου. Η πνευματική ελευθερία απαιτεί να καθαρίσουμε τα κίνητρά μας από τη δίψα για κυριαρχία (Χέρια) και να αναγνωρίσουμε ότι η αληθινή σοφία υπερβαίνει τους ορθολογιστικούς ορισμούς."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Αρκεί μια πολιτική απόφαση για να δημιουργήσει ενότητα πίστης;",
+      "answer": "Διδακτική φωνή Κωνσταντίνου: Η σύγκληση της Συνόδου της Νίκαιας το 325 δείχνει πώς η κρατική μέριμνα συναντά τη θεολογία. Όμως, η πολιτική προστασία και η θεσμική ενότητα δεν μπορούν να αντικαταστήσουν την ελεύθερη, προσωπική συγκατάθεση της καρδιάς. Εξέτασε τη διαφορά μεταξύ θεσμικής συνοχής και πνευματικής ελευθερίας (Περιφέρεια)."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "question": "Πότε η εκκλησιαστική ζωή υποτάσσεται σε κοινωνικό κύρος;",
+      "answer": "Διδακτική προειδοποίηση: Όταν μια κοινότητα δέχεται συμβιβασμούς ή προνόμια με αντάλλαγμα τη σιωπή απέναντι στην αδικία, τότε θεοποιεί την ύλη και την κοσμική εξουσία (Σταθμός 3). Η αληθινή Εκκλησία υπάρχει μόνο όταν η δράση της παραμένει κενωτική διακονία, ελεύθερη από κοσμικές εξαρτήσεις."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "question": "Πώς οι εκστρατείες μου συνέβαλαν στην εξάπλωση και στη συνάντηση των πολιτισμών;",
+      "answer": "Διδακτική φωνή Αλεξάνδρου: Οι εκστρατείες δημιούργησαν δίκτυα μετακίνησης και επικοινωνίας, διέδωσαν την ελληνική γλώσσα και έφεραν σε επαφή ιδέες, θρησκείες και έθιμα διαφορετικών λαών. Η συνάντηση αυτή γέννησε τον ελληνιστικό κόσμο, μαζί με νέες δυνατότητες ανταλλαγής και τις εντάσεις κάθε μεγάλης επέκτασης."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "question": "Πότε η συνύπαρξη διαφορετικών πολιτισμών γίνεται ειρηνική και δημιουργική;",
+      "answer": "Διδακτική φωνή Αλεξάνδρου: Όταν ο κοινός χώρος επικοινωνίας δεν εξαφανίζει τις ταυτότητες, όταν ο διάλογος γίνεται χωρίς εξαναγκασμό και όταν ακούγονται οι ασθενέστερες φωνές. Η πολιτική ενότητα από μόνη της δεν αρκεί· η ειρηνική συνύπαρξη χρειάζεται αμοιβαίο σεβασμό."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Αρκεί το προσωπικό πνευματικό χάρισμα για να παρακάμπτει κανείς την κοινότητα;",
+      "answer": "Διδακτική φωνή του Μοναχού: Το πνευματικό χάρισμα δεν είναι ατομική ιδιοκτησία ούτε δικαιολογία για πνευματική υπερηφάνεια ή απομόνωση. Αν η προσωπική εμπειρία του Φωτός συνοδεύεται από περιφρόνηση των άλλων ή άρνηση της εκκλησιαστικής κοινωνίας, τότε πρόκειται για ψευδή αυτοθέωση (Κεφαλή)."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "question": "Πώς συνθέτουμε τα έργα, τη χάρη και τη Λειτουργική Ευχαριστία;",
+      "answer": "Διδακτική σύνθεση: Ο αγώνας ενάντια στα πάθη και η άσκηση (Κορμός, Χέρια) είναι η ελεύθερη συγκατάθεσή μας στο θεϊκό δώρο. Δεν εξαγοράζουμε τη σωτηρία, αλλά ανταποκρινόμαστε με ευγνωμοσύνη. Αυτή η συνέργεια ολοκληρώνεται στον εσωτερικό πυρήνα (Καρδιά) ως ζωντανή, λειτουργική Ευχαριστία, που μεταφράζεται σε έμπρακτη φροντίδα για τον αδελφό."
+    }
+  ],
+  "facts": [
+    {
+      "character_id": "socrates",
+      "fact": "Ο Σωκράτης αρνήθηκε να δραπετεύσει και αποδέχθηκε την καταδικαστική απόφαση, επιλέγοντας να παραμείνει συνεπής προς τις αρχές που εξέταζε σε όλη τη ζωή του. Η σκηνή συνδέει διδακτικά αυτή τη συνέπεια με την ηθική ακεραιότητα."
+    },
+    {
+      "character_id": "aristotle",
+      "fact": "Η λογική, οι κατηγορίες και η αναλυτική μέθοδος του Αριστοτέλη επηρέασαν τρόπους σκέψης που αξιοποιήθηκαν αργότερα στην Αντιοχειανή παράδοση. Η σύνδεση παρουσιάζεται εδώ ως διδακτική ιστορική ερμηνεία."
+    },
+    {
+      "character_id": "hypatia",
+      "fact": "Η Υπατία δίδαξε φιλοσοφία στην Αλεξάνδρεια. Η παρουσία της εισάγει το ερώτημα της γνώσης, της δημόσιας ζωής και της προστασίας της διαφορετικής φωνής."
+    },
+    {
+      "character_id": "Constantine compressed (2).glb",
+      "fact": "Ο Κωνσταντίνος συγκάλεσε την Α΄ Σύνοδο της Νίκαιας το 325. Η πολιτική ενοποίηση και η ελεύθερη πίστη είναι διαφορετικά ερωτήματα προς διερεύνηση."
+    },
+    {
+      "character_id": "Alexander.glb",
+      "fact": "Ο ελληνιστικός κόσμος διευκόλυνε τη μετακίνηση και τη συνάντηση πολιτισμών. Η ειρηνική συνύπαρξη απαιτεί σεβασμό των διαφορετικών ταυτοτήτων και δεν εξασφαλίζεται μόνο από την πολιτική ενότητα."
+    },
+    {
+      "character_id": "monk compressed.glb",
+      "fact": "Το πνευματικό χάρισμα (Μοναχός) εκφράζει την ελεύθερη, ασκητική ανταπόκριση στη χάρη, η οποία ολοκληρώνεται μόνο μέσα στην κοινωνία και την ταπείνωση."
+    }
+  ],
+  "screens": {
+    "left_label": "Ελευθερία και δογματική συνείδηση — διάλογος με τη φιλοσοφία",
+    "right_image_url": "",
+    "left_image_url": "",
+    "right_label": "Αξίωμα και χάρισμα — κριτήριο η ελεύθερη διακονία"
+  },
+  "props": [
+    {
+      "id": "dimitris",
+      "glbModel": "/models/Dimitris.glb",
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false,
+      "welcome": "Καλώς ήρθες στην Αρχαία Αγορά. Είμαι ο Δημήτρης και θα σε ξεναγήσω.",
+      "welcome_voice": "Melina",
+      "welcome_trigger": "both",
+      "welcome_delay_ms": 2500,
+      "welcome_radius": 2.5,
+      "welcome_audio": "/audio/dimitris.wav"
+    },
+    {
+      "id": "bishop",
+      "glbModel": "/models/vasileios_verified_v7_compact.glb",
+      "position_x": 6.875,
+      "position_y": 0.05,
+      "position_z": 0.3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": true,
+      "idle_animation": "Idle_Retarget_FK",
+      "dialog_enabled": true,
+      "dialog_label": "Ιεράρχης",
+      "dialog_title": "Ιεράρχης",
+      "dialog_subtitle": "Διάλογος από το scenario JSON",
+      "dialog_prompt": "Μήνυμα",
+      "dialog_speech_enabled": false,
+      "dialog_text": "Το περιεχόμενο του διαλόγου μπορεί να αντικατασταθεί αργότερα απευθείας από το scenario JSON."
+    },
+    {
+      "id": "agia_sophia",
+      "glbModel": "/models/agia_sophia_optimized_v1.glb",
+      "position_x": 6.3,
+      "position_y": 0.05,
+      "position_z": 2.3,
+      "rotation": 0,
+      "scale": 1,
+      "idle": false
+    }
+  ]
+}

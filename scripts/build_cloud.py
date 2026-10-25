@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Bundle the approved UI and catalogue for an owner-only Google web app."""
 import argparse
+import copy
 import json
 from pathlib import Path
 
@@ -10,6 +11,15 @@ ROOT = Path(__file__).resolve().parents[1]
 def build_cloud(owner, site=ROOT/'site', output=ROOT/'cloud/generated'):
     site, output = Path(site), Path(output)
     registry = json.loads((site/'data/scenario-registry.json').read_text())
+    # Preserve slide text only in the owner-only service, never in the public export.
+    local_registry = ROOT/'public/data/scenario-registry.json'
+    if local_registry.is_file():
+        originals = {a['id']: a for s in json.loads(local_registry.read_text())['scenarios'] for a in s['activities']}
+        for scenario in registry['scenarios']:
+            for activity in scenario['activities']:
+                original = originals.get(activity['id'], {})
+                if activity.get('kind') == 'slides' and original.get('content_preview'):
+                    activity['content_preview'] = copy.deepcopy(original['content_preview'])
     models = json.loads((site/'data/pedagogical-models.json').read_text())
     css = (site/'styles.css').read_text()
     domain = (site/'domain.mjs').read_text().replace('export function ', 'function ')

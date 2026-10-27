@@ -31,7 +31,7 @@ SOURCE_SCOPES = {
     'mind-palace-cases': r'^(?:cases/.*|catalog|active_lesson)\.json$',
     'personal-page': r'^public/data/lessons/.*\.json$',
     'Interactive-sculpture': r'^(?:data|scenarios)/.*\.json$',
-    'interactive-books': r'^Digital_Lessons/(?:book|data)\.json$',
+    'interactive-books': r'^Digital_Lessons/(?:(?:book|data)\.json|apps/animated-concept-canvas/(?:catalog\.json|index\.html|creation-concepts\.html))$',
     'light-up-legacy': r'^public/(?:sculptures|contributions)\.json$',
 }
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T11:55:38.850230Z",
+  "generated_at": "2026-10-27T09:52:59.608318Z",
   "grades": [
     "Α΄ Γυμνασίου",
     "Β΄ Γυμνασίου",
@@ -17,10 +17,10 @@
   "integrations": {
     "digital_book": {
       "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/",
-      "revision": 28
+      "revision": 29
     },
     "google_drive": {
-      "checked_at": "2026-10-25T11:33:40.548Z",
+      "checked_at": "2026-10-27T09:52:58Z",
       "folder": {
         "id": "1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv",
         "title": "ChatGPT",
@@ -29,13 +29,13 @@
       "mode": "connector-snapshot"
     },
     "source_refresh": {
-      "run_id": "5f796357-9656-4cdd-989f-c8790b1e813c",
-      "checked_at": "2026-10-25T11:33:40.548Z",
+      "run_id": "dffd1986-9d8a-4c64-9110-0fdd5f324373",
+      "checked_at": "2026-10-27T09:52:58Z",
       "status": "verified",
       "github_repositories": 9,
-      "drive_folders": 3,
-      "drive_slides": 21,
-      "drive_html": 2
+      "drive_folders": 5,
+      "drive_slides": 22,
+      "drive_html": 4
     }
   },
   "source_files": [],
@@ -108,7 +108,7 @@
           "media_id": "SLD-029",
           "drive_id": "1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-17T10:33:06.382Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -457,7 +457,7 @@
           "native_id": "",
           "drive_id": "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk",
           "slide_count": 15,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-03T06:14:03.548Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -470,6 +470,7 @@
           "app": "drive-html",
           "native_id": "dentro_diathikis",
           "modified_at": "2026-10-24T12:34:53.912Z",
+          "exercise_count": null,
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
@@ -715,6 +716,7 @@
           "app": "drive-html",
           "native_id": "revelation_map",
           "modified_at": "2026-10-24T12:34:53.912Z",
+          "exercise_count": null,
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
@@ -878,7 +880,7 @@
           "media_id": "SLD-021",
           "drive_id": "1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:25:22.015Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -952,7 +954,7 @@
           "media_id": "SLD-026",
           "drive_id": "17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:24:56.917Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -978,11 +980,19 @@
       "objectives": [],
       "modes": [
         "ανάγνωση",
-        "συζήτηση"
+        "συζήτηση",
+        "αντιστοίχιση",
+        "οπτική ανακάλυψη",
+        "στόχευση χειρογράφων",
+        "αντιστοίχιση καρτών",
+        "σταδιακή αποκάλυψη εικόνας",
+        "αιτιολόγηση"
       ],
       "formats": [
         "Digital Book",
-        "Slides"
+        "Slides",
+        "HTML",
+        "Unity VR"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -997,7 +1007,11 @@
       "aliases": [],
       "notes": [],
       "source_groups": [
-        "Digital Book"
+        "Digital Book",
+        "Animated Concept Canvas",
+        "Drive HTML",
+        "Unity VR",
+        "Unity · υποστήριξη δραστηριότητας"
       ],
       "sources": [
         {
@@ -1014,6 +1028,86 @@
           "system": "Digital Book",
           "path": "book.json",
           "locator": "lessons/lesson-creation-world/sections/creation-restoration-christ"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-creation-world/sections/creation-concept-canvas"
+        },
+        {
+          "system": "Animated Concept Canvas",
+          "path": "creation-concepts.html",
+          "locator": ""
+        },
+        {
+          "system": "Animated Concept Canvas",
+          "path": "catalog.json",
+          "locator": ""
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1-8cyAxy7aFq-yOCwDxavx1UjjOmW_n3L"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "1-8cyAxy7aFq-yOCwDxavx1UjjOmW_n3L.html",
+          "locator": "embedded"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_christianity.unity",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Creation_Concepts.asset",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "creation-human-boundary.asset",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "creation-image-for-everyone.asset",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "creation-image-to-likeness.asset",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "creation-garments-and-life.asset",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "creation-fruit-and-eucharist.asset",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Creation_Lesson.asset",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "creation-concepts.json",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Creation_Concepts.asset",
+          "locator": ""
+        },
+        {
+          "system": "Unity · υποστήριξη δραστηριότητας",
+          "path": "CreationSupportProfile.asset",
+          "locator": "Assembly-CSharp::MindPalace.TeacherSupport.TeacherSupportProfile"
         }
       ],
       "activities": [
@@ -1059,6 +1153,48 @@
           "native_id": "",
           "section_id": "creation-restoration-christ",
           "book_lesson_id": "lesson-creation-world"
+        },
+        {
+          "id": "55cd59840c249905c8cc",
+          "kind": "book",
+          "label": "Digital Book · Δημιουργία · Ανακαλύπτω τις έννοιες στην εικόνα",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-creation-concept-canvas",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "creation-concept-canvas",
+          "book_lesson_id": "lesson-creation-world"
+        },
+        {
+          "id": "354e06aee265e4b4653c",
+          "kind": "html",
+          "label": "Δημιουργία · Αναλόγιο εννοιών",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/apps/animated-concept-canvas/creation-concepts.html",
+          "note": "Πέντε εικαστικά παζλ για τη δημιουργία, το κατ’ εικόνα και την προοπτική ζωής μετά την πτώση.",
+          "app": "animated-concept-canvas",
+          "native_id": "creation-image-and-life",
+          "media_id": "WEB-007",
+          "exercise_count": 5,
+          "availability_status": "available",
+          "section_id": "creation-concept-canvas",
+          "book_lesson_id": "lesson-creation-world",
+          "drive_id": "1-8cyAxy7aFq-yOCwDxavx1UjjOmW_n3L",
+          "download_url": "https://drive.google.com/uc?export=download&id=1-8cyAxy7aFq-yOCwDxavx1UjjOmW_n3L"
+        },
+        {
+          "id": "29e35a1ee55b1a1edcbf",
+          "kind": "vr",
+          "label": "Unity VR · Κυκλικό αναλόγιο · Δημιουργία, κατ’ εικόνα και νέα ζωή",
+          "url": "",
+          "note": "Στο δωμάτιο Χριστιανισμός ο μαθητής στοχεύει 5 περιφερειακά χειρόγραφα για υποδείξεις και ξεκλειδώνει 5 παζλ. Πιάνει τις κάρτες του θέματος στο κυκλικό αναλόγιο και τις τοποθετεί στις σωστές θέσεις. Κάθε σωστή κάρτα φωτίζει το αντίστοιχο εύρημα της εικόνας. Με την ολοκλήρωση κάθε θέματος εμφανίζονται η ερμηνεία και το ερώτημα αιτιολόγησης. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "creation_concepts",
+          "room": "Χριστιανισμός",
+          "scene_name": "Room_christianity",
+          "exercise_count": 5,
+          "stage_count": 0,
+          "reveal_mode": "concept-canvas",
+          "availability_status": "scene-bound"
         }
       ]
     },
@@ -1576,6 +1712,7 @@
           "app": "drive-html",
           "native_id": "two_ways_of_knowing",
           "modified_at": "2026-10-24T12:34:53.912Z",
+          "exercise_count": null,
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
@@ -1857,7 +1994,7 @@
           "media_id": "SLD-011",
           "drive_id": "1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-15T15:15:24.175Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -1931,7 +2068,7 @@
           "media_id": "SLD-012",
           "drive_id": "1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-11T05:57:01.161Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2005,7 +2142,7 @@
           "media_id": "SLD-013",
           "drive_id": "1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-11T05:55:42.464Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2079,7 +2216,7 @@
           "media_id": "SLD-014",
           "drive_id": "1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-11T14:45:46.081Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2153,7 +2290,7 @@
           "media_id": "SLD-016",
           "drive_id": "1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-11T14:46:02.732Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2227,7 +2364,7 @@
           "media_id": "SLD-017",
           "drive_id": "1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-11T14:46:18.578Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2301,7 +2438,7 @@
           "media_id": "SLD-015",
           "drive_id": "1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-11T14:46:30.711Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2840,6 +2977,7 @@
           "app": "drive-html",
           "native_id": "spiritual_healing",
           "modified_at": "2026-10-24T12:34:53.912Z",
+          "exercise_count": null,
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
@@ -2976,7 +3114,7 @@
           "media_id": "SLD-028",
           "drive_id": "1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-17T10:33:03.016Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3050,7 +3188,7 @@
           "media_id": "SLD-022",
           "drive_id": "11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:26:09.383Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3176,7 +3314,7 @@
           "media_id": "SLD-023",
           "drive_id": "182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:25:33.435Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3250,7 +3388,7 @@
           "media_id": "SLD-024",
           "drive_id": "19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:25:11.661Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3324,7 +3462,7 @@
           "media_id": "SLD-019",
           "drive_id": "1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:24:41.955Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3398,7 +3536,7 @@
           "media_id": "SLD-020",
           "drive_id": "1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:25:46.410Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3850,6 +3988,7 @@
           "app": "drive-html",
           "native_id": "jerusalem_pentecost_hymn",
           "modified_at": "2026-10-22T11:22:05.245Z",
+          "exercise_count": null,
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
@@ -4031,7 +4170,7 @@
           "native_id": "",
           "drive_id": "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA",
           "slide_count": 6,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-09-25T20:06:31.232Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4208,9 +4347,77 @@
           "app": "drive-html",
           "native_id": "byzantium_fall_restoration",
           "modified_at": "2026-10-22T11:22:05.245Z",
+          "exercise_count": null,
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:world_religions_cosmology",
+      "title": "Πώς αρχίζει ο κόσμος;",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "μελέτη πηγών",
+        "αντιστοίχιση",
+        "σταδιακή αποκάλυψη εικόνας",
+        "σύγκριση"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "Room_world_religions.unity",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "World_Cosmologies.asset",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "World_Cosmologies.asset",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "f691de3125cadd1f0c8d",
+          "kind": "vr",
+          "label": "Unity VR · Τέσσερις αφηγήσεις για τον κόσμο",
+          "url": "",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 4 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι αφηγήσεις αφορούν: Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "world_religions_cosmology",
+          "room": "Θρησκείες του κόσμου",
+          "scene_name": "Room_world_religions",
+          "exercise_count": 4,
+          "stage_count": 0,
+          "reveal_mode": "cosmology-comparison",
+          "availability_status": "scene-bound"
         }
       ]
     },
@@ -4339,7 +4546,7 @@
           "media_id": "SLD-009",
           "drive_id": "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE",
           "slide_count": 6,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-08T17:49:43.102Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -4354,7 +4561,7 @@
           "media_id": "SLD-027",
           "drive_id": "1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-16T16:33:22.265Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -4367,6 +4574,7 @@
           "app": "drive-html",
           "native_id": "jerusalem_theotokos_hymn",
           "modified_at": "2026-10-22T11:22:05.245Z",
+          "exercise_count": null,
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
           "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
@@ -4500,7 +4708,7 @@
           "media_id": "SLD-025",
           "drive_id": "1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg",
           "slide_count": 7,
-          "checked_at": "2026-10-25T11:33:40.548Z",
+          "checked_at": "2026-10-27T09:52:58Z",
           "modified_at": "2026-10-13T16:25:58.850Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4802,11 +5010,15 @@
       "objectives": [],
       "modes": [
         "ανάγνωση",
-        "συζήτηση"
+        "συζήτηση",
+        "αντιστοίχιση",
+        "οπτική ανακάλυψη",
+        "παρατήρηση"
       ],
       "formats": [
         "Digital Book",
-        "Slides"
+        "Slides",
+        "HTML"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -4821,13 +5033,56 @@
       "aliases": [],
       "notes": [],
       "source_groups": [
-        "Digital Book"
+        "Digital Book",
+        "Animated Concept Canvas",
+        "Google Drive",
+        "Drive HTML"
       ],
       "sources": [
         {
           "system": "Digital Book",
           "path": "book.json",
           "locator": "lessons/lesson-trinity-dogmatic-consciousness/sections/trinity-dogmatic-consciousness"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-trinity-dogmatic-consciousness/sections/trinity-basic-concept-canvas"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-trinity-dogmatic-consciousness/sections/trinity-advanced-concept-canvas"
+        },
+        {
+          "system": "Animated Concept Canvas",
+          "path": "index.html",
+          "locator": ""
+        },
+        {
+          "system": "Animated Concept Canvas",
+          "path": "catalog.json",
+          "locator": ""
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
+          "locator": "files/1z3aTR6G9M6K2DbyN9Izi6HxJewJvkt4sqIKyHXgQYvM"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209.html",
+          "locator": "embedded"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209.html",
+          "locator": "embedded:basics"
         }
       ],
       "activities": [
@@ -4851,7 +5106,11 @@
           "app": null,
           "native_id": "",
           "media_id": "SLD-034",
-          "drive_id": "1z3aTR6G9M6K2DbyN9Izi6HxJewJvkt4sqIKyHXgQYvM"
+          "drive_id": "1z3aTR6G9M6K2DbyN9Izi6HxJewJvkt4sqIKyHXgQYvM",
+          "slide_count": 7,
+          "checked_at": "2026-10-27T09:52:58Z",
+          "modified_at": "2026-10-22T17:32:41.123Z",
+          "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
         {
           "id": "486a4ec60c49c39e97e3",
@@ -4862,6 +5121,60 @@
           "app": null,
           "native_id": "",
           "media_id": "SLD-035"
+        },
+        {
+          "id": "0f6bd492a90a42714220",
+          "kind": "book",
+          "label": "Digital Book · Αγία Τριάδα · Τα βασικά με εικόνες και κάρτες",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-trinity-basic-concept-canvas",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "trinity-basic-concept-canvas",
+          "book_lesson_id": "lesson-trinity-dogmatic-consciousness"
+        },
+        {
+          "id": "9e9479574a0ece36f132",
+          "kind": "book",
+          "label": "Digital Book · Τριαδική θεολογία · Αναλόγιο εμβάθυνσης",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-trinity-advanced-concept-canvas",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "trinity-advanced-concept-canvas",
+          "book_lesson_id": "lesson-trinity-dogmatic-consciousness"
+        },
+        {
+          "id": "4f7e2b33e5ea3b7b5194",
+          "kind": "html",
+          "label": "Αγία Τριάδα · Αναλόγιο για μικρότερες ηλικίες",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/apps/animated-concept-canvas/index.html#unit=basics",
+          "note": "Έξι μικρά παζλ με απλές κάρτες και συγκεκριμένα ευρήματα που φωτίζονται στην εικόνα.",
+          "app": "animated-concept-canvas",
+          "native_id": "trinity-basics",
+          "media_id": "WEB-005",
+          "exercise_count": 6,
+          "availability_status": "available",
+          "section_id": "trinity-basic-concept-canvas",
+          "book_lesson_id": "lesson-trinity-dogmatic-consciousness",
+          "drive_id": "1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209",
+          "download_url": "https://drive.google.com/uc?export=download&id=1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209"
+        },
+        {
+          "id": "5b4be0e7a301e338c1b5",
+          "kind": "html",
+          "label": "Αγία Τριάδα · Αναλόγιο εμβάθυνσης",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/apps/animated-concept-canvas/index.html#unit=advanced",
+          "note": "Πέντε παζλ σύνδεσης, ακολουθίας και τεκμηρίωσης για τη δογματική συνείδηση.",
+          "app": "animated-concept-canvas",
+          "native_id": "trinity-concepts",
+          "media_id": "WEB-006",
+          "exercise_count": 5,
+          "availability_status": "available",
+          "section_id": "trinity-advanced-concept-canvas",
+          "book_lesson_id": "lesson-trinity-dogmatic-consciousness",
+          "drive_id": "1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209",
+          "download_url": "https://drive.google.com/uc?export=download&id=1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209"
         }
       ]
     }

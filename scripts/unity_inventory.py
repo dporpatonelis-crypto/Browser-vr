@@ -149,16 +149,52 @@ class UnityInventory:
                                     instructions=field(text, 'instructions'),
                                     topic_count=len(re.findall(r'^  - stationId:', text, re.M)))
                         reconstruction = self.resolve(reference(text, 'reconstruction'))
+                        concept = self.resolve(reference(text, 'conceptLesson'))
                         evidence = [path]+([matches[0][0]] if len(matches) == 1 else [])
                         for child_guid in re.findall(r'guid: (\w+)', text):
                             child = self.guid_paths.get(child_guid)
                             if child and child.suffix == '.asset':
                                 self.read_text(child)
                                 evidence.append(child)
-                        self.records.append({'mechanism': 'reconstruction' if reconstruction else 'circular-discovery',
+                        if concept:
+                            definition = self.read_text(concept)
+                            catalog = self.resolve(reference(definition, 'catalog'))
+                            content = self.json(catalog) if catalog and catalog.is_file() else {}
+                            activities = content.get('activities', [])
+                            topic_ids = re.findall(r'^    activityId: (.+)$', text, re.M)
+                            if not activities or set(topic_ids) != {a.get('id') for a in activities}:
+                                self.warnings.append({'path': str(concept), 'message': 'Τα θέματα αναλογίου διαφέρουν από τον συνδεδεμένο κατάλογο παζλ.'})
+                            data.update(activities=activities, activity_count=len(activities))
+                            if catalog:
+                                evidence.append(catalog)
+                        self.records.append({'mechanism': 'concept-canvas' if concept else 'reconstruction' if reconstruction else 'circular-discovery',
                                              'native_id': native, 'path': path, 'data': data, 'scene': scene,
                                              'evidence': evidence, 'room': ROOMS.get(scene.stem, scene.stem)})
                         bindings.append(native)
+                elif cls.endswith('.CosmologyController'):
+                    path = self.resolve(reference(component, 'scenario'))
+                    if not path or not path.is_file():
+                        self.warnings.append({'path': str(scene), 'message': 'Λείπει το συνδεδεμένο σενάριο κοσμολογιών.'})
+                        continue
+                    text = self.read_text(path)
+                    native = field(text, 'scenarioId')
+                    traditions = []
+                    for item in re.finditer(r'^  - cardId: (.*?)(?=^  - cardId:|^  [A-Za-z_]+:|\Z)', text, re.M | re.S):
+                        normalized = '  cardId: '+item[1]
+                        normalized = re.sub(r'^    ', '  ', normalized, flags=re.M)
+                        traditions.append({key: field(normalized, key) for key in
+                                           ('cardId', 'stationId', 'displayName', 'cardTitle', 'statement',
+                                            'sourceLabel', 'sourceUrl', 'hint', 'interpretation')})
+                    if not native or not traditions or any(not t['cardId'] or not t['stationId'] for t in traditions):
+                        self.warnings.append({'path': str(path), 'message': 'Ελλιπή δεδομένα συνδεδεμένου σεναρίου κοσμολογιών.'})
+                        continue
+                    self.records.append({'mechanism': 'cosmology-comparison', 'native_id': native,
+                                         'path': path, 'scene': scene, 'evidence': [path],
+                                         'room': ROOMS.get(scene.stem, scene.stem),
+                                         'data': {'title': field(text, 'title'), 'instructions': field(text, 'instructions'),
+                                                  'reflection': field(text, 'reflection'), 'traditions': traditions,
+                                                  'topic_count': len(traditions)}})
+                    bindings.append(native)
                 # Find JSON attached to any component, including future directories/adapters.
                 for guid in re.findall(r'guid: (\w+)', component):
                     path = self.guid_paths.get(guid)

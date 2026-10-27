@@ -1,4 +1,9 @@
 {
+  "concept_canvas_lesson_links": {
+    "trinity-basics": "book:lesson-trinity-dogmatic-consciousness",
+    "trinity-concepts": "book:lesson-trinity-dogmatic-consciousness",
+    "creation-image-and-life": "book:lesson-creation-world"
+  },
   "unity_exclusions": {
     "LessonSystem/LessonJson/lesson_demo_01.json": {
       "sha256": "0e92b7daa4078e0e6c176daf3ac3523963ae4b631908f48db5520fb62574918e",
@@ -6,6 +11,7 @@
     }
   },
   "unity_support_links": {
+    "creation_concepts": "book:lesson-creation-world",
     "upper-room-first-church": "unity:jerusalem_pentecost_hymn",
     "jerusalem-typology": "unity:jerusalem_theotokos_hymn"
   },

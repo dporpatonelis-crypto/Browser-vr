@@ -11,6 +11,38 @@ from scripts.unity_inventory import UnityInventory
 
 
 class RefreshRegressionTests(unittest.TestCase):
+    def test_concept_board_follows_its_actual_catalog_and_activity_bindings(self):
+        with tempfile.TemporaryDirectory() as folder:
+            assets=Path(folder);(assets/'Scenes').mkdir()
+            scenario=assets/'Lesson.asset';definition=assets/'Definition.asset';catalog=assets/'catalog.json'
+            for path,guid in [(scenario,'a'*32),(definition,'b'*32),(catalog,'c'*32)]:
+                Path(str(path)+'.meta').write_text('guid: '+guid)
+            scenario.write_text('  scenarioId: creation\n  displayTitle: Creation\n  topics:\n  - stationId: first\n    activityId: puzzle-a\n  conceptLesson: {fileID: 1, guid: '+('b'*32)+', type: 2}\n')
+            definition.write_text('  catalog: {fileID: 1, guid: '+('c'*32)+', type: 3}\n')
+            catalog.write_text(json.dumps({'activities':[{'id':'puzzle-a','title':'One puzzle'}]}))
+            (assets/'Scenes/Room_christianity.unity').write_text('--- !u!114 &1\nMonoBehaviour:\n  m_EditorClassIdentifier: Test.CircularManuscriptController\n  initialScenario: {fileID: 1, guid: '+('a'*32)+', type: 2}\n')
+            scan=UnityInventory(assets).scan()
+            self.assertEqual([],scan.warnings)
+            self.assertEqual('concept-canvas',scan.records[0]['mechanism'])
+            self.assertEqual(1,scan.records[0]['data']['activity_count'])
+            self.assertIn(catalog,scan.records[0]['evidence'])
+            catalog.write_text('{"activities":[{"id":"other-puzzle"}]}')
+            self.assertTrue(UnityInventory(assets).scan().warnings)
+
+    def test_cosmology_is_indexed_only_from_an_enabled_scene_controller(self):
+        with tempfile.TemporaryDirectory() as folder:
+            assets=Path(folder);(assets/'Scenes').mkdir();scenario=assets/'World.asset'
+            Path(str(scenario)+'.meta').write_text('guid: '+('a'*32))
+            scenario.write_text('  scenarioId: world\n  title: World narratives\n  traditions:\n  - cardId: card-a\n    stationId: station-a\n    displayName: Tradition A\n    statement: A source statement\n    sourceLabel: Source A\n    sourceUrl: https://example.org/a\n')
+            scene=assets/'Scenes/Room_world_religions.unity'
+            scene.write_text('--- !u!114 &1\nMonoBehaviour:\n  m_Enabled: 1\n  m_EditorClassIdentifier: Test.CosmologyController\n  scenario: {fileID: 1, guid: '+('a'*32)+', type: 2}\n')
+            scan=UnityInventory(assets).scan()
+            self.assertEqual([],scan.warnings)
+            self.assertEqual('cosmology-comparison',scan.records[0]['mechanism'])
+            self.assertEqual('Tradition A',scan.records[0]['data']['traditions'][0]['displayName'])
+            scene.write_text(scene.read_text().replace('m_Enabled: 1','m_Enabled: 0'))
+            self.assertEqual([],UnityInventory(assets).scan().records)
+
     def test_book_link_and_verified_local_source_become_one_activity(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

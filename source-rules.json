@@ -13,7 +13,9 @@
   "unity_support_links": {
     "creation_concepts": "book:lesson-creation-world",
     "upper-room-first-church": "unity:jerusalem_pentecost_hymn",
-    "jerusalem-typology": "unity:jerusalem_theotokos_hymn"
+    "jerusalem-typology": "unity:jerusalem_theotokos_hymn",
+    "to-schedio-tis-theias-oikonomias": "sb:to-schedio-tis-theias-oikonomias",
+    "byzantium_fall_restoration_threads": "unity:byzantium_fall_restoration"
   },
   "app_scenario_links": {
     "Map-Timeline:upper-room-first-church": {
@@ -31,5 +33,160 @@
       "scenario_id": "unity:jerusalem_theotokos_hymn",
       "evidence": "The same six exact Shadow/Fulfilment objects and explanations as JerusalemCollectionQuiz and the Drive HTML."
     }
+  },
+  "html_lesson_links": {
+    "concentric_cosmology_v1": "unity:world_religions_cosmology",
+    "world_religions_cosmology": "unity:world_religions_cosmology",
+    "na_agapate_ta_dentra": "book:lesson-care-for-creation",
+    "theia-oikonomia-two-level": "sb:to-schedio-tis-theias-oikonomias",
+    "science-heart-dialogue": "book:lesson-005",
+    "genesis3-mindmap": "unity:byzantium_fall_restoration",
+    "human_creation": "book:lesson-creation-world"
+  },
+  "unity_lesson_links": {
+    "concentric_cosmology_v1": "unity:world_religions_cosmology",
+    "to-schedio-tis-theias-oikonomias": "sb:to-schedio-tis-theias-oikonomias",
+    "byzantium_fall_restoration_threads": "unity:byzantium_fall_restoration"
+  },
+  "book_lesson_links": {
+    "lesson-world-cosmologies": "unity:world_religions_cosmology",
+    "lesson-chronology-observatory": "unity:chronology_observatory"
+  },
+  "book_section_links": {
+    "divine-economy-mindmap": "sb:to-schedio-tis-theias-oikonomias"
+  },
+  "lesson_progressions": {
+    "concentric_cosmology_v1": [
+      {
+        "target_native_id": "concentric_cosmology_v1",
+        "mechanism": "concentric-rings",
+        "relationship": "Ίδια δραστηριότητα σε VR",
+        "note": "Οι ίδιοι τέσσερις γύροι και τα ίδια κείμενα συνεχίζονται στον φυσικό μηχανισμό τριών δακτυλίων του δωματίου των θρησκειών.",
+        "equivalence": "concentric-content"
+      }
+    ],
+    "world_religions_cosmology": [
+      {
+        "target_native_id": "world_religions_cosmology",
+        "mechanism": "cosmology-comparison",
+        "relationship": "Ίδια δραστηριότητα σε VR",
+        "note": "Οι ίδιες τέσσερις κάρτες και συνδέσεις μεταφέρονται στον χώρο: επιλογή κάρτας και στόχευση του κύκλου με τόξο.",
+        "equivalence": "cosmology-content"
+      }
+    ],
+    "na_agapate_ta_dentra": [],
+    "theia-oikonomia-two-level": [
+      {
+        "target_native_id": "to-schedio-tis-theias-oikonomias",
+        "mechanism": "web-book",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Μετά τον φωτεινό χάρτη, το διαδραστικό βιβλίο VR δίνει πρόσβαση στο χρονολόγιο και στον πίνακα διερεύνησης του ίδιου μαθήματος."
+      }
+    ],
+    "science-heart-dialogue": [
+      {
+        "target_native_id": "two_ways_of_knowing",
+        "mechanism": "image-reveal",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Από τις επτά έννοιες νου και καρδιάς, η συνέχεια περνά στη συλλογή έξι παπύρων και στην αποκάλυψη της εικόνας για τους δύο τρόπους γνώσης."
+      }
+    ],
+    "genesis3-mindmap": [
+      {
+        "target_native_id": "byzantium_fall_restoration_threads",
+        "mechanism": "interpretation-threads",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Από την παρατήρηση της αφήγησης της Γένεσης, η πορεία συνεχίζεται στο Βυζάντιο με τέσσερις κάρτες πατερικών ερμηνειών."
+      }
+    ],
+    "human_creation": [
+      {
+        "target_native_id": "creation_concepts",
+        "mechanism": "concept-canvas",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Η μελέτη έξι εννοιών για τον άνθρωπο συνδέεται θεματικά με τα πέντε παζλ Δημιουργίας του κυκλικού αναλογίου. Οι δύο ασκήσεις έχουν διαφορετικές κάρτες."
+      }
+    ],
+    "creation-image-and-life": [
+      {
+        "target_native_id": "creation_concepts",
+        "mechanism": "concept-canvas",
+        "relationship": "Ίδια πέντε θέματα σε VR",
+        "note": "Τα ίδια πέντε θέματα γίνονται χωρική δραστηριότητα: ξεκλείδωμα χειρογράφων, πιάσιμο καρτών και αντιστοίχιση στα ευρήματα της εικόνας.",
+        "equivalence": "activity-ids"
+      }
+    ],
+    "dentro_diathikis": [
+      {
+        "target_native_id": "dentro_diathikis",
+        "mechanism": "image-reveal",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Τα έξι χειρόγραφα της ίδιας διαδρομής συνεχίζονται στα Ιεροσόλυμα με συλλογή παπύρων και στόχευση των περιοχών της εικόνας."
+      }
+    ],
+    "two_ways_of_knowing": [
+      {
+        "target_native_id": "two_ways_of_knowing",
+        "mechanism": "image-reveal",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Η ίδια διαδρομή έξι συνδέσεων συνεχίζεται στα Ιεροσόλυμα με συλλογή παπύρων και στόχευση περιοχών της εικόνας."
+      }
+    ],
+    "revelation_map": [
+      {
+        "target_native_id": "revelation_map",
+        "mechanism": "reconstruction",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Τα έξι σημεία της Αποκάλυψης συνεχίζονται στο κυκλικό αναλόγιο του Χριστιανισμού με συλλογή χειρογράφων και ανασύνθεση της εικόνας."
+      }
+    ],
+    "spiritual_healing": [
+      {
+        "target_native_id": "spiritual_healing",
+        "mechanism": "image-reveal",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Οι πέντε συνδέσεις πάθους και θεραπείας συνεχίζονται στα Ιεροσόλυμα με παπύρους και αποκάλυψη εικόνας."
+      }
+    ],
+    "jerusalem_theotokos_hymn": [
+      {
+        "target_native_id": "jerusalem_theotokos_hymn",
+        "mechanism": null,
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Τα έξι ευρήματα Σκιάς και Πλήρωσης συνεχίζονται στη συλλογή αντικειμένων και στο αντίστοιχο quiz των Ιεροσολύμων."
+      }
+    ],
+    "jerusalem_pentecost_hymn": [
+      {
+        "target_native_id": "jerusalem_pentecost_hymn",
+        "mechanism": null,
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Τα ευρήματα της Πεντηκοστής συνεχίζονται στη συλλογή αντικειμένων και στο αντίστοιχο quiz των Ιεροσολύμων."
+      }
+    ],
+    "byzantium_fall_restoration": [
+      {
+        "target_native_id": "byzantium_fall_restoration",
+        "mechanism": null,
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Η άσκηση συμβόλων συνεχίζεται στο αντίστοιχο quiz Πτώσης και Αποκατάστασης του Βυζαντίου."
+      }
+    ],
+    "trinity-basics": [
+      {
+        "target_native_id": "christianity_free_discovery",
+        "mechanism": "circular-discovery",
+        "relationship": "Συναφής μελέτη στο Unity",
+        "note": "Στο κυκλικό αναλόγιο του Χριστιανισμού υπάρχει το θεματικό χειρόγραφο «Τριαδικό δόγμα». Είναι συνέχεια μελέτης πηγής, με διαφορετική αλληλεπίδραση από τις κάρτες του HTML."
+      }
+    ],
+    "trinity-concepts": [
+      {
+        "target_native_id": "christianity_free_discovery",
+        "mechanism": "circular-discovery",
+        "relationship": "Συναφής μελέτη στο Unity",
+        "note": "Στο κυκλικό αναλόγιο του Χριστιανισμού υπάρχει το θεματικό χειρόγραφο «Τριαδικό δόγμα». Είναι συνέχεια μελέτης πηγής, με διαφορετική αλληλεπίδραση από τις κάρτες του HTML."
+      }
+    ]
   }
 }

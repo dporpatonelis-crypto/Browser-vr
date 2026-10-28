@@ -17,10 +17,12 @@ try:
     from .unity_inventory import UnityInventory
     from .refresh_sources import blob_sha, mirror_root, summary as refresh_summary
     from .concept_canvas_inventory import inspect_concept_canvases, extract_embedded_canvases
+    from .lesson_html_inventory import extract_lessons
 except ImportError:
     from unity_inventory import UnityInventory
     from refresh_sources import blob_sha, mirror_root, summary as refresh_summary
     from concept_canvas_inventory import inspect_concept_canvases, extract_embedded_canvases
+    from lesson_html_inventory import extract_lessons
 
 ROOT = Path(__file__).resolve().parents[1]
 GRADES = ['Α΄ Γυμνασίου', 'Β΄ Γυμνασίου', 'Γ΄ Γυμνασίου', 'Α΄ Λυκείου', 'Β΄ Λυκείου', 'Γ΄ Λυκείου']
@@ -79,6 +81,13 @@ class Builder:
         self.rules = self.read(ROOT/'source-rules.json', {})
         self.classified_exclusions = []
         self.concept_canvas_entries = {}
+        self.html_units = {}
+        # Preserve published selections across an updated private HTML container.
+        previous = ROOT/'site/data/scenario-registry.json'
+        old = json.loads(previous.read_text()) if previous.is_file() else {}
+        self.drive_activity_ids = {(s['scenario_id'], a.get('drive_id'), a.get('native_id')): a['id']
+                                   for s in old.get('scenarios', []) for a in s.get('activities', [])
+                                   if a.get('app') == 'drive-html'}
 
     def app_dir(self, name):
         repository = 'Interactive-sculpture' if name == 'interactive-sculpture' else name
@@ -344,6 +353,7 @@ class Builder:
         for record in scan.records:
             data, native = record['data'], record['native_id']
             sid = (self.config.get('html_scenario_links', {}).get(native)
+                   or self.rules.get('unity_lesson_links', {}).get(native)
                    or self.rules.get('unity_support_links', {}).get(native) or 'unity:'+native)
             title = data.get('short_title') or data.get('title') or native
             s = self.scenarios.get(sid) or self.scenario(sid, data.get('title') or title)
@@ -352,7 +362,34 @@ class Builder:
             items, stages = data.get('items', []), data.get('stages', [])
             count = data.get('topic_count') or len(items)
             exercises = sum(len(stage.get('items', [])) for stage in stages) if stages else count
-            if record['mechanism'] == 'concept-canvas':
+            if record['mechanism'] == 'concentric-rings':
+                label = 'Unity VR · Ομόκεντροι δακτύλιοι · '+title
+                note = (f"Στο δωμάτιο {record['room']} ο μαθητής διαβάζει το κείμενο αναφοράς, "
+                        f'περιστρέφει τρεις δακτυλίους και συνθέτει μία πρόταση σε καθέναν από τους {count} γύρους. '
+                        'Ελέγχει τη σύνθεση με την κεντρική σφραγίδα και ολοκληρώνει με σύγκριση των αφηγήσεων.')
+                modes = ['περιστροφή δακτυλίων', 'σύνθεση πρότασης', 'μελέτη πηγών', 'σύγκριση']
+            elif record['mechanism'] == 'interpretation-threads':
+                label = 'Unity VR · Κλωστές πατερικών ερμηνειών'
+                note = (f"Στο δωμάτιο {record['room']} ο μαθητής ενεργοποιεί το σενάριο στο αναλόγιο, "
+                        f'μελετά τα χειρόγραφα και αντιστοιχίζει {count} κάρτες με τις ερμηνείες των Πατέρων, '
+                        'στοχεύοντας τα φωτεινά πλαίσια με το τόξο. Οι σωστές συνδέσεις σχεδιάζουν κλωστές. '
+                        'Με την ολοκλήρωση ακολουθούν επιβράβευση και βίντεο στον σταθμό του Δαμασκηνού. '
+                        'Πρόκειται για ξεχωριστή δραστηριότητα από το quiz του δωματίου.')
+                modes = ['μελέτη χειρογράφων', 'αντιστοίχιση', 'ερμηνεία', 'συζήτηση']
+            elif record['mechanism'] == 'web-book':
+                label = 'Unity VR · Διαδραστικό βιβλίο · '+title
+                note = ('Το διαδραστικό βιβλίο της σκηνής έχει προφίλ για το συγκεκριμένο μάθημα, '
+                        'με επιλογές χρονολογίου και πίνακα διερεύνησης. Φορτώνει τις αντίστοιχες διαδικτυακές εφαρμογές '
+                        'και χρειάζεται σύνδεση. Η διαθεσιμότητα στον τελικό VR browser εξαρτάται από το build.')
+                modes = ['χρονολόγιο', 'διερεύνηση']
+            elif record['mechanism'] == 'room-preview':
+                label = 'Unity VR · Παρατηρητήριο του Χρόνου · Χώρος περιήγησης'
+                note = ('Από την πύλη της Main ο επισκέπτης εισέρχεται στο Παρατηρητήριο του Χρόνου, '
+                        'περιηγείται στην αίθουσα και παρακολουθεί το σύντομο εισαγωγικό βίντεο στην πίσω οθόνη. '
+                        'Υπάρχουν δύο περιβάλλοντα. Η κονσόλα είναι βάση για μελλοντική δραστηριότητα· '
+                        'δεν έχει διαμορφωθεί ακόμη άσκηση χρονολογικής αντιστοίχισης.')
+                modes = ['περιήγηση', 'παρατήρηση']
+            elif record['mechanism'] == 'concept-canvas':
                 exercises = data['activity_count']
                 label = 'Unity VR · Κυκλικό αναλόγιο · '+title
                 note = (f"Στο δωμάτιο {record['room']} ο μαθητής στοχεύει {count} περιφερειακά χειρόγραφα για υποδείξεις "
@@ -393,7 +430,8 @@ class Builder:
             self.activity(s, 'vr', label, path=record['path'], app='Unity VR', native_id=native, note=note,
                           identity_key='unity:'+record['scene'].stem+':'+record['mechanism']+':'+native,
                           room=record['room'], scene_name=record['scene'].stem, exercise_count=exercises,
-                          stage_count=len(stages), reveal_mode=record['mechanism'], availability_status='scene-bound')
+                          stage_count=len(stages), reveal_mode=record['mechanism'],
+                          availability_status='room-only' if record['mechanism'] == 'room-preview' else 'scene-bound')
             s['modes'] += modes
             if not s['objectives'] and data.get('subtitle'):
                 s['objectives'] = [data['subtitle']]
@@ -406,10 +444,11 @@ class Builder:
             else:
                 self.warnings.append({'path': str(support['path']), 'message': 'Προφίλ Unity χωρίς τεκμηριωμένη σύνδεση: '+native})
         indexed = {a.get('native_id') for s in self.scenarios.values() for a in s['activities'] if a['kind'] == 'vr'}
+        handled = {path for record in scan.records for path in record['evidence']}
         for path in scan.candidates:
             data = self.read(path, {})
-            native = data.get('lesson_id') or data.get('id')
-            if native not in indexed:
+            native = data.get('lesson_id') or data.get('id') or data.get('scenarioId')
+            if native not in indexed and path not in handled:
                 relative = str(path.relative_to(self.unity/'Assets'))
                 exclusion = self.rules.get('unity_exclusions', {}).get(relative, {})
                 bound = any(relative in scene['bindings'] for scene in scan.scenes)
@@ -457,18 +496,18 @@ class Builder:
             self.warnings.append({'path':str(f.parent/'apps/animated-concept-canvas/catalog.json'),'message':str(error)})
         for lesson in book.get('lessons',[]):
             lid=lesson['id']
-            primary=self.config.get('book_lesson_links',{}).get(lid,'book:'+lid)
+            primary=self.config.get('book_lesson_links',{}).get(lid) or self.rules.get('book_lesson_links',{}).get(lid,'book:'+lid)
             split=lid in {'lesson-003','lesson-church-fathers'}
             general=None if split else self.scenario(primary,lesson.get('short_title') or lesson['title'])
             for section in lesson.get('sections',[]):
                 secid=section['id']
                 if 'teacher-answers' in secid:
                     continue
-                sid=self.config.get('book_section_links',{}).get(secid)
+                sid=self.config.get('book_section_links',{}).get(secid) or self.rules.get('book_section_links',{}).get(secid)
                 if not sid:
                     sid='book:'+secid if split or secid.endswith('-journey') else primary
                 if lid=='lesson-foundations':
-                    sid=self.config['book_section_links'].get(secid,primary)
+                    sid=self.config['book_section_links'].get(secid) or self.rules.get('book_section_links',{}).get(secid,primary)
                 s=self.scenario(sid,section['title'] if sid.startswith('book:') and sid!='book:'+lid else lesson.get('short_title') or lesson['title'])
                 src=self.add_source(s,f,'Digital Book',lid,f"lessons/{lid}/sections/{secid}")
                 url=self.book_url+'#section-'+quote(secid)
@@ -481,6 +520,14 @@ class Builder:
                 for media in section.get('media',[]):
                     if media.get('type')=='slides' and media.get('url'):
                         self.activity(s,'slides',media.get('title') or 'Διαφάνειες',media['url'],media_id=media.get('media_id'))
+                    elif media.get('type') == 'drive' and media.get('download_only') and media.get('drive_id'):
+                        self.activity(s, 'html', media['title'], media['url'], app='drive-html',
+                                      native_id=media.get('native_id', ''), drive_id=media['drive_id'],
+                                      identity_key='drive:'+media['drive_id']+':'+media.get('native_id',''),
+                                      media_id=media.get('media_id'), download_only=True, drive_html=True,
+                                      download_url='https://drive.google.com/uc?export=download&id='+media['drive_id'],
+                                      availability_status='authenticated-download',
+                                      note='Ιδιωτικό αρχείο. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.')
             if general and not general['activities']:
                 del self.scenarios[primary]
             if general:
@@ -562,28 +609,21 @@ class Builder:
             local=ROOT/'imports/html'/f"{f['id']}.html"
             if not local.is_file() and f['title']=='jerusalem-quiz.html':
                 local=self.apps/'jerusalem-shadow-fulfillment-quiz/jerusalem-quiz.html'
-            embedded=[]
+                embedded=[]
             if local.is_file():
                 self.source(local,'Drive HTML',f['id'])
                 text=local.read_text()
-                for tag in ['lesson-data','initial-scenario','additional-scenarios']:
-                    match=re.search(r'<script[^>]*id=[\"\x27]'+tag+r'[\"\x27][^>]*>(.*?)</script>',text,re.S)
-                    if not match:
-                        continue
-                    try:
-                        data=json.loads(match.group(1))
-                        embedded += data.get('scenarios',[]) if tag=='lesson-data' else data if isinstance(data,list) else [data]
-                    except ValueError:
-                        self.warnings.append({'path':str(local),'message':'Δεν διαβάζεται το ενσωματωμένο JSON '+tag})
                 try:
-                    embedded += extract_embedded_canvases(text)
+                    embedded = extract_lessons(text)
                 except (ValueError,KeyError,TypeError):
-                    self.warnings.append({'path':str(local),'message':'Δεν διαβάζονται οι ενσωματωμένες ενότητες αναλογίου.'})
+                    self.warnings.append({'path':str(local),'message':'Δεν διαβάζονται τα ενσωματωμένα δεδομένα μαθήματος.'})
             if not embedded:
                 embedded=[{'id':f['id'],'title':f['title']}]
             for data in embedded:
                 native=data.get('lesson_id') or data.get('id')
-                sid=self.config.get('html_scenario_links',{}).get(native) or self.rules.get('concept_canvas_lesson_links',{}).get(native)
+                sid=(self.config.get('html_scenario_links',{}).get(native)
+                     or self.rules.get('html_lesson_links',{}).get(native)
+                     or self.rules.get('concept_canvas_lesson_links',{}).get(native))
                 if not sid:
                     sid='unity:'+native if 'unity:'+native in self.scenarios else 'html:'+f['id']+':'+native
                 s=self.scenario(sid,data.get('title') or f['title'])
@@ -594,16 +634,39 @@ class Builder:
                     if match:
                         existing=next((a for a in s['activities'] if a.get('native_id')==native and a.get('app')=='animated-concept-canvas'),None)
                         if existing:
+                            self.html_units[existing['id']] = data
                             self.add_source(s,local,'Drive HTML',f['id'],data['catalog_key'])
                             existing['drive_id']=f['id']
                             existing['download_url']='https://drive.google.com/uc?export=download&id='+f['id']
                             existing['drive_source']={'url':f['url'],'modified_at':f.get('modified_time'),'catalog_digest':data['catalog_digest']}
                             continue
-                self.activity(s,'quiz' if data.get('exercises') else 'html','HTML · '+label,f['url'],path=local if local.is_file() else None,
+                mechanism = data.get('mechanism')
+                summary = {
+                    'concentric-rings': 'Περιστροφή τριών δακτυλίων, σύνθεση πρότασης και έλεγχος με την κεντρική σφραγίδα.',
+                    'cosmology-threads': 'Σύνδεση τεσσάρων καρτών πηγών με την αντίστοιχη παράδοση και σύγκριση αφηγήσεων.',
+                    'image-mindmap': 'Σύνδεση εννοιών με σημεία της εικόνας, φωτεινά νήματα και σταδιακή αποκάλυψη κειμένου.'
+                }.get(mechanism)
+                if not summary:
+                    summary = ('Από το πεδίο «Υλικό» επίλεξε «'+label+'».' if data.get('concept_canvas') else
+                               'Από το μενού «Σενάρια» επίλεξε «'+label+'».' if len(embedded) > 1 else
+                               'Αντιστοίχιση καρτών και σταδιακή αποκάλυψη της εικόνας.')
+                if mechanism == 'concentric-rings': label = 'Ομόκεντροι δακτύλιοι · '+label
+                elif mechanism == 'cosmology-threads': label = 'Κλωστές · '+label
+                private = f.get('source_visibility_status') == 'not_shared' or f.get('shared') is False
+                if private:
+                    summary += ' Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.'
+                a = self.activity(s,'quiz' if data.get('exercises') else 'html','HTML · '+label,f['url'],path=local if local.is_file() else None,
                               app='drive-html' if local.is_file() else None,native_id=native,modified_at=f.get('modified_time'),
-                              note=('Από το πεδίο «Υλικό» επίλεξε «'+label+'». Κάθε σωστή κάρτα φωτίζει ένα συγκεκριμένο εύρημα της εικόνας.' if data.get('concept_canvas') else 'Από το μενού «Σενάρια» επίλεξε «'+label+'». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς.') if local.is_file() else 'Για εκτέλεση HTML, κατέβασε το αρχείο και άνοιξέ το στον browser. Η προεπισκόπηση Drive δεν το εκτελεί.',
-                              exercise_count=data.get('activity_count'),
+                              identity_key='drive:'+f['id']+':'+native, note=summary,
+                              exercise_count=data.get('activity_count'), download_only=private,
+                              availability_status='authenticated-download' if private else 'drive-download',
                               drive_id=f['id'],drive_html=True,download_url='https://drive.google.com/uc?export=download&id='+f['id'])
+                previous = self.drive_activity_ids.get((sid, f['id'], native))
+                if previous:
+                    a['id'] = previous
+                    if a.get('local_url'): a['local_url'] = '/launch/'+previous
+                if private: a.pop('local_url', None)
+                self.html_units[a['id']] = data
                 s['modes']+=['αντιστοίχιση','αιτιολόγηση']
                 if not s['objectives'] and data.get('subtitle'):
                     s['objectives']=[data['subtitle']]
@@ -660,6 +723,51 @@ class Builder:
                     info=next((v for v in APP_INFO.values() if v[0]==name),None)
                     if info and name!='personal-page':
                         self.activity(s,'html',info[1],info[2],path=p,app=name,native_id=p.stem)
+
+    def link_unity_progressions(self):
+        """Attach evidenced classroom → VR steps; keep different tasks distinct."""
+        publication = self.read(ROOT/'publishing.json', {})
+        base = publication.get('site_url', '')
+        rules = self.rules.get('lesson_progressions', {})
+        vr = [(s, a) for s in self.scenarios.values() for a in s['activities'] if a['kind'] == 'vr']
+        records = self.unity_scan.records if self.unity_scan else []
+        for scenario in self.scenarios.values():
+            for activity in scenario['activities']:
+                if activity['kind'] not in {'html', 'quiz'}:
+                    continue
+                source = self.html_units.get(activity['id'], {})
+                links = []
+                for rule in rules.get(activity.get('native_id'), []):
+                    match = next(((s, a) for s, a in vr if a.get('native_id') == rule['target_native_id']
+                                  and (not rule.get('mechanism') or a.get('reveal_mode') == rule['mechanism'])), None)
+                    if not match:
+                        self.warnings.append({'path': str(ROOT/'source-rules.json'), 'message': 'Δεν βρέθηκε η δηλωμένη συνέχεια Unity: '+rule['target_native_id']})
+                        continue
+                    target_scenario, target = match
+                    record = next((r for r in records if r['native_id'] == rule['target_native_id']
+                                   and r['mechanism'] == rule.get('mechanism')), None)
+                    check = rule.get('equivalence')
+                    same = True
+                    if check == 'concentric-content':
+                        same = bool(record and source.get('rounds') == record['data'].get('rounds')
+                                    and source.get('referenceSections') == record['data'].get('referenceSections'))
+                    elif check == 'cosmology-content':
+                        keys = ('cardId', 'stationId', 'statement')
+                        same = bool(record and [{k: t.get(k) for k in keys} for t in source.get('traditions', [])]
+                                    == [{k: t.get(k) for k in keys} for t in record['data'].get('traditions', [])])
+                    elif check == 'activity-ids':
+                        same = bool(record and source.get('activity_ids')
+                                    == [a['id'] for a in record['data'].get('activities', [])])
+                    if not same:
+                        self.warnings.append({'path': str(ROOT/'source-rules.json'), 'message': 'Το περιεχόμενο HTML και Unity δεν τεκμηριώνει πλέον την ίδια δραστηριότητα: '+activity['native_id']})
+                        continue
+                    links.append({'activity_id': target['id'], 'scenario_id': target_scenario['scenario_id'],
+                                  'label': target['label'], 'relationship': rule['relationship'], 'note': rule['note'],
+                                  'url': base+'?material='+target['id']+'#activity/'+quote(target_scenario['scenario_id'], safe='')})
+                if links:
+                    activity['unity_counterparts'] = links
+                elif activity.get('native_id') == 'na_agapate_ta_dentra':
+                    activity['unity_note'] = 'Χρήση στην τάξη. Δεν εντοπίστηκε συγκεκριμένη αποθηκευμένη ανάθεση αυτής της δραστηριότητας στο Unity.'
 
     def finish(self):
         if self.warnings:
@@ -719,6 +827,7 @@ class Builder:
         self.local_app_catalogs()
         self.covenant_tree()
         self.light_up_legacy()
+        self.link_unity_progressions()
         return self.finish()
 
 

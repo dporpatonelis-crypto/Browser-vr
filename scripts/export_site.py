@@ -22,7 +22,7 @@ ACTIVITY_FIELDS = {
     'id', 'kind', 'label', 'url', 'note', 'app', 'native_id', 'drive_id', 'download_url',
     'drive_html', 'section_id', 'book_lesson_id', 'media_id', 'slide_count',
     'checked_at', 'modified_at', 'access_note', 'room', 'exercise_count', 'stage_count', 'reveal_mode',
-    'scene_name', 'availability_status',
+    'scene_name', 'availability_status', 'download_only', 'unity_counterparts', 'unity_note',
 }
 NATIVE_APPS = {'idea-weaver-board', 'Map-Timeline', 'history-explorer-3d', 'mind-palace-cases'}
 
@@ -83,7 +83,7 @@ def portable_registry(registry, output, site_url, cloud_url=''):
                 query['dataUrl'] = activity['lesson_download_url']
                 activity['url'] = urlunsplit(parts._replace(query=urlencode(query)))
                 activity['note'] = (activity.get('note', '') + ' Το αρχείο του συγκεκριμένου μαθήματος είναι διαθέσιμο και για εισαγωγή στην εφαρμογή.').strip()
-            if activity.get('app') == 'drive-html':
+            if activity.get('app') == 'drive-html' and not activity.get('download_only'):
                 activity['note'] = (activity.get('note', '') + ' Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.').strip()
             if activity['url'] or activity.get('kind') == 'vr':
                 scenario['activities'].append(activity)

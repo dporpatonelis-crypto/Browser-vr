@@ -197,6 +197,8 @@ class MissionServer(ThreadingHTTPServer):
         super().__init__(address, MissionHandler)
 
     def launch_url(self, activity, base_url):
+        if activity.get('download_only'):
+            return activity.get('download_url') or activity.get('url')
         src = next((s for s in self.registry['source_files'] if s['key'] == activity.get('source_key')), None)
         if src is None:
             return activity.get('url')

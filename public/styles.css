@@ -18,3 +18,4 @@ textarea{width:100%;border:1px solid #d8dcd1;border-radius:5px;background:#fffef
 .route-guidance{padding:20px 25px;margin-bottom:25px;font-size:12px;line-height:1.9}.route-guidance summary{cursor:pointer;color:var(--green);min-height:28px}.route-guidance[open] summary{margin-bottom:15px}.material-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:start}.material-grid .material{margin-bottom:0}@media(max-width:680px){.material-grid{grid-template-columns:1fr}}
 
 @media print{.materials,.route-guidance{display:none!important}}
+.unity-continuation{margin-top:18px;padding:14px 16px;border-left:3px solid var(--gold);background:#f5f3e9;font-size:12px;line-height:1.85}.unity-continuation strong{color:var(--green);font-weight:600}.unity-continuation p{margin:6px 0!important}.unity-continuation a{display:inline-block;min-height:30px}.material:focus{outline:2px solid var(--green);outline-offset:4px;scroll-margin:30px}

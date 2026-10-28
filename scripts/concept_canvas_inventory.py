@@ -34,6 +34,7 @@ def extract_embedded_canvases(text):
     packs=[('embedded',primary)]+[(item['key'],item['catalog']) for item in options.get('catalogs',[])]
     return [{'id':data['id'],'title':data['title'],'concept_canvas':True,'catalog_key':key,
              'catalog_digest':catalog_digest(data),'activity_count':len(data['activities']),
+             'activity_ids':[a['id'] for a in data['activities']],
              'activity_titles':[a['title'] for a in data['activities']]} for key,data in packs]
 
 

@@ -179,13 +179,20 @@ function selectedIntro(s, eyebrow) {
 }
 function activityCard(a) {
   const choice=`<label class="material-choice"><input type="checkbox" data-planned="${esc(a.id)}" ${planDraft().ids.includes(a.id)?'checked':''}><span>Στο σχέδιο μαθήματος</span></label>`;
-  if (a.kind==='vr') return `<article class="material vr-material">${icon('vr')}<div><span class="material-kind">UNITY VR · ΤΟΠΙΚΗ ΑΠΟΣΤΟΛΗ</span><h3>${esc(a.label)}</h3><p>${esc(a.room || '')}</p><p>${esc(a.note)}</p>${choice}<details><summary>Πληροφορία τοπικής αποστολής</summary><p class="source-path">${esc(state.registry.source_files.find(x=>x.key===a.source_key)?.path || '')}</p><p>Άνοιξε την αποστολή από την υπάρχουσα διαδικασία του Unity project.</p></details></div></article>`;
+  if (a.kind==='vr') return `<article id="material-${esc(a.id)}" tabindex="-1" class="material vr-material">${icon('vr')}<div><span class="material-kind">UNITY VR · ${a.availability_status==='room-only'?'ΧΩΡΟΣ ΠΕΡΙΗΓΗΣΗΣ':'ΤΟΠΙΚΗ ΑΠΟΣΤΟΛΗ'}</span><h3>${esc(a.label)}</h3><p>${esc(a.room || '')}</p><p>${esc(a.note)}</p>${choice}<details><summary>Πληροφορία τοπικής αποστολής</summary><p class="source-path">${esc(state.registry.source_files.find(x=>x.key===a.source_key)?.path || '')}</p><p>Άνοιξε την αποστολή από την υπάρχουσα διαδικασία του Unity project.</p></details></div></article>`;
+  const continuation=(a.unity_counterparts||[]).map(u=>`<aside class="unity-continuation"><strong>${esc(u.relationship)}</strong><p>${esc(u.note)}</p><a class="small-link" href="${esc(u.url)}" data-material-focus="${esc(u.activity_id)}" data-material-scenario="${esc(u.scenario_id)}">${esc(u.label)} →</a></aside>`).join('')+(a.unity_note?`<p class="unity-continuation">${esc(a.unity_note)}</p>`:'');
   const kind={book:'DIGITAL BOOK',slides:'ΔΙΑΦΑΝΕΙΕΣ',html:'ΔΙΑΔΡΑΣΤΙΚΗ ΕΦΑΡΜΟΓΗ',quiz:'QUIZ',text:'ΚΕΙΜΕΝΟ',model:'3D ΜΟΝΤΕΛΟ · ΥΛΙΚΟ ΓΙΑ ΠΡΟΕΤΟΙΜΑΣΙΑ'}[a.kind];
-  const target=state.service && a.local_url ? a.local_url : a.url;
+  const target=a.download_only?(a.download_url||a.url):state.service && a.local_url ? a.local_url : a.url;
   if (!target) return '';
-  const label= a.drive_html && !a.local_url?'Άνοιγμα στο Drive':a.kind==='book'?'Στο βιβλίο':a.kind==='slides'?'Άνοιγμα διαφανειών':a.kind==='model'?'Άνοιγμα μοντέλων':'Άνοιγμα δραστηριότητας';
-  return `<article class="material">${icon(a.kind==='slides'?'slides':a.kind==='book'||a.kind==='text'?'book':'play')}<div><span class="material-kind">${kind}${a.slide_count?' · '+a.slide_count+' διαφάνειες':''}</span><h3>${esc(a.label)}</h3>${a.note?`<p>${esc(a.note)}</p>`:''}<div class="material-links">${link(target,label+' '+icon('external'),'button secondary')}${a.drive_html?link(a.download_url,'Λήψη HTML','small-link'):''}${a.lesson_download_url?link(a.lesson_download_url,'Λήψη μαθήματος','small-link'):''}${state.service&&a.app==='interactive-sculpture'&&a.url?link(a.url,'Online εφαρμογή','small-link'):''}</div>
-  ${choice}${a.content_preview?.length?`<details class="content-preview"><summary>Τι περιέχει η παρουσίαση;</summary><ol>${a.content_preview.map(p=>`<li>${link(p.url,esc(p.title))}<p>${esc(p.text)}</p></li>`).join('')}</ol></details>`:''}</div></article>`;
+  const label= a.download_only?'Λήψη από το Drive':a.drive_html && !a.local_url?'Άνοιγμα στο Drive':a.kind==='book'?'Στο βιβλίο':a.kind==='slides'?'Άνοιγμα διαφανειών':a.kind==='model'?'Άνοιγμα μοντέλων':'Άνοιγμα δραστηριότητας';
+  return `<article class="material">${icon(a.kind==='slides'?'slides':a.kind==='book'||a.kind==='text'?'book':'play')}<div><span class="material-kind">${kind}${a.slide_count?' · '+a.slide_count+' διαφάνειες':''}</span><h3>${esc(a.label)}</h3>${a.note?`<p>${esc(a.note)}</p>`:''}<div class="material-links">${link(target,label+' '+icon('external'),'button secondary')}${a.download_only?link(a.url,'Προβολή στο Drive','small-link'):a.drive_html?link(a.download_url,'Λήψη HTML','small-link'):''}${a.lesson_download_url?link(a.lesson_download_url,'Λήψη μαθήματος','small-link'):''}${state.service&&a.app==='interactive-sculpture'&&a.url?link(a.url,'Online εφαρμογή','small-link'):''}</div>
+  ${continuation}${choice}${a.content_preview?.length?`<details class="content-preview"><summary>Τι περιέχει η παρουσίαση;</summary><ol>${a.content_preview.map(p=>`<li>${link(p.url,esc(p.title))}<p>${esc(p.text)}</p></li>`).join('')}</ol></details>`:''}</div></article>`;
+}
+function focusMaterial(id) {
+  if (!selected()?.activities.some(a=>a.id===id)) return;
+  const card=document.getElementById('material-'+id);
+  card?.focus({preventScroll:true});
+  card?.scrollIntoView({block:'center',behavior:'instant'});
 }
 function planRouteHTML() {
   const p=planDraft(),s=selected();
@@ -249,6 +256,12 @@ function go(view) {
   state.notice=''; render(true);
 }
 function bind() {
+  document.querySelectorAll('[data-material-focus]').forEach(a=>a.addEventListener('click',e=>{
+    if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+    e.preventDefault();
+    if(state.selected&&state.view==='activity')planDraft().context=sessionData();
+    state.selected=a.dataset.materialScenario;state.teaching=false;go('activity');focusMaterial(a.dataset.materialFocus);
+  }));
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
   document.querySelectorAll('[data-select]').forEach(b=>b.addEventListener('click',()=>{state.selected=b.dataset.select;state.teaching=false;go('activity');}));
   document.querySelectorAll('[data-context]').forEach(el=>el.addEventListener(['section','classProfile'].includes(el.dataset.context)?'input':'change',()=>{
@@ -340,6 +353,8 @@ async function boot() {
     if(match){state.view=match[1];state.selected=decodeURIComponent(match[2]);}
     if(cloud?.initial?.materialIds && state.selected)planDraft().ids=cloud.initial.materialIds;
     await loadHistory();render();
+    const material=new URLSearchParams(location.search).get('material');
+    if(material&&state.view==='activity')focusMaterial(material);
   } catch(e) {app.innerHTML=`<main class="loading"><h1>Δεν φορτώθηκε ο κατάλογος.</h1><p>${esc(e.message)}</p><p>Ανανέωσε τη σελίδα και έλεγξε τη σύνδεσή σου.</p><button class="button primary" id="retry">Δοκιμή ξανά</button></main>`;document.querySelector('#retry').addEventListener('click',boot);}
 }
 window.addEventListener('focus',async()=>{if(state.registry&&state.service&&!state.saving&&!state.planning){const before=JSON.stringify([state.records,state.plans,state.historyError,state.planError]);await loadHistory();if(!state.saving&&!state.planning&&before!==JSON.stringify([state.records,state.plans,state.historyError,state.planError])){if(!document.activeElement?.matches('input,select,textarea,button,a'))render();}}});

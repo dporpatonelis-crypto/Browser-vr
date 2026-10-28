@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-27T09:52:59.608318Z",
+  "generated_at": "2026-10-28T17:01:03.851961Z",
   "grades": [
     "Α΄ Γυμνασίου",
     "Β΄ Γυμνασίου",
@@ -17,10 +17,10 @@
   "integrations": {
     "digital_book": {
       "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/",
-      "revision": 29
+      "revision": 30
     },
     "google_drive": {
-      "checked_at": "2026-10-27T09:52:58Z",
+      "checked_at": "2026-10-28T16:25:02Z",
       "folder": {
         "id": "1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv",
         "title": "ChatGPT",
@@ -29,13 +29,13 @@
       "mode": "connector-snapshot"
     },
     "source_refresh": {
-      "run_id": "dffd1986-9d8a-4c64-9110-0fdd5f324373",
-      "checked_at": "2026-10-27T09:52:58Z",
+      "run_id": "92991fb6-6d0d-4bc0-a7d8-3412bd5e531e",
+      "checked_at": "2026-10-28T16:25:02Z",
       "status": "verified",
       "github_repositories": 9,
-      "drive_folders": 5,
+      "drive_folders": 6,
       "drive_slides": 22,
-      "drive_html": 4
+      "drive_html": 10
     }
   },
   "source_files": [],
@@ -108,7 +108,7 @@
           "media_id": "SLD-029",
           "drive_id": "1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-17T10:33:06.382Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -309,7 +309,7 @@
       "notes": [
         "Τίτλος και δεκαπέντε σταθμοί της ίδιας διαδρομής Σκιά–Αλήθεια, Αβραάμ–Νόμος–Προφήτες–Χριστός–Πεντηκοστή.",
         "Έξι χειρόγραφα για υπόσχεση, Νόμο, Ενανθρώπηση, καρδιά, έλεος, Χριστό και οικουμενικότητα· ίδιο περιεχόμενο της ενότητας των δύο Διαθηκών.",
-        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T10:38:04.534Z."
       ],
       "source_groups": [
         "Sacred Blueprint",
@@ -412,6 +412,11 @@
         },
         {
           "system": "Unity VR",
+          "path": "CovenantScenarioSelector.cs",
+          "locator": "image-reveal"
+        },
+        {
+          "system": "Unity VR",
           "path": "CovenantTree.json",
           "locator": ""
         }
@@ -457,7 +462,7 @@
           "native_id": "",
           "drive_id": "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk",
           "slide_count": 15,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-03T06:14:03.548Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -466,14 +471,26 @@
           "kind": "html",
           "label": "HTML · Το Δέντρο της Διαθήκης",
           "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
-          "note": "Από το μενού «Σενάρια» επίλεξε «Το Δέντρο της Διαθήκης». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Το Δέντρο της Διαθήκης». Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
           "app": "drive-html",
           "native_id": "dentro_diathikis",
-          "modified_at": "2026-10-24T12:34:53.912Z",
-          "exercise_count": null,
+          "modified_at": "2026-10-27T10:38:04.534Z",
+          "exercise_count": 6,
+          "download_only": true,
+          "availability_status": "authenticated-download",
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
-          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "unity_counterparts": [
+            {
+              "activity_id": "d995172189b55d65a386",
+              "scenario_id": "sb:20261002_palaia-kai-kaini-diathiki-enotita",
+              "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Δέντρο της Διαθήκης",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Τα έξι χειρόγραφα της ίδιας διαδρομής συνεχίζονται στα Ιεροσόλυμα με συλλογή παπύρων και στόχευση των περιοχών της εικόνας.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=d995172189b55d65a386#activity/sb%3A20261002_palaia-kai-kaini-diathiki-enotita"
+            }
+          ]
         },
         {
           "id": "d995172189b55d65a386",
@@ -533,7 +550,7 @@
       "aliases": [],
       "notes": [
         "Ίδια έξι σημεία του χάρτη της Αποκάλυψης με το Digital Book και το Slides snapshot του γλυπτού.",
-        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T10:38:04.534Z."
       ],
       "source_groups": [
         "Digital Book",
@@ -619,6 +636,11 @@
         {
           "system": "Unity VR",
           "path": "Revelation_Map_Regions.asset",
+          "locator": "reconstruction"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CircularManuscriptController.cs",
           "locator": "reconstruction"
         },
         {
@@ -712,14 +734,26 @@
           "kind": "html",
           "label": "HTML · Οντολογικός χάρτης της Αποκάλυψης",
           "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
-          "note": "Από το μενού «Σενάρια» επίλεξε «Οντολογικός χάρτης της Αποκάλυψης». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Οντολογικός χάρτης της Αποκάλυψης». Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
           "app": "drive-html",
           "native_id": "revelation_map",
-          "modified_at": "2026-10-24T12:34:53.912Z",
-          "exercise_count": null,
+          "modified_at": "2026-10-27T10:38:04.534Z",
+          "exercise_count": 6,
+          "download_only": true,
+          "availability_status": "authenticated-download",
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
-          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "unity_counterparts": [
+            {
+              "activity_id": "39dfe73c304ed4962d1e",
+              "scenario_id": "book:lesson-004",
+              "label": "Unity VR · Κυκλικό αναλόγιο · Οντολογικός χάρτης της Αποκάλυψης",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Τα έξι σημεία της Αποκάλυψης συνεχίζονται στο κυκλικό αναλόγιο του Χριστιανισμού με συλλογή χειρογράφων και ανασύνθεση της εικόνας.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=39dfe73c304ed4962d1e#activity/book%3Alesson-004"
+            }
+          ]
         },
         {
           "id": "39dfe73c304ed4962d1e",
@@ -734,6 +768,239 @@
           "exercise_count": 6,
           "stage_count": 0,
           "reveal_mode": "reconstruction",
+          "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:world_religions_cosmology",
+      "title": "Αφηγήσεις για την αρχή του κόσμου",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Τρεις δακτύλιοι · τέσσερις αφηγήσεις"
+      ],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση",
+        "μελέτη πηγών",
+        "σταδιακή αποκάλυψη εικόνας",
+        "σύγκριση",
+        "περιστροφή δακτυλίων",
+        "σύνθεση πρότασης"
+      ],
+      "formats": [
+        "Digital Book",
+        "HTML",
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T21:53:28.320Z.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T14:58:07.698Z."
+      ],
+      "source_groups": [
+        "Digital Book",
+        "Drive HTML",
+        "drive-html",
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-world-cosmologies/sections/concentric-cosmology"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-world-cosmologies/sections/cosmology-threads"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1bStII4PbGq75w41Cam0hn8FaL_bZf6kR"
+        },
+        {
+          "system": "drive-html",
+          "path": "1bStII4PbGq75w41Cam0hn8FaL_bZf6kR.html",
+          "locator": ""
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1DJdjslsIl59Ex8CY9f_S_yhu0OTCC5XB"
+        },
+        {
+          "system": "drive-html",
+          "path": "1DJdjslsIl59Ex8CY9f_S_yhu0OTCC5XB.html",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_world_religions.unity",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "World_Cosmologies.asset",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CosmologyController.cs",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "World_Cosmologies.asset",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_world_religions.unity",
+          "locator": "concentric-rings"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Cosmology.json",
+          "locator": "concentric-rings"
+        },
+        {
+          "system": "Unity VR",
+          "path": "ConcentricMystery_Classroom.prefab",
+          "locator": "concentric-rings"
+        },
+        {
+          "system": "Unity VR",
+          "path": "ConcentricPuzzleController.cs",
+          "locator": "concentric-rings"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Cosmology.json",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "030ddc9df2c1e52e29bd",
+          "kind": "book",
+          "label": "Digital Book · Ο μηχανισμός των αφηγήσεων · Τρεις δακτύλιοι",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-concentric-cosmology",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "concentric-cosmology",
+          "book_lesson_id": "lesson-world-cosmologies"
+        },
+        {
+          "id": "3f6a9c8b0b9b4639fd7c",
+          "kind": "html",
+          "label": "HTML · Ομόκεντροι δακτύλιοι · Πώς αρχίζει ο κόσμος;",
+          "url": "https://drive.google.com/file/d/1bStII4PbGq75w41Cam0hn8FaL_bZf6kR/view?usp=drivesdk",
+          "note": "Περιστροφή τριών δακτυλίων, σύνθεση πρότασης και έλεγχος με την κεντρική σφραγίδα. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "concentric_cosmology_v1",
+          "drive_id": "1bStII4PbGq75w41Cam0hn8FaL_bZf6kR",
+          "media_id": "DOC-024",
+          "download_only": true,
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1bStII4PbGq75w41Cam0hn8FaL_bZf6kR",
+          "availability_status": "authenticated-download",
+          "modified_at": "2026-10-27T21:53:28.320Z",
+          "exercise_count": 4,
+          "unity_counterparts": [
+            {
+              "activity_id": "eb45b52c072a82d82796",
+              "scenario_id": "unity:world_religions_cosmology",
+              "label": "Unity VR · Ομόκεντροι δακτύλιοι · Πώς αρχίζει ο κόσμος;",
+              "relationship": "Ίδια δραστηριότητα σε VR",
+              "note": "Οι ίδιοι τέσσερις γύροι και τα ίδια κείμενα συνεχίζονται στον φυσικό μηχανισμό τριών δακτυλίων του δωματίου των θρησκειών.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=eb45b52c072a82d82796#activity/unity%3Aworld_religions_cosmology"
+            }
+          ]
+        },
+        {
+          "id": "173419b6381548c0e0ac",
+          "kind": "book",
+          "label": "Digital Book · Οι κλωστές των τεσσάρων αφηγήσεων",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-cosmology-threads",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "cosmology-threads",
+          "book_lesson_id": "lesson-world-cosmologies"
+        },
+        {
+          "id": "ffac1e9ad6dc66aa0c4f",
+          "kind": "html",
+          "label": "HTML · Κλωστές · Πώς αρχίζει ο κόσμος;",
+          "url": "https://drive.google.com/file/d/1DJdjslsIl59Ex8CY9f_S_yhu0OTCC5XB/view?usp=drivesdk",
+          "note": "Σύνδεση τεσσάρων καρτών πηγών με την αντίστοιχη παράδοση και σύγκριση αφηγήσεων. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "world_religions_cosmology",
+          "drive_id": "1DJdjslsIl59Ex8CY9f_S_yhu0OTCC5XB",
+          "media_id": "DOC-025",
+          "download_only": true,
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1DJdjslsIl59Ex8CY9f_S_yhu0OTCC5XB",
+          "availability_status": "authenticated-download",
+          "modified_at": "2026-10-27T14:58:07.698Z",
+          "exercise_count": 4,
+          "unity_counterparts": [
+            {
+              "activity_id": "f691de3125cadd1f0c8d",
+              "scenario_id": "unity:world_religions_cosmology",
+              "label": "Unity VR · Τέσσερις αφηγήσεις για τον κόσμο",
+              "relationship": "Ίδια δραστηριότητα σε VR",
+              "note": "Οι ίδιες τέσσερις κάρτες και συνδέσεις μεταφέρονται στον χώρο: επιλογή κάρτας και στόχευση του κύκλου με τόξο.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=f691de3125cadd1f0c8d#activity/unity%3Aworld_religions_cosmology"
+            }
+          ]
+        },
+        {
+          "id": "f691de3125cadd1f0c8d",
+          "kind": "vr",
+          "label": "Unity VR · Τέσσερις αφηγήσεις για τον κόσμο",
+          "url": "",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 4 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι αφηγήσεις αφορούν: Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "world_religions_cosmology",
+          "room": "Θρησκείες του κόσμου",
+          "scene_name": "Room_world_religions",
+          "exercise_count": 4,
+          "stage_count": 0,
+          "reveal_mode": "cosmology-comparison",
+          "availability_status": "scene-bound"
+        },
+        {
+          "id": "eb45b52c072a82d82796",
+          "kind": "vr",
+          "label": "Unity VR · Ομόκεντροι δακτύλιοι · Πώς αρχίζει ο κόσμος;",
+          "url": "",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής διαβάζει το κείμενο αναφοράς, περιστρέφει τρεις δακτυλίους και συνθέτει μία πρόταση σε καθέναν από τους 4 γύρους. Ελέγχει τη σύνθεση με την κεντρική σφραγίδα και ολοκληρώνει με σύγκριση των αφηγήσεων. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "concentric_cosmology_v1",
+          "room": "Θρησκείες του κόσμου",
+          "scene_name": "Room_world_religions",
+          "exercise_count": 4,
+          "stage_count": 0,
+          "reveal_mode": "concentric-rings",
           "availability_status": "scene-bound"
         }
       ]
@@ -880,7 +1147,7 @@
           "media_id": "SLD-021",
           "drive_id": "1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:25:22.015Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -954,7 +1221,7 @@
           "media_id": "SLD-026",
           "drive_id": "17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:24:56.917Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -977,16 +1244,18 @@
       "grades": [],
       "grade_status": "unconfirmed",
       "audience_source": null,
-      "objectives": [],
+      "objectives": [
+        "Δημιουργία του ανθρώπου. Σύνδεσε έξι αποσπάσματα με την εικόνα και έπειτα τεκμηρίωσε την πορεία «δώρο — πορεία — μετοχή»."
+      ],
       "modes": [
         "ανάγνωση",
         "συζήτηση",
         "αντιστοίχιση",
         "οπτική ανακάλυψη",
+        "αιτιολόγηση",
         "στόχευση χειρογράφων",
         "αντιστοίχιση καρτών",
-        "σταδιακή αποκάλυψη εικόνας",
-        "αιτιολόγηση"
+        "σταδιακή αποκάλυψη εικόνας"
       ],
       "formats": [
         "Digital Book",
@@ -1005,11 +1274,14 @@
       "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
       "application_status": "proposal",
       "aliases": [],
-      "notes": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T10:38:04.534Z."
+      ],
       "source_groups": [
         "Digital Book",
         "Animated Concept Canvas",
         "Drive HTML",
+        "drive-html",
         "Unity VR",
         "Unity · υποστήριξη δραστηριότητας"
       ],
@@ -1035,6 +1307,11 @@
           "locator": "lessons/lesson-creation-world/sections/creation-concept-canvas"
         },
         {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-creation-world/sections/human-gift-calling"
+        },
+        {
           "system": "Animated Concept Canvas",
           "path": "creation-concepts.html",
           "locator": ""
@@ -1042,6 +1319,16 @@
         {
           "system": "Animated Concept Canvas",
           "path": "catalog.json",
+          "locator": ""
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+        },
+        {
+          "system": "drive-html",
+          "path": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV.html",
           "locator": ""
         },
         {
@@ -1097,6 +1384,11 @@
         {
           "system": "Unity VR",
           "path": "creation-concepts.json",
+          "locator": "concept-canvas"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CircularManuscriptController.cs",
           "locator": "concept-canvas"
         },
         {
@@ -1166,6 +1458,44 @@
           "book_lesson_id": "lesson-creation-world"
         },
         {
+          "id": "e905cf52c57d4654a590",
+          "kind": "book",
+          "label": "Digital Book · Ο άνθρωπος: δώρο και κλήση · Έξι χειρόγραφα",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-human-gift-calling",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "human-gift-calling",
+          "book_lesson_id": "lesson-creation-world"
+        },
+        {
+          "id": "db782b097d77186e6738",
+          "kind": "html",
+          "label": "HTML · Ο άνθρωπος: δώρο και κλήση",
+          "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Ο άνθρωπος: δώρο και κλήση». Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "human_creation",
+          "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "media_id": "DOC-030",
+          "download_only": true,
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "availability_status": "authenticated-download",
+          "modified_at": "2026-10-27T10:38:04.534Z",
+          "exercise_count": 6,
+          "unity_counterparts": [
+            {
+              "activity_id": "29e35a1ee55b1a1edcbf",
+              "scenario_id": "book:lesson-creation-world",
+              "label": "Unity VR · Κυκλικό αναλόγιο · Δημιουργία, κατ’ εικόνα και νέα ζωή",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Η μελέτη έξι εννοιών για τον άνθρωπο συνδέεται θεματικά με τα πέντε παζλ Δημιουργίας του κυκλικού αναλογίου. Οι δύο ασκήσεις έχουν διαφορετικές κάρτες.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=29e35a1ee55b1a1edcbf#activity/book%3Alesson-creation-world"
+            }
+          ]
+        },
+        {
           "id": "354e06aee265e4b4653c",
           "kind": "html",
           "label": "Δημιουργία · Αναλόγιο εννοιών",
@@ -1179,7 +1509,17 @@
           "section_id": "creation-concept-canvas",
           "book_lesson_id": "lesson-creation-world",
           "drive_id": "1-8cyAxy7aFq-yOCwDxavx1UjjOmW_n3L",
-          "download_url": "https://drive.google.com/uc?export=download&id=1-8cyAxy7aFq-yOCwDxavx1UjjOmW_n3L"
+          "download_url": "https://drive.google.com/uc?export=download&id=1-8cyAxy7aFq-yOCwDxavx1UjjOmW_n3L",
+          "unity_counterparts": [
+            {
+              "activity_id": "29e35a1ee55b1a1edcbf",
+              "scenario_id": "book:lesson-creation-world",
+              "label": "Unity VR · Κυκλικό αναλόγιο · Δημιουργία, κατ’ εικόνα και νέα ζωή",
+              "relationship": "Ίδια πέντε θέματα σε VR",
+              "note": "Τα ίδια πέντε θέματα γίνονται χωρική δραστηριότητα: ξεκλείδωμα χειρογράφων, πιάσιμο καρτών και αντιστοίχιση στα ευρήματα της εικόνας.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=29e35a1ee55b1a1edcbf#activity/book%3Alesson-creation-world"
+            }
+          ]
         },
         {
           "id": "29e35a1ee55b1a1edcbf",
@@ -1603,7 +1943,8 @@
       "aliases": [],
       "notes": [
         "Το κείμενο του αγίου Λουκά και οι έξι αντιστοιχίσεις διάνοιας/καρδιάς τεκμηριώνουν την υπάρχουσα ενότητα επιστήμης και θρησκείας. Δεν ταυτίζεται με το επιμέρους quiz της Αγοράς.",
-        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T10:38:04.534Z.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-28T07:52:39.078Z."
       ],
       "source_groups": [
         "Digital Book",
@@ -1633,6 +1974,11 @@
           "locator": "lessons/lesson-005/sections/science-religion-agora-artifact-talk"
         },
         {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-005/sections/science-heart-mindmap"
+        },
+        {
           "system": "Drive HTML",
           "path": "google-drive.json",
           "locator": "html_files/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
@@ -1643,6 +1989,16 @@
           "locator": ""
         },
         {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1m1VD1hp6_bEpCrltrCtYq1ZD8hs-Fbk0"
+        },
+        {
+          "system": "drive-html",
+          "path": "1m1VD1hp6_bEpCrltrCtYq1ZD8hs-Fbk0.html",
+          "locator": ""
+        },
+        {
           "system": "Unity VR",
           "path": "Room_jerusalem.unity",
           "locator": "image-reveal"
@@ -1650,6 +2006,11 @@
         {
           "system": "Unity VR",
           "path": "ScienceReligion.json",
+          "locator": "image-reveal"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CovenantScenarioSelector.cs",
           "locator": "image-reveal"
         },
         {
@@ -1704,18 +2065,68 @@
           "book_lesson_id": "lesson-005"
         },
         {
+          "id": "f711ad251060820a4a2b",
+          "kind": "book",
+          "label": "Digital Book · Νους και καρδιά · Επτά έννοιες στην εικόνα",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-science-heart-mindmap",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "science-heart-mindmap",
+          "book_lesson_id": "lesson-005"
+        },
+        {
+          "id": "2208e6d2ba7c5048e33b",
+          "kind": "html",
+          "label": "HTML · Επιστήμη και θρησκεία",
+          "url": "https://drive.google.com/file/d/1m1VD1hp6_bEpCrltrCtYq1ZD8hs-Fbk0/view?usp=drivesdk",
+          "note": "Σύνδεση εννοιών με σημεία της εικόνας, φωτεινά νήματα και σταδιακή αποκάλυψη κειμένου. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "science-heart-dialogue",
+          "drive_id": "1m1VD1hp6_bEpCrltrCtYq1ZD8hs-Fbk0",
+          "media_id": "DOC-028",
+          "download_only": true,
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1m1VD1hp6_bEpCrltrCtYq1ZD8hs-Fbk0",
+          "availability_status": "authenticated-download",
+          "modified_at": "2026-10-28T07:52:39.078Z",
+          "exercise_count": 7,
+          "unity_counterparts": [
+            {
+              "activity_id": "82ec311e076b554cae00",
+              "scenario_id": "book:lesson-005",
+              "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Δύο τρόποι γνώσης",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Από τις επτά έννοιες νου και καρδιάς, η συνέχεια περνά στη συλλογή έξι παπύρων και στην αποκάλυψη της εικόνας για τους δύο τρόπους γνώσης.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=82ec311e076b554cae00#activity/book%3Alesson-005"
+            }
+          ]
+        },
+        {
           "id": "6fd70c360ae0989004b3",
           "kind": "html",
           "label": "HTML · Ο άνθρωπος και οι δύο τρόποι γνώσης",
           "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
-          "note": "Από το μενού «Σενάρια» επίλεξε «Ο άνθρωπος και οι δύο τρόποι γνώσης». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Ο άνθρωπος και οι δύο τρόποι γνώσης». Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
           "app": "drive-html",
           "native_id": "two_ways_of_knowing",
-          "modified_at": "2026-10-24T12:34:53.912Z",
-          "exercise_count": null,
+          "modified_at": "2026-10-27T10:38:04.534Z",
+          "exercise_count": 6,
+          "download_only": true,
+          "availability_status": "authenticated-download",
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
-          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "unity_counterparts": [
+            {
+              "activity_id": "82ec311e076b554cae00",
+              "scenario_id": "book:lesson-005",
+              "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Δύο τρόποι γνώσης",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Η ίδια διαδρομή έξι συνδέσεων συνεχίζεται στα Ιεροσόλυμα με συλλογή παπύρων και στόχευση περιοχών της εικόνας.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=82ec311e076b554cae00#activity/book%3Alesson-005"
+            }
+          ]
         },
         {
           "id": "82ec311e076b554cae00",
@@ -1994,7 +2405,7 @@
           "media_id": "SLD-011",
           "drive_id": "1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-15T15:15:24.175Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2068,7 +2479,7 @@
           "media_id": "SLD-012",
           "drive_id": "1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-11T05:57:01.161Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2142,7 +2553,7 @@
           "media_id": "SLD-013",
           "drive_id": "1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-11T05:55:42.464Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2216,7 +2627,7 @@
           "media_id": "SLD-014",
           "drive_id": "1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-11T14:45:46.081Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2290,7 +2701,7 @@
           "media_id": "SLD-016",
           "drive_id": "1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-11T14:46:02.732Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2364,7 +2775,7 @@
           "media_id": "SLD-017",
           "drive_id": "1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-11T14:46:18.578Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2438,7 +2849,7 @@
           "media_id": "SLD-015",
           "drive_id": "1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-11T14:46:30.711Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -2872,6 +3283,92 @@
       ]
     },
     {
+      "scenario_id": "book:lesson-care-for-creation",
+      "title": "Η φροντίδα της δημιουργίας",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T11:14:33.850Z."
+      ],
+      "source_groups": [
+        "Digital Book",
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-care-for-creation/sections/care-for-trees"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1zwgAyW7B2Rhg7fUi-5DlczsuuP_UTnq0"
+        },
+        {
+          "system": "drive-html",
+          "path": "1zwgAyW7B2Rhg7fUi-5DlczsuuP_UTnq0.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "9a9c2dcbf21cad808d31",
+          "kind": "book",
+          "label": "Digital Book · Να αγαπάτε τα δέντρα! · Ο κήπος της φροντίδας",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-care-for-trees",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "care-for-trees",
+          "book_lesson_id": "lesson-care-for-creation"
+        },
+        {
+          "id": "d8e1000ef255b574c27c",
+          "kind": "html",
+          "label": "HTML · Να αγαπάτε τα δέντρα!",
+          "url": "https://drive.google.com/file/d/1zwgAyW7B2Rhg7fUi-5DlczsuuP_UTnq0/view?usp=drivesdk",
+          "note": "Αντιστοίχιση καρτών και σταδιακή αποκάλυψη της εικόνας. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "na_agapate_ta_dentra",
+          "drive_id": "1zwgAyW7B2Rhg7fUi-5DlczsuuP_UTnq0",
+          "media_id": "DOC-026",
+          "download_only": true,
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1zwgAyW7B2Rhg7fUi-5DlczsuuP_UTnq0",
+          "availability_status": "authenticated-download",
+          "modified_at": "2026-10-27T11:14:33.850Z",
+          "exercise_count": 6,
+          "unity_note": "Χρήση στην τάξη. Δεν εντοπίστηκε συγκεκριμένη αποθηκευμένη ανάθεση αυτής της δραστηριότητας στο Unity."
+        }
+      ]
+    },
+    {
       "scenario_id": "sculpture:spiritual-freedom",
       "title": "Ίαση των παθών και πνευματική ελευθερία",
       "subject": "Δόγμα και βίωμα · Η πνευματική ελευθερία",
@@ -2908,7 +3405,7 @@
       "aliases": [],
       "notes": [
         "Ίδια πέντε πάθη και αντίστοιχες θεραπείες με το spiritual-freedom του Interactive Sculpture.",
-        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-24T12:34:53.912Z."
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-27T10:38:04.534Z."
       ],
       "source_groups": [
         "interactive-sculpture",
@@ -2944,6 +3441,11 @@
         },
         {
           "system": "Unity VR",
+          "path": "CovenantScenarioSelector.cs",
+          "locator": "image-reveal"
+        },
+        {
+          "system": "Unity VR",
           "path": "SpiritualHealing.json",
           "locator": ""
         }
@@ -2973,14 +3475,26 @@
           "kind": "html",
           "label": "HTML · Πνευματική ελευθερία — από τα πάθη στη θεραπεία",
           "url": "https://drive.google.com/file/d/1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV/view?usp=drivesdk",
-          "note": "Από το μενού «Σενάρια» επίλεξε «Πνευματική ελευθερία — από τα πάθη στη θεραπεία». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Πνευματική ελευθερία — από τα πάθη στη θεραπεία». Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
           "app": "drive-html",
           "native_id": "spiritual_healing",
-          "modified_at": "2026-10-24T12:34:53.912Z",
-          "exercise_count": null,
+          "modified_at": "2026-10-27T10:38:04.534Z",
+          "exercise_count": 5,
+          "download_only": true,
+          "availability_status": "authenticated-download",
           "drive_id": "1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
           "drive_html": true,
-          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV"
+          "download_url": "https://drive.google.com/uc?export=download&id=1Kf2sPd09JSMkFcNdhV_EAK-IGX_WYJYV",
+          "unity_counterparts": [
+            {
+              "activity_id": "68fb8a528fb7e3df5b2e",
+              "scenario_id": "sculpture:spiritual-freedom",
+              "label": "Unity VR · Σταδιακή αποκάλυψη εικόνας · Πνευματική ελευθερία — από τα πάθη στη θεραπεία",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Οι πέντε συνδέσεις πάθους και θεραπείας συνεχίζονται στα Ιεροσόλυμα με παπύρους και αποκάλυψη εικόνας.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=68fb8a528fb7e3df5b2e#activity/sculpture%3Aspiritual-freedom"
+            }
+          ]
         },
         {
           "id": "68fb8a528fb7e3df5b2e",
@@ -3114,7 +3628,7 @@
           "media_id": "SLD-028",
           "drive_id": "1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-17T10:33:03.016Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3188,7 +3702,7 @@
           "media_id": "SLD-022",
           "drive_id": "11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:26:09.383Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3314,7 +3828,7 @@
           "media_id": "SLD-023",
           "drive_id": "182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:25:33.435Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3388,7 +3902,7 @@
           "media_id": "SLD-024",
           "drive_id": "19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:25:11.661Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3462,7 +3976,7 @@
           "media_id": "SLD-019",
           "drive_id": "1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:24:41.955Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3536,7 +4050,7 @@
           "media_id": "SLD-020",
           "drive_id": "1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:25:46.410Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3726,6 +4240,11 @@
         },
         {
           "system": "Unity VR",
+          "path": "CircularManuscriptController.cs",
+          "locator": "circular-discovery"
+        },
+        {
+          "system": "Unity VR",
           "path": "Current_Themes_Free_Discovery.asset",
           "locator": ""
         }
@@ -3745,6 +4264,96 @@
           "stage_count": 0,
           "reveal_mode": "circular-discovery",
           "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:chronology_observatory",
+      "title": "Παρατηρητήριο του Χρόνου",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "ανάγνωση",
+        "συζήτηση",
+        "περιήγηση",
+        "παρατήρηση"
+      ],
+      "formats": [
+        "Digital Book",
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Digital Book",
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-chronology-observatory/sections/chronology-observatory"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_chronology.unity",
+          "locator": "room-preview"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Chronology_Intro.mp4",
+          "locator": "room-preview"
+        },
+        {
+          "system": "Unity VR",
+          "path": "ChronologyRoomController.cs",
+          "locator": "room-preview"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_chronology.unity",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "050375b6df6ccea02b2c",
+          "kind": "book",
+          "label": "Digital Book · Παρατηρητήριο του Χρόνου · Χώρος περιήγησης",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-chronology-observatory",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "chronology-observatory",
+          "book_lesson_id": "lesson-chronology-observatory"
+        },
+        {
+          "id": "e9acad1df56f8b4bf6cf",
+          "kind": "vr",
+          "label": "Unity VR · Παρατηρητήριο του Χρόνου · Χώρος περιήγησης",
+          "url": "",
+          "note": "Από την πύλη της Main ο επισκέπτης εισέρχεται στο Παρατηρητήριο του Χρόνου, περιηγείται στην αίθουσα και παρακολουθεί το σύντομο εισαγωγικό βίντεο στην πίσω οθόνη. Υπάρχουν δύο περιβάλλοντα. Η κονσόλα είναι βάση για μελλοντική δραστηριότητα· δεν έχει διαμορφωθεί ακόμη άσκηση χρονολογικής αντιστοίχισης. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "chronology_observatory",
+          "room": "Παρατηρητήριο του Χρόνου",
+          "scene_name": "Room_chronology",
+          "exercise_count": 0,
+          "stage_count": 0,
+          "reveal_mode": "room-preview",
+          "availability_status": "room-only"
         }
       ]
     },
@@ -3849,7 +4458,7 @@
         },
         {
           "system": "drive-html",
-          "path": "jerusalem-quiz.html",
+          "path": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E.html",
           "locator": ""
         },
         {
@@ -3984,14 +4593,26 @@
           "kind": "quiz",
           "label": "HTML · Πεντηκοστή — Το Πνεύμα συγκροτεί την Εκκλησία",
           "url": "https://drive.google.com/file/d/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E/view?usp=drivesdk",
-          "note": "Από το μενού «Σενάρια» επίλεξε «Πεντηκοστή — Το Πνεύμα συγκροτεί την Εκκλησία». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Πεντηκοστή — Το Πνεύμα συγκροτεί την Εκκλησία». Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
           "app": "drive-html",
           "native_id": "jerusalem_pentecost_hymn",
           "modified_at": "2026-10-22T11:22:05.245Z",
-          "exercise_count": null,
+          "exercise_count": 13,
+          "download_only": false,
+          "availability_status": "drive-download",
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
-          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
+          "unity_counterparts": [
+            {
+              "activity_id": "385df58cb90138841868",
+              "scenario_id": "unity:jerusalem_pentecost_hymn",
+              "label": "Αποστολή αντικειμένων στο Unity",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Τα ευρήματα της Πεντηκοστής συνεχίζονται στη συλλογή αντικειμένων και στο αντίστοιχο quiz των Ιεροσολύμων.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=385df58cb90138841868#activity/unity%3Ajerusalem_pentecost_hymn"
+            }
+          ]
         },
         {
           "id": "12ad1f1aa8bf2e6e4853",
@@ -4170,7 +4791,7 @@
           "native_id": "",
           "drive_id": "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA",
           "slide_count": 6,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-09-25T20:06:31.232Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4191,7 +4812,9 @@
         "αντιστοίχιση",
         "αιτιολόγηση",
         "ανάγνωση",
-        "συζήτηση"
+        "συζήτηση",
+        "μελέτη χειρογράφων",
+        "ερμηνεία"
       ],
       "formats": [
         "Unity VR",
@@ -4211,13 +4834,15 @@
       "application_status": "proposal",
       "aliases": [],
       "notes": [
-        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z."
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-22T11:22:05.245Z.",
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-28T06:46:31.591Z."
       ],
       "source_groups": [
         "Unity VR",
         "Digital Book",
         "Drive HTML",
-        "drive-html"
+        "drive-html",
+        "Unity · υποστήριξη δραστηριότητας"
       ],
       "sources": [
         {
@@ -4251,14 +4876,69 @@
           "locator": "lessons/lesson-fall-restoration/sections/fall-restoration-conclusion"
         },
         {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-fall-restoration/sections/fall-pains-mindmap"
+        },
+        {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-fall-restoration/sections/byzantium-interpretation-threads"
+        },
+        {
           "system": "Drive HTML",
           "path": "google-drive.json",
           "locator": "html_files/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
         },
         {
           "system": "drive-html",
-          "path": "jerusalem-quiz.html",
+          "path": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E.html",
           "locator": ""
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1rSBAOEiMuA3pO2XRhgL7M-NfQcbZSg7L"
+        },
+        {
+          "system": "drive-html",
+          "path": "1rSBAOEiMuA3pO2XRhgL7M-NfQcbZSg7L.html",
+          "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_byzantium.unity",
+          "locator": "interpretation-threads"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Fall_Restoration_Threads.asset",
+          "locator": "interpretation-threads"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Byzantium_Interpretation_Catalog.asset",
+          "locator": "interpretation-threads"
+        },
+        {
+          "system": "Unity VR",
+          "path": "byzantium_fall_restoration.json",
+          "locator": "interpretation-threads"
+        },
+        {
+          "system": "Unity VR",
+          "path": "InterpretationController.cs",
+          "locator": "interpretation-threads"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Fall_Restoration_Threads.asset",
+          "locator": ""
+        },
+        {
+          "system": "Unity · υποστήριξη δραστηριότητας",
+          "path": "Female_Teacher_Profile.asset",
+          "locator": "Assembly-CSharp::MindPalace.TeacherSupport.TeacherSupportProfile"
         }
       ],
       "activities": [
@@ -4339,84 +5019,93 @@
           "book_lesson_id": "lesson-fall-restoration"
         },
         {
+          "id": "f5500ffbb217aa4d05c2",
+          "kind": "book",
+          "label": "Digital Book · Οι οδύνες μετά την παρακοή · Χάρτης της αφήγησης",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-fall-pains-mindmap",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "fall-pains-mindmap",
+          "book_lesson_id": "lesson-fall-restoration"
+        },
+        {
+          "id": "737ad4db12d34033c2ce",
+          "kind": "html",
+          "label": "HTML · Οι οδύνες μετά την παρακοή",
+          "url": "https://drive.google.com/file/d/1rSBAOEiMuA3pO2XRhgL7M-NfQcbZSg7L/view?usp=drivesdk",
+          "note": "Σύνδεση εννοιών με σημεία της εικόνας, φωτεινά νήματα και σταδιακή αποκάλυψη κειμένου. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "genesis3-mindmap",
+          "drive_id": "1rSBAOEiMuA3pO2XRhgL7M-NfQcbZSg7L",
+          "media_id": "DOC-029",
+          "download_only": true,
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1rSBAOEiMuA3pO2XRhgL7M-NfQcbZSg7L",
+          "availability_status": "authenticated-download",
+          "modified_at": "2026-10-28T06:46:31.591Z",
+          "exercise_count": 8,
+          "unity_counterparts": [
+            {
+              "activity_id": "4d7271dbfb36a9aceda3",
+              "scenario_id": "unity:byzantium_fall_restoration",
+              "label": "Unity VR · Κλωστές πατερικών ερμηνειών",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Από την παρατήρηση της αφήγησης της Γένεσης, η πορεία συνεχίζεται στο Βυζάντιο με τέσσερις κάρτες πατερικών ερμηνειών.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=4d7271dbfb36a9aceda3#activity/unity%3Abyzantium_fall_restoration"
+            }
+          ]
+        },
+        {
+          "id": "65a8f50b966487af2754",
+          "kind": "book",
+          "label": "Digital Book · Κλωστές πατερικών ερμηνειών · Στο Βυζάντιο",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-byzantium-interpretation-threads",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "byzantium-interpretation-threads",
+          "book_lesson_id": "lesson-fall-restoration"
+        },
+        {
           "id": "c5e1735d1e6cbbe0f4de",
           "kind": "quiz",
           "label": "HTML · Πτώση και επανόρθωση-σύμβολα",
           "url": "https://drive.google.com/file/d/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E/view?usp=drivesdk",
-          "note": "Από το μενού «Σενάρια» επίλεξε «Πτώση και επανόρθωση-σύμβολα». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Πτώση και επανόρθωση-σύμβολα». Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
           "app": "drive-html",
           "native_id": "byzantium_fall_restoration",
           "modified_at": "2026-10-22T11:22:05.245Z",
-          "exercise_count": null,
+          "exercise_count": 18,
+          "download_only": false,
+          "availability_status": "drive-download",
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
-          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
-        }
-      ]
-    },
-    {
-      "scenario_id": "unity:world_religions_cosmology",
-      "title": "Πώς αρχίζει ο κόσμος;",
-      "subject": "Θρησκευτικά",
-      "grades": [],
-      "grade_status": "unconfirmed",
-      "audience_source": null,
-      "objectives": [],
-      "modes": [
-        "μελέτη πηγών",
-        "αντιστοίχιση",
-        "σταδιακή αποκάλυψη εικόνας",
-        "σύγκριση"
-      ],
-      "formats": [
-        "Unity VR"
-      ],
-      "duration": null,
-      "duration_status": "unconfirmed",
-      "cognitive_difficulty": null,
-      "cognitive_status": "unconfirmed",
-      "technical_difficulty": null,
-      "technical_status": "unconfirmed",
-      "readiness": "available",
-      "readiness_note": "",
-      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
-      "application_status": "proposal",
-      "aliases": [],
-      "notes": [],
-      "source_groups": [
-        "Unity VR"
-      ],
-      "sources": [
-        {
-          "system": "Unity VR",
-          "path": "Room_world_religions.unity",
-          "locator": "cosmology-comparison"
+          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
+          "unity_counterparts": [
+            {
+              "activity_id": "77da1da949c86ab92a78",
+              "scenario_id": "unity:byzantium_fall_restoration",
+              "label": "Αποστολή αντικειμένων στο Unity",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Η άσκηση συμβόλων συνεχίζεται στο αντίστοιχο quiz Πτώσης και Αποκατάστασης του Βυζαντίου.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=77da1da949c86ab92a78#activity/unity%3Abyzantium_fall_restoration"
+            }
+          ]
         },
         {
-          "system": "Unity VR",
-          "path": "World_Cosmologies.asset",
-          "locator": "cosmology-comparison"
-        },
-        {
-          "system": "Unity VR",
-          "path": "World_Cosmologies.asset",
-          "locator": ""
-        }
-      ],
-      "activities": [
-        {
-          "id": "f691de3125cadd1f0c8d",
+          "id": "4d7271dbfb36a9aceda3",
           "kind": "vr",
-          "label": "Unity VR · Τέσσερις αφηγήσεις για τον κόσμο",
+          "label": "Unity VR · Κλωστές πατερικών ερμηνειών",
           "url": "",
-          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 4 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι αφηγήσεις αφορούν: Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "note": "Στο δωμάτιο Βυζάντιο ο μαθητής ενεργοποιεί το σενάριο στο αναλόγιο, μελετά τα χειρόγραφα και αντιστοιχίζει 4 κάρτες με τις ερμηνείες των Πατέρων, στοχεύοντας τα φωτεινά πλαίσια με το τόξο. Οι σωστές συνδέσεις σχεδιάζουν κλωστές. Με την ολοκλήρωση ακολουθούν επιβράβευση και βίντεο στον σταθμό του Δαμασκηνού. Πρόκειται για ξεχωριστή δραστηριότητα από το quiz του δωματίου. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
           "app": "Unity VR",
-          "native_id": "world_religions_cosmology",
-          "room": "Θρησκείες του κόσμου",
-          "scene_name": "Room_world_religions",
+          "native_id": "byzantium_fall_restoration_threads",
+          "room": "Βυζάντιο",
+          "scene_name": "Room_byzantium",
           "exercise_count": 4,
           "stage_count": 0,
-          "reveal_mode": "cosmology-comparison",
+          "reveal_mode": "interpretation-threads",
           "availability_status": "scene-bound"
         }
       ]
@@ -4498,7 +5187,7 @@
         },
         {
           "system": "drive-html",
-          "path": "jerusalem-quiz.html",
+          "path": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E.html",
           "locator": ""
         },
         {
@@ -4546,7 +5235,7 @@
           "media_id": "SLD-009",
           "drive_id": "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE",
           "slide_count": 6,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-08T17:49:43.102Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -4561,7 +5250,7 @@
           "media_id": "SLD-027",
           "drive_id": "1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-16T16:33:22.265Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -4570,14 +5259,26 @@
           "kind": "quiz",
           "label": "HTML · Σκιά και Πλήρωση — Η Θεοτόκος στην υμνολογία",
           "url": "https://drive.google.com/file/d/11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E/view?usp=drivesdk",
-          "note": "Από το μενού «Σενάρια» επίλεξε «Σκιά και Πλήρωση — Η Θεοτόκος στην υμνολογία». Το αρχείο διατηρεί τον δικό του επιλογέα και όλους τους υπάρχοντες χειρισμούς. Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
+          "note": "Από το μενού «Σενάρια» επίλεξε «Σκιά και Πλήρωση — Η Θεοτόκος στην υμνολογία». Στην online έκδοση ανοίγει το αρχικό αρχείο στο Drive. Για εκτέλεση, κατέβασε το HTML και διάλεξε το αντίστοιχο σενάριο μέσα του.",
           "app": "drive-html",
           "native_id": "jerusalem_theotokos_hymn",
           "modified_at": "2026-10-22T11:22:05.245Z",
-          "exercise_count": null,
+          "exercise_count": 14,
+          "download_only": false,
+          "availability_status": "drive-download",
           "drive_id": "11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
           "drive_html": true,
-          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E"
+          "download_url": "https://drive.google.com/uc?export=download&id=11wnDMCi8mRrV3XhX5CI74E_0Xcujxm3E",
+          "unity_counterparts": [
+            {
+              "activity_id": "e1ce0531b777c8404087",
+              "scenario_id": "unity:jerusalem_theotokos_hymn",
+              "label": "Αποστολή αντικειμένων στο Unity",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Τα έξι ευρήματα Σκιάς και Πλήρωσης συνεχίζονται στη συλλογή αντικειμένων και στο αντίστοιχο quiz των Ιεροσολύμων.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=e1ce0531b777c8404087#activity/unity%3Ajerusalem_theotokos_hymn"
+            }
+          ]
         },
         {
           "id": "7db2071e218293b5700a",
@@ -4708,7 +5409,7 @@
           "media_id": "SLD-025",
           "drive_id": "1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-13T16:25:58.850Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4796,7 +5497,9 @@
         "εξερεύνηση",
         "αντιστοίχιση",
         "ερμηνεία",
-        "ανάγνωση"
+        "ανάγνωση",
+        "αιτιολόγηση",
+        "χρονολόγιο"
       ],
       "formats": [
         "Κείμενο",
@@ -4815,7 +5518,9 @@
       "pedagogical_application": "Πρόταση: ξεκινήστε από το υπάρχον ερώτημα, συνδέστε δύο τεκμήρια και ζητήστε αιτιολόγηση.",
       "application_status": "proposal",
       "aliases": [],
-      "notes": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-10-28T12:28:17.284Z."
+      ],
       "source_groups": [
         "Sacred Blueprint",
         "text",
@@ -4826,7 +5531,10 @@
         "personal-page",
         "quiz",
         "Unity VR",
-        "Digital Book"
+        "Digital Book",
+        "Drive HTML",
+        "drive-html",
+        "Unity · υποστήριξη δραστηριότητας"
       ],
       "inquiry_question": "Αν ο Θεός προσφέρει τη σωτηρία, ποιος είναι ο ρόλος της ανθρώπινης ελευθερίας απέναντι στο καλό και το κακό;",
       "sources": [
@@ -4911,6 +5619,21 @@
           "locator": "lessons/lesson-foundations/sections/divine-economy-worksheet"
         },
         {
+          "system": "Digital Book",
+          "path": "book.json",
+          "locator": "lessons/lesson-foundations/sections/divine-economy-mindmap"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1jmSyJQ96_Gd2EXC_jWdNKagGhejZN7gk"
+        },
+        {
+          "system": "drive-html",
+          "path": "1jmSyJQ96_Gd2EXC_jWdNKagGhejZN7gk.html",
+          "locator": ""
+        },
+        {
           "system": "idea-weaver-board",
           "path": "to-schedio-tis-theias-oikonomias.json",
           "locator": ""
@@ -4934,6 +5657,36 @@
           "system": "personal-page",
           "path": "to-schedio-tis-theias-oikonomias.json",
           "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Main.unity",
+          "locator": "web-book"
+        },
+        {
+          "system": "Unity VR",
+          "path": "to-schedio-tis-theias-oikonomias.asset",
+          "locator": "web-book"
+        },
+        {
+          "system": "Unity VR",
+          "path": "InteractiveWebBook.prefab",
+          "locator": "web-book"
+        },
+        {
+          "system": "Unity VR",
+          "path": "InteractiveWebBookController.cs",
+          "locator": "web-book"
+        },
+        {
+          "system": "Unity VR",
+          "path": "to-schedio-tis-theias-oikonomias.asset",
+          "locator": ""
+        },
+        {
+          "system": "Unity · υποστήριξη δραστηριότητας",
+          "path": "to-schedio-tis-theias-oikonomias.asset",
+          "locator": "MindPalace.InteractiveWebBook::MindPalace.InteractiveWebBook.BookWebLessonProfile"
         }
       ],
       "activities": [
@@ -4997,6 +5750,59 @@
           "native_id": "",
           "section_id": "divine-economy-worksheet",
           "book_lesson_id": "lesson-foundations"
+        },
+        {
+          "id": "93740d20f2e98496f888",
+          "kind": "book",
+          "label": "Digital Book · Το Σχέδιο της Θείας Οικονομίας · Φωτεινός χάρτης",
+          "url": "https://dporpatonelis-crypto.github.io/interactive-books/Digital_Lessons/#section-divine-economy-mindmap",
+          "note": "",
+          "app": null,
+          "native_id": "",
+          "section_id": "divine-economy-mindmap",
+          "book_lesson_id": "lesson-foundations"
+        },
+        {
+          "id": "5578199462a5d3e565e7",
+          "kind": "html",
+          "label": "HTML · Το Σχέδιο της Θείας Οικονομίας",
+          "url": "https://drive.google.com/file/d/1jmSyJQ96_Gd2EXC_jWdNKagGhejZN7gk/view?usp=drivesdk",
+          "note": "Σύνδεση εννοιών με σημεία της εικόνας, φωτεινά νήματα και σταδιακή αποκάλυψη κειμένου. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "theia-oikonomia-two-level",
+          "drive_id": "1jmSyJQ96_Gd2EXC_jWdNKagGhejZN7gk",
+          "media_id": "DOC-027",
+          "download_only": true,
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1jmSyJQ96_Gd2EXC_jWdNKagGhejZN7gk",
+          "availability_status": "authenticated-download",
+          "modified_at": "2026-10-28T12:28:17.284Z",
+          "exercise_count": 4,
+          "unity_counterparts": [
+            {
+              "activity_id": "284df9b465139f702b4e",
+              "scenario_id": "sb:to-schedio-tis-theias-oikonomias",
+              "label": "Unity VR · Διαδραστικό βιβλίο · Το σχέδιο της Θείας Οικονομίας",
+              "relationship": "Συνέχεια του μαθήματος στο Unity",
+              "note": "Μετά τον φωτεινό χάρτη, το διαδραστικό βιβλίο VR δίνει πρόσβαση στο χρονολόγιο και στον πίνακα διερεύνησης του ίδιου μαθήματος.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=284df9b465139f702b4e#activity/sb%3Ato-schedio-tis-theias-oikonomias"
+            }
+          ]
+        },
+        {
+          "id": "284df9b465139f702b4e",
+          "kind": "vr",
+          "label": "Unity VR · Διαδραστικό βιβλίο · Το σχέδιο της Θείας Οικονομίας",
+          "url": "",
+          "note": "Το διαδραστικό βιβλίο της σκηνής έχει προφίλ για το συγκεκριμένο μάθημα, με επιλογές χρονολογίου και πίνακα διερεύνησης. Φορτώνει τις αντίστοιχες διαδικτυακές εφαρμογές και χρειάζεται σύνδεση. Η διαθεσιμότητα στον τελικό VR browser εξαρτάται από το build. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "to-schedio-tis-theias-oikonomias",
+          "room": "Main",
+          "scene_name": "Main",
+          "exercise_count": 2,
+          "stage_count": 0,
+          "reveal_mode": "web-book",
+          "availability_status": "scene-bound"
         }
       ]
     },
@@ -5108,7 +5914,7 @@
           "media_id": "SLD-034",
           "drive_id": "1z3aTR6G9M6K2DbyN9Izi6HxJewJvkt4sqIKyHXgQYvM",
           "slide_count": 7,
-          "checked_at": "2026-10-27T09:52:58Z",
+          "checked_at": "2026-10-28T16:25:02Z",
           "modified_at": "2026-10-22T17:32:41.123Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -5158,7 +5964,17 @@
           "section_id": "trinity-basic-concept-canvas",
           "book_lesson_id": "lesson-trinity-dogmatic-consciousness",
           "drive_id": "1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209",
-          "download_url": "https://drive.google.com/uc?export=download&id=1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209"
+          "download_url": "https://drive.google.com/uc?export=download&id=1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209",
+          "unity_counterparts": [
+            {
+              "activity_id": "0c184e859a520d9546be",
+              "scenario_id": "unity:christianity_free_discovery",
+              "label": "Unity VR · Κυκλικό αναλόγιο · Ο κύκλος των χειρογράφων",
+              "relationship": "Συναφής μελέτη στο Unity",
+              "note": "Στο κυκλικό αναλόγιο του Χριστιανισμού υπάρχει το θεματικό χειρόγραφο «Τριαδικό δόγμα». Είναι συνέχεια μελέτης πηγής, με διαφορετική αλληλεπίδραση από τις κάρτες του HTML.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=0c184e859a520d9546be#activity/unity%3Achristianity_free_discovery"
+            }
+          ]
         },
         {
           "id": "5b4be0e7a301e338c1b5",
@@ -5174,7 +5990,17 @@
           "section_id": "trinity-advanced-concept-canvas",
           "book_lesson_id": "lesson-trinity-dogmatic-consciousness",
           "drive_id": "1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209",
-          "download_url": "https://drive.google.com/uc?export=download&id=1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209"
+          "download_url": "https://drive.google.com/uc?export=download&id=1IcLpxXDd2TK2QbFyRfA7y95QJsGx8209",
+          "unity_counterparts": [
+            {
+              "activity_id": "0c184e859a520d9546be",
+              "scenario_id": "unity:christianity_free_discovery",
+              "label": "Unity VR · Κυκλικό αναλόγιο · Ο κύκλος των χειρογράφων",
+              "relationship": "Συναφής μελέτη στο Unity",
+              "note": "Στο κυκλικό αναλόγιο του Χριστιανισμού υπάρχει το θεματικό χειρόγραφο «Τριαδικό δόγμα». Είναι συνέχεια μελέτης πηγής, με διαφορετική αλληλεπίδραση από τις κάρτες του HTML.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=0c184e859a520d9546be#activity/unity%3Achristianity_free_discovery"
+            }
+          ]
         }
       ]
     }

@@ -15,7 +15,9 @@
     "upper-room-first-church": "unity:jerusalem_pentecost_hymn",
     "jerusalem-typology": "unity:jerusalem_theotokos_hymn",
     "to-schedio-tis-theias-oikonomias": "sb:to-schedio-tis-theias-oikonomias",
-    "byzantium_fall_restoration_threads": "unity:byzantium_fall_restoration"
+    "byzantium_fall_restoration_threads": "unity:byzantium_fall_restoration",
+    "judgement_concepts": "unity:judgement_concepts",
+    "trinity_economy_concepts": "unity:trinity_economy_concepts"
   },
   "app_scenario_links": {
     "Map-Timeline:upper-room-first-church": {
@@ -41,12 +43,18 @@
     "theia-oikonomia-two-level": "sb:to-schedio-tis-theias-oikonomias",
     "science-heart-dialogue": "book:lesson-005",
     "genesis3-mindmap": "unity:byzantium_fall_restoration",
-    "human_creation": "book:lesson-creation-world"
+    "human_creation": "book:lesson-creation-world",
+    "christos-gennatai": "unity:christos_gennatai_opening"
   },
   "unity_lesson_links": {
     "concentric_cosmology_v1": "unity:world_religions_cosmology",
     "to-schedio-tis-theias-oikonomias": "sb:to-schedio-tis-theias-oikonomias",
-    "byzantium_fall_restoration_threads": "unity:byzantium_fall_restoration"
+    "byzantium_fall_restoration_threads": "unity:byzantium_fall_restoration",
+    "time_library": "unity:chronology_observatory",
+    "historical_revelation_demo": "unity:chronology_observatory",
+    "theia_oikonomia": "sb:to-schedio-tis-theias-oikonomias",
+    "theia_oikonomia_journey": "sb:to-schedio-tis-theias-oikonomias",
+    "paul_apostolic_journey": "book:paul-journey"
   },
   "book_lesson_links": {
     "lesson-world-cosmologies": "unity:world_religions_cosmology",
@@ -186,6 +194,22 @@
         "mechanism": "circular-discovery",
         "relationship": "Συναφής μελέτη στο Unity",
         "note": "Στο κυκλικό αναλόγιο του Χριστιανισμού υπάρχει το θεματικό χειρόγραφο «Τριαδικό δόγμα». Είναι συνέχεια μελέτης πηγής, με διαφορετική αλληλεπίδραση από τις κάρτες του HTML."
+      }
+    ],
+    "christos-gennatai": [
+      {
+        "target_native_id": "christos_gennatai_opening",
+        "mechanism": "meaning-melody",
+        "relationship": "Συνέχεια του μαθήματος στο Unity",
+        "note": "Οι τρεις έννοιες μεταφέρονται σε κάρτες στο κυκλικό αναλόγιο και ακολουθεί μουσική αντιστοίχιση με τρεις φυσικούς δακτυλίους. Η πρόοδος του HTML δεν μεταφέρεται αυτόματα."
+      }
+    ],
+    "paulos-school-mindmap": [
+      {
+        "target_native_id": "paul_apostolic_journey",
+        "mechanism": "chronology-journey",
+        "relationship": "Συνέχεια της μελέτης στο Unity",
+        "note": "Μετά τη διαδρομή του Παύλου στον φωτεινό χάρτη, ο μαθητής παρακολουθεί πέντε σταθμούς της αποστολικής πορείας στον χωρικό χάρτη. Οι δύο δραστηριότητες έχουν διαφορετικό χειρισμό και περιεχόμενο σταθμών."
       }
     ]
   }

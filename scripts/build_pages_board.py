@@ -11,9 +11,33 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def build_pages_board(site_url):
+def build_pages_board(site_url, published_evidence=None):
     config = json.loads((ROOT/'config.json').read_text())
     source = (Path(config['apps_root'])/'idea-weaver-board').resolve()
+    if published_evidence is not None:
+        evidence = json.loads(Path(published_evidence).read_text())
+        if evidence.get('repository') != 'dporpatonelis-crypto/Browser-vr' or not evidence.get('head'):
+            raise ValueError('Χρειάζεται επαληθευμένη δημοσιευμένη έκδοση του πίνακα.')
+        base = (ROOT/'site/apps/investigation').resolve()
+        verified = set()
+        for item in evidence.get('files', []):
+            path = (ROOT/item['path']).resolve()
+            if not path.is_relative_to(base) or not path.is_file():
+                raise ValueError('Λείπει αρχείο του δημοσιευμένου πίνακα.')
+            content = path.read_bytes()
+            sha = hashlib.sha1(b'blob '+str(len(content)).encode()+b'\0'+content).hexdigest()
+            if sha != item['sha']:
+                raise ValueError('Το αντίγραφο του δημοσιευμένου πίνακα δεν συμφωνεί με το GitHub.')
+            verified.add(path)
+        entry = base/'index.html'
+        if entry not in verified or base/'provenance.json' not in verified:
+            raise ValueError('Ελλιπές αποδεικτικό του δημοσιευμένου πίνακα.')
+        import re
+        for url in re.findall(r'(?:src|href)="([^"]+)"', entry.read_text()):
+            prefix = urlsplit(site_url).path.rstrip('/')+'/apps/investigation/'
+            if url.startswith(prefix) and (base/url.removeprefix(prefix)).resolve() not in verified:
+                raise ValueError('Δεν επαληθεύτηκε το συνδεδεμένο build asset.')
+        return base
     output = ROOT/'storage/pages-app-builds/idea-weaver-board'
     build_directory = ROOT/'storage/pages-board-builder'
     base = urlsplit(site_url).path.rstrip('/')+'/apps/investigation/'
@@ -64,5 +88,7 @@ export default defineConfig({
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--site-url', default='https://dporpatonelis-crypto.github.io/Browser-vr/')
+    parser.add_argument('--reuse-published-evidence', type=Path,
+                        help='Keep the unchanged pinned public board when refreshing only its lesson catalogue.')
     args = parser.parse_args()
-    print(build_pages_board(args.site_url))
+    print(build_pages_board(args.site_url, args.reuse_published_evidence))

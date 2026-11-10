@@ -41,6 +41,16 @@ def reference(text, name):
     return match[1] if match else ''
 
 
+def list_rows(text, name):
+    match = re.search(r'^  '+re.escape(name)+r':\n(.*?)(?=^  [A-Za-z_]+:|\Z)', text, re.M | re.S)
+    if not match:
+        return []
+    result = []
+    for row in re.finditer(r'^  - (.*?)(?=^  - |\Z)', match[1], re.M | re.S):
+        result.append('  '+re.sub(r'^    ', '  ', row[1], flags=re.M))
+    return result
+
+
 class UnityInventory:
     def __init__(self, assets, read_text=None):
         self.assets = Path(assets)
@@ -144,12 +154,37 @@ class UnityInventory:
             if not isinstance(data, dict):
                 continue
             native = data.get('lesson_id') or data.get('id') or data.get('scenarioId')
-            if native and any(key in data for key in ('items', 'exercises', 'phases', 'intro', 'rounds', 'activities')):
+            if native and any(key in data for key in ('items', 'exercises', 'phases', 'intro', 'rounds', 'activities', 'cards', 'stations')):
                 self.candidates.append(path)
                 self.json_by_id.setdefault(native, []).append((path, data))
         for scene in sorted((self.assets/'Scenes').glob('*.unity')):
             document = self.read_text(scene)
             parts, origins = self.prefab_parts(document, scene)
+            # The active mode selector can enable an initially hidden activity.
+            # Resolve stripped scene references to the expanded saved prefab data.
+            def component_id(ref):
+                match = re.search(r'fileID: (-?\d+)', ref)
+                key = match[1] if match else ''
+                component = parts.get(key, '')
+                prefab = self.resolve(reference(component, 'm_CorrespondingSourceObject'))
+                if prefab:
+                    cls = field(component, 'm_EditorClassIdentifier')
+                    choices = [k for k, v in parts.items() if prefab in origins.get(k, [])
+                               and field(v, 'm_EditorClassIdentifier') == cls]
+                    if len(choices) == 1:
+                        return choices[0]
+                return key
+            selectable = set()
+            for candidate in parts.values():
+                if not field(candidate, 'm_EditorClassIdentifier').endswith('.ChronologyExperienceController'):
+                    continue
+                if field(candidate, 'm_Enabled', '1') == '0':
+                    continue
+                for name in ('library', 'activity', 'journey'):
+                    selectable.add(component_id(reference(candidate, name)))
+                refs = re.search(r'^  journeys:\n(.*?)(?=^  [A-Za-z_]+:|\Z)', candidate, re.M | re.S)
+                for ref in re.findall(r'\{([^}]+)\}', refs[1] if refs else ''):
+                    selectable.add(component_id(ref))
             parents = {}
             for component in parts.values():
                 game = re.search(r'fileID: (-?\d+)', reference(component, 'm_GameObject'))
@@ -173,7 +208,7 @@ class UnityInventory:
                     continue
                 game = re.search(r'fileID: (-?\d+)', reference(component, 'm_GameObject'))
                 # Selector alternatives may be inactive until selected; the selector itself must be active.
-                if game and not active(game[1]):
+                if game and not active(game[1]) and component_id not in selectable:
                     continue
                 before = len(self.records)
                 if cls.endswith('.CovenantScenarioSelector'):
@@ -212,6 +247,7 @@ class UnityInventory:
                                     topic_count=len(re.findall(r'^  - stationId:', text, re.M)))
                         reconstruction = self.resolve(reference(text, 'reconstruction'))
                         concept = self.resolve(reference(text, 'conceptLesson'))
+                        melody = self.resolve(reference(text, 'melodyFinale'))
                         evidence = [path]+([matches[0][0]] if len(matches) == 1 else [])
                         for child_guid in re.findall(r'guid: (\w+)', text):
                             child = self.guid_paths.get(child_guid)
@@ -229,10 +265,42 @@ class UnityInventory:
                             data.update(activities=activities, activity_count=len(activities))
                             if catalog:
                                 evidence.append(catalog)
-                        self.records.append({'mechanism': 'concept-canvas' if concept else 'reconstruction' if reconstruction else 'circular-discovery',
+                        if melody:
+                            evidence.append(melody)
+                        self.records.append({'mechanism': 'meaning-melody' if melody else 'concept-canvas' if concept else 'reconstruction' if reconstruction else 'circular-discovery',
                                              'native_id': native, 'path': path, 'data': data, 'scene': scene,
                                              'evidence': evidence, 'room': ROOMS.get(scene.stem, scene.stem)})
                         bindings.append(native)
+                elif cls.endswith(('.TimeLibraryController', '.ChronologyRailController',
+                                   '.HistoricalMechanismController', '.ChronologyJourneyController')):
+                    mode = ('time-library' if cls.endswith('.TimeLibraryController') else
+                            'chronology-rail' if cls.endswith('.ChronologyRailController') else
+                            'historical-gears' if cls.endswith('.HistoricalMechanismController') else 'chronology-journey')
+                    key = 'catalog' if mode == 'time-library' else 'lesson' if mode == 'chronology-rail' else 'definition'
+                    path = self.resolve(reference(component, key))
+                    # Stripped components are locators; the expanded component carries the data.
+                    if not path:
+                        continue
+                    text = self.read_text(path)
+                    native = field(text, 'scenarioId') or field(text, 'lessonId') or ('time_library' if mode == 'time-library' else '')
+                    if not native:
+                        self.warnings.append({'path': str(path), 'message': 'Συνδεδεμένος μηχανισμός χωρίς ταυτότητα μαθήματος.'})
+                        continue
+                    list_name = {'time-library': 'entries', 'chronology-rail': 'cards',
+                                 'historical-gears': 'gears', 'chronology-journey': 'stations'}[mode]
+                    rows = list_rows(text, list_name)
+                    summaries = [{k: field(row, k) for k in ('id', 'title', 'summary', 'explanation', 'dateLabel', 'contextId', 'libraryEntryId')} for row in rows]
+                    evidence = [path]
+                    for guid in re.findall(r'guid: (\w+)', text):
+                        child = self.guid_paths.get(guid)
+                        if child and child.suffix in {'.mp4', '.asset'}:
+                            evidence.append(child)
+                    self.records.append({'mechanism': mode, 'native_id': native, 'path': path,
+                                         'scene': scene, 'room': ROOMS.get(scene.stem, scene.stem), 'evidence': evidence,
+                                         'data': {'title': field(text, 'title') or 'Βιβλιοθήκη του Χρόνου',
+                                                  'topic_count': len(rows), 'entries': summaries,
+                                                  'relation_count': len(list_rows(text, 'relations'))}})
+                    bindings.append(native)
                 elif cls.endswith('.CosmologyController'):
                     path = self.resolve(reference(component, 'scenario'))
                     if not path or not path.is_file():

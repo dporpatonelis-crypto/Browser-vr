@@ -118,6 +118,27 @@ def declared_literal(script, name):
     return value
 
 
+def assigned_lesson(script, name):
+    """Read only a complete literal assigned to the known authored data slot."""
+    match = re.search(r'\bwindow\.'+re.escape(name)+r'\s*=\s*', script)
+    if not match:
+        return None
+    reader = LiteralReader(script[match.end():])
+    value = reader.value()
+    reader.space()
+    if reader.text[reader.pos:reader.pos+1] != ';':
+        raise ValueError('Assigned lesson must end with a literal')
+    return value
+
+
+def literal_declaration(script, name):
+    # Runtime aliases such as `const LESSON = CONTENT.stations` are not data.
+    match = re.search(r'\bconst\s+'+re.escape(name)+r'\s*=\s*', script)
+    if not match or script[match.end():].lstrip()[:1] not in ('[', '{'):
+        return None
+    return declared_literal(script, name)
+
+
 def extract_lessons(text):
     parser = Scripts()
     parser.feed(text)
@@ -128,14 +149,35 @@ def extract_lessons(text):
         if tag in {'lesson-data', 'initial-scenario', 'additional-scenarios', 'default-scenario'}:
             data = json.loads(value)
             records += data.get('scenarios', [data]) if isinstance(data, dict) else data
+        if tag == 'resource-data':
+            resources = json.loads(value)
+            lesson = resources.get('lesson', {})
+            if lesson.get('lesson_id') and lesson.get('phrases'):
+                records.append({**lesson, 'mechanism': 'meaning-melody',
+                                'activity_count': len(lesson['phrases'])})
         if not attrs.get('type'):
-            scenario = declared_literal(value, 'SCENARIO')
+            for name in ('LESSON_CONTENT', 'LUKE_CONTENT'):
+                content = assigned_lesson(value, name)
+                if isinstance(content, dict) and content.get('id'):
+                    mechanism = ('biography-music' if name == 'LUKE_CONTENT' else
+                                 'text-music-relay' if content.get('levels') else
+                                 'music-mindmap' if content.get('hymn') or content.get('hymnText') else
+                                 'image-mindmap')
+                    groups = content.get('stations', content.get('scenes', []))
+                    if content.get('levels'):
+                        groups = [scene for level in content['levels'].values() for scene in level.get('scenes', [])]
+                    records.append({**content, 'mechanism': mechanism, 'activity_count': len(groups)})
+            history = literal_declaration(value, 'DATA')
+            if isinstance(history, dict) and history.get('cities'):
+                records.append({**history, 'id': 'historical-worlds', 'mechanism': 'historical-selector',
+                                'activity_count': len(history['cities'])})
+            scenario = literal_declaration(value, 'SCENARIO')
             if isinstance(scenario, dict) and scenario.get('scenarioId') and scenario.get('traditions'):
                 records.append({**scenario, 'id': scenario['scenarioId'],
                                 'mechanism': 'cosmology-threads', 'activity_count': len(scenario['traditions'])})
             storage = re.search(r'\bconst STORAGE_KEY\s*=\s*[\"\x27]([\w.-]+)', value)
             if storage:
-                stations = declared_literal(value, 'GROUPS') or declared_literal(value, 'LESSON')
+                stations = literal_declaration(value, 'GROUPS') or literal_declaration(value, 'LESSON')
                 if isinstance(stations, list) and stations and all(isinstance(s, dict) and s.get('id') for s in stations):
                     title = re.search(r'<title>(.*?)</title>', text, re.S | re.I)
                     records.append({'id': re.sub(r'\.v\d+$', '', storage[1]),
@@ -147,9 +189,15 @@ def extract_lessons(text):
         native = record.get('lesson_id') or record.get('id') or record.get('scenarioId')
         if not native or native == 'new_lesson' or str(record.get('title', '')).startswith('['):
             continue
-        if record.get('rounds'):
+        if record.get('rounds') and not record.get('mechanism'):
             record = {**record, 'mechanism': 'concentric-rings', 'activity_count': len(record['rounds'])}
+        if record.get('stations') and not record.get('mechanism'):
+            record = {**record, 'mechanism': 'image-mindmap', 'activity_count': len(record['stations'])}
+        if record.get('scenes') and record.get('groups') and not record.get('mechanism'):
+            record = {**record, 'mechanism': 'image-mindmap', 'activity_count': len(record['groups'])}
         record = {**record, 'id': native}
+        if record.get('mechanism') in {'meaning-melody', 'music-mindmap', 'biography-music', 'text-music-relay'}:
+            record['audio_available'] = 'data:audio/' in text
         if not record.get('activity_count'):
             record['activity_count'] = len(record.get('items', record.get('exercises', []))) or None
         if not any(unit['id'] == native for unit in units):

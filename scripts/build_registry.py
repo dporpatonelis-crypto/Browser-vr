@@ -138,6 +138,8 @@ class Builder:
                 'aliases': [], 'notes': [], 'source_groups': [],
             }
         item = self.scenarios[sid]
+        if item.pop('title_pending', False) and title:
+            item['title'] = title
         item.update(fields)
         return item
 
@@ -385,10 +387,48 @@ class Builder:
             elif record['mechanism'] == 'room-preview':
                 label = 'Unity VR · Παρατηρητήριο του Χρόνου · Χώρος περιήγησης'
                 note = ('Από την πύλη της Main ο επισκέπτης εισέρχεται στο Παρατηρητήριο του Χρόνου, '
-                        'περιηγείται στην αίθουσα και παρακολουθεί το σύντομο εισαγωγικό βίντεο στην πίσω οθόνη. '
-                        'Υπάρχουν δύο περιβάλλοντα. Η κονσόλα είναι βάση για μελλοντική δραστηριότητα· '
-                        'δεν έχει διαμορφωθεί ακόμη άσκηση χρονολογικής αντιστοίχισης.')
+                        'περιηγείται στην αίθουσα και βλέπει το εισαγωγικό βίντεο. '
+                        'Στον ίδιο χώρο λειτουργούν πλέον η Βιβλιοθήκη του Χρόνου, οι κάρτες και κλωστές της Θείας Οικονομίας, '
+                        'ο μηχανισμός με τα γρανάζια και οι τρεις χωριστές πορείες με σταθμούς. '
+                        'Κάθε δραστηριότητα περιγράφεται στη δική της κάρτα.')
                 modes = ['περιήγηση', 'παρατήρηση']
+            elif record['mechanism'] == 'time-library':
+                label = 'Unity VR · Βιβλιοθήκη του Χρόνου'
+                note = (f'Ο μαθητής επιλέγει ελεύθερα ανάμεσα σε {count} βιβλία και κάρτες προσώπων, '
+                        'πιάνει ένα αντικείμενο και το αφήνει στη φωτεινή βάση. Αλλάζει το ιστορικό περιβάλλον '
+                        'και προβάλλεται το αντίστοιχο βίντεο. Υπάρχουν Κωνσταντινούπολη, Αλεξάνδρεια και Αθήνα, '
+                        'δέκα Πατέρες της Εκκλησίας και οκτώ βιβλικά πρόσωπα. Μπορεί να επαναλάβει την προβολή '
+                        'ή να επιστρέψει το αντικείμενο. Η επιλογή βίντεο είναι χωριστή από τις ασκήσεις της αίθουσας.')
+                modes = ['επιλογή πηγής', 'παρατήρηση', 'ακρόαση', 'ιστορικό πλαίσιο']
+            elif record['mechanism'] == 'chronology-rail':
+                label = 'Unity VR · Θεία Οικονομία · Κάρτες και κλωστές'
+                note = (f'Από τις Δραστηριότητες του Παρατηρητηρίου ο μαθητής επιλέγει Θεία Οικονομία, '
+                        f'τοποθετεί {count} κάρτες σταθμών στη χρονική σειρά και συνδέει '
+                        f"{data['relation_count']} σχέσεις με κλωστές. Οι σταθμοί είναι Αβραάμ, Μωυσής, Προφήτες, Χριστός και Εκκλησία. "
+                        'Οι κάρτες αλλάζουν το περιβάλλον και οι σωστές σχέσεις φωτίζουν τη διαδρομή.')
+                modes = ['χρονολογική σειρά', 'σύνδεση σχέσεων', 'αιτιολόγηση']
+            elif record['mechanism'] == 'chronology-journey':
+                label = 'Unity VR · Πορεία στον Χρόνο · '+title
+                note = (f'Από το χειρόγραφο Δραστηριότητες ο μαθητής επιλέγει «{title}». '
+                        f'Με τη μανιβέλα προχωρά σε {count} σταθμούς του χάρτη: μεταφέρεται στον σταθμό, '
+                        'παρατηρεί την ανάδυση του θέματος και το ιστορικό περιβάλλον και βλέπει τη σχετική προβολή. '
+                        'Μπορεί να επανεπισκεφτεί ολοκληρωμένους σταθμούς ή να αρχίσει νέα πορεία.')
+                modes = ['καθοδηγούμενη περιήγηση', 'ιστορική ακολουθία', 'παρατήρηση', 'συζήτηση']
+            elif record['mechanism'] == 'historical-gears':
+                label = 'Unity VR · Μηχανισμός του Χρόνου · Τρία γρανάζια'
+                note = ('Στο Παρατηρητήριο του Χρόνου ο μαθητής αναζητά τρία γρανάζια με σύμβολα βιβλίου, '
+                        'ειληταρίου και πόλης, τα μεταφέρει στις αντίστοιχες υποδοχές και περιστρέφει τη μανιβέλα. '
+                        'Ο μηχανισμός συνδέεται με τις πορείες της αίθουσας. Ο εκπαιδευτικός υποδεικνύει τις κρυψώνες '
+                        'μετά την επιλεγμένη εργασία· δεν υπάρχει αυτόματη μεταφορά προόδου από τα HTML.')
+                modes = ['αναζήτηση', 'συναρμολόγηση', 'συνεργασία']
+            elif record['mechanism'] == 'meaning-melody':
+                label = 'Unity VR · Χριστός γεννάται · Νόημα και μελωδία'
+                note = ('Στο κυκλικό αναλόγιο του Χριστιανισμού ο μαθητής επιλέγει Χριστός γεννάται. '
+                        'Μεταφέρει τις τρεις κάρτες Δοξολογία, Υποδοχή και Πνευματική ανύψωση στις περιοχές της εικόνας. '
+                        'Έπειτα ακούει τα αποσπάσματα και περιστρέφει τρεις μουσικούς δακτυλίους, '
+                        'ώστε να αντιστοιχίσει τη μελωδία με τις φράσεις του ύμνου. Ο έλεγχος φωτίζει την εικόνα '
+                        'και η ολοκλήρωση παίζει την οργανική απόδοση. Η συνέχεια από το HTML επιλέγεται από τον εκπαιδευτικό.')
+                modes = ['ερμηνεία κειμένου', 'αντιστοίχιση καρτών', 'ακρόαση', 'μουσική αντιστοίχιση']
             elif record['mechanism'] == 'concept-canvas':
                 exercises = data['activity_count']
                 label = 'Unity VR · Κυκλικό αναλόγιο · '+title
@@ -521,7 +561,17 @@ class Builder:
                     if media.get('type')=='slides' and media.get('url'):
                         self.activity(s,'slides',media.get('title') or 'Διαφάνειες',media['url'],media_id=media.get('media_id'))
                     elif media.get('type') == 'drive' and media.get('download_only') and media.get('drive_id'):
-                        self.activity(s, 'html', media['title'], media['url'], app='drive-html',
+                        native = media.get('native_id', '')
+                        target_id = (self.config.get('html_scenario_links', {}).get(native)
+                                     or self.rules.get('html_lesson_links', {}).get(native)
+                                     or self.rules.get('concept_canvas_lesson_links', {}).get(native))
+                        target = self.scenarios.get(target_id) if target_id else None
+                        if target_id and target is None:
+                            target = self.scenario(target_id, section['title'])
+                            target['title_pending'] = True
+                        target = target or s
+                        self.add_source(target, f, 'Digital Book', lid, f"lessons/{lid}/sections/{secid}")
+                        self.activity(target, 'html', media['title'], media['url'], app='drive-html',
                                       native_id=media.get('native_id', ''), drive_id=media['drive_id'],
                                       identity_key='drive:'+media['drive_id']+':'+media.get('native_id',''),
                                       media_id=media.get('media_id'), download_only=True, drive_html=True,
@@ -644,15 +694,22 @@ class Builder:
                 summary = {
                     'concentric-rings': 'Περιστροφή τριών δακτυλίων, σύνθεση πρότασης και έλεγχος με την κεντρική σφραγίδα.',
                     'cosmology-threads': 'Σύνδεση τεσσάρων καρτών πηγών με την αντίστοιχη παράδοση και σύγκριση αφηγήσεων.',
-                    'image-mindmap': 'Σύνδεση εννοιών με σημεία της εικόνας, φωτεινά νήματα και σταδιακή αποκάλυψη κειμένου.'
+                    'image-mindmap': 'Σύνδεση εννοιών με σημεία της εικόνας, φωτεινά νήματα και σταδιακή αποκάλυψη κειμένου.',
+                    'historical-selector': 'Επιλογή ενός από τέσσερα ιστορικά περιβάλλοντα, αναζήτηση των σημείων του και μελέτη των αντίστοιχων κειμένων.',
+                    'music-mindmap': 'Μελέτη κειμένου και ύμνου στην ίδια εικόνα, σύνδεση εννοιών και σταδιακή αποκάλυψη των αποσπασμάτων.',
+                    'biography-music': 'Εξερεύνηση οκτώ σκηνών από τον βίο του αγίου Λουκά, σύνδεση λέξεων με την εικόνα και χωριστή ανάγνωση του ύμνου.',
+                    'text-music-relay': 'Δύο διαδρομές στην ίδια εφαρμογή: μελέτη της Προς Διόγνητον επιστολής και ανάγνωση του ύμνου «Δός μοι τούτον τον ξένον», με συνδέσεις στην εικόνα.',
+                    'meaning-melody': 'Σύνδεση τριών εννοιών με τις φράσεις «δοξάσατε», «ἀπαντήσατε», «ὑψώθητε» και κατόπιν αντιστοίχιση των μουσικών αποσπασμάτων με τον ύμνο.'
                 }.get(mechanism)
+                if mechanism in {'music-mindmap', 'biography-music', 'text-music-relay'} and not data.get('audio_available'):
+                    summary += ' Η ελεγμένη έκδοση περιλαμβάνει το κείμενο του ύμνου, χωρίς ενσωματωμένη ακρόαση.'
                 if not summary:
                     summary = ('Από το πεδίο «Υλικό» επίλεξε «'+label+'».' if data.get('concept_canvas') else
                                'Από το μενού «Σενάρια» επίλεξε «'+label+'».' if len(embedded) > 1 else
                                'Αντιστοίχιση καρτών και σταδιακή αποκάλυψη της εικόνας.')
                 if mechanism == 'concentric-rings': label = 'Ομόκεντροι δακτύλιοι · '+label
                 elif mechanism == 'cosmology-threads': label = 'Κλωστές · '+label
-                private = f.get('source_visibility_status') == 'not_shared' or f.get('shared') is False
+                private = f.get('teacher_download_only', True)
                 if private:
                     summary += ' Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.'
                 a = self.activity(s,'quiz' if data.get('exercises') else 'html','HTML · '+label,f['url'],path=local if local.is_file() else None,
@@ -667,6 +724,8 @@ class Builder:
                     if a.get('local_url'): a['local_url'] = '/launch/'+previous
                 if private: a.pop('local_url', None)
                 self.html_units[a['id']] = data
+                if data.get('audience'):
+                    self.set_audience(s, data['audience'])
                 s['modes']+=['αντιστοίχιση','αιτιολόγηση']
                 if not s['objectives'] and data.get('subtitle'):
                     s['objectives']=[data['subtitle']]

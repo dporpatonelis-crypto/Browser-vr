@@ -54,7 +54,10 @@ def context_fields(data):
 
 
 def material_snapshot(activity):
-    return {k: activity.get(k, '') for k in ('id', 'kind', 'label', 'url', 'room', 'native_id')}
+    result = {k: activity.get(k, '') for k in ('id', 'kind', 'label', 'url', 'room', 'native_id')}
+    if activity.get('kind') == 'canvas':
+        result.update({k:activity[k] for k in ('canvas_id','canvas_version_id') if k in activity})
+    return result
 
 
 def select_materials(ids, scenario, plan=None):

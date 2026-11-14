@@ -1,0 +1,20 @@
+{
+  "python_tests": 47,
+  "javascript_tests": 29,
+  "browser_checks": 34,
+  "browser_errors": [],
+  "physical_android_tested": false,
+  "cloud_bundle": "syntax checked",
+  "published_registry_and_existing_payloads": "unchanged",
+  "private_pilot": "private transfer package prepared; excluded from public Git",
+  "date": "2026-11-14",
+  "status": "passed",
+  "notes": [
+    "No physical Android or interactive-whiteboard test",
+    "Original public catalogue and activity payloads unchanged",
+    "Local teacher evaluations remain empty; browser tests used separate storage",
+    "Publishing uses the existing public Pages and owner-only Apps Script destinations"
+  ],
+  "json_schema": "2020-12 meta-schema and both pilot documents validated",
+  "private_slide_previews_preserved": 27
+}

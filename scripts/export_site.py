@@ -66,6 +66,8 @@ def portable_registry(registry, output, site_url, cloud_url=''):
                                 'locator': s.get('locator', '')} for s in source_scenario['sources']]
         scenario['activities'] = []
         for original in source_scenario['activities']:
+            if original.get('kind') == 'canvas' or original.get('app') == 'lesson-map':
+                continue  # Private registrations never become public catalogue entries.
             activity = {k: copy.deepcopy(v) for k, v in original.items() if k in ACTIVITY_FIELDS}
             activity['url'] = https_link(activity.get('url'))
             source = sources.get(original.get('source_key'))
@@ -91,6 +93,19 @@ def portable_registry(registry, output, site_url, cloud_url=''):
     return without_paths(result)
 
 
+def copy_public_ui(output):
+    """UI-only update preserves the verified catalogue and existing activity payloads."""
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    for filename in ('index.html', 'styles.css', 'app.mjs', 'domain.mjs', 'icon.svg', 'lesson-map.css', 'lesson-map-domain.mjs', 'lesson-map-viewers.mjs', 'lesson-map.mjs'):
+        shutil.copyfile(ROOT/'public'/filename, output/filename)
+    for folder in ('assets/lesson-map','vendor/pdfjs'):
+        shutil.copytree(ROOT/'public'/folder, output/folder, dirs_exist_ok=True)
+    html = (output/'index.html').read_text()
+    html = html.replace('<script type="module"', '<meta name="mission-mode" content="catalogue">\n  <script type="module"')
+    (output/'index.html').write_text(html, encoding='utf-8')
+
+
 def export_site(output, site_url, cloud_url=''):
     output = Path(output)
     if output.resolve() in {ROOT.resolve(), (ROOT/'public').resolve()}:
@@ -105,15 +120,11 @@ def export_site(output, site_url, cloud_url=''):
     # Remove obsolete educational payloads as part of a repeat export, never source files.
     if (output/'data/activities').is_dir():
         shutil.rmtree(output/'data/activities')
-    for filename in ('index.html', 'styles.css', 'app.mjs', 'domain.mjs', 'icon.svg'):
-        shutil.copyfile(ROOT/'public'/filename, output/filename)
+    copy_public_ui(output)
     registry = json.loads((ROOT/'public/data/scenario-registry.json').read_text())
     portable = portable_registry(registry, output, site_url, cloud_url)
     write_json(output/'data/scenario-registry.json', portable)
     shutil.copyfile(ROOT/'public/data/pedagogical-models.json', output/'data/pedagogical-models.json')
-    html = (output/'index.html').read_text()
-    html = html.replace('<script type="module"', '<meta name="mission-mode" content="catalogue">\n  <script type="module"')
-    (output/'index.html').write_text(html, encoding='utf-8')
     (output/'.nojekyll').touch()
     return portable
 
@@ -124,6 +135,11 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=Path, default=ROOT/'site')
     parser.add_argument('--site-url', default=defaults.get('site_url', 'https://dporpatonelis-crypto.github.io/Browser-vr/'))
     parser.add_argument('--cloud-url', default=defaults.get('cloud_url', ''))
+    parser.add_argument('--ui-only',action='store_true',help='Ενημέρωση μόνο της εμφάνισης, διατήρηση του καταλόγου και όλων των payloads')
     args = parser.parse_args()
+    if args.ui_only:
+        copy_public_ui(args.output)
+        print('Ενημερώθηκε μόνο η εμφάνιση. Ο κατάλογος και τα υπάρχοντα μέσα διατηρήθηκαν.')
+        raise SystemExit(0)
     result = export_site(args.output, args.site_url, args.cloud_url)
     print(f'Εξήχθησαν {len(result["scenarios"])} μαθήματα στο {args.output}.')

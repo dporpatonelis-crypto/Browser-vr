@@ -2,22 +2,24 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {createHash,randomUUID} from 'node:crypto';
+import {lmNewCanvas,lmNewWorkspace} from '../public/lesson-map-domain.mjs';
 
 const owner='teacher@example.com';
 const catalog=JSON.parse(readFileSync(new URL('../site/data/scenario-registry.json',import.meta.url)));
 const models=JSON.parse(readFileSync(new URL('../site/data/pedagogical-models.json',import.meta.url)));
-const source=readFileSync(new URL('../cloud/Code.gs',import.meta.url),'utf8')
+const source=(readFileSync(new URL('../cloud/Code.gs',import.meta.url),'utf8')+'\n'+readFileSync(new URL('../cloud/LessonMaps.gs',import.meta.url),'utf8'))
   .replace('__OWNER_EMAIL__',owner).replace('__CATALOG__',JSON.stringify(catalog))
   .replace('__MODELS__',JSON.stringify(models)).replace('__PRIVATE_PAGE__',JSON.stringify('<html>__MISSION_BOOTSTRAP__</html>'));
 function iterator(rows){let i=0;return {hasNext:()=>i<rows.length,next:()=>rows[i++]};}
 function environment(storage={files:[],properties:new Map()},active=owner,effective=owner){
   const folder={getId:()=> 'private-folder',getSharingAccess:()=> 'PRIVATE',getEditors:()=>[],getViewers:()=>[],getOwner:()=>({getEmail:()=>owner}),
     getFiles:()=>iterator(storage.files),getFilesByName:name=>iterator(storage.files.filter(f=>f.getName()===name)),
-    createFile:blob=>{const f={getName:()=>blob.name,getBlob:()=>({getDataAsString:()=>blob.data})};storage.files.push(f);return f;}};
+    createFile:blob=>{const f={getName:()=>blob.name,getBlob:()=>blob};storage.files.push(f);return f;}};
   const context=vm.createContext({Session:{getActiveUser:()=>({getEmail:()=>active}),getEffectiveUser:()=>({getEmail:()=>effective})},
     PropertiesService:{getScriptProperties:()=>({getProperty:k=>storage.properties.get(k),setProperty:(k,v)=>storage.properties.set(k,v)})},
     LockService:{getScriptLock:()=>({waitLock:()=>{},releaseLock:()=>{}})},DriveApp:{Access:{PRIVATE:'PRIVATE'},createFolder:()=>folder,getFolderById:()=>folder},
-    Utilities:{newBlob:(data,type,name)=>({data,type,name}),formatDate:d=>d.toISOString().slice(0,10)},
+    Utilities:{newBlob:(data,type,name)=>({data,type,name,getName:()=>name,getContentType:()=>type,getBytes:()=>[...Buffer.from(Array.isArray(data)?data.map(b=>b&255):data)],getDataAsString:()=>Array.isArray(data)?Buffer.from(data.map(b=>b&255)).toString('utf8'):data}),formatDate:d=>d.toISOString().slice(0,10),DigestAlgorithm:{SHA_256:'sha256'},computeDigest:(algorithm,data)=>[...createHash(algorithm).update(Buffer.from(data.map(b=>b&255))).digest()],base64Encode:data=>Buffer.from(data.map(b=>b&255)).toString('base64')},
     HtmlService:{createHtmlOutput:s=>({setTitle:()=>({addMetaTag:()=>s})})}});
   vm.runInContext(source,context);
   return {context,storage,folder};
@@ -26,7 +28,7 @@ const payload=(overrides={})=>({request_id:'7ed3a50f-991a-4eb9-964a-f2e5458a5de0
 test('private cloud rejects anonymous, other accounts and mismatched execution identity',()=>{
   for(const [active,effective] of [['',owner],['other@example.com',owner],[owner,'other@example.com']]){
     const {context}=environment(undefined,active,effective);
-    for(const name of ['doGet','listEvaluations','saveEvaluation','listPlans','savePlan','exportEvaluations','verifyPrivateStorage']) assert.throws(()=>context[name](payload()),/ιδιωτικός χώρος/);
+    for(const name of ['doGet','listEvaluations','saveEvaluation','listPlans','savePlan','exportEvaluations','verifyPrivateStorage','listLessonMaps','saveLessonMap','registerLessonCanvas','uploadCanvasAsset','readCanvasAsset']) assert.throws(()=>context[name](payload()),/ιδιωτικός χώρος/);
   }
 });
 
@@ -154,4 +156,43 @@ test('cloud stops if storage was shared or a record was corrupted',()=>{
   folder.getEditors=()=>[];
   storage.files.push({getName:()=>payload().request_id+'.json',getBlob:()=>({getDataAsString:()=>'{broken'})});
   assert.throws(()=>context.listEvaluations(),/ανάκτηση/);
+});
+
+const mapPayload=(overrides={})=>({request_id:randomUUID(),document_id:randomUUID(),kind:'canvas',document:lmNewCanvas('Ιδιωτικό μάθημα',scenario.scenario_id),...overrides});
+test('lesson maps preserve versions, reject stale writes, and retry once',()=>{
+ const {context,storage}=environment();const data=mapPayload(),one=context.saveLessonMap(data).version;
+ assert.equal(context.saveLessonMap(data).created,false);
+ const edit=mapPayload({document_id:one.document_id,previous_version_id:one.id});edit.document.title='Νέα έκδοση';
+ const two=context.saveLessonMap(edit).version;assert.equal(two.previous_version_id,one.id);
+ assert.throws(()=>context.saveLessonMap({...edit,request_id:randomUUID()}),/άλλη συσκευή/);
+ assert.equal(environment(storage).context.listLessonMaps().versions.length,2);
+ assert.equal(context.listEvaluations().records.length,0);assert.equal(context.listPlans().plans.length,0);
+});
+test('private registration is a material with an exact saved canvas version',()=>{
+ const {context}=environment();const row=context.registerLessonCanvas(mapPayload()).version;
+ const c=context.lessonCanvasRegistry_().scenarios.find(s=>s.scenario_id===scenario.scenario_id),a=c.activities.find(a=>a.kind==='canvas');
+ assert.equal(a.canvas_version_id,row.id);assert.equal(catalog.scenarios.find(s=>s.scenario_id===scenario.scenario_id).activities.some(a=>a.kind==='canvas'),false);
+ const plan=context.savePlan(planPayload({planned_material_ids:[a.id]})).plan;assert.equal(plan.planned_materials[0].canvas_version_id,row.id);
+ const usage={confirmed:true,canvas_id:row.document_id,version_id:row.id,used_building_ids:['text'],guidance_building_ids:['images'],note:'Ιδιωτική παρατήρηση'};
+ const evaluation={...payload({scenario_id:scenario.scenario_id,plan_version_id:plan.id,media_usage_recorded:true,used_material_ids:[a.id]}),canvas_usage:usage};
+ const saved=context.saveEvaluation(evaluation).record;assert.equal(saved.canvas_usage.version_id,row.id);assert.equal(context.saveEvaluation(evaluation).created,false);
+ assert.throws(()=>context.saveEvaluation({...evaluation,canvas_usage:{...usage,note:'διαφορετικό'}}),/διαφορετική καταγραφή/);
+ assert.throws(()=>context.validateCanvasUsage_({...usage,confirmed:false},scenario.scenario_id),/Επιβεβαίωσε/);
+ assert.throws(()=>context.validateCanvasUsage_(usage,'foreign'),/έκδοση χάρτη/);
+});
+test('uploaded HTML remains private and its bytes are returned only to the owner',()=>{
+ const {context}=environment();const id=randomUUID(),text='<!doctype html><html><body>ΜΑΘΗΜΑ</body></html>',blob=context.Utilities.newBlob(text,'text/html','activity.html');
+ const result=context.uploadCanvasAsset({asset_id:id,file:blob});assert.equal(result.asset.mime,'text/html');assert.equal(Buffer.from(context.readCanvasAsset(id).base64,'base64').toString('utf8'),text);
+ assert.equal(context.uploadCanvasAsset({asset_id:id,file:blob}).asset.sha256,result.asset.sha256);
+ assert.throws(()=>context.uploadCanvasAsset({asset_id:randomUUID(),file:context.Utilities.newBlob(text,'image/png','fake.png')}),/αντιστοιχεί/);
+ const data=mapPayload();data.document.buildings[3].materials.push({id:randomUUID(),label:'HTML',type:'html',asset_id:id});const row=context.saveLessonMap(data).version;
+ assert.equal(JSON.stringify(row).includes('ΜΑΘΗΜΑ'),false);assert.equal(context.listEvaluations().records.length,0);
+});
+test('server validates map relationships, asset references, and normalized annotations',()=>{
+ const {context}=environment();
+ for(const mutate of [d=>d.schema_version=2,d=>d.buildings.pop(),d=>d.buildings[0].box.x=NaN,d=>d.connections.push({id:randomUUID(),from:'missing',to:'text'}),d=>d.buildings[0].materials.push({id:randomUUID(),type:'pdf',url:'javascript:alert(1)'}),d=>d.buildings[0].materials.push({id:randomUUID(),type:'image',asset_id:randomUUID()})]){
+  const p=mapPayload();mutate(p.document);assert.throws(()=>context.saveLessonMap(p));
+ }
+ const w=lmNewWorkspace(catalog);assert.equal(w.themes.length,5);assert.equal(w.themes.some(t=>t.title.includes('Αποκάλυψη')),false);
+ assert.equal(context.listLessonMaps().versions.length,0);
 });

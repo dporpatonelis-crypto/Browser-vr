@@ -103,3 +103,12 @@ class PlanTests(unittest.TestCase):
         new,_ = self.store.append({**data,'request_id':str(uuid.uuid4()),'media_usage_recorded':True,'used_material_ids':[]},self.registry,self.models)
         self.assertTrue(new['media_usage_recorded'])
         self.assertEqual([],new['used_materials'])
+
+
+def load_tests(loader, standard_tests, pattern):
+    # The existing Pages workflow selects this file. Include map regressions in
+    # that entrypoint; a full discovery already finds test_lesson_maps itself.
+    if pattern == 'test_lesson_plans.py':
+        import test_lesson_maps
+        standard_tests.addTests(loader.loadTestsFromModule(test_lesson_maps))
+    return standard_tests

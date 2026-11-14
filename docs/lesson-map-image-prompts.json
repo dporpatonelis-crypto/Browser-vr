@@ -1,0 +1,38 @@
+[
+  {
+    "key": "library",
+    "prompt": "Use case: illustration-story. Asset type: reusable transparent PNG building sprite for a Greek classroom lesson-map web application. Warm, polished, richly detailed children's-book painted miniature; Mediterranean fantasy architecture, cream limestone, terracotta and lavender accents, golden afternoon light, small trees, flowering plants, tiny stone steps. Orthographic three-quarter isometric camera, entire building visible, centered with generous clear margin, a compact irregular stone foundation and delicate shadow; no surrounding island, no sea, no sky, no people, no letters, no typography, no symbols that look like UI, no watermark. Every building in this set must share the same camera angle, proportions, lighting, hand-painted outlines and palette. This is an approachable knowledge city, not photorealistic, not a flat icon. Subject: An inviting small two-storey library with arched doorway, an oversized open book sculpted above the entrance, visible shelves and rolled manuscripts inside, terracotta roof.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true
+  },
+  {
+    "key": "gallery",
+    "prompt": "Use case: illustration-story. Asset type: reusable transparent PNG building sprite for a Greek classroom lesson-map web application. Warm, polished, richly detailed children's-book painted miniature; Mediterranean fantasy architecture, cream limestone, terracotta and lavender accents, golden afternoon light, small trees, flowering plants, tiny stone steps. Orthographic three-quarter isometric camera, entire building visible, centered with generous clear margin, a compact irregular stone foundation and delicate shadow; no surrounding island, no sea, no sky, no people, no letters, no typography, no symbols that look like UI, no watermark. Every building in this set must share the same camera angle, proportions, lighting, hand-painted outlines and palette. This is an approachable knowledge city, not photorealistic, not a flat icon. Subject: A bright picture gallery with a small domed roof, open arcade, framed colorful paintings displayed under the arches, one small easel near the entrance.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true
+  },
+  {
+    "key": "concepts",
+    "prompt": "Use case: illustration-story. Asset type: reusable transparent PNG building sprite for a Greek classroom lesson-map web application. Warm, polished, richly detailed children's-book painted miniature; Mediterranean fantasy architecture, cream limestone, terracotta and lavender accents, golden afternoon light, small trees, flowering plants, tiny stone steps. Orthographic three-quarter isometric camera, entire building visible, centered with generous clear margin, a compact irregular stone foundation and delicate shadow; no surrounding island, no sea, no sky, no people, no letters, no typography, no symbols that look like UI, no watermark. Every building in this set must share the same camera angle, proportions, lighting, hand-painted outlines and palette. This is an approachable knowledge city, not photorealistic, not a flat icon. Subject: A school of ideas with a lavender tiled roof, circular stained-glass window showing six colorful connected circles, open lecture porch and a tiny branching-tree sculpture.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true
+  },
+  {
+    "key": "workshop",
+    "prompt": "Use case: illustration-story. Asset type: reusable transparent PNG building sprite for a Greek classroom lesson-map web application. Warm, polished, richly detailed children's-book painted miniature; Mediterranean fantasy architecture, cream limestone, terracotta and lavender accents, golden afternoon light, small trees, flowering plants, tiny stone steps. Orthographic three-quarter isometric camera, entire building visible, centered with generous clear margin, a compact irregular stone foundation and delicate shadow; no surrounding island, no sea, no sky, no people, no letters, no typography, no symbols that look like UI, no watermark. Every building in this set must share the same camera angle, proportions, lighting, hand-painted outlines and palette. This is an approachable knowledge city, not photorealistic, not a flat icon. Subject: A creative learning workshop with mint and blue roof accents, large arched windows, playful gears and a blue glass interactive panel, small tools and a workbench.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true
+  },
+  {
+    "key": "synthesis",
+    "prompt": "Use case: illustration-story. Asset type: reusable transparent PNG building sprite for a Greek classroom lesson-map web application. Warm, polished, richly detailed children's-book painted miniature; Mediterranean fantasy architecture, cream limestone, terracotta and lavender accents, golden afternoon light, small trees, flowering plants, tiny stone steps. Orthographic three-quarter isometric camera, entire building visible, centered with generous clear margin, a compact irregular stone foundation and delicate shadow; no surrounding island, no sea, no sky, no people, no letters, no typography, no symbols that look like UI, no watermark. Every building in this set must share the same camera angle, proportions, lighting, hand-painted outlines and palette. This is an approachable knowledge city, not photorealistic, not a flat icon. Subject: An elegant small synthesis stoa with five limestone columns, flowering vines, two interwoven gold-and-violet ribbons above a central arch, an open circular meeting terrace.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true
+  },
+  {
+    "key": "island",
+    "prompt": "Use case: illustration-story. Asset type: reusable transparent PNG building sprite for a Greek classroom lesson-map web application. Warm, polished, richly detailed children's-book painted miniature; Mediterranean fantasy architecture, cream limestone, terracotta and lavender accents, golden afternoon light, small trees, flowering plants, tiny stone steps. Orthographic three-quarter isometric camera, entire building visible, centered with generous clear margin, a compact irregular stone foundation and delicate shadow; no surrounding island, no sea, no sky, no people, no letters, no typography, no symbols that look like UI, no watermark. Every building in this set must share the same camera angle, proportions, lighting, hand-painted outlines and palette. This is an approachable knowledge city, not photorealistic, not a flat icon. Subject: A lush miniature irregular island ONLY, with grass, rocky purple-limestone cliffs, a central clear beige parchment-colored meadow occupying half the surface for UI text, two tiny cypress trees at the back and flowering shrubs at the edges; absolutely NO building, no book, no sea. Same gentle isometric perspective.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true
+  }
+]

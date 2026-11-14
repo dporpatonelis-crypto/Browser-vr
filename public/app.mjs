@@ -1,4 +1,6 @@
 import {filterScenarios, relevantHistory, latestPlans, materialChoices, sameTeachingSession} from './domain.mjs';
+import {createLessonMap} from './lesson-map.mjs';
+import {LM_BUILDINGS} from './lesson-map-domain.mjs';
 
 const app = document.querySelector('#app');
 const cloud = window.__MISSION_CLOUD__ || null;
@@ -43,6 +45,7 @@ const state = {registry:null,models:null,view:'select',selected:null,grade:remem
   modelId:remembered.modelId || 'guided-exploration',filters:{search:'',goal:'',subject:'',source:'',includeUnknown:false},
   classProfile:'',timeSlot:'',lessonDate:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Athens'}),
   service:false,records:[],plans:[],planError:'',historyEpoch:0,planDrafts:new Map(),teaching:false,historyError:'',drafts:new Map(),notice:'',refreshing:false,saving:false,planning:false};
+let lessonMapController = null;
 const selected = () => state.registry.scenarios.find(s => s.scenario_id === state.selected);
 const model = () => state.models.models.find(m => m.id === state.modelId) || state.models.models[0];
 function contextKey() { return state.selected; }
@@ -126,7 +129,7 @@ function privateSpace(view='evaluate') {
 }
 function header() {
   const steps=[['select','book','Επιλογή μαθήματος','Η αφετηρία της τάξης'],['activity','play','Σχέδιο μαθήματος','Επιλογές και διδασκαλία'],['evaluate','check','Τι έγινε στην τάξη','Μέσα και αξιολόγηση']];
-  return `<header class="header"><div class="brand"><img src="${esc(asset('icon.svg'))}" alt="" width="42" height="42"><div><span class="brand-title">Πιλοτήριο τάξης</span><span class="brand-subtitle">TEACHING MISSION CONTROL</span></div></div><div class="header-right"><span class="teacher-mark"><i class="status-dot ${state.service?'':'offline'}"></i>${cloud?'Ιδιωτικός χώρος · cloud':state.service?'Χώρος εκπαιδευτικού':'Online κατάλογος'}</span>${!state.service?privateSpace('activity'):''}${link(state.registry.integrations.digital_book.url,icon('book')+' Το ψηφιακό μου βιβλίο '+icon('external'),'book-link')}</div></header>
+  return `<header class="header"><div class="brand"><img src="${esc(asset('icon.svg'))}" alt="" width="42" height="42"><div><span class="brand-title">Πιλοτήριο τάξης</span><span class="brand-subtitle">TEACHING MISSION CONTROL</span></div></div><div class="header-right"><button class="button secondary" data-open-lesson-map>🗺️ Χάρτης Μαθήματος</button><span class="teacher-mark"><i class="status-dot ${state.service?'':'offline'}"></i>${cloud?'Ιδιωτικός χώρος · cloud':state.service?'Χώρος εκπαιδευτικού':'Online κατάλογος'}</span>${!state.service?privateSpace('activity'):''}${link(state.registry.integrations.digital_book.url,icon('book')+' Το ψηφιακό μου βιβλίο '+icon('external'),'book-link')}</div></header>
   <nav class="steps" aria-label="Πορεία μαθήματος">${steps.map(([id,ic,title,caption],i)=>`<button class="step ${state.view===id?'active':''}" data-view="${id}" ${id!=='select'&&!state.selected?'disabled title="Επίλεξε πρώτα ένα σενάριο"':''} ${state.view===id?'aria-current="step"':''}><span class="step-number">0${i+1}</span><span class="step-copy"><strong>${title}</strong><small>${caption}</small></span>${icon(ic)}</button>`).join('')}</nav>`;
 }
 function gradeOptions(empty='Όλες οι τάξεις') { return `<option value="">${empty}</option>`+state.registry.grades.map(g=>`<option ${g===state.grade?'selected':''}>${esc(g)}</option>`).join(''); }
@@ -160,7 +163,9 @@ function sessionContext() {
 }
 function recordDetails(r) {
   const plan=r.lesson_plan;
-  return `<p>${esc([r.class_profile,r.time_slot?timeLabel(r.time_slot):'',r.lesson_date?'Μάθημα: '+date(r.lesson_date):''].filter(Boolean).join(' · '))}</p>${plan?`<p><strong>Σχεδιάστηκαν:</strong> ${esc(plan.planned_materials.map(a=>a.label).join(' · ')||'Χωρίς ψηφιακά μέσα')}</p>`:''}<p><strong>Χρησιμοποιήθηκαν:</strong> ${r.media_usage_recorded?esc(r.used_materials.map(a=>a.label).join(' · ')||'Κανένα από τα καταγεγραμμένα μέσα'):'Δεν καταγράφηκαν στην παλαιότερη αξιολόγηση.'}</p>`;
+  const canvas=r.canvas_usage;
+  const canvasSummary=canvas?`<p><strong>Χάρτης:</strong> ${esc(canvas.title)} · ${esc(canvas.used_building_ids.map(id=>LM_BUILDINGS.find(b=>b.id===id)?.title||id).join(' · '))}</p>${canvas.note?`<p>${esc(canvas.note)}</p>`:''}`:'';
+  return `${canvasSummary}<p>${esc([r.class_profile,r.time_slot?timeLabel(r.time_slot):'',r.lesson_date?'Μάθημα: '+date(r.lesson_date):''].filter(Boolean).join(' · '))}</p>${plan?`<p><strong>Σχεδιάστηκαν:</strong> ${esc(plan.planned_materials.map(a=>a.label).join(' · ')||'Χωρίς ψηφιακά μέσα')}</p>`:''}<p><strong>Χρησιμοποιήθηκαν:</strong> ${r.media_usage_recorded?esc(r.used_materials.map(a=>a.label).join(' · ')||'Κανένα από τα καταγεγραμμένα μέσα'):'Δεν καταγράφηκαν στην παλαιότερη αξιολόγηση.'}</p>`;
 }
 function previous(s, full=true) {
   if (state.historyError) return `<div class="notice error" role="alert">${esc(state.historyError)}</div>`;
@@ -179,6 +184,7 @@ function selectedIntro(s, eyebrow) {
 }
 function activityCard(a) {
   const choice=`<label class="material-choice"><input type="checkbox" data-planned="${esc(a.id)}" ${planDraft().ids.includes(a.id)?'checked':''}><span>Στο σχέδιο μαθήματος</span></label>`;
+  if (a.kind==='canvas') return `<article class="material">${icon('book')}<div><span class="material-kind">ΧΑΡΤΗΣ ΜΑΘΗΜΑΤΟΣ</span><h3>${esc(a.label)}</h3><p>Πέντε οικοδομήματα γνώσης · ιδιωτικός χάρτης</p><button class="button secondary" data-open-canvas="${esc(a.canvas_id)}">Άνοιγμα χάρτη</button>${choice}</div></article>`;
   if (a.kind==='vr') return `<article id="material-${esc(a.id)}" tabindex="-1" class="material vr-material">${icon('vr')}<div><span class="material-kind">UNITY VR · ${a.availability_status==='room-only'?'ΧΩΡΟΣ ΠΕΡΙΗΓΗΣΗΣ':'ΤΟΠΙΚΗ ΑΠΟΣΤΟΛΗ'}</span><h3>${esc(a.label)}</h3><p>${esc(a.room || '')}</p><p>${esc(a.note)}</p>${choice}<details><summary>Πληροφορία τοπικής αποστολής</summary><p class="source-path">${esc(state.registry.source_files.find(x=>x.key===a.source_key)?.path || '')}</p><p>Άνοιξε την αποστολή από την υπάρχουσα διαδικασία του Unity project.</p></details></div></article>`;
   const continuation=(a.unity_counterparts||[]).map(u=>`<aside class="unity-continuation"><strong>${esc(u.relationship)}</strong><p>${esc(u.note)}</p><a class="small-link" href="${esc(u.url)}" data-material-focus="${esc(u.activity_id)}" data-material-scenario="${esc(u.scenario_id)}">${esc(u.label)} →</a></aside>`).join('')+(a.unity_note?`<p class="unity-continuation">${esc(a.unity_note)}</p>`:'');
   const kind={book:'DIGITAL BOOK',slides:'ΔΙΑΦΑΝΕΙΕΣ',html:'ΔΙΑΔΡΑΣΤΙΚΗ ΕΦΑΡΜΟΓΗ',quiz:'QUIZ',text:'ΚΕΙΜΕΝΟ',model:'3D ΜΟΝΤΕΛΟ · ΥΛΙΚΟ ΓΙΑ ΠΡΟΕΤΟΙΜΑΣΙΑ'}[a.kind];
@@ -205,7 +211,7 @@ function planPanel() {
   const materials=p.ids.map(id=>choices.find(a=>a.id===id)).filter(Boolean);
   return `<section class="panel lesson-plan ${state.teaching?'teaching-plan':''}" aria-label="Το σχέδιο μαθήματος"><div class="plan-heading"><div><p class="eyebrow">ΠΡΙΝ ΚΑΙ ΚΑΤΑ ΤΗ ΔΙΔΑΣΚΑΛΙΑ</p><h2>Το σχέδιο μαθήματός μου</h2><p class="muted plan-context-summary">${esc([state.grade,state.section,state.timeSlot?timeLabel(state.timeSlot):'',state.lessonDate?date(state.lessonDate):''].filter(Boolean).join(' · '))}</p></div><div class="plan-actions"><button class="button secondary" id="teaching-mode">${state.teaching?'Επεξεργασία σχεδίου':'Προβολή για διδασκαλία'}</button><button class="button secondary" id="copy-plan">Αντίγραφο για άλλο τμήμα</button><button class="text-button" id="new-plan">Νέο σχέδιο</button></div></div>
   <div id="saved-plan-list">${savedPlansHTML()}</div>
-  <p class="plan-profile" ${state.classProfile?'':'hidden'}>${esc(state.classProfile)}</p><div class="plan-grid"><div><h3>Τα μέσα που επέλεξα <span class="count">${materials.length}</span></h3>${materials.length?`<ol class="plan-materials">${materials.map((a,i)=>{const current=s.activities.find(x=>x.id===a.id);const target=a.kind==='vr'?'':state.service&&current?.local_url?current.local_url:a.url;return `<li><div><strong>${esc(a.label)}</strong>${a.room?`<small>${esc(a.room)}</small>`:''}${a.unavailable?'<small class="missing-material">Η παλιά επιλογή απουσιάζει από τον σημερινό κατάλογο. Έλεγξε τη διαθεσιμότητά της.</small>':''}</div><div class="plan-actions">${target?link(target,'Άνοιγμα '+icon('external'),'button secondary'):'<small>Άνοιγμα από το Unity project</small>'}${!state.teaching?`<button class="text-button" data-move-material="${esc(a.id)}" ${i===0?'disabled':''} aria-label="Νωρίτερα: ${esc(a.label)}">↑</button><button class="text-button" data-remove-material="${esc(a.id)}" aria-label="Αφαίρεση: ${esc(a.label)}">Αφαίρεση</button>`:''}</div></li>`;}).join('')}</ol>`:'<p class="muted">Σημείωσε «Στο σχέδιο μαθήματος» στις κάρτες υλικού παρακάτω. Η σειρά των επιλογών είναι και η σειρά στο σχέδιο.</p>'}
+  <p class="plan-profile" ${state.classProfile?'':'hidden'}>${esc(state.classProfile)}</p><div class="plan-grid"><div><h3>Τα μέσα που επέλεξα <span class="count">${materials.length}</span></h3>${materials.length?`<ol class="plan-materials">${materials.map((a,i)=>{const current=s.activities.find(x=>x.id===a.id);const pinned=p.saved&&!planDirty()?p.saved.planned_materials.find(m=>m.id===a.id&&m.kind==='canvas'):null;const target=a.kind==='canvas'?'#canvas/'+a.canvas_id+(pinned?.canvas_version_id?'/'+pinned.canvas_version_id:''):a.kind==='vr'?'':state.service&&current?.local_url?current.local_url:a.url;return `<li><div><strong>${esc(a.label)}</strong>${a.room?`<small>${esc(a.room)}</small>`:''}${a.unavailable?'<small class="missing-material">Η παλιά επιλογή απουσιάζει από τον σημερινό κατάλογο. Έλεγξε τη διαθεσιμότητά της.</small>':''}</div><div class="plan-actions">${target?link(target,'Άνοιγμα '+icon('external'),'button secondary'):'<small>Άνοιγμα από το Unity project</small>'}${!state.teaching?`<button class="text-button" data-move-material="${esc(a.id)}" ${i===0?'disabled':''} aria-label="Νωρίτερα: ${esc(a.label)}">↑</button><button class="text-button" data-remove-material="${esc(a.id)}" aria-label="Αφαίρεση: ${esc(a.label)}">Αφαίρεση</button>`:''}</div></li>`;}).join('')}</ol>`:'<p class="muted">Σημείωσε «Στο σχέδιο μαθήματος» στις κάρτες υλικού παρακάτω. Η σειρά των επιλογών είναι και η σειρά στο σχέδιο.</p>'}
   <label for="plan-notes" class="field-label">Η δική μου πορεία / σημειώσεις <span class="optional">προαιρετικό</span></label>${state.teaching?`<p class="plan-notes">${esc(p.notes||'Δεν έχουν προστεθεί σημειώσεις.')}</p>`:`<textarea id="plan-notes" rows="3" maxlength="2000" placeholder="π.χ. Ερώτημα εκκίνησης → διαφάνειες → ομάδες στο VR → συζήτηση">${esc(p.notes)}</textarea>`}</div><div class="plan-route">${planRouteHTML()}</div></div>
   ${p.error?`<div class="notice error" role="alert">${esc(p.error)} Οι επιλογές σου παραμένουν εδώ.</div>`:''}<div class="plan-save"><span role="status">${esc(planStatus())}</span>${state.service?`<button class="button primary" id="save-plan" ${state.planning||state.saving||!planDirty()?'disabled':''}>${state.planning?'Αποθηκεύεται…':'Αποθήκευση σχεδίου'}</button>`:`<div>${privateSpace('activity')}<p class="privacy-note">Οι επιλογές υλικού μεταφέρονται στον ιδιωτικό χώρο. Εκεί συμπλήρωσε τα στοιχεία και τις σημειώσεις και αποθήκευσε το σχέδιο.</p></div>`}</div></section>`;
 }
@@ -228,15 +234,39 @@ function evaluationView() {
   const s=selected(), d=draft();
   const p=planDraft(),choices=materialChoices(s,p.saved||state.plans.find(x=>x.id===p.sourceVersionId)),planned=choices.filter(a=>p.ids.includes(a.id));
   return `${selectedIntro(s,'Η ΔΙΚΗ ΣΟΥ ΑΝΑΤΡΟΦΟΔΟΤΗΣΗ')}${sessionContext()}<div class="evaluation-layout"><section class="panel evaluation-panel"><section class="actual-materials"><p class="eyebrow">ΑΠΟ ΤΟ ΣΧΕΔΙΟ ΣΤΗΝ ΠΡΑΞΗ</p><h2>Ποια μέσα χρησιμοποιήθηκαν;</h2><p class="muted"><strong>Στο σχέδιο:</strong> ${esc(planned.map(a=>a.label).join(' · ')||'Χωρίς επιλεγμένα μέσα')}. Μπορείς να αφαιρέσεις όσα δεν πρόλαβες ή να προσθέσεις μέσα που χρησιμοποίησες επιπλέον.</p><button class="text-button" id="use-planned">Επιλογή των μέσων του σχεδίου</button><div class="used-options" role="group" aria-label="Μέσα που χρησιμοποιήθηκαν">${choices.map(a=>`<label class="usage-choice"><input type="checkbox" data-used="${esc(a.id)}" ${d.used.has(a.id)?'checked':''} ${!state.service?'disabled':''}><span><strong>${esc(a.label)}</strong><small>${p.ids.includes(a.id)?'Στο σχέδιο':'Εκτός σχεδίου'}${a.room?' · '+esc(a.room):''}${a.unavailable?' · παλιά επιλογή καταλόγου':''}</small></span></label>`).join('')}</div><label class="usage-confirm"><input type="checkbox" id="usage-confirmed" ${d.usageConfirmed?'checked':''} ${!state.service?'disabled':''}><span>Επιβεβαιώνω ότι οι επιλογές δείχνουν τι χρησιμοποιήθηκε τελικά${d.used.size?' ('+d.used.size+' μέσα)':' · δεν χρησιμοποιήθηκε κανένα από τα παραπάνω'}.</span></label></section><p class="eyebrow">Η ΛΕΙΤΟΥΡΓΙΑ ΤΟΥ ΜΑΘΗΜΑΤΟΣ</p><h2>Πώς λειτούργησε η δραστηριότητα;</h2><p class="muted">Επίλεξε μία ή περισσότερες επισημάνσεις. Δεν χρειάζεται γραπτή αναφορά.</p><div class="flag-options" role="group" aria-label="Επισημάνσεις εφαρμογής">${state.models.flags.map(f=>`<button class="flag ${d.flags.has(f.id)?'chosen':''}" data-flag="${f.id}" aria-pressed="${d.flags.has(f.id)}" ${state.saving||!state.service?'disabled':''}><span class="flag-icon">${f.icon}</span><span>${esc(f.label)}</span><span class="flag-check" aria-hidden="true">${d.flags.has(f.id)?'✓':'+'}</span></button>`).join('')}</div>
-  <details class="difficulty-select"><summary>Γνωστική δυσκολία σχεδιασμού · ${d.difficulty?d.difficulty+'/5':'προαιρετική'}</summary><label for="cognitive">Επίπεδο, εφόσον είναι γνωστό</label><select id="cognitive"><option value="">Προς επιβεβαίωση</option>${state.models.cognitive_scale.map(x=>`<option value="${x.level}" ${Number(d.difficulty)===x.level?'selected':''}>${x.level}. ${esc(x.label)}</option>`).join('')}</select></details>
+  ${mapReviewHTML()}<details class="difficulty-select"><summary>Γνωστική δυσκολία σχεδιασμού · ${d.difficulty?d.difficulty+'/5':'προαιρετική'}</summary><label for="cognitive">Επίπεδο, εφόσον είναι γνωστό</label><select id="cognitive"><option value="">Προς επιβεβαίωση</option>${state.models.cognitive_scale.map(x=>`<option value="${x.level}" ${Number(d.difficulty)===x.level?'selected':''}>${x.level}. ${esc(x.label)}</option>`).join('')}</select></details>
   ${!state.service?`<div class="notice"><p>Οι αξιολογήσεις παραμένουν ιδιωτικές στον Google λογαριασμό σου. Άνοιξε τον ιδιωτικό χώρο για να αποθηκεύσεις και να δεις το ιστορικό από κάθε συσκευή.</p>${privateSpace()}</div>`:''}${d.error?`<div class="notice error" role="alert">${esc(d.error)} Οι επιλογές σου παραμένουν εδώ.</div>`:''}${d.saved?`<div class="saved-message" role="status">✓ ${cloud?'Αποθηκεύτηκε στο ιδιωτικό cloud.':'Αποθηκεύτηκε στον δίσκο.'} Θα εμφανιστεί στην επόμενη επιλογή του σεναρίου.</div>`:''}
-  <div class="save-row"><span class="save-context">${state.grade?esc(state.grade)+(state.section?' · '+esc(state.section):''):'Χωρίς επιλογή τάξης'}<small>${esc(model().short_title || model().title)} · ${timeLabel(state.timeSlot)}</small></span><button class="button primary" id="save-evaluation" ${!state.service||!d.flags.size||!d.usageConfirmed||state.saving?'disabled':''}>${state.saving?'Αποθηκεύεται…':'Αποθήκευση αξιολόγησης'} ${icon('check')}</button></div><p class="privacy-note">Με την αξιολόγηση αποθηκεύεται και η τρέχουσα έκδοση του σχεδίου. Οι καταγραφές παραμένουν στον χώρο του εκπαιδευτικού.</p></section><aside class="evaluation-history"><h2>Από τις προηγούμενες εφαρμογές</h2>${previous(s)}<button class="text-button" data-view="activity">← Επιστροφή στο σχέδιο</button></aside></div>`;
+  <div class="save-row"><span class="save-context">${state.grade?esc(state.grade)+(state.section?' · '+esc(state.section):''):'Χωρίς επιλογή τάξης'}<small>${esc(model().short_title || model().title)} · ${timeLabel(state.timeSlot)}</small></span><button class="button primary" id="save-evaluation" ${!state.service||!d.flags.size||!d.usageConfirmed||state.saving||(d.canvasReview&&!d.canvasUsage.confirmed)?'disabled':''}>${state.saving?'Αποθηκεύεται…':'Αποθήκευση αξιολόγησης'} ${icon('check')}</button></div><p class="privacy-note">Με την αξιολόγηση αποθηκεύεται και η τρέχουσα έκδοση του σχεδίου. Οι καταγραφές παραμένουν στον χώρο του εκπαιδευτικού.</p></section><aside class="evaluation-history"><h2>Από τις προηγούμενες εφαρμογές</h2>${previous(s)}<button class="text-button" data-view="activity">← Επιστροφή στο σχέδιο</button></aside></div>`;
 }
 function footer() {
   const drive=state.registry.integrations.google_drive;
   return `<footer class="footer"><span>Το υλικό σου. Η παιδαγωγική σου διαδρομή.</span><details class="integrations"><summary>Πηγές και διατήρηση</summary><div class="integration-content"><p><strong>Digital Book:</strong> έκδοση ${esc(state.registry.integrations.digital_book.revision || 'προς επιβεβαίωση')}. Το βιβλίο συνεχίζει να ενημερώνεται από την υπάρχουσα διαδικασία.</p><p><strong>Google Drive:</strong> ${drive.checked_at?'ανάγνωση '+date(drive.checked_at):'δεν έχει ολοκληρωθεί ανάγνωση'}. ${drive.folder?link(drive.folder.url,'Φάκελος ChatGPT'):''}</p><p>${cloud?'Η ανανέωση φορτώνει το ιδιωτικό ιστορικό σου.':state.service?'Η ανανέωση ξαναδιαβάζει τα τοπικά μαθήματα και το βιβλίο.':'Η online έκδοση περιέχει τον τελευταίο δημοσιευμένο κατάλογο.'} Για νέες παρουσιάσεις και HTML του Drive, ζήτησε ενημέρωση του καταλόγου. Η ημερομηνία ελέγχου διατηρείται.</p><div class="footer-actions"><button class="button secondary" id="refresh" ${!state.service||state.refreshing?'disabled':''}>${state.refreshing?'Ενημερώνεται…':cloud?'Ανανέωση ιστορικού':'Ανανέωση τοπικού καταλόγου'}</button>${cloud?'<button class="text-button" id="export-history">Λήψη σχεδίων και αξιολογήσεων</button>':state.service?link('api/export','Λήψη σχεδίων και αξιολογήσεων','small-link'):''}</div><p>${cloud?'Τα σχέδια και οι αξιολογήσεις αποθηκεύονται ως ξεχωριστά ιδιωτικά αρχεία στο Drive. Ο ίδιος Google λογαριασμός βλέπει το ίδιο ιστορικό από κάθε συσκευή.':state.service?'Οι αξιολογήσεις αποθηκεύονται στον δίσκο. Οι συσκευές που συνδέονται στην ίδια τοπική υπηρεσία βλέπουν το ίδιο ιστορικό.':'Η online σελίδα περιέχει μόνο τον κατάλογο. Οι αξιολογήσεις διατηρούνται στον ιδιωτικό χώρο ή στην τοπική υπηρεσία.'}</p></div></details></footer>`;
 }
+function openLessonMap(canvasId='',versionId='') {
+  state.view='map';state.mapCanvasId=canvasId;state.mapVersionId=versionId;history.replaceState(null,'',canvasId?'#canvas/'+canvasId+(versionId?'/'+versionId:''):'#map');render();
+}
+function mapReviewHTML() {
+  const d=draft(),row=d.canvasReview;if(!row)return '';
+  const usage=d.canvasUsage,doc=row.document;
+  return `<section class="canvas-review"><h2>Πώς λειτούργησε ο χάρτης;</h2><p>${esc(doc.title)} · η συγκεκριμένη αποθηκευμένη έκδοση</p><div class="canvas-review-buildings">${doc.buildings.map(b=>`<div><strong>${esc(b.title)}</strong><label><input type="checkbox" data-canvas-usage="used_building_ids" value="${b.id}" ${usage.used_building_ids.includes(b.id)?'checked':''}> Χρησιμοποιήθηκε</label><label><input type="checkbox" data-canvas-usage="guidance_building_ids" value="${b.id}" ${usage.guidance_building_ids.includes(b.id)?'checked':''}> Χρειάστηκε καθοδήγηση</label></div>`).join('')}</div><details><summary>Μέσα και συνδέσεις που λειτούργησαν καλά</summary>${doc.buildings.flatMap(b=>b.materials).map(m=>`<label class="usage-choice"><input type="checkbox" data-canvas-usage="effective_material_ids" value="${m.id}" ${usage.effective_material_ids.includes(m.id)?'checked':''}>${esc(m.label)}</label>`).join('')}${doc.connections.map(c=>`<label class="usage-choice"><input type="checkbox" data-canvas-usage="effective_connection_ids" value="${c.id}" ${usage.effective_connection_ids.includes(c.id)?'checked':''}>${esc(c.verb+' · '+c.phrase)}</label>`).join('')}</details><label>Σύντομη παρατήρηση<textarea id="canvas-usage-note" maxlength="2000">${esc(usage.note)}</textarea></label><label class="usage-confirm"><input type="checkbox" id="canvas-usage-confirm" ${usage.confirmed?'checked':''}> Επιβεβαιώνω την αποτίμηση αυτής της έκδοσης χάρτη.</label></section>`;
+}
+function mountLessonMap() {
+  if(!lessonMapController){
+    const host=document.createElement('main');host.id='main';host.innerHTML='<p class="loading">Ετοιμάζεται ο χάρτης…</p>';
+    app.replaceChildren(host);
+    lessonMapController=createLessonMap(host,{registry:state.registry,privateMode:state.service,cloud,rpc,assetURL:asset,canvasId:state.mapCanvasId,versionId:state.mapVersionId,
+      onExit:()=>{state.view='select';history.replaceState(null,'',location.pathname);render(true);},
+      onRegistry:registry=>{state.registry=registry;},
+      onReview:row=>{state.selected=row.document.scenario_id;const d=draft();d.canvasReview=row;d.canvasUsage={canvas_id:row.document_id,version_id:row.id,confirmed:false,used_building_ids:[],guidance_building_ids:[],effective_material_ids:[],effective_connection_ids:[],note:''};state.teaching=false;go('evaluate');}
+    });
+  }else{
+    if(app.firstElementChild!==lessonMapController.host)app.replaceChildren(lessonMapController.host);
+    const canvasId=state.mapCanvasId,versionId=state.mapVersionId;if(canvasId)void lessonMapController.ready.then(()=>lessonMapController.open(canvasId,versionId));
+  }
+  state.mapCanvasId='';state.mapVersionId='';
+}
 function render(focus=false) {
+  if(state.view==='map'){mountLessonMap();return;}
   if (!selected() && state.view!=='select') state.view='select';
   app.innerHTML=header()+`<main id="main">${state.notice?`<div class="notice" role="status">${esc(state.notice)}</div>`:''}${state.view==='select'?selectView():state.view==='activity'?activityView():evaluationView()}</main>`+footer();
   bind();
@@ -256,6 +286,11 @@ function go(view) {
   state.notice=''; render(true);
 }
 function bind() {
+  document.querySelectorAll('[data-open-lesson-map]').forEach(b=>b.onclick=()=>openLessonMap());
+  document.querySelectorAll('[data-open-canvas]').forEach(b=>b.onclick=()=>openLessonMap(b.dataset.openCanvas));
+  document.querySelectorAll('[data-canvas-usage]').forEach(el=>el.onchange=()=>{const d=draft(),k=el.dataset.canvasUsage;d.canvasUsage[k]=el.checked?[...new Set([...d.canvasUsage[k],el.value])]:d.canvasUsage[k].filter(id=>id!==el.value);d.requestId=uuid();d.saved=false;});
+  document.querySelector('#canvas-usage-note')?.addEventListener('input',e=>{draft().canvasUsage.note=e.target.value;draft().requestId=uuid();});
+  document.querySelector('#canvas-usage-confirm')?.addEventListener('change',e=>{draft().canvasUsage.confirmed=e.target.checked;draft().requestId=uuid();render();});
   document.querySelectorAll('[data-material-focus]').forEach(a=>a.addEventListener('click',e=>{
     if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
     e.preventDefault();
@@ -315,9 +350,10 @@ async function savePlan() {
   finally{state.planning=false;render();}
 }
 async function save() {
-  const d=draft();if(state.saving||!d.flags.size||!d.usageConfirmed||!state.service)return;
+  const d=draft();if(state.saving||!d.flags.size||!d.usageConfirmed||!state.service||(d.canvasReview&&!d.canvasUsage.confirmed))return;
   const key=contextKey();
   const payload={request_id:d.requestId,scenario_id:state.selected,...sessionData(),flags:[...d.flags],cognitive_difficulty:d.difficulty?Number(d.difficulty):null,media_usage_recorded:true,used_material_ids:[...d.used]};
+  if(d.canvasReview)payload.canvas_usage=d.canvasUsage;
   state.saving=true;d.error='';render();
   try {
     const plan=await savePlan();payload.plan_version_id=plan.id;
@@ -349,6 +385,7 @@ async function boot() {
     if (cloud?.initial) { const i=cloud.initial;state.selected=i.scenario||null;state.view=i.view||'select';state.grade=i.grade||state.grade;state.section=i.section||'';state.modelId=i.modelId||state.modelId; }
     if(!state.registry.grades.includes(state.grade)){state.grade='';state.section='';}
     if(!state.models.models.some(m=>m.id===state.modelId))state.modelId=state.models.models[0].id;
+    const mapMatch=location.hash.match(/^#(map|canvas)(?:\/([^/]+))?(?:\/([^/]+))?$/);if(mapMatch){state.view='map';state.mapCanvasId=mapMatch[1]==='canvas'?decodeURIComponent(mapMatch[2]||''):'';state.mapVersionId=mapMatch[3]||'';}
     const match=location.hash.match(/^#(activity|evaluate)\/(.+)$/);
     if(match){state.view=match[1];state.selected=decodeURIComponent(match[2]);}
     if(cloud?.initial?.materialIds && state.selected)planDraft().ids=cloud.initial.materialIds;
@@ -358,4 +395,5 @@ async function boot() {
   } catch(e) {app.innerHTML=`<main class="loading"><h1>Δεν φορτώθηκε ο κατάλογος.</h1><p>${esc(e.message)}</p><p>Ανανέωσε τη σελίδα και έλεγξε τη σύνδεσή σου.</p><button class="button primary" id="retry">Δοκιμή ξανά</button></main>`;document.querySelector('#retry').addEventListener('click',boot);}
 }
 window.addEventListener('focus',async()=>{if(state.registry&&state.service&&!state.saving&&!state.planning){const before=JSON.stringify([state.records,state.plans,state.historyError,state.planError]);await loadHistory();if(!state.saving&&!state.planning&&before!==JSON.stringify([state.records,state.plans,state.historyError,state.planError])){if(!document.activeElement?.matches('input,select,textarea,button,a'))render();}}});
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#canvas/"]');if(a&&!e.ctrlKey&&!e.metaKey){e.preventDefault();const [id,version]=a.getAttribute('href').slice(8).split('/');openLessonMap(id,version||'');}});
 boot();

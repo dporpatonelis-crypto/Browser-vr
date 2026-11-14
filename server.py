@@ -22,6 +22,7 @@ from zoneinfo import ZoneInfo
 
 from scripts.build_registry import ROOT, build_and_save
 from lesson_records import PlanStore, context_fields, select_materials
+from lesson_canvas import CanvasStore, CanvasConflict, MAX_ASSET, MAX_DOCUMENT
 
 
 def relevant_history(rows, scenario_id, grade='', section=''):
@@ -60,7 +61,7 @@ class EvaluationStore:
                 raise ValueError(f'Δεν διαβάζεται η καταγραφή {f.name}. Διατηρείται ανέπαφη για ανάκτηση.') from e
         return rows
 
-    def append(self, data, registry, models, plans=None):
+    def append(self, data, registry, models, plans=None, canvases=None):
         if not isinstance(data, dict):
             raise ValueError('Μη έγκυρη καταγραφή.')
         try:
@@ -104,6 +105,10 @@ class EvaluationStore:
                'cognitive_difficulty': difficulty, 'technical_difficulty': scenario.get('technical_difficulty'),
                **context_fields(data), 'media_usage_recorded': usage_recorded, 'used_materials': used,
                'lesson_plan': lesson_plan}
+        if data.get('canvas_usage') is not None:
+            if canvases is None:
+                raise ValueError('Ο χάρτης δεν είναι διαθέσιμος.')
+            row['canvas_usage'] = canvases.usage(data['canvas_usage'], scenario['scenario_id'])
         with self.lock, (self.directory / '.append.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
             target = self.directory / f'{request_id}.json'
@@ -114,6 +119,8 @@ class EvaluationStore:
                     raise ValueError('Το αναγνωριστικό έχει ήδη χρησιμοποιηθεί για διαφορετική καταγραφή.')
                 defaults = {'class_profile':'', 'time_slot':'', 'lesson_date':'', 'media_usage_recorded':False, 'used_materials':[], 'lesson_plan':None}
                 if any(old.get(k, default) != row[k] for k, default in defaults.items()):
+                    raise ValueError('Το αναγνωριστικό έχει ήδη χρησιμοποιηθεί για διαφορετική καταγραφή.')
+                if old.get('canvas_usage') != row.get('canvas_usage'):
                     raise ValueError('Το αναγνωριστικό έχει ήδη χρησιμοποιηθεί για διαφορετική καταγραφή.')
                 return old, False
             self.write_atomic(target, row)
@@ -179,16 +186,23 @@ class MissionServer(ThreadingHTTPServer):
     daemon_threads = True
     def __init__(self, address, directory=ROOT, storage=None, refresh=True):
         self.root = Path(directory)
+        self.snapshot_mode = not refresh
         if refresh:
             build_and_save(self.root)
-        self.registry = json.loads((self.root/'public/data/scenario-registry.json').read_text())
+        registry_file = self.root/'public/data/scenario-registry.json'
+        if not registry_file.is_file() and not refresh:
+            registry_file = self.root/'site/data/scenario-registry.json'
+        self.registry = json.loads(registry_file.read_text())
+        self.registry_file = registry_file
         self.models = json.loads((self.root/'public/data/pedagogical-models.json').read_text())
         self.store = EvaluationStore(storage or self.root/'storage/evaluations')
         self.plans = PlanStore(self.store)
+        self.canvases = CanvasStore(self.store)
         self.preview_servers = {}
         self.preview_lock = threading.Lock()
         self.refresh_lock = threading.Lock()
-        self.config = json.loads((self.root/'config.json').read_text())
+        config_file = self.root/'config.json'
+        self.config = json.loads((config_file if config_file.is_file() else self.root/'config.example.json').read_text())
         self.allowed_hosts = {'localhost', '127.0.0.1', '[::1]'}
         try:
             self.allowed_hosts.update(socket.gethostbyname_ex(socket.gethostname())[2])
@@ -296,7 +310,14 @@ class MissionHandler(BaseHTTPRequestHandler):
             if path == '/api/health':
                 self.body({'ok': True, 'service':'teaching-mission-control','storage':'disk','schema_version':1})
             elif path == '/api/registry':
-                self.body(self.server.registry)
+                self.body(self.server.canvases.registry(self.server.registry))
+            elif path == '/api/lesson-maps':
+                self.body({'versions':self.server.canvases.read()})
+            elif path.startswith('/api/canvas-assets/'):
+                metadata, asset_file = self.server.canvases.asset(path.removeprefix('/api/canvas-assets/'))
+                self.body(asset_file.read_bytes(), metadata['mime'], headers={
+                    'Content-Disposition': 'inline; filename="asset"',
+                    'Content-Security-Policy': "sandbox; default-src 'none'; img-src data:; style-src 'unsafe-inline'"})
             elif path == '/api/models':
                 self.body(self.server.models)
             elif path == '/api/evaluations':
@@ -306,7 +327,7 @@ class MissionHandler(BaseHTTPRequestHandler):
             elif path == '/api/plans':
                 self.body({'plans':self.server.plans.read()})
             elif path == '/api/export':
-                self.body({'schema_version':2,'exported_at':datetime.now(timezone.utc).isoformat(),'evaluations':self.server.store.read(),'plans':self.server.plans.read()},
+                self.body({'schema_version':3,'exported_at':datetime.now(timezone.utc).isoformat(),'evaluations':self.server.store.read(),'plans':self.server.plans.read(),'lesson_maps':self.server.canvases.read()},
                           headers={'Content-Disposition':'attachment; filename="teaching-evaluations.json"'})
             elif path.startswith('/sources/'):
                 key = path.removeprefix('/sources/')
@@ -366,23 +387,41 @@ class MissionHandler(BaseHTTPRequestHandler):
             return
         try:
             length=int(self.headers.get('Content-Length','0'))
-            if not 0 < length < 64000 or self.headers.get('Content-Type','').split(';')[0] != 'application/json':
+            path=urlsplit(self.path).path
+            if path == '/api/canvas-assets':
+                if not 0 < length <= MAX_ASSET:
+                    raise ValueError('Το αρχείο πρέπει να είναι έως 25 MB.')
+                row = self.server.canvases.upload(self.headers.get('X-Asset-ID',''), unquote(self.headers.get('X-Asset-Name','asset')),
+                    self.headers.get('Content-Type','').split(';')[0], self.rfile.read(length))
+                self.body({'ok':True,'asset':row},status=201)
+                return
+            limit = MAX_DOCUMENT + 4096 if path in ('/api/lesson-maps', '/api/lesson-maps/register') else 64000
+            if not 0 < length < limit or self.headers.get('Content-Type','').split(';')[0] != 'application/json':
                 raise ValueError('Μη έγκυρο μέγεθος ή περιεχόμενο αιτήματος.')
             data=json.loads(self.rfile.read(length))
-            path=urlsplit(self.path).path
+            registry = self.server.canvases.registry(self.server.registry)
             if path=='/api/evaluations':
-                row,created=self.server.store.append(data,self.server.registry,self.server.models,self.server.plans)
+                row,created=self.server.store.append(data,registry,self.server.models,self.server.plans,self.server.canvases)
                 self.body({'ok':True,'record':row,'created':created},status=201 if created else 200)
             elif path=='/api/plans':
-                row,created=self.server.plans.append(data,self.server.registry,self.server.models)
+                row,created=self.server.plans.append(data,registry,self.server.models)
                 self.body({'ok':True,'plan':row,'created':created},status=201 if created else 200)
+            elif path in ('/api/lesson-maps', '/api/lesson-maps/register'):
+                if path.endswith('/register'):
+                    if data.get('kind') != 'canvas' or not isinstance(data.get('document'),dict):
+                        raise ValueError('Η καταχώριση αφορά χάρτη μαθήματος.')
+                    data['document']['registered'] = True
+                row,created=self.server.canvases.save(data,self.server.registry)
+                self.body({'ok':True,'version':row,'created':created,'registry':self.server.canvases.registry(self.server.registry)},status=201 if created else 200)
             elif path=='/api/refresh':
                 with self.server.refresh_lock:
-                    self.server.registry=build_and_save(self.server.root)
-                self.body({'ok':True,'registry':self.server.registry})
+                    self.server.registry=json.loads(self.server.registry_file.read_text()) if self.server.snapshot_mode else build_and_save(self.server.root)
+                self.body({'ok':True,'registry':self.server.canvases.registry(self.server.registry)})
             else:
                 self.fail('Δεν υπάρχει αυτή η ενέργεια.',404)
-        except (ValueError, TypeError) as e:
+        except CanvasConflict as e:
+            self.fail(str(e),409)
+        except (ValueError, TypeError, KeyError) as e:
             self.fail(str(e))
         except OSError:
             self.fail('Η εγγραφή στον δίσκο απέτυχε. Οι επιλογές σου παραμένουν στην οθόνη· δοκίμασε ξανά.',500)
@@ -394,10 +433,12 @@ def main():
     parser.add_argument('--host',default='127.0.0.1')
     parser.add_argument('--open',action='store_true')
     parser.add_argument('--storage',type=Path)
+    parser.add_argument('--snapshot',action='store_true',help='Χρήση του ήδη αποθηκευμένου καταλόγου χωρίς ανανέωση πηγών')
     args=parser.parse_args()
     from scripts.prepare_apps import prepare_board
-    prepare_board()
-    server=MissionServer((args.host,args.port),storage=args.storage)
+    if not args.snapshot:
+        prepare_board()
+    server=MissionServer((args.host,args.port),storage=args.storage,refresh=not args.snapshot)
     address='127.0.0.1' if args.host=='0.0.0.0' else args.host
     url=f'http://{address}:{server.server_port}/'
     print(f'Πιλοτήριο τάξης: {url}',flush=True)

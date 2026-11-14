@@ -16,9 +16,11 @@ function doGet(e) {
   assertOwner_();
   const parameters = e && e.parameter || {};
   const initial = {};
+  const privateCatalog = lessonCanvasRegistry_();
+  if(parameters.view==='map')initial.view='map';
   if (CATALOG.scenarios.some(s => s.scenario_id === parameters.scenario)) {
     initial.scenario = parameters.scenario;
-    initial.view = parameters.view === 'evaluate' ? 'evaluate' : 'activity';
+    initial.view = parameters.view==='map'?'map':parameters.view === 'evaluate' ? 'evaluate' : 'activity';
   }
   if (CATALOG.grades.includes(parameters.grade)) initial.grade = parameters.grade;
   if (MODELS.models.some(m => m.id === parameters.model)) initial.modelId = parameters.model;
@@ -27,7 +29,7 @@ function doGet(e) {
     const known = CATALOG.scenarios.find(s => s.scenario_id === initial.scenario).activities.map(a => a.id);
     initial.materialIds = parameters.materials.split(',').filter(id => known.includes(id)).slice(0, 100);
   }
-  const bootstrap = JSON.stringify({registry: CATALOG, models: MODELS, initial,
+  const bootstrap = JSON.stringify({registry: privateCatalog, models: MODELS, initial,
     assetBase: CATALOG.publication.site_url}).replace(/</g, '\\u003c');
   return HtmlService.createHtmlOutput(PRIVATE_PAGE.replace('__MISSION_BOOTSTRAP__', bootstrap))
     .setTitle('Πιλοτήριο τάξης · Ιδιωτικός χώρος')
@@ -84,7 +86,7 @@ function validateRecord_(data, lessonPlan) {
   if (typeof data.request_id !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(data.request_id)) {
     throw new Error('Η καταγραφή χρειάζεται μοναδικό αναγνωριστικό.');
   }
-  const scenario = CATALOG.scenarios.find(s => s.scenario_id === data.scenario_id);
+  const scenario = lessonCanvasRegistry_().scenarios.find(s => s.scenario_id === data.scenario_id);
   const model = MODELS.models.find(m => m.id === data.model_id);
   if (!scenario || !model) throw new Error('Επίλεξε υπάρχον μάθημα και παιδαγωγικό μοντέλο.');
   const permitted = MODELS.flags.map(f => f.id);
@@ -106,7 +108,8 @@ function validateRecord_(data, lessonPlan) {
   if (typeof usage !== 'boolean' || ('used_material_ids' in data && !usage)) throw new Error('Επιβεβαίωσε ποια μέσα χρησιμοποιήθηκαν.');
   const used = usage ? selectMaterials_(data.used_material_ids, scenario, lessonPlan) : [];
   const timestamp = new Date();
-  return {schema_version: 2, id: data.request_id.toLowerCase(), scenario_id: scenario.scenario_id,
+  const canvasUsage=data.canvas_usage==null?{}:{canvas_usage:validateCanvasUsage_(data.canvas_usage,scenario.scenario_id)};
+  return {...canvasUsage,schema_version: 2, id: data.request_id.toLowerCase(), scenario_id: scenario.scenario_id,
     scenario_title: scenario.title, created_at: timestamp.toISOString(),
     date: Utilities.formatDate(timestamp, 'Europe/Athens', 'yyyy-MM-dd'), timezone: 'Europe/Athens',
     grade, section: section.trim(), model_id: model.id, model_title: model.title,
@@ -139,6 +142,7 @@ function persistRecord_(record, folder) {
       if (Object.keys(defaults).some(k => JSON.stringify(old[k] == null ? defaults[k] : old[k]) !== JSON.stringify(record[k]))) {
         throw new Error('Το αναγνωριστικό χρησιμοποιήθηκε για διαφορετική καταγραφή.');
       }
+      if(JSON.stringify(old.canvas_usage||null)!==JSON.stringify(record.canvas_usage||null))throw new Error('Το αναγνωριστικό χρησιμοποιήθηκε για διαφορετική καταγραφή.');
       return {ok: true, record: old, created: false};
     }
     const file = folder.createFile(Utilities.newBlob(JSON.stringify(record, null, 2), 'application/json', record.id + '.json'));
@@ -152,7 +156,7 @@ function exportEvaluations() {
   assertOwner_();
   const lock = LockService.getScriptLock();
   lock.waitLock(30000);
-  try { const folder = folder_(); return {schema_version:2, exported_at:new Date().toISOString(), evaluations:readRecords_(folder), plans:readPlans_(folder)}; }
+  try { const folder = folder_(); return {schema_version:3, exported_at:new Date().toISOString(), evaluations:readRecords_(folder), plans:readPlans_(folder),lesson_maps:readLessonMaps_(folder)}; }
   finally { lock.releaseLock(); }
 }
 
@@ -171,7 +175,7 @@ function uuid_(value) {
 }
 function selectMaterials_(ids, scenario, plan) {
   const choices = new Map(((plan && plan.planned_materials) || []).map(a => [a.id,a]));
-  scenario.activities.forEach(a => choices.set(a.id,Object.fromEntries(['id','kind','label','url','room','native_id'].map(k => [k,a[k] || '']))));
+  scenario.activities.forEach(a => choices.set(a.id,Object.fromEntries(['id','kind','label','url','room','native_id',...(a.kind==='canvas'?['canvas_id','canvas_version_id']:[])].map(k => [k,a[k] || '']))));
   if (!Array.isArray(ids) || ids.length > 100 || ids.some(id => typeof id !== 'string' || !choices.has(id))) throw new Error('Επίλεξε μέσα από το συγκεκριμένο μάθημα ή το αποθηκευμένο σχέδιο.');
   return [...new Set(ids)].map(id => choices.get(id));
 }
@@ -221,7 +225,7 @@ function savePlan(data) {
   const id = uuid_(data.request_id);
   let planId = uuid_(data.plan_id || id), previous = data.previous_version_id ? uuid_(data.previous_version_id) : '';
   let sourceId = data.source_version_id ? uuid_(data.source_version_id) : '';
-  const scenario = CATALOG.scenarios.find(s => s.scenario_id === data.scenario_id), model = MODELS.models.find(m => m.id === data.model_id);
+  const scenario = lessonCanvasRegistry_().scenarios.find(s => s.scenario_id === data.scenario_id), model = MODELS.models.find(m => m.id === data.model_id);
   if (!scenario || !model) throw new Error('Επίλεξε υπάρχον μάθημα και παιδαγωγικό μοντέλο.');
   // Reuse the same grade/section validation as evaluations, without creating an evaluation.
   const context = validateRecord_({...data, flags:[MODELS.flags[0].id], cognitive_difficulty:null, media_usage_recorded:false});

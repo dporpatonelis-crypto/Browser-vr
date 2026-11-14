@@ -4,9 +4,9 @@
   "browser_checks": 34,
   "browser_errors": [],
   "physical_android_tested": false,
-  "cloud_bundle": "syntax checked",
+  "cloud_bundle": "syntax checked; deployed as owner-only Apps Script version 13",
   "published_registry_and_existing_payloads": "unchanged",
-  "private_pilot": "private transfer package prepared; excluded from public Git",
+  "private_pilot": "2 documents and 5 separate assets imported into the existing owner-only cloud; saved layout reloaded; excluded from public Git",
   "date": "2026-11-14",
   "status": "passed",
   "notes": [
@@ -16,5 +16,14 @@
     "Publishing uses the existing public Pages and owner-only Apps Script destinations"
   ],
   "json_schema": "2020-12 meta-schema and both pilot documents validated",
-  "private_slide_previews_preserved": 27
+  "private_slide_previews_preserved": 27,
+  "publication": {
+    "implementation_commit": "5f956f45dc5c24aad8a2e34509c81901f0384302",
+    "github_pages": "https://dporpatonelis-crypto.github.io/Browser-vr/#map",
+    "github_actions_run": "https://github.com/dporpatonelis-crypto/Browser-vr/actions/runs/43636934765",
+    "github_actions_result": "success",
+    "public_map": "both levels opened in Chrome",
+    "private_cloud": "existing deployment updated to version 13; same URL and owner-only access",
+    "private_pilot_reload": "saved material counts and connections verified; private image loaded from cloud"
+  }
 }

@@ -209,6 +209,13 @@ test('private registration is a material with an exact saved canvas version',()=
  assert.throws(()=>context.validateCanvasUsage_({...usage,confirmed:false},scenario.scenario_id),/Επιβεβαίωσε/);
  assert.throws(()=>context.validateCanvasUsage_(usage,'foreign'),/έκδοση χάρτη/);
 });
+test('registered canvas confirms its class in the private catalogue without changing the public snapshot',()=>{
+ const {context}=environment(),data=mapPayload();data.document.scenario_id='book:lesson-creation-world';data.document.registered=true;
+ context.saveLessonMap(data);
+ const c=context.lessonCanvasRegistry_().scenarios.find(s=>s.scenario_id===data.document.scenario_id);
+ assert.ok(c.grades.includes(data.document.grade));assert.equal(c.grade_status,'confirmed');
+ assert.deepEqual(Array.from(vm.runInContext("CATALOG.scenarios.find(s=>s.scenario_id==='book:lesson-creation-world').grades",context)),catalog.scenarios.find(s=>s.scenario_id===data.document.scenario_id).grades);
+});
 test('uploaded HTML remains private and its bytes are returned only to the owner',()=>{
  const {context}=environment();const id=randomUUID(),text='<!doctype html><html><body>ΜΑΘΗΜΑ</body></html>',blob=context.Utilities.newBlob(text,'text/html','activity.html');
  const result=context.uploadCanvasAsset({asset_id:id,file:blob});assert.equal(result.asset.mime,'text/html');assert.equal(Buffer.from(context.readCanvasAsset(id).base64,'base64').toString('utf8'),text);

@@ -344,6 +344,10 @@ class CanvasStore:
                 result['scenarios'].append(scenario)
                 scenarios[d['scenario_id']] = scenario
             if row['kind'] == 'canvas' and d.get('registered') and d.get('scenario_id') in scenarios:
+                scenario = scenarios[d['scenario_id']]
+                if d['grade'] in original.get('grades', []) and d['grade'] not in scenario.get('grades', []):
+                    scenario['grades'] = [*scenario.get('grades', []), d['grade']]
+                    scenario['grade_status'] = 'confirmed'
                 scenarios[d['scenario_id']]['activities'].append({
                     'id':'canvas:'+row['document_id'], 'kind':'canvas', 'label':'Χάρτης · '+d['title'],
                     'url':'#canvas/'+row['document_id'], 'canvas_id':row['document_id'], 'canvas_version_id':row['id'],

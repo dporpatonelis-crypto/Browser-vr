@@ -94,7 +94,11 @@ function lessonCanvasRegistry_(){
       const scenario={scenario_id:d.scenario_id,title:d.title,subject:'Θρησκευτικά',grades:CATALOG.grades.includes(d.grade)?[d.grade]:[],grade_status:'confirmed',objectives:[],inquiry_question:source.focus,modes:['μελέτη πηγής','σύνδεση εννοιών'],formats:[source.type==='pdf'?'PDF':'Εικόνα','HTML'],duration:null,cognitive_difficulty:null,technical_difficulty:null,readiness:'available',pedagogical_application:source.focus||'Μελέτη των σημειώσεων και σύνδεση με επιλεγμένα μέσα.',application_status:'teacher-confirmed',aliases:[],notes:[],source_groups:['Samsung Notes'],sources:[{system:'Samsung Notes',path:source.name,locator:''}],activities,private:true};
       registry.scenarios.push(scenario);scenarios.set(d.scenario_id,scenario);
     }
-    if(row.kind==='canvas'&&d.registered&&scenarios.has(d.scenario_id))scenarios.get(d.scenario_id).activities.push({id:'canvas:'+row.document_id,kind:'canvas',label:'Χάρτης · '+d.title,url:'#canvas/'+row.document_id,canvas_id:row.document_id,canvas_version_id:row.id,note:'Ιδιωτικός χάρτης μαθήματος · πέντε οικοδομήματα γνώσης',app:'lesson-map'});}
+    if(row.kind==='canvas'&&d.registered&&scenarios.has(d.scenario_id)){
+      const scenario=scenarios.get(d.scenario_id);
+      if(CATALOG.grades.includes(d.grade)&&!(scenario.grades||[]).includes(d.grade)){scenario.grades=[...scenario.grades||[],d.grade];scenario.grade_status='confirmed';}
+      scenario.activities.push({id:'canvas:'+row.document_id,kind:'canvas',label:'Χάρτης · '+d.title,url:'#canvas/'+row.document_id,canvas_id:row.document_id,canvas_version_id:row.id,note:'Ιδιωτικός χάρτης μαθήματος · πέντε οικοδομήματα γνώσης',app:'lesson-map'});
+    }}
   return registry;
 }
 function saveLessonMap(data){

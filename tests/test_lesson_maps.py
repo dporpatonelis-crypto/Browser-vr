@@ -114,6 +114,7 @@ class MapTests(unittest.TestCase):
         registry=self.maps.registry(self.registry);scenario=next(s for s in registry['scenarios'] if s['scenario_id']=='book:lesson-004')
         activity=next(a for a in scenario['activities'] if a['kind']=='canvas')
         self.assertNotIn(activity['id'],json.dumps(self.registry))
+        self.assertIn(doc['grade'],scenario['grades'])
         plans=PlanStore(self.evaluations)
         p,_=plans.append({'request_id':str(uuid.uuid4()),'scenario_id':scenario['scenario_id'],'model_id':'guided-exploration','planned_material_ids':[activity['id']]},registry,self.models)
         self.assertEqual(row['id'],p['planned_materials'][0]['canvas_version_id'])
@@ -125,6 +126,14 @@ class MapTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.maps.usage({**usage,'confirmed':False},scenario['scenario_id'])
         with self.assertRaises(ValueError):self.maps.usage(usage,'other')
         with self.assertRaises(ValueError):self.maps.usage({**usage,'used_building_ids':['foreign']},scenario['scenario_id'])
+
+    def test_registered_canvas_confirms_grade_only_in_private_catalogue(self):
+        doc=copy.deepcopy(self.canvas);doc['scenario_id']='book:lesson-creation-world';doc['registered']=True
+        original=copy.deepcopy(self.registry)
+        self.maps.save(self.payload(document=doc),self.registry)
+        scenario=next(s for s in self.maps.registry(self.registry)['scenarios'] if s['scenario_id']==doc['scenario_id'])
+        self.assertIn('Α΄ Γυμνασίου',scenario['grades']);self.assertEqual('confirmed',scenario['grade_status'])
+        self.assertEqual(original,self.registry)
 
     def test_public_export_excludes_registrations_assets_and_private_fields(self):
         doc=copy.deepcopy(self.canvas);doc['registered']=True;doc['class_profile']='NEVER PUBLIC';doc['private_note']='NEVER PUBLIC'

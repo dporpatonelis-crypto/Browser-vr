@@ -55,6 +55,7 @@ export async function lmShowViewer(owner,building,start=0) {
     });
   }
   function imageTools() {
+    body.querySelector('[data-fit-image]').onclick=()=>{const vp=body.querySelector('.lm-image-viewport'),page=body.querySelector('.lm-image-page'),img=page.querySelector('img');if(img.naturalWidth){zoom=Math.min(1,vp.clientHeight/(img.naturalHeight/img.naturalWidth*vp.clientWidth)*.97);page.style.width=zoom*100+'%';vp.scrollTop=vp.scrollLeft=0;}};
     body.querySelectorAll('[data-image-tool]').forEach(button=>button.onclick=()=>{
       tool=button.dataset.imageTool;first=null;active=null;
       body.querySelectorAll('[data-image-tool]').forEach(b=>b.setAttribute('aria-pressed',b===button));
@@ -114,7 +115,7 @@ export async function lmShowViewer(owner,building,start=0) {
       }else if(activity?.download_only&&!blob){
         body.innerHTML=`<div class="lm-empty"><span>🔒</span><h3>${lmEscape(m.label)}</h3><p>Άνοιξε τη λήψη με τον λογαριασμό σου στο Drive. Μπορείς επίσης να εισαγάγεις το ληφθέν αυτοτελές HTML στον ιδιωτικό χάρτη.</p>${external}</div>`;
       }else if(m.type==='image'){
-        body.innerHTML=`<div class="lm-image-tools"><button data-image-tool="pan" aria-pressed="true">Περιήγηση</button><button data-image-tool="stroke" aria-pressed="false">✎ Γραμμή</button><button data-image-tool="relation" aria-pressed="false">🔗 Σύνδεση</button><button data-image-tool="region" aria-pressed="false">▧ Περιοχή</button><button data-undo-annotation>Αναίρεση γραμμής</button><button data-clear-annotations>Καθαρισμός</button><button data-reveal-image>Αποκάλυψη εικόνας</button></div><div class="lm-region-buttons"></div><div class="lm-image-viewport"><div class="lm-image-page"><img src="${lmEscape(url)}" alt="${lmEscape(m.label)}" draggable="false"><svg class="lm-image-overlay" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-label="Σημειώσεις και συνδέσεις εικόνας"></svg><div class="lm-image-curtain" hidden>✦</div></div></div><div class="lm-resource-link">${external}<button data-cover>Κάλυψη εικόνας</button></div>`;
+        body.innerHTML=`<div class="lm-image-tools"><button data-fit-image>Προβολή όλης της εικόνας</button><button data-image-tool="pan" aria-pressed="true">Περιήγηση</button><button data-image-tool="stroke" aria-pressed="false">✎ Γραμμή</button><button data-image-tool="relation" aria-pressed="false">🔗 Σύνδεση</button><button data-image-tool="region" aria-pressed="false">▧ Περιοχή</button><button data-undo-annotation>Αναίρεση γραμμής</button><button data-clear-annotations>Καθαρισμός</button><button data-reveal-image>Αποκάλυψη εικόνας</button></div><div class="lm-region-buttons"></div><div class="lm-image-viewport"><div class="lm-image-page"><img src="${lmEscape(url)}" alt="${lmEscape(m.label)}" draggable="false"><svg class="lm-image-overlay" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-label="Σημειώσεις και συνδέσεις εικόνας"></svg><div class="lm-image-curtain" hidden>✦</div></div></div><div class="lm-resource-link">${external}<button data-cover>Κάλυψη εικόνας</button></div>`;
         body.querySelector('img').onerror=()=>{status.textContent='Η εικόνα δεν φορτώθηκε. Έλεγξε τον σύνδεσμο ή εισήγαγε το αρχείο.';};
         body.querySelector('[data-cover]').onclick=()=>{body.querySelector('.lm-image-curtain').hidden=false;body.querySelector('[data-reveal-image]').hidden=false;};
         imageTools();
@@ -137,7 +138,7 @@ export async function lmShowViewer(owner,building,start=0) {
   }
   selector.onchange=()=>{index=Number(selector.value);void show();};
   dialog.querySelector('[data-prev]').onclick=()=>{--index;void show();};dialog.querySelector('[data-next]').onclick=()=>{++index;void show();};
-  function changeZoom(factor){zoom=lmClamp(zoom*factor,.4,4);const image=body.querySelector('.lm-image-page');if(image)image.style.width=`${zoom*100}%`;if(pdf)void paintPDF();}
+  function changeZoom(factor){zoom=lmClamp(zoom*factor,.08,4);const image=body.querySelector('.lm-image-page');if(image)image.style.width=`${zoom*100}%`;if(pdf)void paintPDF();}
   dialog.querySelector('[data-zoom-out]').onclick=()=>changeZoom(1/1.25);dialog.querySelector('[data-zoom-in]').onclick=()=>changeZoom(1.25);
   dialog.querySelector('[data-fullscreen]').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await dialog.requestFullscreen();}catch{status.textContent='Η προβολή έχει ήδη προσαρμοστεί στο διαθέσιμο παράθυρο.';}};
   await show();return dialog;

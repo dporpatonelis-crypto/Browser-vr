@@ -129,7 +129,7 @@ function privateSpace(view='evaluate') {
 }
 function header() {
   const steps=[['select','book','Επιλογή μαθήματος','Η αφετηρία της τάξης'],['activity','play','Σχέδιο μαθήματος','Επιλογές και διδασκαλία'],['evaluate','check','Τι έγινε στην τάξη','Μέσα και αξιολόγηση']];
-  return `<header class="header"><div class="brand"><img src="${esc(asset('icon.svg'))}" alt="" width="42" height="42"><div><span class="brand-title">Πιλοτήριο τάξης</span><span class="brand-subtitle">TEACHING MISSION CONTROL</span></div></div><div class="header-right"><button class="button secondary" data-open-lesson-map>🗺️ Χάρτης Μαθήματος</button><span class="teacher-mark"><i class="status-dot ${state.service?'':'offline'}"></i>${cloud?'Ιδιωτικός χώρος · cloud':state.service?'Χώρος εκπαιδευτικού':'Online κατάλογος'}</span>${!state.service?privateSpace('activity'):''}${link(state.registry.integrations.digital_book.url,icon('book')+' Το ψηφιακό μου βιβλίο '+icon('external'),'book-link')}</div></header>
+  return `<header class="header"><div class="brand"><img src="${esc(asset('icon.svg'))}" alt="" width="42" height="42"><div><span class="brand-title">Πιλοτήριο τάξης</span><span class="brand-subtitle">TEACHING MISSION CONTROL</span></div></div><div class="header-right"><button class="button secondary" data-open-lesson-map>🗺️ Χάρτης Μαθήματος</button>${state.service?'<button class="button secondary" data-import-notes>📥 Από σημειώσεις</button>':''}<span class="teacher-mark"><i class="status-dot ${state.service?'':'offline'}"></i>${cloud?'Ιδιωτικός χώρος · cloud':state.service?'Χώρος εκπαιδευτικού':'Online κατάλογος'}</span>${!state.service?privateSpace('activity'):''}${link(state.registry.integrations.digital_book.url,icon('book')+' Το ψηφιακό μου βιβλίο '+icon('external'),'book-link')}</div></header>
   <nav class="steps" aria-label="Πορεία μαθήματος">${steps.map(([id,ic,title,caption],i)=>`<button class="step ${state.view===id?'active':''}" data-view="${id}" ${id!=='select'&&!state.selected?'disabled title="Επίλεξε πρώτα ένα σενάριο"':''} ${state.view===id?'aria-current="step"':''}><span class="step-number">0${i+1}</span><span class="step-copy"><strong>${title}</strong><small>${caption}</small></span>${icon(ic)}</button>`).join('')}</nav>`;
 }
 function gradeOptions(empty='Όλες οι τάξεις') { return `<option value="">${empty}</option>`+state.registry.grades.map(g=>`<option ${g===state.grade?'selected':''}>${esc(g)}</option>`).join(''); }
@@ -287,6 +287,7 @@ function go(view) {
 }
 function bind() {
   document.querySelectorAll('[data-open-lesson-map]').forEach(b=>b.onclick=()=>openLessonMap());
+  document.querySelectorAll('[data-import-notes]').forEach(b=>b.onclick=async()=>{openLessonMap();await lessonMapController.ready;await lessonMapController.importNotes();});
   document.querySelectorAll('[data-open-canvas]').forEach(b=>b.onclick=()=>openLessonMap(b.dataset.openCanvas));
   document.querySelectorAll('[data-canvas-usage]').forEach(el=>el.onchange=()=>{const d=draft(),k=el.dataset.canvasUsage;d.canvasUsage[k]=el.checked?[...new Set([...d.canvasUsage[k],el.value])]:d.canvasUsage[k].filter(id=>id!==el.value);d.requestId=uuid();d.saved=false;});
   document.querySelector('#canvas-usage-note')?.addEventListener('input',e=>{draft().canvasUsage.note=e.target.value;draft().requestId=uuid();});

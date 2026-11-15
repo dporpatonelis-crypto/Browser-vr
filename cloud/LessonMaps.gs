@@ -14,12 +14,20 @@ function mapLinks_(rows,ids) {
   });
   if(new Set(result.map(r=>r.id)).size!==result.length)throw new Error('Διπλή ταυτότητα σύνδεσης.');return result;
 }
-function validateLessonMap_(kind,data) {
+function validateNotesSource_(data,scenarios){
+  if(!data||!['pdf','image'].includes(data.type)||!/^([0-9a-f]{64})$/.test(data.sha256||'')||!['pdf-text','ocr','mixed','manual'].includes(data.extraction))throw new Error('Μη έγκυρη πηγή σημειώσεων.');
+  const start=data.page_start,end=data.page_end,total=data.total_pages;
+  if(![start,end,total].every(Number.isInteger)||start<1||end<start||end>total||total>10000||end-start>=20)throw new Error('Επίλεξε έγκυρο εύρος έως 20 σελίδων.');
+  const related=mapList_(data.related_scenario_ids||[],100);if(related.some(s=>!scenarios.has(s)))throw new Error('Δεν βρέθηκε το σχετικό μάθημα.');
+  return {asset_id:uuid_(data.asset_id),sha256:data.sha256,name:mapText_(data.name,180),type:data.type,extraction:data.extraction,page_start:start,page_end:end,total_pages:total,focus:mapText_(data.focus||'',1000),keywords:mapList_(data.keywords||[],12).map(t=>mapText_(t,100)),related_scenario_ids:[...new Set(related)],exercise_regions:mapList_(data.exercise_regions||[],40).map(r=>{if(r.page<start||r.page>end)throw new Error('Το απόσπασμα είναι εκτός επιλεγμένων σελίδων.');return {asset_id:uuid_(r.asset_id),page:r.page,...notesRegion_(r)};})};
+}
+function notesRegion_(r){const p=mapPoint_(r,0,1);if(!Number.isInteger(r.page)||r.page<1||r.page>10000||!['w','h'].every(k=>typeof r[k]==='number'&&Number.isFinite(r[k])&&r[k]>.001&&r[k]<=1)||p.x+r.w>1.001||p.y+r.h>1.001)throw new Error('Μη έγκυρο απόσπασμα άσκησης.');return {...p,w:r.w,h:r.h};}
+function validateLessonMap_(kind,data,documentId) {
   if(!data||typeof data!=='object'||Array.isArray(data)||JSON.stringify(data).length>1048576)throw new Error('Μη έγκυρο μέγεθος ή περιεχόμενο χάρτη.');
   if(data.schema_version!=null&&data.schema_version!==1)throw new Error('Η έκδοση αυτού του χάρτη χρειάζεται νεότερη εφαρμογή. Το αρχείο διατηρείται.');
   const result={schema_version:1,title:mapText_(data.title),grade:mapText_(data.grade||'',60),verbs:[...new Set(mapList_(data.verbs||[],80).map(v=>mapText_(v,100)))]};
   if(!result.title.trim())throw new Error('Δώσε τίτλο στον χάρτη.');
-  const scenarios=new Map(CATALOG.scenarios.map(s=>[s.scenario_id,s]));
+  const scenarios=new Map(lessonCanvasRegistry_().scenarios.map(s=>[s.scenario_id,s]));
   if(kind==='workspace') {
     const themes=mapList_(data.themes,80).map(t=>({id:uuid_(t.id),title:mapText_(t.title),icon:mapText_(t.icon||'📚',20),box:mapBox_(t.box)})),ids=new Set(themes.map(t=>t.id));
     if(ids.size!==themes.length)throw new Error('Διπλή ταυτότητα θεματικής.');
@@ -32,7 +40,9 @@ function validateLessonMap_(kind,data) {
   }
   if(kind!=='canvas')throw new Error('Άγνωστος τύπος χάρτη.');
   const sid=data.scenario_id||null,registered=data.registered===true,materialIds=new Set();
-  if(sid&&!scenarios.has(sid))throw new Error('Επίλεξε υπάρχον σενάριο για τη σύνδεση.');
+  const source=data.import_source?validateNotesSource_(data.import_source,scenarios):null,ownNotes=source&&sid==='notes:'+documentId;
+  if(sid&&!scenarios.has(sid)&&!ownNotes)throw new Error('Επίλεξε υπάρχον σενάριο για τη σύνδεση.');
+  if(source&&!ownNotes)throw new Error('Το μάθημα σημειώσεων διατηρεί τη δική του ταυτότητα.');
   if(registered&&!sid)throw new Error('Η καταχώριση χρειάζεται υπάρχον μάθημα.');
   const buildings=mapList_(data.buildings,5).map(b=>{
     if(!MAP_BUILDINGS_.includes(b.id))throw new Error('Άγνωστος τύπος οικοδομήματος.');
@@ -55,7 +65,7 @@ function validateLessonMap_(kind,data) {
   });
   const p=data.presentation||{},order=mapList_(p.reveal_order||MAP_BUILDINGS_,5);
   if(order.length!==5||new Set(order).size!==5||order.some(i=>!MAP_BUILDINGS_.includes(i)))throw new Error('Μη έγκυρη σειρά εμφάνισης.');
-  return {...result,scenario_id:sid,registered,buildings,annotations,connections:mapLinks_(data.connections||[],new Set(MAP_BUILDINGS_)),presentation:{reveal_order:order,hide_empty:p.hide_empty!==false}};
+  return {...result,...source?{import_source:source}:{},scenario_id:sid,registered,buildings,annotations,connections:mapLinks_(data.connections||[],new Set(MAP_BUILDINGS_)),presentation:{reveal_order:order,hide_empty:p.hide_empty!==false}};
 }
 function readLessonMaps_(folder) {
   const files=folder.getFiles(),rows=[];
@@ -70,18 +80,26 @@ function latestLessonMaps_(rows){const latest=new Map(),superseded=new Set(rows.
 function listLessonMaps(){assertOwner_();const lock=LockService.getScriptLock();lock.waitLock(30000);try{return {versions:readLessonMaps_(folder_())};}finally{lock.releaseLock();}}
 function lessonCanvasRegistry_(){
   const registry=JSON.parse(JSON.stringify(CATALOG)),scenarios=new Map(registry.scenarios.map(s=>[s.scenario_id,s]));
-  for(const row of latestLessonMaps_(readLessonMaps_(folder_()))){const d=row.document;if(row.kind==='canvas'&&d.registered&&scenarios.has(d.scenario_id))scenarios.get(d.scenario_id).activities.push({id:'canvas:'+row.document_id,kind:'canvas',label:'Χάρτης · '+d.title,url:'#canvas/'+row.document_id,canvas_id:row.document_id,canvas_version_id:row.id,note:'Ιδιωτικός χάρτης μαθήματος · πέντε οικοδομήματα γνώσης',app:'lesson-map'});}
+  for(const row of latestLessonMaps_(readLessonMaps_(folder_()))){const d=row.document;
+    if(row.kind==='canvas'&&d.registered&&d.import_source&&d.scenario_id==='notes:'+row.document_id){
+      const source=d.import_source,refs=new Set(d.buildings.flatMap(b=>b.materials.filter(m=>m.activity_id).map(m=>m.source_scenario_id+'|'+m.activity_id)));
+      const activities=CATALOG.scenarios.flatMap(s=>s.activities.filter(a=>refs.has(s.scenario_id+'|'+a.id))).map(a=>JSON.parse(JSON.stringify(a)));
+      const scenario={scenario_id:d.scenario_id,title:d.title,subject:'Θρησκευτικά',grades:CATALOG.grades.includes(d.grade)?[d.grade]:[],grade_status:'confirmed',objectives:[],inquiry_question:source.focus,modes:['μελέτη πηγής','σύνδεση εννοιών'],formats:[source.type==='pdf'?'PDF':'Εικόνα','HTML'],duration:null,cognitive_difficulty:null,technical_difficulty:null,readiness:'available',pedagogical_application:source.focus||'Μελέτη των σημειώσεων και σύνδεση με επιλεγμένα μέσα.',application_status:'teacher-confirmed',aliases:[],notes:[],source_groups:['Samsung Notes'],sources:[{system:'Samsung Notes',path:source.name,locator:''}],activities,private:true};
+      registry.scenarios.push(scenario);scenarios.set(d.scenario_id,scenario);
+    }
+    if(row.kind==='canvas'&&d.registered&&scenarios.has(d.scenario_id))scenarios.get(d.scenario_id).activities.push({id:'canvas:'+row.document_id,kind:'canvas',label:'Χάρτης · '+d.title,url:'#canvas/'+row.document_id,canvas_id:row.document_id,canvas_version_id:row.id,note:'Ιδιωτικός χάρτης μαθήματος · πέντε οικοδομήματα γνώσης',app:'lesson-map'});}
   return registry;
 }
 function saveLessonMap(data){
   assertOwner_();if(!data||typeof data!=='object')throw new Error('Μη έγκυρος χάρτης.');
-  const id=uuid_(data.request_id),did=uuid_(data.document_id),previous=data.previous_version_id?uuid_(data.previous_version_id):'',kind=data.kind,doc=validateLessonMap_(kind,data.document);
+  const id=uuid_(data.request_id),did=uuid_(data.document_id),previous=data.previous_version_id?uuid_(data.previous_version_id):'',kind=data.kind,doc=validateLessonMap_(kind,data.document,did);
   const lock=LockService.getScriptLock();lock.waitLock(30000);
   try{
     const folder=folder_(),rows=readLessonMaps_(folder),old=rows.find(r=>r.id===id),latest=latestLessonMaps_(rows).find(r=>r.document_id===did);
     if(old){if(['document_id','kind','previous_version_id','document'].some(k=>JSON.stringify(old[k])!==JSON.stringify({document_id:did,kind,previous_version_id:previous,document:doc}[k])))throw new Error('Το αναγνωριστικό χρησιμοποιήθηκε για διαφορετική αλλαγή.');return {ok:true,version:old,created:false,registry:lessonCanvasRegistry_()};}
     if(latest&&(latest.id!==previous||latest.kind!==kind)||!latest&&previous)throw new Error('Ο χάρτης άλλαξε από άλλη συσκευή. Άνοιξε την τελευταία έκδοση· οι αλλαγές σου διατηρούνται.');
     if(latest?.document.registered&&latest.document.scenario_id!==doc.scenario_id)throw new Error('Ο καταχωρισμένος χάρτης παραμένει στο ίδιο μάθημα. Δημιούργησε αντίγραφο.');
+    if(doc.import_source){const s=doc.import_source,info=canvasAssetInfo_(s.asset_id,folder);if(info.sha256!==s.sha256||(s.type==='pdf')!==(info.mime==='application/pdf')||!/^image\/|^application\/pdf$/.test(info.mime))throw new Error('Το πρωτότυπο δεν αντιστοιχεί στις σημειώσεις.');for(const r of s.exercise_regions||[])if(!canvasAssetInfo_(r.asset_id,folder).mime.startsWith('image/'))throw new Error('Η άσκηση χρειάζεται εικόνα.');}
     for(const b of doc.buildings||[])for(const m of b.materials)if(m.asset_id)canvasAssetInfo_(m.asset_id,folder);
     if(kind==='workspace')for(const l of doc.lessons)if(l.canvas_id&&!rows.some(r=>r.kind==='canvas'&&r.document_id===l.canvas_id))throw new Error('Αποθήκευσε πρώτα τα μαθήματα του χάρτη.');
     const row={schema_version:1,id,document_id:did,previous_version_id:previous,kind,created_at:new Date().toISOString(),document:doc};

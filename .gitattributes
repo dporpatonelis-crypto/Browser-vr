@@ -1,3 +1,5 @@
 # Preserve upstream distributions byte-for-byte, including licence formatting.
 /public/vendor/pdfjs/** -whitespace linguist-vendored=true
 /site/vendor/pdfjs/** -whitespace linguist-vendored=true
+/public/vendor/notes-ocr/** -whitespace linguist-vendored=true
+/site/vendor/notes-ocr/** -whitespace linguist-vendored=true

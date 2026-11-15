@@ -70,6 +70,7 @@ export function lmMaterialType(file) {
   if(file.type==='text/html'||['html','htm'].includes(ext))return 'html';
   throw Error('Επίλεξε PNG, JPG, WebP, PDF ή αυτοτελές HTML.');
 }
+export function lmAssetIDs(doc){return [...new Set([...(doc.buildings||[]).flatMap(b=>b.materials.map(m=>m.asset_id)),doc.import_source?.asset_id,...(doc.import_source?.exercise_regions||[]).map(r=>r.asset_id)].filter(Boolean))];}
 export function lmValidateTransfer(value) {
   const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if(!value||value.format!=='lesson-map-transfer'||value.schema_version!==1||!Array.isArray(value.documents)||value.documents.length>100||!Array.isArray(value.assets)||value.assets.length>500)throw Error('Επίλεξε έγκυρο ιδιωτικό πακέτο μεταφοράς χάρτη.');
@@ -81,5 +82,6 @@ export function lmValidateTransfer(value) {
   const assets=new Set();
   for(const a of value.assets){if(!a||!uuid.test(a.id)||assets.has(a.id)||typeof a.name!=='string'||a.name.length>180||!['image/png','image/jpeg','image/webp','application/pdf','text/html'].includes(a.mime)||typeof a.base64!=='string'||a.base64.length>36*1024*1024)throw Error('Το πακέτο περιέχει μη έγκυρο αρχείο.');assets.add(a.id);}
   for(const [,row] of value.documents)for(const b of row.document.buildings||[])for(const m of b.materials||[])if(m.asset_id&&!assets.has(m.asset_id))throw Error('Λείπει αρχείο από το πακέτο μεταφοράς.');
+  for(const [,row] of value.documents)if(lmAssetIDs(row.document).some(id=>!assets.has(id)))throw Error('Λείπει πρωτότυπο ή απόσπασμα σημειώσεων από το πακέτο.');
   return value;
 }

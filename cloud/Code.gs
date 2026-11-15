@@ -18,7 +18,7 @@ function doGet(e) {
   const initial = {};
   const privateCatalog = lessonCanvasRegistry_();
   if(parameters.view==='map')initial.view='map';
-  if (CATALOG.scenarios.some(s => s.scenario_id === parameters.scenario)) {
+  if (privateCatalog.scenarios.some(s => s.scenario_id === parameters.scenario)) {
     initial.scenario = parameters.scenario;
     initial.view = parameters.view==='map'?'map':parameters.view === 'evaluate' ? 'evaluate' : 'activity';
   }
@@ -26,7 +26,7 @@ function doGet(e) {
   if (MODELS.models.some(m => m.id === parameters.model)) initial.modelId = parameters.model;
   if (initial.grade && typeof parameters.section === 'string') initial.section = parameters.section.slice(0, 40);
   if (initial.scenario && typeof parameters.materials === 'string') {
-    const known = CATALOG.scenarios.find(s => s.scenario_id === initial.scenario).activities.map(a => a.id);
+    const known = privateCatalog.scenarios.find(s => s.scenario_id === initial.scenario).activities.map(a => a.id);
     initial.materialIds = parameters.materials.split(',').filter(id => known.includes(id)).slice(0, 100);
   }
   const bootstrap = JSON.stringify({registry: privateCatalog, models: MODELS, initial,

@@ -23,6 +23,11 @@ def export_transfer(storage,output):
     store=CanvasStore(EvaluationStore(storage))
     documents=[[r['document_id'],{'kind':r['kind'],'document':r['document']}] for r in store.latest()]
     needed={m['asset_id'] for _,row in documents for b in row['document'].get('buildings',[]) for m in b['materials'] if m.get('asset_id')}
+    for _, row in documents:
+        source = row['document'].get('import_source')
+        if source:
+            needed.add(source['asset_id'])
+            needed.update(r['asset_id'] for r in source.get('exercise_regions', []))
     assets=[]
     for aid in sorted(needed):
         metadata,path=store.asset(aid)

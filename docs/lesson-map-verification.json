@@ -25,5 +25,17 @@
     "public_map": "both levels opened in Chrome",
     "private_cloud": "existing deployment updated to version 13; same URL and owner-only access",
     "private_pilot_reload": "saved material counts and connections verified; private image loaded from cloud"
+  },
+  "notes_import": {
+    "date": "2026-11-15",
+    "required_python_tests": 40,
+    "javascript_tests": 35,
+    "image_source": "actual supplied Notes image; native file picker, Greek OCR, teacher text correction, exercise crop, save and reload verified",
+    "pdf_source": "second page only in a two-page PDF; typed text and exercise image separated",
+    "responsive_form": "390px; 362px dialog; no horizontal overflow",
+    "html_policy": "existing catalogue or separate local/Drive update; no HTML generated from notes",
+    "handwriting_policy": "red ink excluded from OCR working copy; other notes can be marked Ignore; teacher review required",
+    "public_registry": "unchanged",
+    "physical_android_tested": false
   }
 }

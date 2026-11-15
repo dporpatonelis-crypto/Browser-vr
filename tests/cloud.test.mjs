@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {createHash,randomUUID} from 'node:crypto';
 import {lmNewCanvas,lmNewWorkspace} from '../public/lesson-map-domain.mjs';
+import {niBuildCanvas} from '../public/lesson-import-domain.mjs';
 
 const owner='teacher@example.com';
 const catalog=JSON.parse(readFileSync(new URL('../site/data/scenario-registry.json',import.meta.url)));
@@ -24,6 +25,21 @@ function environment(storage={files:[],properties:new Map()},active=owner,effect
   vm.runInContext(source,context);
   return {context,storage,folder};
 }
+test('Notes source and exercise create one private lesson with stable catalogue access after restart',()=>{
+  const {context,storage}=environment(),aid=randomUUID(),crop=randomUUID(),did=randomUUID();
+  const blob=bytes=>({getName:()=> 'notes.png',getBytes:()=>[...Buffer.from(bytes)]});
+  const metadata=context.uploadCanvasAsset({asset_id:aid,file:blob([137,80,78,71,13,10,26,10,1])}).asset;
+  context.uploadCanvasAsset({asset_id:crop,file:blob([137,80,78,71,13,10,26,10,2])});
+  const doc=niBuildCanvas({id:did,title:'Συνέπειες της πτώσης',grade:catalog.grades[0],source:{asset_id:aid,name:'notes.png',sha256:metadata.sha256,type:'image',extraction:'ocr',page_start:1,page_end:1,total_pages:1,exercise_regions:[{asset_id:crop,page:1,x:.1,y:.1,w:.6,h:.5}]},text:'Ελεγμένο έντυπο κείμενο',terms:['παρακοή'],focus:'Η σχέση ανθρώπου και κτίσης',selected:[]});
+  doc.buildings[1].materials.push({id:randomUUID(),type:'image',label:'Άσκηση με κενά',asset_id:crop});
+  const data={request_id:randomUUID(),document_id:did,kind:'canvas',previous_version_id:'',document:doc};
+  const first=context.saveLessonMap(data);assert.equal(first.created,true);assert.equal(context.saveLessonMap(data).created,false);
+  const lesson=first.registry.scenarios.find(s=>s.scenario_id==='notes:'+did);assert.equal(lesson.private,true);assert.equal(lesson.activities[0].canvas_id,did);
+  const restarted=environment(storage).context;assert.equal(restarted.lessonCanvasRegistry_().scenarios.filter(s=>s.scenario_id==='notes:'+did).length,1);
+  assert.equal(restarted.listLessonMaps().versions[0].document.import_source.exercise_regions[0].asset_id,crop);
+  const plan=restarted.savePlan({request_id:randomUUID(),scenario_id:'notes:'+did,model_id:'guided-exploration',notes:'',planned_material_ids:['canvas:'+did]}).plan;assert.equal(plan.scenario_id,'notes:'+did);
+  const invalid=JSON.parse(JSON.stringify(data));invalid.request_id=randomUUID();invalid.previous_version_id=first.version.id;invalid.document.import_source.sha256='0'.repeat(64);assert.throws(()=>restarted.saveLessonMap(invalid),/πρωτότυπο/);
+});
 const payload=(overrides={})=>({request_id:'7ed3a50f-991a-4eb9-964a-f2e5458a5de0',scenario_id:'book:abraham-journey',model_id:'guided-exploration',grade:'Β΄ Λυκείου',section:'Β1',flags:['worked-well'],cognitive_difficulty:3,...overrides});
 test('private cloud rejects anonymous, other accounts and mismatched execution identity',()=>{
   for(const [active,effective] of [['',owner],['other@example.com',owner],[owner,'other@example.com']]){

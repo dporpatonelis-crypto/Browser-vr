@@ -76,7 +76,35 @@ def links(value, nodes):
     return result
 
 
-def validate_document(kind, data, registry):
+def validate_import_source(data, registry):
+    if not isinstance(data, dict) or data.get('type') not in ('pdf', 'image'):
+        raise ValueError('Μη έγκυρη πηγή σημειώσεων.')
+    sha = short(data.get('sha256', ''), 64)
+    if not re.fullmatch('[0-9a-f]{64}', sha):
+        raise ValueError('Μη έγκυρη ταυτότητα αρχείου σημειώσεων.')
+    if data.get('extraction') not in ('pdf-text', 'ocr', 'mixed', 'manual'):
+        raise ValueError('Μη έγκυρη ανάγνωση σημειώσεων.')
+    start, end, total = (data.get(k) for k in ('page_start', 'page_end', 'total_pages'))
+    if any(type(n) is not int for n in (start, end, total)) or not 1 <= start <= end <= total <= 10000 or end-start >= 20:
+        raise ValueError('Επίλεξε έγκυρο εύρος έως 20 σελίδων.')
+    known = {s['scenario_id'] for s in registry['scenarios']}
+    related = items(data.get('related_scenario_ids', []), 100)
+    if any(s not in known for s in related):
+        raise ValueError('Δεν βρέθηκε το σχετικό μάθημα.')
+    regions = []
+    for r in items(data.get('exercise_regions', []), 40):
+        p = point(r)
+        w, h, page = r.get('w'), r.get('h'), r.get('page')
+        if type(page) is not int or not start <= page <= end or any(type(n) not in (float, int) or not math.isfinite(n) or not .001 < n <= 1 for n in (w, h)) or p['x']+w > 1.001 or p['y']+h > 1.001:
+            raise ValueError('Μη έγκυρο απόσπασμα άσκησης.')
+        regions.append({'asset_id': identity(r.get('asset_id')), 'page': page, **p, 'w': w, 'h': h})
+    return {'asset_id': identity(data.get('asset_id')), 'sha256': sha, 'name': short(data.get('name', ''), 180),
+            'type': data['type'], 'extraction': data['extraction'], 'page_start': start, 'page_end': end, 'total_pages': total,
+            'focus': short(data.get('focus', ''), 1000), 'keywords': [short(t, 100) for t in items(data.get('keywords', []), 12)],
+            'related_scenario_ids': list(dict.fromkeys(related)), 'exercise_regions': regions}
+
+
+def validate_document(kind, data, registry, document_id=None):
     if not isinstance(data, dict) or len(json.dumps(data, ensure_ascii=False).encode()) > MAX_DOCUMENT:
         raise ValueError('Μη έγκυρο μέγεθος ή περιεχόμενο χάρτη.')
     if data.get('schema_version', 1) != 1:
@@ -106,8 +134,12 @@ def validate_document(kind, data, registry):
         result.update(themes=themes, lessons=lessons, connections=links(data.get('connections', []), ids))
     elif kind == 'canvas':
         sid = data.get('scenario_id') or None
-        if sid and sid not in scenarios:
+        imported = validate_import_source(data['import_source'], registry) if data.get('import_source') is not None else None
+        own_notes = imported and document_id and sid == 'notes:' + document_id
+        if sid and sid not in scenarios and not own_notes:
             raise ValueError('Επίλεξε υπάρχον σενάριο για τη σύνδεση.')
+        if imported and not own_notes:
+            raise ValueError('Το μάθημα σημειώσεων διατηρεί τη δική του ταυτότητα.')
         registered = data.get('registered', False) is True
         if registered and not sid:
             raise ValueError('Η καταχώριση χρειάζεται υπάρχον μάθημα.')
@@ -159,6 +191,8 @@ def validate_document(kind, data, registry):
         result.update(scenario_id=sid, registered=registered, buildings=buildings, annotations=annotations,
                       connections=links(data.get('connections', []), set(BUILDINGS)),
                       presentation={'reveal_order': order, 'hide_empty': presentation.get('hide_empty', True) is not False})
+        if imported:
+            result['import_source'] = imported
     else:
         raise ValueError('Άγνωστος τύπος χάρτη.')
     return result
@@ -208,7 +242,7 @@ class CanvasStore:
         rid, did = identity(data.get('request_id')), identity(data.get('document_id'))
         previous = identity(data['previous_version_id']) if data.get('previous_version_id') else ''
         kind = data.get('kind')
-        doc = validate_document(kind, data.get('document'), registry)
+        doc = validate_document(kind, data.get('document'), self.registry(registry), did)
         with self.store.lock, (self.directory / '.append.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
             rows = self.read()
@@ -223,6 +257,13 @@ class CanvasStore:
                 raise CanvasConflict('Ο χάρτης άλλαξε από άλλη συσκευή. Άνοιξε την τελευταία έκδοση· οι αλλαγές σου διατηρούνται.')
             if latest and latest['document'].get('registered') and latest['document'].get('scenario_id') != doc.get('scenario_id'):
                 raise ValueError('Ο καταχωρισμένος χάρτης παραμένει στο ίδιο μάθημα. Δημιούργησε αντίγραφο.')
+            if doc.get('import_source'):
+                source = doc['import_source']
+                info, _ = self.asset(source['asset_id'])
+                if info['sha256'] != source['sha256'] or (source['type'] == 'pdf') != (info['mime'] == 'application/pdf') or not info['mime'].startswith(('image/', 'application/pdf')):
+                    raise ValueError('Το πρωτότυπο δεν αντιστοιχεί στις σημειώσεις.')
+                if any(not self.asset(r['asset_id'])[0]['mime'].startswith('image/') for r in source['exercise_regions']):
+                    raise ValueError('Η άσκηση χρειάζεται εικόνα.')
             for b in doc.get('buildings', []):
                 for m in b['materials']:
                     if m['asset_id']:
@@ -269,6 +310,21 @@ class CanvasStore:
         scenarios = {s['scenario_id']: s for s in result['scenarios']}
         for row in self.latest():
             d = row['document']
+            if row['kind'] == 'canvas' and d.get('registered') and d.get('import_source') and d.get('scenario_id') == 'notes:' + row['document_id']:
+                source = d['import_source']
+                references = {(m['source_scenario_id'], m['activity_id']) for b in d['buildings'] for m in b['materials'] if m.get('activity_id')}
+                activities = [copy.deepcopy(a) for s in original['scenarios'] for a in s['activities'] if (s['scenario_id'], a['id']) in references]
+                scenario = {'scenario_id': d['scenario_id'], 'title': d['title'], 'subject': 'Θρησκευτικά',
+                            'grades': [d['grade']] if d['grade'] in original.get('grades', []) else [], 'grade_status': 'confirmed',
+                            'objectives': [], 'inquiry_question': source['focus'], 'modes': ['μελέτη πηγής', 'σύνδεση εννοιών'],
+                            'formats': list(dict.fromkeys(['PDF' if source['type'] == 'pdf' else 'Εικόνα', 'HTML'])),
+                            'duration': None, 'cognitive_difficulty': None, 'technical_difficulty': None, 'readiness': 'available',
+                            'pedagogical_application': source['focus'] or 'Μελέτη των σημειώσεων και σύνδεση με επιλεγμένα μέσα.',
+                            'application_status': 'teacher-confirmed', 'aliases': [], 'notes': [], 'source_groups': ['Samsung Notes'],
+                            'sources': [{'system': 'Samsung Notes', 'path': source['name'], 'locator': ''}], 'activities': activities, 'private': True}
+                result['scenarios'] = [s for s in result['scenarios'] if s['scenario_id'] != d['scenario_id']]
+                result['scenarios'].append(scenario)
+                scenarios[d['scenario_id']] = scenario
             if row['kind'] == 'canvas' and d.get('registered') and d.get('scenario_id') in scenarios:
                 scenarios[d['scenario_id']]['activities'].append({
                     'id':'canvas:'+row['document_id'], 'kind':'canvas', 'label':'Χάρτης · '+d['title'],

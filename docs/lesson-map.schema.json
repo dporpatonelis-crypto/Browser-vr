@@ -355,6 +355,17 @@
         "source_scenario_id": {
           "type": "string"
         },
+        "provenance": {
+          "type": "object",
+          "required": ["drive_id", "name"],
+          "properties": {
+            "drive_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{10,200}$"},
+            "name": {"type": "string", "maxLength": 180},
+            "page": {"type": "integer", "minimum": 1, "maximum": 10000},
+            "variant": {"type": "string", "maxLength": 120}
+          },
+          "additionalProperties": false
+        },
         "page_start": {
           "type": "integer",
           "minimum": 1,

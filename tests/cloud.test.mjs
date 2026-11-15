@@ -41,6 +41,19 @@ test('Notes source and exercise create one private lesson with stable catalogue 
   const invalid=JSON.parse(JSON.stringify(data));invalid.request_id=randomUUID();invalid.previous_version_id=first.version.id;invalid.document.import_source.sha256='0'.repeat(64);assert.throws(()=>restarted.saveLessonMap(invalid),/πρωτότυπο/);
 });
 const payload=(overrides={})=>({request_id:'7ed3a50f-991a-4eb9-964a-f2e5458a5de0',scenario_id:'book:abraham-journey',model_id:'guided-exploration',grade:'Β΄ Λυκείου',section:'Β1',flags:['worked-well'],cognitive_difficulty:3,...overrides});
+test('ready material keeps an empty library and exact Drive/PDF provenance after cloud restart',()=>{
+  const {context,storage}=environment(),aid=randomUUID(),did=randomUUID();
+  const file={getName:()=> 'exercise.png',getBytes:()=>[137,80,78,71,13,10,26,10,7]};
+  const metadata=context.uploadCanvasAsset({asset_id:aid,file}).asset;
+  const doc=niBuildCanvas({id:did,title:'Άσκηση Α΄',grade:catalog.grades[0],readyOnly:true,source:{asset_id:aid,name:'exercise.png',sha256:metadata.sha256,type:'image',extraction:'manual',page_start:1,page_end:1,total_pages:1,exercise_regions:[]}});
+  const provenance={drive_id:'source_id_1234567890',name:'source.pdf',page:39,variant:'FXX5.png'};
+  doc.buildings[2].materials=[{id:randomUUID(),type:'image',label:'Εννοιολογικός χάρτης',asset_id:aid,provenance}];
+  const first=context.saveLessonMap({request_id:randomUUID(),document_id:did,kind:'canvas',document:doc});
+  const restored=environment(storage).context.listLessonMaps().versions[0].document;
+  assert.equal(restored.buildings[0].materials.length,0);assert.equal(JSON.stringify(restored.buildings[2].materials[0].provenance),JSON.stringify(provenance));
+  doc.buildings[2].materials[0].provenance.page=0;
+  assert.throws(()=>context.saveLessonMap({request_id:randomUUID(),document_id:did,kind:'canvas',previous_version_id:first.version.id,document:doc}),/σελίδα/);
+});
 test('private cloud rejects anonymous, other accounts and mismatched execution identity',()=>{
   for(const [active,effective] of [['',owner],['other@example.com',owner],[owner,'other@example.com']]){
     const {context}=environment(undefined,active,effective);

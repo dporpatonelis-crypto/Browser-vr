@@ -24,7 +24,7 @@ export function niMaterialTarget(a) {
   return {building:/mind.?map|concept|εννοιολογ|χαρτησ/.test(label)?'mindmap':['book','text'].includes(a.kind)?'text':'html',type:'html'};
 }
 /** Transparent retrieval clues, not a claim of AI comprehension. Teacher confirms each selection. */
-export function niFindMaterials(registry,{title='',text='',focus='',query=''}={}) {
+export function niFindMaterials(registry,{title='',text='',focus='',query='',readyOnly=false}={}) {
   const prompt=niNormalize([title,focus,query,text.slice(0,50000)].join(' '));
   const terms=[...new Set(niTerms([title,focus,query].join(' '),20).concat(niTerms(text,18)).map(niNormalize))];
   const topics=NI_TOPICS.filter(([,pattern])=>new RegExp(pattern).test(prompt));
@@ -33,6 +33,7 @@ export function niFindMaterials(registry,{title='',text='',focus='',query=''}={}
     if(s.private)continue;
     const parent=niNormalize([s.title,s.inquiry_question,...s.objectives||[],...s.aliases||[]].join(' '));
     for(const a of s.activities){
+      if(readyOnly&&!['html','image','pdf','quiz'].includes(a.kind))continue;
       const target=niMaterialTarget(a);if(!target)continue;
       const direct=niNormalize([a.label,a.note,a.native_id,...(a.content_preview||[]).map(p=>p.title+' '+p.text)].join(' ')),label=niNormalize(a.label);
       const hits=terms.filter(t=>direct.includes(t)||parent.includes(t));
@@ -49,12 +50,14 @@ export function niFindMaterials(registry,{title='',text='',focus='',query=''}={}
 export function niMaterial(row){return {id:lmId(),label:row.activity.label,type:row.type,text:'',url:'',asset_id:'',activity_id:row.activity.id,source_scenario_id:row.scenario_id,page_start:1,page_end:1};}
 export function niSourceMaterial(type,label,extra={}){return {id:lmId(),type,label:label.slice(0,240),text:'',url:'',asset_id:'',activity_id:'',source_scenario_id:'',page_start:1,page_end:1,...extra};}
 export function niExistingImport(documents,sha,start,end){return [...documents].find(([,row])=>{const s=row.document.import_source;return s?.sha256===sha&&s.page_start===start&&s.page_end===end;});}
-export function niBuildCanvas({id,title,grade,source,text,terms,focus,selected}) {
-  const doc=lmNewCanvas(title,'notes:'+id);doc.grade=grade;doc.registered=true;doc.presentation.hide_empty=false;
+export function niBuildCanvas({id,title,grade,source,text='',terms=[],focus='',selected=[],readyOnly=false}) {
+  const doc=lmNewCanvas(title,'notes:'+id);doc.grade=grade;doc.registered=true;doc.presentation.hide_empty=readyOnly;
   doc.import_source={...source,focus:focus||'',keywords:terms,related_scenario_ids:[...new Set(selected.map(r=>r.scenario_id))]};
   const add=(bid,m)=>doc.buildings.find(b=>b.id===bid).materials.push(m);
-  if(text.trim())add('text',niSourceMaterial('text','Κείμενο σημειώσεων · ελεγμένο από τον εκπαιδευτικό',{text:text.slice(0,100000)}));
-  add('text',niSourceMaterial(source.type,'Πρωτότυπο · '+source.name,{asset_id:source.asset_id,page_start:source.page_start,page_end:source.page_end}));
+  if(!readyOnly){
+    if(text.trim())add('text',niSourceMaterial('text','Κείμενο σημειώσεων · ελεγμένο από τον εκπαιδευτικό',{text:text.slice(0,100000)}));
+    add('text',niSourceMaterial(source.type,'Πρωτότυπο · '+source.name,{asset_id:source.asset_id,page_start:source.page_start,page_end:source.page_end}));
+  }
   for(const r of selected)add(r.building,niMaterial(r));
   if(focus)add('synthesis',niSourceMaterial('text','Ερώτημα σύνθεσης',{text:focus}));
   return doc;

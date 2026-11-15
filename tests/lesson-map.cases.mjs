@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {lmNewWorkspace,lmNewCanvas,lmLatest,lmFit,lmZoom,lmCurve,lmPoint,lmSafeURL,lmMaterialType,lmValidateTransfer,LM_BUILDINGS} from '../public/lesson-map-domain.mjs';
+import {lmNewWorkspace,lmNewCanvas,lmLatest,lmFit,lmZoom,lmCurve,lmPoint,lmSafeURL,lmMaterialType,lmValidateTransfer,lmVisibleWorkspace,lmCurateTransfer,lmCanvasReady,LM_WORKSPACE_ID,LM_BUILDINGS} from '../public/lesson-map-domain.mjs';
 import {niBuildCanvas,niFindMaterials,niMaterialTarget,niExistingImport} from '../public/lesson-import-domain.mjs';
 import {niDarkPanels,niPrintedPixels} from '../public/lesson-notes-regions.mjs';
 import {readFileSync} from 'node:fs';
@@ -66,4 +66,56 @@ test('red pen is removed only from the OCR working copy, preserving typed ink an
 test('one PDF can supply distinct lessons from different page ranges without duplicating the same range',()=>{
   const id=crypto.randomUUID(),rows=new Map([[id,{document:{import_source:{sha256:'hash',page_start:2,page_end:4}}}]]);
   assert.equal(niExistingImport(rows,'hash',2,4)[0],id);assert.equal(niExistingImport(rows,'hash',5,8),undefined);assert.equal(niExistingImport(rows,'other',2,4),undefined);
+});
+test('ready-only import keeps provenance without copying text or original into the library',()=>{
+  const id=crypto.randomUUID(),source={asset_id:crypto.randomUUID(),type:'image',name:'worksheet.jpg',page_start:1,page_end:1};
+  const d=niBuildCanvas({id,title:'Άσκηση',grade:'Α΄ Γυμνασίου',source,text:'Δεν εισάγεται',readyOnly:true});
+  assert.equal(d.buildings[0].materials.length,0);assert.equal(d.import_source.asset_id,source.asset_id);assert.equal(d.presentation.hide_empty,true);
+  assert.equal(lmCanvasReady(d),false);
+});
+test('islands and cities follow actual material, including removal, undo and reloaded drafts',()=>{
+  const w=lmNewWorkspace(),cid=crypto.randomUUID(),doc=lmNewCanvas(),registry={scenarios:[]},documents=new Map([[cid,{kind:'canvas',document:doc}]]);
+  w.lessons=[{id:crypto.randomUUID(),theme_id:w.themes[0].id,canvas_id:cid}];
+  const visible=()=>lmVisibleWorkspace(w,documents,registry);
+  assert.equal(visible().themes.length,0);
+  doc.buildings[1].materials=[{id:crypto.randomUUID(),type:'image',asset_id:crypto.randomUUID()}];
+  const before=JSON.stringify(doc);assert.equal(visible().themes.length,1);assert.equal(visible().lessons.length,1);
+  doc.buildings[1].materials=[];assert.equal(visible().themes.length,0);
+  documents.set(cid,{kind:'canvas',document:JSON.parse(before)});assert.equal(visible().lessons.length,1);
+  assert.equal(w.themes.length,5);assert.equal(w.lessons.length,1);
+});
+test('a label or source file alone does not activate a draft, and catalogue links need a launch target',()=>{
+  const d=lmNewCanvas();d.import_source={asset_id:crypto.randomUUID()};d.buildings[1].materials=[{id:crypto.randomUUID(),type:'image',label:'Προσθήκη αργότερα'}];
+  assert.equal(lmCanvasReady(d),false);
+  d.buildings[3].materials=[{type:'html',activity_id:'actual',source_scenario_id:'s'}];
+  assert.equal(lmCanvasReady(d,{scenarios:[{scenario_id:'s',activities:[{id:'actual',kind:'html',url:'https://example.org/lesson'}]}]}),true);
+});
+test('curation merges into current canvas and placement, preserving edits and avoiding duplicates on retry',()=>{
+  const registry={scenarios:[]},w=lmNewWorkspace(registry),cid=crypto.randomUUID(),incomingId=crypto.randomUUID(),sid='existing:lesson';
+  const c=lmNewCanvas('Τίτλος εκπαιδευτικού',sid);c.buildings[1].box.x=.56;
+  const edited={id:crypto.randomUUID(),type:'image',label:'Δικός μου τίτλος',asset_id:crypto.randomUUID(),provenance:{drive_id:'source_id_12345',name:'image.jpg'}};
+  c.buildings[1].materials=[edited];w.lessons=[{id:crypto.randomUUID(),canvas_id:cid,scenario_id:sid,title:'Δικός μου τίτλος',theme_id:w.themes[0].id}];
+  const incoming=lmNewCanvas('Νέος τίτλος',sid);incoming.registered=true;incoming.buildings[1].materials=[{...edited,id:crypto.randomUUID(),label:'Αρχικός τίτλος'},{id:crypto.randomUUID(),type:'image',asset_id:crypto.randomUUID()}];
+  const bundle={documents:[[incomingId,{kind:'canvas',document:incoming}]],curation:{workspace_id:LM_WORKSPACE_ID,themes:[w.themes[4]],placements:[{id:crypto.randomUUID(),canvas_id:incomingId,theme_id:w.themes[4].id}]}};
+  const docs=new Map([[LM_WORKSPACE_ID,{kind:'workspace',document:w}],[cid,{kind:'canvas',document:c}]]),before=JSON.stringify([...docs]);
+  const changes=lmCurateTransfer(bundle,docs);assert.equal(JSON.stringify([...docs]),before);assert.ok(!changes.has(incomingId));
+  assert.equal(changes.get(cid).document.title,c.title);assert.equal(changes.get(cid).document.buildings[1].box.x,.56);
+  assert.equal(changes.get(cid).document.buildings[1].materials.length,2);assert.equal(changes.get(cid).document.buildings[1].materials[0].label,edited.label);
+  assert.equal(changes.get(LM_WORKSPACE_ID).document.lessons[0].id,w.lessons[0].id);assert.equal(changes.get(LM_WORKSPACE_ID).document.lessons[0].theme_id,w.themes[4].id);
+  for(const pair of changes)docs.set(...pair);
+  assert.equal(lmCurateTransfer(bundle,docs).size,0);
+});
+test('curation registers an existing private draft without replacing its images, HTML or layout',()=>{
+  const cid=crypto.randomUUID(),w=lmNewWorkspace(),old=lmNewCanvas('Αγία Φιλοθέη'),mid=crypto.randomUUID(),oldAsset=crypto.randomUUID();
+  delete old.scenario_id;old.presentation.reveal_order=['text','html','images','mindmap','synthesis'];
+  old.buildings[1].materials=[{id:mid,type:'image',label:'Δικό μου αρχείο',asset_id:oldAsset}];
+  old.buildings[3].materials=[{id:crypto.randomUUID(),type:'html',asset_id:crypto.randomUUID()}];
+  w.lessons=[{id:crypto.randomUUID(),title:old.title,canvas_id:cid,theme_id:w.themes[3].id}];
+  const incoming=lmNewCanvas(old.title,'notes:'+cid);incoming.registered=true;incoming.import_source={asset_id:crypto.randomUUID()};
+  incoming.buildings[1].materials=[{id:mid,type:'image',asset_id:crypto.randomUUID(),provenance:{drive_id:'source_id_12345',name:'source.jpg'}}];
+  const bundle={documents:[[cid,{kind:'canvas',document:incoming}]],curation:{workspace_id:LM_WORKSPACE_ID,themes:[w.themes[3]],placements:[{id:crypto.randomUUID(),canvas_id:cid,theme_id:w.themes[3].id}]}};
+  const docs=new Map([[LM_WORKSPACE_ID,{kind:'workspace',document:w}],[cid,{kind:'canvas',document:old}]]),changes=lmCurateTransfer(bundle,docs),merged=changes.get(cid).document;
+  assert.equal(merged.scenario_id,'notes:'+cid);assert.equal(merged.registered,true);assert.equal(merged.buildings[1].materials.length,1);assert.equal(merged.buildings[1].materials[0].asset_id,oldAsset);
+  assert.equal(merged.buildings[1].materials[0].label,'Δικό μου αρχείο');assert.equal(merged.buildings[3].materials[0].asset_id,old.buildings[3].materials[0].asset_id);assert.deepEqual(merged.presentation,old.presentation);
+  for(const pair of changes)docs.set(...pair);assert.equal(lmCurateTransfer(bundle,docs).size,0);
 });

@@ -94,6 +94,20 @@ class MapTests(unittest.TestCase):
         doc['annotations'][0]['points'][0]['x']=1.1
         with self.assertRaises(ValueError):validate_document('canvas',doc,self.registry)
 
+    def test_drive_and_pdf_provenance_survives_storage_export_and_invalid_sources_fail(self):
+        aid=str(uuid.uuid4());self.maps.upload(aid,'worksheet.png','image/png',b'\x89PNG\r\n\x1a\noriginal')
+        doc=copy.deepcopy(self.canvas)
+        source={'drive_id':'source_id_1234567890','name':'source.pdf','page':39,'variant':'FXX5.png'}
+        doc['buildings'][2]['materials']=[{'id':str(uuid.uuid4()),'type':'image','label':'Χάρτης','asset_id':aid,'provenance':source}]
+        row,_=self.maps.save(self.payload(document=doc),self.registry)
+        self.assertEqual(source,row['document']['buildings'][2]['materials'][0]['provenance'])
+        output=Path(self.temp.name)/'private.lessonmap.json';export_transfer(self.evaluations.directory,output)
+        transferred=json.loads(output.read_text())['documents'][0][1]['document']
+        self.assertEqual(source,transferred['buildings'][2]['materials'][0]['provenance'])
+        for bad in [{**source,'page':0},{**source,'drive_id':'../outside'},None]:
+            doc['buildings'][2]['materials'][0]['provenance']=bad
+            with self.assertRaises(ValueError):validate_document('canvas',doc,self.registry)
+
     def test_registration_adds_private_activity_and_pins_evaluation_version(self):
         doc=copy.deepcopy(self.canvas);doc['registered']=True
         row,_=self.maps.save(self.payload(document=doc),self.registry)

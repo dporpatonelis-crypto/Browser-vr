@@ -1,0 +1,73 @@
+/* Isolated private test service only. Never point this at a teacher's real store. */
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const {chromium,devices}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const base=process.env.LESSON_MAP_TEST_URL||'http://127.0.0.1:8795';
+const out=path.resolve('storage/review');
+const checks=[],errors=[];
+const check=(name,condition=true)=>{assert.ok(condition,name);checks.push(name);console.log('PASS',name);};
+const submit=(page,label)=>page.locator('dialog[open]').last().getByRole('button',{name:label,exact:true}).click();
+const snapshot=async page=>(await page.request.get(base+'/api/lesson-maps')).json();
+const close=page=>page.locator('dialog[open] .lm-close').last().click();
+(async()=>{
+  const browser=await chromium.launch({headless:true,channel:'chrome'});
+  try{
+    const context=await browser.newContext({viewport:{width:1672,height:1000}}),page=await context.newPage();
+    page.on('pageerror',e=>errors.push(e.message));let ocrRequests=0;
+    await page.route('**/vendor/notes-ocr/**',route=>{ocrRequests++;return route.abort();});
+    await page.goto(base+'/#map');await page.locator('.lm-island').first().waitFor();
+    await page.locator('[data-action="notes"]').click();
+    check('ready-only mode is the default',await page.locator('[data-ready-only]').isChecked());
+    await page.locator('[data-notes-file]').setInputFiles(path.resolve('public/assets/lesson-map/library.webp'));
+    await page.locator('[data-read]:enabled').waitFor();await page.locator('[data-read]').click();
+    await page.locator('dialog[open] input[name="title"]').fill('Άσκηση δοκιμής μόνο με εικόνα');
+    check('ready-only review does not require a text transcript',await page.locator('dialog[open] textarea[name="text"]').count()===0);
+    await submit(page,'Εύρεση υλικού →');await page.locator('dialog[open] select[name="theme_id"]').selectOption('new');
+    await page.locator('dialog[open] input[name="new_theme_title"]').fill('Δοκιμή μόνο υλικού');
+    for(const box of await page.locator('dialog[open] input[name^="crop-"]').all())await box.uncheck();
+    await submit(page,'Δημιουργία ιδιωτικού μαθήματος');await page.getByText('Επίλεξε τουλάχιστον μία έτοιμη εικόνα', {exact:false}).waitFor();
+    check('empty selection cannot create a city');
+    await page.locator('dialog[open] select[name="whole_image"]').selectOption('images');await submit(page,'Δημιουργία ιδιωτικού μαθήματος');
+    await page.getByText('Αποθηκεύτηκε ιδιωτικά.',{exact:false}).waitFor();
+    const did=page.url().split('#canvas/')[1],first=(await snapshot(page)).versions.find(v=>v.document_id===did).document;
+    check('whole image creates a registered private lesson with an empty library',first.registered&&first.buildings[0].materials.length===0&&first.buildings[1].materials.length===1);
+    check('OCR is never requested',ocrRequests===0);
+    await page.locator('[data-action="mode"]').click();
+    check('presentation hides empty buildings and their navigation',await page.locator('.lm-building').count()===1&&await page.locator('[data-quick]').count()===1);
+    await page.locator('[data-action="reveal-start"]').click();await page.locator('[data-action="reveal-next"]').click();
+    check('reveal finishes after the one populated building',await page.locator('[data-action="reveal-next"]').isDisabled());
+    await page.locator('[data-action="mode"]').click();await page.locator('[data-node-select="images"]').click();await page.locator('[data-remove-entry]').click();await page.locator('[data-action="home"]').click();
+    check('removing last material withdraws the island',await page.locator('.lm-island').filter({hasText:'Δοκιμή μόνο υλικού'}).count()===0);
+    await page.locator('[data-action="undo"]').click();check('undo restores the island',await page.locator('.lm-island').filter({hasText:'Δοκιμή μόνο υλικού'}).count()===1);
+    await page.locator('[data-action="redo"]').click();await page.locator('[data-action="save"]').click();await page.getByText('Αποθηκεύτηκε ιδιωτικά.',{exact:false}).waitFor();await page.reload();await page.locator('.lm-island').first().waitFor();
+    check('reloaded empty draft stays outside the map',await page.locator('.lm-island').filter({hasText:'Δοκιμή μόνο υλικού'}).count()===0);
+    await page.locator('[data-action="saved"]').click();await page.locator('dialog[open] select[name="canvas_id"]').selectOption(did);await page.locator('dialog[open] select[name="theme_id"]').selectOption({label:'Δοκιμή μόνο υλικού'});await submit(page,'Άνοιγμα / τοποθέτηση');
+    check('withdrawn draft remains editable with five buildings',await page.locator('.lm-building').count()===5);await page.locator('[data-action="home"]').click();
+    if(process.env.READY_MATERIAL_PACKAGE){
+      const bundle=path.resolve(process.env.READY_MATERIAL_PACKAGE);
+      await page.locator('#lm-transfer-file').setInputFiles(bundle);await submit(page,'Μεταφορά');await page.getByText('Αποθηκεύτηκε ιδιωτικά.',{exact:false}).waitFor({timeout:120000});
+      check('curated package produces five populated islands',await page.locator('.lm-island').count()===5);
+      const titles=await page.locator('.lm-island [data-node-select]').allTextContents();
+      check('A-grade allocation excludes the empty New Testament island',titles.some(t=>t.includes('Αγία Γραφή'))&&!titles.some(t=>t.includes('Καινή Διαθήκη')));
+      const data=await snapshot(page),all=data.versions,latest=all.filter(v=>!all.some(n=>n.previous_version_id===v.id));
+      const curated=latest.filter(v=>v.kind==='canvas'&&v.document.buildings.some(b=>b.materials.some(m=>m.provenance)));
+      check('eight curated canvases preserve eleven source image references',curated.length===8&&curated.flatMap(v=>v.document.buildings.flatMap(b=>b.materials)).filter(m=>m.provenance).length===11);
+      check('new libraries contain no textbook or OCR text',curated.every(v=>v.document.buildings.find(b=>b.id==='text').materials.length===0));
+      await page.getByRole('button',{name:'Αγία Φιλοθέη ↗',exact:true}).click();await page.locator('[data-quick="mindmap"]').click();await page.locator('.lm-image-page img').waitFor();
+      check('Philothei has two complete concept-map versions',await page.locator('dialog[open] [data-material] option').count()===2);
+      await page.locator('dialog[open] [data-next]').click();await page.waitForFunction(()=>document.querySelector('.lm-image-page img')?.naturalWidth===1448);
+      check('PDF concept map is the full embedded image rather than a clipped page crop');
+      await page.locator('[data-fit-image]').click();await page.screenshot({path:path.join(out,'ready-philothei-concept.png'),fullPage:true});await close(page);await page.locator('[data-action="home"]').click();
+      const count=all.length;await page.locator('#lm-transfer-file').setInputFiles(bundle);await page.getByText('Οι χάρτες υπάρχουν ήδη στον ιδιωτικό χώρο και διατηρήθηκαν.',{exact:true}).waitFor();
+      check('repeated package import adds no material or saved versions',(await snapshot(page)).versions.length===count);
+      await page.screenshot({path:path.join(out,'ready-archipelago-desktop.png'),fullPage:true});
+    }
+    const mobile=await browser.newContext({...devices['Pixel 7']}),mp=await mobile.newPage();mp.on('pageerror',e=>errors.push(e.message));
+    await mp.goto(base+'/#map');await mp.locator('.lm-island').first().waitFor();await mp.locator('[data-action="notes"]').click();
+    check('ready-material import is usable at Android width without horizontal overflow',await mp.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await close(mp);
+    await mp.screenshot({path:path.join(out,'ready-archipelago-android.png'),fullPage:true});await mobile.close();
+    check('no uncaught browser errors',errors.length===0);
+    fs.writeFileSync(path.join(out,'ready-materials-browser.json'),JSON.stringify({checks,errors,android:'Chrome emulation; no physical Android'},null,2));await context.close();
+  }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exit(1);});

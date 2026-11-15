@@ -22,6 +22,13 @@ function validateNotesSource_(data,scenarios){
   return {asset_id:uuid_(data.asset_id),sha256:data.sha256,name:mapText_(data.name,180),type:data.type,extraction:data.extraction,page_start:start,page_end:end,total_pages:total,focus:mapText_(data.focus||'',1000),keywords:mapList_(data.keywords||[],12).map(t=>mapText_(t,100)),related_scenario_ids:[...new Set(related)],exercise_regions:mapList_(data.exercise_regions||[],40).map(r=>{if(r.page<start||r.page>end)throw new Error('Το απόσπασμα είναι εκτός επιλεγμένων σελίδων.');return {asset_id:uuid_(r.asset_id),page:r.page,...notesRegion_(r)};})};
 }
 function notesRegion_(r){const p=mapPoint_(r,0,1);if(!Number.isInteger(r.page)||r.page<1||r.page>10000||!['w','h'].every(k=>typeof r[k]==='number'&&Number.isFinite(r[k])&&r[k]>.001&&r[k]<=1)||p.x+r.w>1.001||p.y+r.h>1.001)throw new Error('Μη έγκυρο απόσπασμα άσκησης.');return {...p,w:r.w,h:r.h};}
+function mapProvenance_(data){
+  if(!data||typeof data!=='object'||!/^[-\w]{10,200}$/.test(data.drive_id||''))throw new Error('Μη έγκυρη ταυτότητα πηγής Drive.');
+  const result={drive_id:mapText_(data.drive_id,200),name:mapText_(data.name,180)};
+  if('page' in data){if(!Number.isInteger(data.page)||data.page<1||data.page>10000)throw new Error('Μη έγκυρη σελίδα πηγής.');result.page=data.page;}
+  if('variant' in data)result.variant=mapText_(data.variant,120);
+  return result;
+}
 function validateLessonMap_(kind,data,documentId) {
   if(!data||typeof data!=='object'||Array.isArray(data)||JSON.stringify(data).length>1048576)throw new Error('Μη έγκυρο μέγεθος ή περιεχόμενο χάρτη.');
   if(data.schema_version!=null&&data.schema_version!==1)throw new Error('Η έκδοση αυτού του χάρτη χρειάζεται νεότερη εφαρμογή. Το αρχείο διατηρείται.');
@@ -53,7 +60,7 @@ function validateLessonMap_(kind,data,documentId) {
       if(url&&!/^https:\/\/[^\s/@:]+(?::\d+)?(?:[/?#][^\s]*)?$/i.test(url))throw new Error('Ο σύνδεσμος πρέπει να είναι πλήρης διεύθυνση HTTPS.');
       if(aid&&!(scenarios.get(source)?.activities||[]).some(a=>a.id===aid))throw new Error('Δεν βρέθηκε το συγκεκριμένο υλικό στον κατάλογο.');
       const start=m.page_start||1,end=m.page_end||1;if(!Number.isInteger(start)||!Number.isInteger(end)||start<1||end<start||end>10000)throw new Error('Μη έγκυρο εύρος σελίδων.');
-      return {id,type:m.type,label:mapText_(m.label||''),text:mapText_(m.text||'',100000),url,asset_id:m.asset_id?uuid_(m.asset_id):'',activity_id:aid,source_scenario_id:source,page_start:start,page_end:end};
+      return {id,type:m.type,label:mapText_(m.label||''),text:mapText_(m.text||'',100000),url,asset_id:m.asset_id?uuid_(m.asset_id):'',activity_id:aid,source_scenario_id:source,page_start:start,page_end:end,...m.provenance?{provenance:mapProvenance_(m.provenance)}:{}};
     });
     return {id:b.id,title:mapText_(b.title),icon:mapText_(b.icon||'',20),box:mapBox_(b.box),hidden:b.hidden===true,materials};
   });

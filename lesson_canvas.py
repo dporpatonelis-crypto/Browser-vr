@@ -104,6 +104,23 @@ def validate_import_source(data, registry):
             'related_scenario_ids': list(dict.fromkeys(related)), 'exercise_regions': regions}
 
 
+def validate_provenance(data):
+    if not isinstance(data, dict):
+        raise ValueError('Μη έγκυρη προέλευση υλικού.')
+    drive_id = short(data.get('drive_id', ''), 200)
+    if not re.fullmatch(r'[A-Za-z0-9_-]{10,200}', drive_id):
+        raise ValueError('Μη έγκυρη ταυτότητα πηγής Drive.')
+    result = {'drive_id': drive_id, 'name': short(data.get('name', ''), 180)}
+    if 'page' in data:
+        page = data['page']
+        if type(page) is not int or not 1 <= page <= 10000:
+            raise ValueError('Μη έγκυρη σελίδα πηγής.')
+        result['page'] = page
+    if 'variant' in data:
+        result['variant'] = short(data['variant'], 120)
+    return result
+
+
 def validate_document(kind, data, registry, document_id=None):
     if not isinstance(data, dict) or len(json.dumps(data, ensure_ascii=False).encode()) > MAX_DOCUMENT:
         raise ValueError('Μη έγκυρο μέγεθος ή περιεχόμενο χάρτη.')
@@ -170,7 +187,8 @@ def validate_document(kind, data, registry, document_id=None):
                                   'text': short(m.get('text', ''), 100000), 'url': url,
                                   'asset_id': identity(m['asset_id']) if m.get('asset_id') else '',
                                   'activity_id': activity_id, 'source_scenario_id': source_sid,
-                                  'page_start': page_start, 'page_end': page_end})
+                                  'page_start': page_start, 'page_end': page_end,
+                                  **({'provenance': validate_provenance(m['provenance'])} if 'provenance' in m else {})})
             buildings.append({'id': b['id'], 'title': short(b.get('title', '')), 'icon': short(b.get('icon', ''), 20),
                               'box': box(b.get('box')), 'hidden': b.get('hidden', False) is True, 'materials': materials})
         if {b['id'] for b in buildings} != set(BUILDINGS) or len(buildings) != 5:

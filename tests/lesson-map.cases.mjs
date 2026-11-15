@@ -43,7 +43,7 @@ test('private transfer validates identities and requires every referenced payloa
 test('Notes keeps the original and text in the library without generating HTML or invented concepts',()=>{
   const id=crypto.randomUUID(),source={asset_id:crypto.randomUUID(),type:'pdf',name:'source.pdf',page_start:2,page_end:4};
   const d=niBuildCanvas({id,title:'Συνέπειες της πτώσης',grade:'Α΄ Γυμνασίου',source,text:'Έντυπο κείμενο',terms:['παρακοή'],focus:'',selected:[]});
-  assert.equal(d.scenario_id,'notes:'+id);assert.equal(d.registered,true);assert.equal(d.buildings[0].materials[0].type,'pdf');assert.equal(d.buildings[0].materials[0].page_start,2);assert.equal(d.buildings[0].materials[1].text,'Έντυπο κείμενο');
+  assert.equal(d.scenario_id,'notes:'+id);assert.equal(d.registered,true);assert.equal(d.buildings[0].materials[0].text,'Έντυπο κείμενο');assert.equal(d.buildings[0].materials[1].type,'pdf');assert.equal(d.buildings[0].materials[1].page_start,2);
   assert.equal(d.buildings.find(b=>b.id==='html').materials.length,0);assert.equal(d.buildings.find(b=>b.id==='mindmap').materials.length,0);
 });
 test('Notes retrieval uses existing material identities and supplies evidence for teacher selection',()=>{

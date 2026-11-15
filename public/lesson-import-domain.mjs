@@ -53,8 +53,8 @@ export function niBuildCanvas({id,title,grade,source,text,terms,focus,selected})
   const doc=lmNewCanvas(title,'notes:'+id);doc.grade=grade;doc.registered=true;doc.presentation.hide_empty=false;
   doc.import_source={...source,focus:focus||'',keywords:terms,related_scenario_ids:[...new Set(selected.map(r=>r.scenario_id))]};
   const add=(bid,m)=>doc.buildings.find(b=>b.id===bid).materials.push(m);
-  add('text',niSourceMaterial(source.type,'Πρωτότυπο · '+source.name,{asset_id:source.asset_id,page_start:source.page_start,page_end:source.page_end}));
   if(text.trim())add('text',niSourceMaterial('text','Κείμενο σημειώσεων · ελεγμένο από τον εκπαιδευτικό',{text:text.slice(0,100000)}));
+  add('text',niSourceMaterial(source.type,'Πρωτότυπο · '+source.name,{asset_id:source.asset_id,page_start:source.page_start,page_end:source.page_end}));
   for(const r of selected)add(r.building,niMaterial(r));
   if(focus)add('synthesis',niSourceMaterial('text','Ερώτημα σύνθεσης',{text:focus}));
   return doc;

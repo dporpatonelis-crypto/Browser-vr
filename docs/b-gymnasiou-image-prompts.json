@@ -1,0 +1,87 @@
+[
+  {
+    "key": "jerusalem/library",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by Jerusalem and Judea in the apostolic period: pale honey limestone, warm ochre plaster, flat roofs, exterior stone stairs, simple rectangular openings, olive trees. No domed churches, no medieval castles, no minarets. Subject: a small manuscript library, welcoming open doorway with visible shelves of rolled scrolls, one open scroll above the entrance, a wooden reading desk. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/jerusalem/library.webp"
+  },
+  {
+    "key": "jerusalem/gallery",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by Jerusalem and Judea in the apostolic period: pale honey limestone, warm ochre plaster, flat roofs, exterior stone stairs, simple rectangular openings, olive trees. No domed churches, no medieval castles, no minarets. Subject: a picture gallery courtyard with an open arcade and two painted wooden panels showing simple colorful landscapes, a mosaic detail. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/jerusalem/gallery.webp"
+  },
+  {
+    "key": "jerusalem/concepts",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by Jerusalem and Judea in the apostolic period: pale honey limestone, warm ochre plaster, flat roofs, exterior stone stairs, simple rectangular openings, olive trees. No domed churches, no medieval castles, no minarets. Subject: a small school with a sheltered teaching porch, semicircle of stone seats and five colorful clay tokens connected by delicate cords on a teaching table. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/jerusalem/concepts.webp"
+  },
+  {
+    "key": "jerusalem/workshop",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by Jerusalem and Judea in the apostolic period: pale honey limestone, warm ochre plaster, flat roofs, exterior stone stairs, simple rectangular openings, olive trees. No domed churches, no medieval castles, no minarets. Subject: an artisan learning workshop with a wide open entrance, wooden workbench, clay tablets and simple hand tools, no machinery. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/jerusalem/workshop.webp"
+  },
+  {
+    "key": "jerusalem/synthesis",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by Jerusalem and Judea in the apostolic period: pale honey limestone, warm ochre plaster, flat roofs, exterior stone stairs, simple rectangular openings, olive trees. No domed churches, no medieval castles, no minarets. Subject: a graceful meeting stoa around a round courtyard, five columns and two interwoven fabric ribbons above its entrance. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/jerusalem/synthesis.webp"
+  },
+  {
+    "key": "jerusalem/island",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by Jerusalem and Judea in the apostolic period: pale honey limestone, warm ochre plaster, flat roofs, exterior stone stairs, simple rectangular openings, olive trees. No domed churches, no medieval castles, no minarets. Subject: an irregular miniature land island with a broad empty central sandy clearing occupying most of its surface for interface labels, rocky edges and sparse plants at the back; NO building, NO sea, NO sky. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/jerusalem/island.webp"
+  },
+  {
+    "key": "mediterranean/library",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by eastern Mediterranean Greco-Roman coastal towns of the apostolic era and first Christian communities: warm cream stone, terracotta tiled roofs, blue painted timber accents, classical porticoes, a restrained harbor-town character. No medieval castles, no modern churches. Subject: a small manuscript library, welcoming open doorway with visible shelves of rolled scrolls, one open scroll above the entrance, a wooden reading desk. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/mediterranean/library.webp"
+  },
+  {
+    "key": "mediterranean/gallery",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by eastern Mediterranean Greco-Roman coastal towns of the apostolic era and first Christian communities: warm cream stone, terracotta tiled roofs, blue painted timber accents, classical porticoes, a restrained harbor-town character. No medieval castles, no modern churches. Subject: a picture gallery courtyard with an open arcade and two painted wooden panels showing simple colorful landscapes, a mosaic detail. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/mediterranean/gallery.webp"
+  },
+  {
+    "key": "mediterranean/concepts",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by eastern Mediterranean Greco-Roman coastal towns of the apostolic era and first Christian communities: warm cream stone, terracotta tiled roofs, blue painted timber accents, classical porticoes, a restrained harbor-town character. No medieval castles, no modern churches. Subject: a small school with a sheltered teaching porch, semicircle of stone seats and five colorful clay tokens connected by delicate cords on a teaching table. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/mediterranean/concepts.webp"
+  },
+  {
+    "key": "mediterranean/workshop",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by eastern Mediterranean Greco-Roman coastal towns of the apostolic era and first Christian communities: warm cream stone, terracotta tiled roofs, blue painted timber accents, classical porticoes, a restrained harbor-town character. No medieval castles, no modern churches. Subject: an artisan learning workshop with a wide open entrance, wooden workbench, clay tablets and simple hand tools, no machinery. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/mediterranean/workshop.webp"
+  },
+  {
+    "key": "mediterranean/synthesis",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by eastern Mediterranean Greco-Roman coastal towns of the apostolic era and first Christian communities: warm cream stone, terracotta tiled roofs, blue painted timber accents, classical porticoes, a restrained harbor-town character. No medieval castles, no modern churches. Subject: a graceful meeting stoa around a round courtyard, five columns and two interwoven fabric ribbons above its entrance. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/mediterranean/synthesis.webp"
+  },
+  {
+    "key": "mediterranean/island",
+    "prompt": "Use case: illustration-story. Asset: one reusable transparent PNG sprite for a Greek classroom knowledge-map web application. Inspired by eastern Mediterranean Greco-Roman coastal towns of the apostolic era and first Christian communities: warm cream stone, terracotta tiled roofs, blue painted timber accents, classical porticoes, a restrained harbor-town character. No medieval castles, no modern churches. Subject: an irregular miniature land island with a broad empty central sandy clearing occupying most of its surface for interface labels, rocky edges and sparse plants at the back; NO building, NO sea, NO sky. A polished hand-painted children's-book miniature, richly detailed but readable at small size, soft golden afternoon light from upper left. Orthographic three-quarter isometric camera from above, compact foundation, entire silhouette visible with generous clear margin, centered in a square composition. Harmonious consistent camera, scale and lighting across the set. This is a building sprite, not a scene or UI mockup. Transparent background and delicate shadow only. No people, no typography, no letters, no labels, no buttons, no surrounding scenery, no watermark. No futuristic screens or gears.",
+    "generator": "built-in ImageGen",
+    "transparent_background": true,
+    "asset": "assets/lesson-map/mediterranean/island.webp",
+    "refinement": "Preserve the miniature and empty center; add a small stone quay, wooden landing jetty, empty boat and narrow turquoise water fringe at the perimeter. Built-in ImageGen edit; transparent background."
+  }
+]

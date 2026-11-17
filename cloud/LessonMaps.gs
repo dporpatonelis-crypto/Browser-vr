@@ -43,6 +43,14 @@ function validateLessonMap_(kind,data,documentId) {
       return {id:uuid_(l.id),theme_id:l.theme_id,title:mapText_(l.title),scenario_id:l.scenario_id||null,canvas_id:l.canvas_id?uuid_(l.canvas_id):null};
     });
     if(new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error('Διπλή ταυτότητα μαθήματος.');
+    if(data.visual_theme!=null){if(!['default','jerusalem','mediterranean'].includes(data.visual_theme))throw new Error('Άγνωστη εικονογράφηση χάρτη.');result.visual_theme=data.visual_theme;}
+    if(data.lesson_relations!=null){
+      result.lesson_relations=mapList_(data.lesson_relations,500).map(r=>{
+        if(!['proposed','confirmed','dismissed'].includes(r.status)||r.from_canvas_id===r.to_canvas_id)throw new Error('Μη έγκυρη διδακτική σύνδεση.');
+        return {id:uuid_(r.id),from_canvas_id:uuid_(r.from_canvas_id),to_canvas_id:uuid_(r.to_canvas_id),status:r.status,verb:mapText_(r.verb||'',100),phrase:mapText_(r.phrase||'',600),evidence:mapText_(r.evidence||'',2000),evidence_refs:mapList_(r.evidence_refs||[],20).map(ref=>({canvas_id:uuid_(ref.canvas_id),material_id:uuid_(ref.material_id)}))};
+      });
+      if(new Set(result.lesson_relations.map(r=>r.id)).size!==result.lesson_relations.length)throw new Error('Διπλή διδακτική σύνδεση.');
+    }
     return {...result,themes,lessons,connections:mapLinks_(data.connections||[],ids)};
   }
   if(kind!=='canvas')throw new Error('Άγνωστος τύπος χάρτη.');
@@ -84,10 +92,12 @@ function readLessonMaps_(folder) {
   return rows.sort((a,b)=>a.created_at.localeCompare(b.created_at)||a.id.localeCompare(b.id));
 }
 function latestLessonMaps_(rows){const latest=new Map(),superseded=new Set(rows.map(r=>r.previous_version_id).filter(Boolean));rows.filter(r=>!superseded.has(r.id)).forEach(r=>latest.set(r.document_id,r));return [...latest.values()];}
-function listLessonMaps(){assertOwner_();const lock=LockService.getScriptLock();lock.waitLock(30000);try{return {versions:readLessonMaps_(folder_())};}finally{lock.releaseLock();}}
+function listLessonMaps(){assertOwner_();const lock=LockService.getScriptLock();lock.waitLock(30000);try{const folder=folder_(),versions=readLessonMaps_(folder),asset_metadata={};for(const row of latestLessonMaps_(versions))for(const b of row.document.buildings||[])for(const m of b.materials)if(m.asset_id&&!asset_metadata[m.asset_id]){try{asset_metadata[m.asset_id]=canvasAssetInfo_(m.asset_id,folder);}catch(e){}}return {versions,asset_metadata};}finally{lock.releaseLock();}}
 function lessonCanvasRegistry_(){
   const registry=JSON.parse(JSON.stringify(CATALOG)),scenarios=new Map(registry.scenarios.map(s=>[s.scenario_id,s]));
-  for(const row of latestLessonMaps_(readLessonMaps_(folder_()))){const d=row.document;
+  const latest=latestLessonMaps_(readLessonMaps_(folder_())),grades=new Map();
+  for(const row of latest)if(row.kind==='workspace')for(const l of row.document.lessons){if(!grades.has(l.canvas_id))grades.set(l.canvas_id,new Set());grades.get(l.canvas_id).add(row.document.grade);}
+  for(const row of latest){const d=row.document;
     if(row.kind==='canvas'&&d.registered&&d.import_source&&d.scenario_id==='notes:'+row.document_id){
       const source=d.import_source,refs=new Set(d.buildings.flatMap(b=>b.materials.filter(m=>m.activity_id).map(m=>m.source_scenario_id+'|'+m.activity_id)));
       const activities=CATALOG.scenarios.flatMap(s=>s.activities.filter(a=>refs.has(s.scenario_id+'|'+a.id))).map(a=>JSON.parse(JSON.stringify(a)));
@@ -96,9 +106,10 @@ function lessonCanvasRegistry_(){
     }
     if(row.kind==='canvas'&&d.registered&&scenarios.has(d.scenario_id)){
       const scenario=scenarios.get(d.scenario_id);
-      if(CATALOG.grades.includes(d.grade)&&!(scenario.grades||[]).includes(d.grade)){scenario.grades=[...scenario.grades||[],d.grade];scenario.grade_status='confirmed';}
+      for(const grade of new Set([d.grade,...grades.get(row.document_id)||[]]))if(CATALOG.grades.includes(grade)&&!(scenario.grades||[]).includes(grade)){scenario.grades=[...scenario.grades||[],grade];scenario.grade_status='confirmed';}
       scenario.activities.push({id:'canvas:'+row.document_id,kind:'canvas',label:'Χάρτης · '+d.title,url:'#canvas/'+row.document_id,canvas_id:row.document_id,canvas_version_id:row.id,note:'Ιδιωτικός χάρτης μαθήματος · πέντε οικοδομήματα γνώσης',app:'lesson-map'});
     }}
+  for(const row of latest)if(row.kind==='canvas'&&row.document.registered){const d=row.document;for(const sid of new Set(d.buildings.flatMap(b=>b.materials.map(m=>m.source_scenario_id)))){const scenario=scenarios.get(sid);if(!scenario)continue;for(const grade of new Set([d.grade,...grades.get(row.document_id)||[]]))if(CATALOG.grades.includes(grade)&&!(scenario.grades||[]).includes(grade)){scenario.grades=[...scenario.grades||[],grade];scenario.grade_status='confirmed';}}}
   return registry;
 }
 function saveLessonMap(data){
@@ -113,6 +124,7 @@ function saveLessonMap(data){
     if(doc.import_source){const s=doc.import_source,info=canvasAssetInfo_(s.asset_id,folder);if(info.sha256!==s.sha256||(s.type==='pdf')!==(info.mime==='application/pdf')||!/^image\/|^application\/pdf$/.test(info.mime))throw new Error('Το πρωτότυπο δεν αντιστοιχεί στις σημειώσεις.');for(const r of s.exercise_regions||[])if(!canvasAssetInfo_(r.asset_id,folder).mime.startsWith('image/'))throw new Error('Η άσκηση χρειάζεται εικόνα.');}
     for(const b of doc.buildings||[])for(const m of b.materials)if(m.asset_id)canvasAssetInfo_(m.asset_id,folder);
     if(kind==='workspace')for(const l of doc.lessons)if(l.canvas_id&&!rows.some(r=>r.kind==='canvas'&&r.document_id===l.canvas_id))throw new Error('Αποθήκευσε πρώτα τα μαθήματα του χάρτη.');
+    if(kind==='workspace')for(const relation of doc.lesson_relations||[]){const endpoints=new Set([relation.from_canvas_id,relation.to_canvas_id]);for(const cid of endpoints)if(!rows.some(r=>r.kind==='canvas'&&r.document_id===cid))throw new Error('Δεν βρέθηκαν τα μαθήματα της διδακτικής σύνδεσης.');for(const ref of relation.evidence_refs)if(!endpoints.has(ref.canvas_id)||!rows.some(r=>r.kind==='canvas'&&r.document_id===ref.canvas_id&&r.document.buildings.some(b=>b.materials.some(m=>m.id===ref.material_id))))throw new Error('Δεν βρέθηκε το υλικό τεκμηρίωσης της σύνδεσης.');}
     const row={schema_version:1,id,document_id:did,previous_version_id:previous,kind,created_at:new Date().toISOString(),document:doc};
     const file=folder.createFile(Utilities.newBlob(JSON.stringify(row,null,2),'application/json','map-version-'+id+'.json'));
     if(file.getBlob().getDataAsString('UTF-8')!==JSON.stringify(row,null,2))throw new Error('Η αποθήκευση χρειάζεται έλεγχο.');
@@ -144,6 +156,7 @@ function validateCanvasUsage_(data,scenarioId){
   if(!row||row.document.scenario_id!==scenarioId)throw new Error('Δεν βρέθηκε η συγκεκριμένη έκδοση χάρτη για το μάθημα.');
   const doc=row.document,allowed={used_building_ids:new Set(MAP_BUILDINGS_),guidance_building_ids:new Set(MAP_BUILDINGS_),effective_material_ids:new Set(doc.buildings.flatMap(b=>b.materials.map(m=>m.id))),effective_connection_ids:new Set(doc.connections.map(c=>c.id))};
   const result={canvas_id:row.document_id,version_id:row.id,title:doc.title,confirmed:true,note:mapText_(data.note||'',2000)};
+  if(data.workspace_id){const wid=uuid_(data.workspace_id),workspace=latestLessonMaps_(readLessonMaps_(folder_())).find(r=>r.kind==='workspace'&&r.document_id===wid)?.document;if(!workspace||!workspace.lessons.some(l=>l.canvas_id===row.document_id)||workspace.grade!==data.grade)throw new Error('Επίλεξε τον χάρτη και την τάξη χρήσης του μαθήματος.');result.workspace_id=wid;result.grade=workspace.grade;}
   for(const key of Object.keys(allowed)){const values=mapList_(data[key]||[]);if(values.some(v=>!allowed[key].has(v)))throw new Error('Επίλεξε στοιχεία της συγκεκριμένης έκδοσης χάρτη.');result[key]=[...new Set(values)];}
   return result;
 }

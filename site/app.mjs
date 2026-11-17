@@ -1,5 +1,6 @@
 import {filterScenarios, relevantHistory, latestPlans, materialChoices, sameTeachingSession} from './domain.mjs';
 import {createLessonMap} from './lesson-map.mjs';
+import {lmParseRoute,lmRoute} from './lesson-map-atlas.mjs';
 import {LM_BUILDINGS} from './lesson-map-domain.mjs';
 
 const app = document.querySelector('#app');
@@ -129,7 +130,7 @@ function privateSpace(view='evaluate') {
 }
 function header() {
   const steps=[['select','book','Επιλογή μαθήματος','Η αφετηρία της τάξης'],['activity','play','Σχέδιο μαθήματος','Επιλογές και διδασκαλία'],['evaluate','check','Τι έγινε στην τάξη','Μέσα και αξιολόγηση']];
-  return `<header class="header"><div class="brand"><img src="${esc(asset('icon.svg'))}" alt="" width="42" height="42"><div><span class="brand-title">Πιλοτήριο τάξης</span><span class="brand-subtitle">TEACHING MISSION CONTROL</span></div></div><div class="header-right"><button class="button secondary" data-open-lesson-map>🗺️ Χάρτης Μαθήματος</button>${state.service?'<button class="button secondary" data-import-notes>📥 Από σημειώσεις</button>':''}<span class="teacher-mark"><i class="status-dot ${state.service?'':'offline'}"></i>${cloud?'Ιδιωτικός χώρος · cloud':state.service?'Χώρος εκπαιδευτικού':'Online κατάλογος'}</span>${!state.service?privateSpace('activity'):''}${link(state.registry.integrations.digital_book.url,icon('book')+' Το ψηφιακό μου βιβλίο '+icon('external'),'book-link')}</div></header>
+  return `<header class="header"><div class="brand"><img src="${esc(asset('icon.svg'))}" alt="" width="42" height="42"><div><span class="brand-title">Πιλοτήριο τάξης</span><span class="brand-subtitle">TEACHING MISSION CONTROL</span></div></div><div class="header-right"><button class="button secondary" data-open-lesson-map>🗺️ Χάρτης Μαθήματος</button>${state.service?'<button class="button secondary" data-open-atlas>Συνδέσεις και κοινό υλικό</button><button class="button secondary" data-import-notes>📥 Από σημειώσεις</button>':''}<span class="teacher-mark"><i class="status-dot ${state.service?'':'offline'}"></i>${cloud?'Ιδιωτικός χώρος · cloud':state.service?'Χώρος εκπαιδευτικού':'Online κατάλογος'}</span>${!state.service?privateSpace('activity'):''}${link(state.registry.integrations.digital_book.url,icon('book')+' Το ψηφιακό μου βιβλίο '+icon('external'),'book-link')}</div></header>
   <nav class="steps" aria-label="Πορεία μαθήματος">${steps.map(([id,ic,title,caption],i)=>`<button class="step ${state.view===id?'active':''}" data-view="${id}" ${id!=='select'&&!state.selected?'disabled title="Επίλεξε πρώτα ένα σενάριο"':''} ${state.view===id?'aria-current="step"':''}><span class="step-number">0${i+1}</span><span class="step-copy"><strong>${title}</strong><small>${caption}</small></span>${icon(ic)}</button>`).join('')}</nav>`;
 }
 function gradeOptions(empty='Όλες οι τάξεις') { return `<option value="">${empty}</option>`+state.registry.grades.map(g=>`<option ${g===state.grade?'selected':''}>${esc(g)}</option>`).join(''); }
@@ -242,8 +243,8 @@ function footer() {
   const drive=state.registry.integrations.google_drive;
   return `<footer class="footer"><span>Το υλικό σου. Η παιδαγωγική σου διαδρομή.</span><details class="integrations"><summary>Πηγές και διατήρηση</summary><div class="integration-content"><p><strong>Digital Book:</strong> έκδοση ${esc(state.registry.integrations.digital_book.revision || 'προς επιβεβαίωση')}. Το βιβλίο συνεχίζει να ενημερώνεται από την υπάρχουσα διαδικασία.</p><p><strong>Google Drive:</strong> ${drive.checked_at?'ανάγνωση '+date(drive.checked_at):'δεν έχει ολοκληρωθεί ανάγνωση'}. ${drive.folder?link(drive.folder.url,'Φάκελος ChatGPT'):''}</p><p>${cloud?'Η ανανέωση φορτώνει το ιδιωτικό ιστορικό σου.':state.service?'Η ανανέωση ξαναδιαβάζει τα τοπικά μαθήματα και το βιβλίο.':'Η online έκδοση περιέχει τον τελευταίο δημοσιευμένο κατάλογο.'} Για νέες παρουσιάσεις και HTML του Drive, ζήτησε ενημέρωση του καταλόγου. Η ημερομηνία ελέγχου διατηρείται.</p><div class="footer-actions"><button class="button secondary" id="refresh" ${!state.service||state.refreshing?'disabled':''}>${state.refreshing?'Ενημερώνεται…':cloud?'Ανανέωση ιστορικού':'Ανανέωση τοπικού καταλόγου'}</button>${cloud?'<button class="text-button" id="export-history">Λήψη σχεδίων και αξιολογήσεων</button>':state.service?link('api/export','Λήψη σχεδίων και αξιολογήσεων','small-link'):''}</div><p>${cloud?'Τα σχέδια και οι αξιολογήσεις αποθηκεύονται ως ξεχωριστά ιδιωτικά αρχεία στο Drive. Ο ίδιος Google λογαριασμός βλέπει το ίδιο ιστορικό από κάθε συσκευή.':state.service?'Οι αξιολογήσεις αποθηκεύονται στον δίσκο. Οι συσκευές που συνδέονται στην ίδια τοπική υπηρεσία βλέπουν το ίδιο ιστορικό.':'Η online σελίδα περιέχει μόνο τον κατάλογο. Οι αξιολογήσεις διατηρούνται στον ιδιωτικό χώρο ή στην τοπική υπηρεσία.'}</p></div></details></footer>`;
 }
-function openLessonMap(canvasId='',versionId='') {
-  state.view='map';state.mapCanvasId=canvasId;state.mapVersionId=versionId;history.replaceState(null,'',canvasId?'#canvas/'+canvasId+(versionId?'/'+versionId:''):'#map');render();
+function openLessonMap(canvasId='',versionId='',workspaceId='',atlas=false) {
+  state.view='map';state.mapCanvasId=canvasId;state.mapVersionId=versionId;state.mapWorkspaceId=workspaceId;state.mapAtlas=atlas;history.replaceState(null,'',lmRoute(workspaceId||lessonMapController?.workspaceId,canvasId,versionId));render();
 }
 function mapReviewHTML() {
   const d=draft(),row=d.canvasReview;if(!row)return '';
@@ -254,16 +255,17 @@ function mountLessonMap() {
   if(!lessonMapController){
     const host=document.createElement('main');host.id='main';host.innerHTML='<p class="loading">Ετοιμάζεται ο χάρτης…</p>';
     app.replaceChildren(host);
-    lessonMapController=createLessonMap(host,{registry:state.registry,privateMode:state.service,cloud,rpc,assetURL:asset,canvasId:state.mapCanvasId,versionId:state.mapVersionId,
+    lessonMapController=createLessonMap(host,{registry:state.registry,privateMode:state.service,cloud,rpc,assetURL:asset,canvasId:state.mapCanvasId,versionId:state.mapVersionId,workspaceId:state.mapWorkspaceId,
       onExit:()=>{state.view='select';history.replaceState(null,'',location.pathname);render(true);},
       onRegistry:registry=>{state.registry=registry;},
-      onReview:row=>{state.selected=row.document.scenario_id;const d=draft();d.canvasReview=row;d.canvasUsage={canvas_id:row.document_id,version_id:row.id,confirmed:false,used_building_ids:[],guidance_building_ids:[],effective_material_ids:[],effective_connection_ids:[],note:''};state.teaching=false;go('evaluate');}
+      onReview:row=>{state.selected=row.document.scenario_id;if(row.grade)state.grade=row.grade;const d=draft();d.canvasReview=row;d.canvasUsage={canvas_id:row.document_id,version_id:row.id,workspace_id:row.workspace_id,grade:row.grade,confirmed:false,used_building_ids:[],guidance_building_ids:[],effective_material_ids:[],effective_connection_ids:[],note:''};state.teaching=false;go('evaluate');}
     });
   }else{
     if(app.firstElementChild!==lessonMapController.host)app.replaceChildren(lessonMapController.host);
-    const canvasId=state.mapCanvasId,versionId=state.mapVersionId;if(canvasId)void lessonMapController.ready.then(()=>lessonMapController.open(canvasId,versionId));
+    const canvasId=state.mapCanvasId,versionId=state.mapVersionId,workspaceId=state.mapWorkspaceId;if(canvasId||workspaceId)void lessonMapController.ready.then(()=>lessonMapController.open(canvasId||workspaceId,versionId,workspaceId));
   }
-  state.mapCanvasId='';state.mapVersionId='';
+  if(state.mapAtlas)void lessonMapController.ready.then(()=>{lessonMapController.edit=true;return lessonMapController.openAtlas();});
+  state.mapCanvasId='';state.mapVersionId='';state.mapWorkspaceId='';state.mapAtlas=false;
 }
 function render(focus=false) {
   if(state.view==='map'){mountLessonMap();return;}
@@ -287,6 +289,7 @@ function go(view) {
 }
 function bind() {
   document.querySelectorAll('[data-open-lesson-map]').forEach(b=>b.onclick=()=>openLessonMap());
+  document.querySelectorAll('[data-open-atlas]').forEach(b=>b.onclick=()=>openLessonMap('','','',true));
   document.querySelectorAll('[data-import-notes]').forEach(b=>b.onclick=async()=>{openLessonMap();await lessonMapController.ready;await lessonMapController.importNotes();});
   document.querySelectorAll('[data-open-canvas]').forEach(b=>b.onclick=()=>openLessonMap(b.dataset.openCanvas));
   document.querySelectorAll('[data-canvas-usage]').forEach(el=>el.onchange=()=>{const d=draft(),k=el.dataset.canvasUsage;d.canvasUsage[k]=el.checked?[...new Set([...d.canvasUsage[k],el.value])]:d.canvasUsage[k].filter(id=>id!==el.value);d.requestId=uuid();d.saved=false;});
@@ -386,7 +389,7 @@ async function boot() {
     if (cloud?.initial) { const i=cloud.initial;state.selected=i.scenario||null;state.view=i.view||'select';state.grade=i.grade||state.grade;state.section=i.section||'';state.modelId=i.modelId||state.modelId; }
     if(!state.registry.grades.includes(state.grade)){state.grade='';state.section='';}
     if(!state.models.models.some(m=>m.id===state.modelId))state.modelId=state.models.models[0].id;
-    const mapMatch=location.hash.match(/^#(map|canvas)(?:\/([^/]+))?(?:\/([^/]+))?$/);if(mapMatch){state.view='map';state.mapCanvasId=mapMatch[1]==='canvas'?decodeURIComponent(mapMatch[2]||''):'';state.mapVersionId=mapMatch[3]||'';}
+    const mapMatch=lmParseRoute(location.hash);if(mapMatch){state.view='map';state.mapCanvasId=mapMatch.canvasId;state.mapVersionId=mapMatch.versionId;state.mapWorkspaceId=mapMatch.workspaceId;}
     const match=location.hash.match(/^#(activity|evaluate)\/(.+)$/);
     if(match){state.view=match[1];state.selected=decodeURIComponent(match[2]);}
     if(cloud?.initial?.materialIds && state.selected)planDraft().ids=cloud.initial.materialIds;

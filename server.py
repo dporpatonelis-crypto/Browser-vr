@@ -312,7 +312,7 @@ class MissionHandler(BaseHTTPRequestHandler):
             elif path == '/api/registry':
                 self.body(self.server.canvases.registry(self.server.registry))
             elif path == '/api/lesson-maps':
-                self.body({'versions':self.server.canvases.read()})
+                self.body(self.server.canvases.listing())
             elif path.startswith('/api/canvas-assets/'):
                 metadata, asset_file = self.server.canvases.asset(path.removeprefix('/api/canvas-assets/'))
                 self.body(asset_file.read_bytes(), metadata['mime'], headers={

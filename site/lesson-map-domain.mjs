@@ -13,8 +13,8 @@ export const lmId = () => crypto.randomUUID?.() ?? '10000000-1000-4000-8000-1000
 export const lmClone = value => JSON.parse(JSON.stringify(value));
 export const lmEscape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const lmClamp = (value,min,max) => Math.max(min,Math.min(max,value));
-export function lmNewCanvas(title='Νέο μάθημα',scenarioId=null) {
-  return {schema_version:1,title,grade:'Α΄ Γυμνασίου',scenario_id:scenarioId,registered:false,
+export function lmNewCanvas(title='Νέο μάθημα',scenarioId=null,grade='Α΄ Γυμνασίου') {
+  return {schema_version:1,title,grade,scenario_id:scenarioId,registered:false,
     verbs:[...LM_VERBS],buildings:LM_BUILDINGS.map(b=>({...lmClone(b),materials:[],hidden:false})),
     annotations:[],connections:[],presentation:{reveal_order:LM_BUILDINGS.map(b=>b.id),hide_empty:true}};
 }
@@ -84,7 +84,7 @@ export function lmVisibleWorkspace(workspace,documents,registry) {
     return registry.scenarios.find(s=>s.scenario_id===l.scenario_id)?.activities.some(a=>['html','image','pdf','quiz'].includes(a.kind)&&(a.url||a.download_url));
   });
   const themes=workspace.themes.filter(t=>lessons.some(l=>l.theme_id===t.id));
-  return {...workspace,themes,lessons};
+  return {...workspace,themes,lessons:lessons.map(l=>({...l,title:documents.get(l.canvas_id)?.document.title||l.title}))};
 }
 export function lmMaterialKey(m) {
   if(m.activity_id)return 'activity:'+m.source_scenario_id+':'+m.activity_id;
@@ -94,7 +94,7 @@ export function lmMaterialKey(m) {
 /** Add curated material to the teacher's latest documents, preserving their layout and edits. */
 export function lmCurateTransfer(bundle,documents) {
   const next=new Map([...documents].map(([id,row])=>[id,lmClone(row)])),curation=bundle.curation;
-  const workspace=next.get(curation.workspace_id)?.document||lmNewWorkspace({scenarios:[]});
+  const workspace=next.get(curation.workspace_id)?.document||{schema_version:1,title:curation.title||'Ο χάρτης των μαθημάτων μου',grade:curation.grade||'Α΄ Γυμνασίου',visual_theme:curation.visual_theme||'default',verbs:[...LM_VERBS],themes:[],lessons:[],connections:[]};
   const aliases=new Map();
   for(const [id,row] of bundle.documents){
     if(row.kind!=='canvas')continue;
@@ -115,6 +115,7 @@ export function lmCurateTransfer(bundle,documents) {
     if(row.document.registered&&target.scenario_id===sid)target.registered=true;
   }
   for(const t of curation.themes)if(!workspace.themes.some(old=>old.id===t.id))workspace.themes.push(lmClone(t));
+  if(curation.lesson_relations?.length){workspace.lesson_relations||=[];for(const r of curation.lesson_relations)if(!workspace.lesson_relations.some(old=>old.id===r.id))workspace.lesson_relations.push(lmClone(r));}
   for(const p of curation.placements){
     const cid=aliases.get(p.canvas_id)||p.canvas_id,canvas=next.get(cid);
     if(canvas?.kind!=='canvas')throw Error('Λείπει το αποθηκευμένο μάθημα της κατανομής.');
@@ -141,6 +142,7 @@ export function lmValidateTransfer(value) {
     const c=value.curation;
     if(!uuid.test(c.workspace_id)||!Array.isArray(c.themes)||c.themes.length>80||!Array.isArray(c.placements)||c.placements.length>100||value.documents.some(([,r])=>r.kind!=='canvas'))throw Error('Μη έγκυρη κατανομή υλικού.');
     const themes=new Set(),placements=new Set();
+    if(c.visual_theme&&!['default','jerusalem','mediterranean'].includes(c.visual_theme)||c.title&&typeof c.title!=='string'||c.grade&&typeof c.grade!=='string')throw Error('Μη έγκυρα στοιχεία χάρτη.');
     for(const t of c.themes){if(!uuid.test(t.id)||themes.has(t.id)||typeof t.title!=='string'||!t.title.trim()||t.title.length>240||typeof t.icon!=='string'||t.icon.length>20||!t.box||!['x','y','w','h'].every(k=>Number.isFinite(t.box[k]))||Math.abs(t.box.x)>5||Math.abs(t.box.y)>5||t.box.w<.05||t.box.h<.05||t.box.w>2||t.box.h>2)throw Error('Μη έγκυρη θεματική της κατανομής.');themes.add(t.id);}
     for(const p of c.placements){if(!uuid.test(p.id)||!uuid.test(p.canvas_id)||!themes.has(p.theme_id)||placements.has(p.canvas_id))throw Error('Μη έγκυρη πόλη της κατανομής.');placements.add(p.canvas_id);}
   }

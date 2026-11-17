@@ -23,7 +23,7 @@ def build_cloud(owner, site=ROOT/'site', output=ROOT/'cloud/generated'):
                     activity['content_preview'] = copy.deepcopy(original['content_preview'])
     models = json.loads((site/'data/pedagogical-models.json').read_text())
     css = (site/'styles.css').read_text()
-    modules = ['domain.mjs','lesson-map-domain.mjs','lesson-map-viewers.mjs','lesson-import-domain.mjs','lesson-notes-regions.mjs','lesson-import.mjs','lesson-map.mjs','app.mjs']
+    modules = ['domain.mjs','lesson-map-domain.mjs','lesson-map-atlas.mjs','lesson-map-viewers.mjs','lesson-import-domain.mjs','lesson-notes-regions.mjs','lesson-import.mjs','lesson-map.mjs','app.mjs']
     sources = [re.sub(r'^export ', '', re.sub(r'^import .*?;\n', '', (site/name).read_text(), flags=re.M), flags=re.M) for name in modules]
     scripts = '\n'.join(sources).replace('</script', '<\\/script')
     html = (site/'index.html').read_text()

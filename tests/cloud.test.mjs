@@ -232,3 +232,29 @@ test('server validates map relationships, asset references, and normalized annot
  const w=lmNewWorkspace(catalog);assert.equal(w.themes.length,5);assert.equal(w.themes.some(t=>t.title.includes('Αποκάλυψη')),false);
  assert.equal(context.listLessonMaps().versions.length,0);
 });
+
+test('shared cloud city has two B map styles, one payload, and contextual grade usage',()=>{
+  const {context,storage}=environment(),did=randomUUID(),aid=randomUUID(),mid=randomUUID();
+  context.uploadCanvasAsset({asset_id:aid,file:{getName:()=> 'common.png',getBytes:()=>[137,80,78,71,13,10,26,10,1]}});
+  const doc=lmNewCanvas('Κοινό','book:abraham-journey');doc.registered=true;doc.buildings[1].materials=[{id:mid,type:'image',label:'Κοινή εικόνα',asset_id:aid}];
+  const first=context.saveLessonMap({request_id:randomUUID(),document_id:did,kind:'canvas',document:doc}).version;
+  let wid;
+  for(const style of ['jerusalem','mediterranean']){wid=randomUUID();const w=lmNewWorkspace({scenarios:[]});w.title=style;w.grade='Β΄ Γυμνασίου';w.visual_theme=style;w.lessons=[{id:randomUUID(),theme_id:w.themes[0].id,title:'Κοινό',scenario_id:doc.scenario_id,canvas_id:did}];context.saveLessonMap({request_id:randomUUID(),document_id:wid,kind:'workspace',document:w});}
+  const restored=environment(storage).context,listing=restored.listLessonMaps();
+  assert.equal(listing.versions.filter(r=>r.kind==='canvas').length,1);assert.ok(listing.asset_metadata[aid].sha256);assert.equal(listing.asset_metadata[aid].base64,undefined);
+  const scenario=restored.lessonCanvasRegistry_().scenarios.find(s=>s.scenario_id===doc.scenario_id);assert.ok(scenario.grades.includes('Β΄ Γυμνασίου'));assert.equal(scenario.activities.filter(a=>a.kind==='canvas').length,1);
+  const usage=restored.validateCanvasUsage_({confirmed:true,canvas_id:did,version_id:first.id,workspace_id:wid,grade:'Β΄ Γυμνασίου'},doc.scenario_id);assert.equal(usage.workspace_id,wid);
+  assert.throws(()=>restored.validateCanvasUsage_({...usage,grade:'Α΄ Γυμνασίου'},doc.scenario_id),/τάξη/);
+});
+test('teacher relation sources survive later removal and remain private map data',()=>{
+  const {context}=environment(),left=randomUUID(),right=randomUUID(),wid=randomUUID(),mid=randomUUID();
+  const a=lmNewCanvas('Πρώτο','book:abraham-journey');a.buildings[0].materials=[{id:mid,type:'text',label:'Τεκμήριο',text:'Προσφορά'}];
+  const first=context.saveLessonMap({request_id:randomUUID(),document_id:left,kind:'canvas',document:a}).version;
+  context.saveLessonMap({request_id:randomUUID(),document_id:right,kind:'canvas',document:lmNewCanvas('Δεύτερο')});
+  const w=lmNewWorkspace({scenarios:[]});w.visual_theme='jerusalem';w.lesson_relations=[{id:randomUUID(),from_canvas_id:left,to_canvas_id:right,status:'proposed',verb:'συνδέεται με',evidence:'Ελεγμένη πρόταση',evidence_refs:[{canvas_id:left,material_id:mid}]}];
+  const saved=context.saveLessonMap({request_id:randomUUID(),document_id:wid,kind:'workspace',document:w}).version;
+  a.buildings[0].materials=[];context.saveLessonMap({request_id:randomUUID(),document_id:left,kind:'canvas',previous_version_id:first.id,document:a});
+  w.lesson_relations[0].status='confirmed';const edited=context.saveLessonMap({request_id:randomUUID(),document_id:wid,kind:'workspace',previous_version_id:saved.id,document:w});assert.equal(edited.version.document.lesson_relations[0].status,'confirmed');
+  w.visual_theme='../../private';assert.throws(()=>context.validateLessonMap_('workspace',w,wid),/εικονογράφηση/);
+  assert.equal(JSON.stringify(context.lessonCanvasRegistry_()).includes('Ελεγμένη πρόταση'),false);
+});

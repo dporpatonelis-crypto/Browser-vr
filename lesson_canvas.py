@@ -149,6 +149,23 @@ def validate_document(kind, data, registry, document_id=None):
         if len({l['id'] for l in lessons}) != len(lessons):
             raise ValueError('Διπλή ταυτότητα μαθήματος.')
         result.update(themes=themes, lessons=lessons, connections=links(data.get('connections', []), ids))
+        if 'visual_theme' in data:
+            if data['visual_theme'] not in ('default', 'jerusalem', 'mediterranean'):
+                raise ValueError('Άγνωστη εικονογράφηση χάρτη.')
+            result['visual_theme'] = data['visual_theme']
+        if 'lesson_relations' in data:
+            relations = []
+            for r in items(data['lesson_relations'], 500):
+                if r.get('status') not in ('proposed', 'confirmed', 'dismissed') or r.get('from_canvas_id') == r.get('to_canvas_id'):
+                    raise ValueError('Μη έγκυρη διδακτική σύνδεση.')
+                relations.append({'id': identity(r.get('id')), 'from_canvas_id': identity(r.get('from_canvas_id')),
+                                  'to_canvas_id': identity(r.get('to_canvas_id')), 'status': r['status'],
+                                  'verb': short(r.get('verb', ''), 100), 'phrase': short(r.get('phrase', ''), 600),
+                                  'evidence': short(r.get('evidence', ''), 2000),
+                                  'evidence_refs': [{'canvas_id': identity(ref.get('canvas_id')), 'material_id': identity(ref.get('material_id'))} for ref in items(r.get('evidence_refs', []), 20)]})
+            if len({r['id'] for r in relations}) != len(relations):
+                raise ValueError('Διπλή διδακτική σύνδεση.')
+            result['lesson_relations'] = relations
     elif kind == 'canvas':
         sid = data.get('scenario_id') or None
         imported = validate_import_source(data['import_source'], registry) if data.get('import_source') is not None else None
@@ -290,6 +307,14 @@ class CanvasStore:
                 canvas_ids = {r['document_id'] for r in rows if r['kind'] == 'canvas'}
                 if any(l['canvas_id'] and l['canvas_id'] not in canvas_ids for l in doc['lessons']):
                     raise ValueError('Αποθήκευσε πρώτα τα μαθήματα του χάρτη.')
+                latest = {r['document_id']: r['document'] for r in self.latest() if r['kind'] == 'canvas'}
+                for relation in doc.get('lesson_relations', []):
+                    endpoints = {relation['from_canvas_id'], relation['to_canvas_id']}
+                    if not endpoints.issubset(latest):
+                        raise ValueError('Δεν βρέθηκαν τα μαθήματα της διδακτικής σύνδεσης.')
+                    for ref in relation['evidence_refs']:
+                        if ref['canvas_id'] not in endpoints or not any(m['id'] == ref['material_id'] for r in rows if r['kind'] == 'canvas' and r['document_id'] == ref['canvas_id'] for b in r['document']['buildings'] for m in b['materials']):
+                            raise ValueError('Δεν βρέθηκε το υλικό τεκμηρίωσης της σύνδεσης.')
             row = {'schema_version':1, 'id':rid, 'document_id':did, 'previous_version_id':previous, 'kind':kind,
                    'created_at':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'), 'document':doc}
             self.store.write_atomic(self.directory / f'{rid}.json', row)
@@ -326,7 +351,13 @@ class CanvasStore:
     def registry(self, original):
         result = copy.deepcopy(original)
         scenarios = {s['scenario_id']: s for s in result['scenarios']}
-        for row in self.latest():
+        latest = self.latest()
+        grades = {}
+        for row in latest:
+            if row['kind'] == 'workspace':
+                for lesson in row['document']['lessons']:
+                    grades.setdefault(lesson['canvas_id'], set()).add(row['document']['grade'])
+        for row in latest:
             d = row['document']
             if row['kind'] == 'canvas' and d.get('registered') and d.get('import_source') and d.get('scenario_id') == 'notes:' + row['document_id']:
                 source = d['import_source']
@@ -345,14 +376,39 @@ class CanvasStore:
                 scenarios[d['scenario_id']] = scenario
             if row['kind'] == 'canvas' and d.get('registered') and d.get('scenario_id') in scenarios:
                 scenario = scenarios[d['scenario_id']]
-                if d['grade'] in original.get('grades', []) and d['grade'] not in scenario.get('grades', []):
-                    scenario['grades'] = [*scenario.get('grades', []), d['grade']]
-                    scenario['grade_status'] = 'confirmed'
+                for grade in {d['grade'], *grades.get(row['document_id'], set())}:
+                    if grade in original.get('grades', []) and grade not in scenario.get('grades', []):
+                        scenario['grades'] = [*scenario.get('grades', []), grade]
+                        scenario['grade_status'] = 'confirmed'
                 scenarios[d['scenario_id']]['activities'].append({
                     'id':'canvas:'+row['document_id'], 'kind':'canvas', 'label':'Χάρτης · '+d['title'],
                     'url':'#canvas/'+row['document_id'], 'canvas_id':row['document_id'], 'canvas_version_id':row['id'],
                     'note':'Ιδιωτικός χάρτης μαθήματος · πέντε οικοδομήματα γνώσης', 'app':'lesson-map'})
+        for row in latest:
+            if row['kind'] != 'canvas' or not row['document'].get('registered'):
+                continue
+            d = row['document']
+            for sid in {m.get('source_scenario_id') for b in d['buildings'] for m in b['materials']}:
+                if sid not in scenarios:
+                    continue
+                scenario = scenarios[sid]
+                for grade in {d['grade'], *grades.get(row['document_id'], set())}:
+                    if grade in original.get('grades', []) and grade not in scenario.get('grades', []):
+                        scenario['grades'] = [*scenario.get('grades', []), grade]
+                        scenario['grade_status'] = 'confirmed'
         return result
+
+    def listing(self):
+        metadata = {}
+        for row in self.latest():
+            for b in row['document'].get('buildings', []):
+                for m in b['materials']:
+                    if m.get('asset_id') and m['asset_id'] not in metadata:
+                        try:
+                            metadata[m['asset_id']] = self.asset(m['asset_id'])[0]
+                        except ValueError:
+                            pass  # Missing payloads retain their existing viewer error and identity.
+        return {'versions': self.read(), 'asset_metadata': metadata}
 
     def usage(self, data, scenario_id):
         if data is None:
@@ -368,6 +424,12 @@ class CanvasStore:
                      'effective_connection_ids':{c['id'] for c in doc['connections']}}
         result = {'canvas_id':row['document_id'], 'version_id':row['id'], 'title':doc['title'], 'confirmed':True,
                   'note':short(data.get('note',''),2000)}
+        if data.get('workspace_id'):
+            wid = identity(data['workspace_id'])
+            workspace = next((r['document'] for r in self.latest() if r['document_id'] == wid and r['kind'] == 'workspace'), None)
+            if not workspace or not any(l['canvas_id'] == row['document_id'] for l in workspace['lessons']) or data.get('grade') != workspace['grade']:
+                raise ValueError('Επίλεξε τον χάρτη και την τάξη χρήσης του μαθήματος.')
+            result.update(workspace_id=wid, grade=workspace['grade'])
         for key, valid in permitted.items():
             chosen = items(data.get(key, []))
             if any(not isinstance(i, str) or i not in valid for i in chosen):

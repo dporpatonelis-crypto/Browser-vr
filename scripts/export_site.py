@@ -99,7 +99,7 @@ def copy_public_ui(output):
     """UI-only update preserves the verified catalogue and existing activity payloads."""
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    for filename in ('index.html', 'styles.css', 'app.mjs', 'domain.mjs', 'icon.svg', 'lesson-map.css', 'lesson-map-domain.mjs', 'lesson-map-viewers.mjs', 'lesson-map.mjs', 'lesson-import-domain.mjs', 'lesson-import.mjs', 'lesson-notes-regions.mjs'):
+    for filename in ('index.html', 'styles.css', 'app.mjs', 'domain.mjs', 'icon.svg', 'lesson-map.css', 'lesson-map-domain.mjs','lesson-map-atlas.mjs', 'lesson-map-viewers.mjs', 'lesson-map.mjs', 'lesson-import-domain.mjs', 'lesson-import.mjs', 'lesson-notes-regions.mjs'):
         shutil.copyfile(ROOT/'public'/filename, output/filename)
     for folder in ('assets/lesson-map','vendor/pdfjs','vendor/notes-ocr'):
         shutil.copytree(ROOT/'public'/folder, output/folder, dirs_exist_ok=True)

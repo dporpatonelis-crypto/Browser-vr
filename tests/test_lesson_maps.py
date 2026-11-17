@@ -194,6 +194,48 @@ class MapTests(unittest.TestCase):
         with self.assertRaises(ValueError):export_transfer(self.evaluations.directory,ROOT/'site/private.json')
 
 
+    def test_shared_city_styles_grades_metadata_and_context_survive_restart(self):
+        data=self.payload();data['document']['registered']=True;data['document']['grade']='Α΄ Γυμνασίου'
+        aid=str(uuid.uuid4());mid=str(uuid.uuid4())
+        self.maps.upload(aid,'common.png','image/png',b'\x89PNG\r\n\x1a\nprivate-image')
+        data['document']['buildings'][1]['materials']=[{'id':mid,'type':'image','label':'Κοινή εικόνα','asset_id':aid}]
+        first,_=self.maps.save(data,self.registry)
+        workspaces=[]
+        for style in ['jerusalem','mediterranean']:
+            wid,tid=str(uuid.uuid4()),str(uuid.uuid4())
+            doc={'schema_version':1,'title':style,'grade':'Β΄ Γυμνασίου','visual_theme':style,'verbs':[],
+                 'themes':[{'id':tid,'title':'Κοινό','box':{'x':.1,'y':.1,'w':.3,'h':.4}}],
+                 'lessons':[{'id':str(uuid.uuid4()),'theme_id':tid,'title':'Κοινή πόλη','scenario_id':data['document']['scenario_id'],'canvas_id':first['document_id']}],'connections':[]}
+            row,_=self.maps.save(self.payload(document_id=wid,kind='workspace',document=doc),self.registry);workspaces.append(row)
+        restored=CanvasStore(EvaluationStore(self.evaluations.directory))
+        self.assertEqual(1,sum(r['kind']=='canvas' for r in restored.latest()))
+        scenario=next(s for s in restored.registry(self.registry)['scenarios'] if s['scenario_id']==data['document']['scenario_id'])
+        self.assertIn('Α΄ Γυμνασίου',scenario['grades']);self.assertIn('Β΄ Γυμνασίου',scenario['grades'])
+        listing=restored.listing();self.assertIn(aid,listing['asset_metadata']);self.assertNotIn('private-image',json.dumps(listing))
+        usage=restored.usage({'canvas_id':first['document_id'],'version_id':first['id'],'workspace_id':workspaces[1]['document_id'],'grade':'Β΄ Γυμνασίου','confirmed':True},data['document']['scenario_id'])
+        self.assertEqual('Β΄ Γυμνασίου',usage['grade'])
+        with self.assertRaises(ValueError):restored.usage({**usage,'grade':'Α΄ Γυμνασίου'},data['document']['scenario_id'])
+        stale=self.payload(document_id=first['document_id'],previous_version_id=first['id']);stale['document']=copy.deepcopy(first['document']);stale['document']['title']='Κοινή αλλαγή'
+        self.maps.save(stale,self.registry)
+        with self.assertRaises(CanvasConflict):self.maps.save({**stale,'request_id':str(uuid.uuid4())},self.registry)
+
+    def test_teacher_relations_validate_sources_and_keep_historical_evidence(self):
+        left=self.payload();left['document']['buildings'][0]['materials']=[{'id':str(uuid.uuid4()),'type':'text','label':'Τεκμήριο','text':'Προσφορά'}]
+        one,_=self.maps.save(left,self.registry);two,_=self.maps.save(self.payload(),self.registry)
+        wid,tid=str(uuid.uuid4()),str(uuid.uuid4())
+        relation={'id':str(uuid.uuid4()),'from_canvas_id':one['document_id'],'to_canvas_id':two['document_id'],'status':'proposed','verb':'συνδέεται με','phrase':'Διακονία','evidence':'Ελεγμένο υλικό','evidence_refs':[{'canvas_id':one['document_id'],'material_id':one['document']['buildings'][0]['materials'][0]['id']}]}
+        doc={'schema_version':1,'title':'Σχέσεις','grade':'Β΄ Γυμνασίου','visual_theme':'jerusalem','verbs':[],'themes':[],'lessons':[],'connections':[],'lesson_relations':[relation]}
+        first,_=self.maps.save(self.payload(document_id=wid,kind='workspace',document=doc),self.registry)
+        removed=copy.deepcopy(one['document']);removed['buildings'][0]['materials']=[]
+        self.maps.save(self.payload(document_id=one['document_id'],previous_version_id=one['id'],document=removed),self.registry)
+        doc['lesson_relations'][0]['status']='confirmed'
+        saved,_=self.maps.save(self.payload(document_id=wid,kind='workspace',previous_version_id=first['id'],document=doc),self.registry)
+        self.assertEqual('confirmed',saved['document']['lesson_relations'][0]['status'])
+        bad=copy.deepcopy(doc);bad['lesson_relations'][0]['evidence_refs'][0]['material_id']=str(uuid.uuid4())
+        with self.assertRaises(ValueError):self.maps.save(self.payload(document_id=wid,kind='workspace',previous_version_id=saved['id'],document=bad),self.registry)
+        with self.assertRaises(ValueError):validate_document('workspace',{**doc,'visual_theme':'../../private'},self.registry)
+
+
 class MapHTTPTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup);root=Path(self.temp.name)

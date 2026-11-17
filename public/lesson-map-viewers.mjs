@@ -19,6 +19,7 @@ export function lmForm(host,title,body,submitLabel='Εφαρμογή') {
 }
 
 export async function lmShowViewer(owner,building,start=0) {
+  const readOnly=Boolean(owner.readOnly||owner.historical);
   let index=start,zoom=1,tool='pan',first=null,active=null,mediaEpoch=0,pdf=null,page=1,destroyed=false,renderTask=null;
   const viewerURLs=new Set();
   const releaseURLs=()=>{for(const url of viewerURLs){URL.revokeObjectURL(url);owner.objectURLs.delete(url);}viewerURLs.clear();};
@@ -55,6 +56,7 @@ export async function lmShowViewer(owner,building,start=0) {
     });
   }
   function imageTools() {
+    if(readOnly)body.querySelectorAll('[data-image-tool]:not([data-image-tool="pan"]),[data-undo-annotation],[data-clear-annotations]').forEach(b=>b.disabled=true);
     body.querySelector('[data-fit-image]').onclick=()=>{const vp=body.querySelector('.lm-image-viewport'),page=body.querySelector('.lm-image-page'),img=page.querySelector('img');if(img.naturalWidth){zoom=Math.min(1,vp.clientHeight/(img.naturalHeight/img.naturalWidth*vp.clientWidth)*.97);page.style.width=zoom*100+'%';vp.scrollTop=vp.scrollLeft=0;}};
     body.querySelectorAll('[data-image-tool]').forEach(button=>button.onclick=()=>{
       tool=button.dataset.imageTool;first=null;active=null;

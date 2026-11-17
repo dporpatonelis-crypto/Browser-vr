@@ -34,9 +34,15 @@ def build(manifest_path, source_root, output, registry_path=None):
     scenarios = {s['scenario_id']: s for s in registry['scenarios']}
     js = "const m=await import(process.argv[1]);console.log(JSON.stringify({workspace_id:m.LM_WORKSPACE_ID,canvas:m.lmNewCanvas()}));"
     template = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', js, (ROOT/'public/lesson-map-domain.mjs').as_uri()], text=True))
+    workspace_id = manifest.get('workspace_id', template['workspace_id'])
+    uuid.UUID(workspace_id)
     assets, documents, placements = {}, [], []
     for lesson in manifest['lessons']:
         did = lesson.get('canvas_id') or stable(manifest['key'] + ':' + lesson['key'])
+        if lesson.get('reference_only'):
+            uuid.UUID(did)
+            placements.append({'id': stable('placement:' + workspace_id + ':' + did), 'canvas_id': did, 'theme_id': lesson['theme_id']})
+            continue
         doc = json.loads(json.dumps(template['canvas']))
         doc.update(title=lesson['title'], grade=manifest['grade'], registered=True,
                    scenario_id=lesson.get('scenario_id') or 'notes:' + did)
@@ -65,7 +71,7 @@ def build(manifest_path, source_root, output, registry_path=None):
             else:
                 sid, activity_id = entry['scenario_id'], entry['activity_id']
                 activity = next(a for a in scenarios[sid]['activities'] if a['id'] == activity_id)
-                if activity['kind'] != 'html' or not activity.get('url'):
+                if activity['kind'] not in ('html', 'quiz') or not activity.get('url'):
                     raise ValueError('Η επιλεγμένη δραστηριότητα πρέπει να είναι υπάρχον έτοιμο HTML.')
                 material.update(id=stable('activity:' + sid + ':' + activity_id), type='html',
                                 activity_id=activity_id, source_scenario_id=sid)
@@ -82,10 +88,11 @@ def build(manifest_path, source_root, output, registry_path=None):
                                     'keywords': [], 'related_scenario_ids': sorted(related), 'exercise_regions': []}
         doc = validate_document('canvas', doc, registry, did)
         documents.append([did, {'kind': 'canvas', 'document': doc}])
-        placements.append({'id': stable('placement:' + did), 'canvas_id': did, 'theme_id': lesson['theme_id']})
+        placements.append({'id': stable('placement:' + (workspace_id + ':' if workspace_id != template['workspace_id'] else '') + did), 'canvas_id': did, 'theme_id': lesson['theme_id']})
     bundle = {'format': 'lesson-map-transfer', 'schema_version': 1, 'documents': documents,
-              'assets': list(assets.values()), 'curation': {'workspace_id': template['workspace_id'],
-                                                         'themes': manifest['themes'], 'placements': placements}}
+              'assets': list(assets.values()), 'curation': {'workspace_id': workspace_id,
+                                                         'themes': manifest['themes'], 'placements': placements,
+                                                         **{k: manifest[k] for k in ('title', 'grade', 'visual_theme', 'lesson_relations') if k in manifest}}}
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(output.suffix + '.tmp')
     temporary.write_text(json.dumps(bundle, ensure_ascii=False))

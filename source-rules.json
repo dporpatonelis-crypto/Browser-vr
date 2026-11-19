@@ -44,7 +44,24 @@
     "science-heart-dialogue": "book:lesson-005",
     "genesis3-mindmap": "unity:byzantium_fall_restoration",
     "human_creation": "book:lesson-creation-world",
-    "christos-gennatai": "unity:christos_gennatai_opening"
+    "christos-gennatai": "unity:christos_gennatai_opening",
+    "saint-luke-journey": "html:1Ko8gjsGL-vHako6sN4ngfolgt5i6yFdJ:saint-luke-journey",
+    "megas-vasileios": "book:father-basil",
+    "saint-gregory-theologian-journey": "book:father-gregory-theologian",
+    "saint-john-chrysostom-journey": "book:father-john-chrysostom",
+    "saint-athanasius-journey": "book:father-athanasius"
+  },
+  "drive_html_exclusions": {
+    "1OGGcyrKuaTvUgz_VNFsJ87xx6kbHHaqU": {
+      "sha256": "e8c82ee8f990986f95a85789214276fd878bf073a9d1676f9a3723d487580406",
+      "reason": "Σελίδα εισόδου του έργου WebXR. Χρειάζεται το src/main.js του έργου για να φορτώσει η δραστηριότητα."
+    }
+  },
+  "html_activity_notes": {
+    "saint-philothei-journey": "Οκτώ σκηνές από το σχολικό κείμενο της Γαλάτειας Γρηγοριάδου–Σουρέλη. Ο μαθητής συνθέτει προτάσεις για τη διαδρομή της Ρηγούλας και συνδέει στην εικόνα τη μάθηση, τη φιλοξενία και την προστασία των ευάλωτων με πράξεις προσφοράς.",
+    "saint-gregory-theologian-journey": "Οκτώ βιογραφικές σκηνές για τη φιλία με τον Βασίλειο, την άσκηση, τη διακονία και την ειρήνη. Ακολουθούν συνδέσεις με τον Πέμπτο Θεολογικό Λόγο για το Άγιο Πνεύμα.",
+    "saint-john-chrysostom-journey": "Οκτώ στάσεις από την Αντιόχεια ως την εξορία. Ο μαθητής συνδέει εικόνες από τη διδασκαλία του Χρυσοστόμου με τη φροντίδα των φτωχών, την άσκηση και τη στάση του απέναντι στην αδικία.",
+    "saint-athanasius-journey": "Οκτώ στάσεις από την Αλεξάνδρεια και τη Σύνοδο της Νίκαιας ως τις εξορίες και τα συγγράμματα. Ο μαθητής συνδέει φράσεις του απολυτικίου με γεγονότα του βίου και με τη διαμάχη για τη σχέση του Υιού με τον Πατέρα."
   },
   "unity_lesson_links": {
     "concentric_cosmology_v1": "unity:world_religions_cosmology",
@@ -54,7 +71,8 @@
     "historical_revelation_demo": "unity:chronology_observatory",
     "theia_oikonomia": "sb:to-schedio-tis-theias-oikonomias",
     "theia_oikonomia_journey": "sb:to-schedio-tis-theias-oikonomias",
-    "paul_apostolic_journey": "book:paul-journey"
+    "paul_apostolic_journey": "book:paul-journey",
+    "paul_teachings_theater": "book:paul-journey"
   },
   "book_lesson_links": {
     "lesson-world-cosmologies": "unity:world_religions_cosmology",
@@ -64,6 +82,36 @@
     "divine-economy-mindmap": "sb:to-schedio-tis-theias-oikonomias"
   },
   "lesson_progressions": {
+    "world_religions_five_axes_v1": [
+      {
+        "target_native_id": "world_religions_revelation_search",
+        "mechanism": "cosmology-comparison",
+        "relationship": "Συνέχεια στο Unity ανά θέμα",
+        "note": "Στον χώρο συγκρίνονται οι πέντε ήδη μελετημένες κάρτες για τους τρόπους γνώσης της αλήθειας.",
+        "equivalence": "world-topic-content"
+      },
+      {
+        "target_native_id": "world_religions_divine",
+        "mechanism": "cosmology-comparison",
+        "relationship": "Συνέχεια στο Unity ανά θέμα",
+        "note": "Οι πέντε παραδόσεις εξετάζονται πλάι πλάι ως προς το πώς κατανοούν το θείο.",
+        "equivalence": "world-topic-content"
+      },
+      {
+        "target_native_id": "world_religions_afterlife",
+        "mechanism": "cosmology-comparison",
+        "relationship": "Συνέχεια στο Unity ανά θέμα",
+        "note": "Οι πέντε κάρτες επανέρχονται για σύγκριση των προσδοκιών μετά τον θάνατο.",
+        "equivalence": "world-topic-content"
+      },
+      {
+        "target_native_id": "world_religions_judgement",
+        "mechanism": "cosmology-comparison",
+        "relationship": "Συνέχεια στο Unity ανά θέμα",
+        "note": "Με τις πέντε γνωστές κάρτες, ο μαθητής συγκρίνει τη σημασία των πράξεων στις παραδόσεις.",
+        "equivalence": "world-topic-content"
+      }
+    ],
     "concentric_cosmology_v1": [
       {
         "target_native_id": "concentric_cosmology_v1",

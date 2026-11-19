@@ -37,6 +37,50 @@ class CatalogueAdditionTests(unittest.TestCase):
             with self.subTest(source=source), self.assertRaises(ValueError):
                 extract_lessons('<script>'+source+'</script>')
 
+    def test_luke_relations_have_the_same_lesson_identity_and_a_distinct_mechanism(self):
+        source = 'window.LUKE_CONTENT='
+        data = {'id': 'luke', 'title': 'Luke', 'scenes': [{'id': 'one'}]}
+        original, = extract_lessons('<script>'+source+json.dumps(data)+';</script>')
+        data['biographySentences'] = {'one': {}}
+        variant, = extract_lessons('<script>'+source+json.dumps(data)+
+                                   '; window.LUKE_RELATIONS=(()=>{ throw Error("never execute"); })();</script>')
+        self.assertEqual(original['id'], variant['id'])
+        self.assertEqual('biography-music', original['mechanism'])
+        self.assertEqual('biography-relations', variant['mechanism'])
+
+    def test_religions_and_source_study_count_native_units(self):
+        payloads = {
+            'WORLD_LESSON': {'lessonId': 'world', 'religions': [{'scenes': [{}, {}]}, {'scenes': [{}]}]},
+            'PATRISTIC_DEMO_LIBRARY': {'id': 'texts', 'views': [{}, {}]},
+        }
+        source = '<script>'+''.join('window.'+k+'='+json.dumps(v)+';' for k, v in payloads.items())+'</script>'
+        self.assertEqual(
+            [('world', 'world-religions-study', 3), ('texts', 'reading-cross-references', 2)],
+            [(unit['id'], unit['mechanism'], unit['activity_count']) for unit in extract_lessons(source)],
+        )
+
+    def test_religion_topics_use_the_selector_and_controller_references(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            scene = root/'Scenes/Room_world_religions.unity'
+            scene.parent.mkdir()
+            refs = []
+            for name, char in [('initial', 'a'), ('visible', 'b'), ('extra', 'c')]:
+                source = root/(name+'.asset')
+                source.write_text(f'  scenarioId: {name}\n  title: {name}\n  traditions:\n'
+                                  '  - cardId: card\n    stationId: station\n')
+                Path(str(source)+'.meta').write_text('guid: '+char*32)
+                refs.append('{fileID: 1, guid: '+char*32+', type: 2}')
+            scene.write_text('--- !u!114 &1\nMonoBehaviour:\n'
+                             '  m_EditorClassIdentifier: Test.CosmologyController\n'
+                             '  scenario: '+refs[0]+'\n  scenarios:\n'+
+                             ''.join('  - '+ref+'\n' for ref in refs)+
+                             '--- !u!114 &2\nMonoBehaviour:\n'
+                             '  m_EditorClassIdentifier: Test.CosmologyTopicSelector\n'
+                             '  controller: {fileID: 1}\n  buttons:\n  - {fileID: 3}\n'
+                             '  scenarioIds:\n  - visible\n')
+            self.assertEqual(['initial', 'visible'], [r['native_id'] for r in UnityInventory(root).scan().records])
+
     def test_mode_selector_indexes_its_hidden_journey_but_not_an_unassigned_one(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder); (root/'Scenes').mkdir()

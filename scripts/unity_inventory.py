@@ -162,7 +162,7 @@ class UnityInventory:
             parts, origins = self.prefab_parts(document, scene)
             # The active mode selector can enable an initially hidden activity.
             # Resolve stripped scene references to the expanded saved prefab data.
-            def component_id(ref):
+            def resolve_component_id(ref):
                 match = re.search(r'fileID: (-?\d+)', ref)
                 key = match[1] if match else ''
                 component = parts.get(key, '')
@@ -180,11 +180,11 @@ class UnityInventory:
                     continue
                 if field(candidate, 'm_Enabled', '1') == '0':
                     continue
-                for name in ('library', 'activity', 'journey'):
-                    selectable.add(component_id(reference(candidate, name)))
+                for name in ('library', 'activity', 'journey', 'theater'):
+                    selectable.add(resolve_component_id(reference(candidate, name)))
                 refs = re.search(r'^  journeys:\n(.*?)(?=^  [A-Za-z_]+:|\Z)', candidate, re.M | re.S)
                 for ref in re.findall(r'\{([^}]+)\}', refs[1] if refs else ''):
-                    selectable.add(component_id(ref))
+                    selectable.add(resolve_component_id(ref))
             parents = {}
             for component in parts.values():
                 game = re.search(r'fileID: (-?\d+)', reference(component, 'm_GameObject'))
@@ -201,6 +201,21 @@ class UnityInventory:
                 parent = parts.get(parents.get(game_id), '')
                 grandparent = re.search(r'fileID: (-?\d+)', reference(parent, 'm_GameObject'))
                 return not grandparent or active(grandparent[1], visited)
+            topic_selectors = {}
+            for component in parts.values():
+                if not field(component, 'm_EditorClassIdentifier').endswith('.CosmologyTopicSelector'):
+                    continue
+                game = re.search(r'fileID: (-?\d+)', reference(component, 'm_GameObject'))
+                if field(component, 'm_Enabled', '1') == '0' or (game and not active(game[1])):
+                    continue
+                ids = re.search(r'^  scenarioIds:\n((?:  - [\w-]+\n?)+)', component, re.M)
+                buttons = re.search(r'^  buttons:\n((?:  - \{[^}\n]+\}\n?)+)', component, re.M)
+                selected = re.findall(r'^  - ([\w-]+)', ids[1] if ids else '', re.M)
+                target = resolve_component_id(reference(component, 'controller'))
+                if not target or not selected or len(selected) != (buttons[1].count('  - ') if buttons else 0):
+                    self.warnings.append({'path': str(scene), 'message': 'Ελλιπής επιλογέας θεμάτων θρησκειών.'})
+                    continue
+                topic_selectors.setdefault(target, set()).update(selected)
             bindings = []
             for component_id, component in parts.items():
                 cls = field(component, 'm_EditorClassIdentifier')
@@ -301,30 +316,52 @@ class UnityInventory:
                                                   'topic_count': len(rows), 'entries': summaries,
                                                   'relation_count': len(list_rows(text, 'relations'))}})
                     bindings.append(native)
-                elif cls.endswith('.CosmologyController'):
-                    path = self.resolve(reference(component, 'scenario'))
-                    if not path or not path.is_file():
-                        self.warnings.append({'path': str(scene), 'message': 'Λείπει το συνδεδεμένο σενάριο κοσμολογιών.'})
+                elif cls.endswith('.ChronologyTheaterController'):
+                    path = self.resolve(reference(component, 'definition'))
+                    if not path:  # Stripped locator for the expanded prefab.
                         continue
-                    text = self.read_text(path)
+                    text = self.read_text(path) if path.is_file() else ''
                     native = field(text, 'scenarioId')
-                    traditions = []
-                    for item in re.finditer(r'^  - cardId: (.*?)(?=^  - cardId:|^  [A-Za-z_]+:|\Z)', text, re.M | re.S):
-                        normalized = '  cardId: '+item[1]
-                        normalized = re.sub(r'^    ', '  ', normalized, flags=re.M)
-                        traditions.append({key: field(normalized, key) for key in
-                                           ('cardId', 'stationId', 'displayName', 'cardTitle', 'statement',
-                                            'sourceLabel', 'sourceUrl', 'hint', 'interpretation')})
-                    if not native or not traditions or any(not t['cardId'] or not t['stationId'] for t in traditions):
-                        self.warnings.append({'path': str(path), 'message': 'Ελλιπή δεδομένα συνδεδεμένου σεναρίου κοσμολογιών.'})
+                    acts = [field(row, 'title') for row in list_rows(text, 'acts')]
+                    if not native or not acts or not all(acts):
+                        self.warnings.append({'path': str(path), 'message': 'Ελλιπή δεδομένα θεάτρου στο Παρατηρητήριο.'})
                         continue
-                    self.records.append({'mechanism': 'cosmology-comparison', 'native_id': native,
-                                         'path': path, 'scene': scene, 'evidence': [path],
-                                         'room': ROOMS.get(scene.stem, scene.stem),
-                                         'data': {'title': field(text, 'title'), 'instructions': field(text, 'instructions'),
-                                                  'reflection': field(text, 'reflection'), 'traditions': traditions,
-                                                  'topic_count': len(traditions)}})
+                    self.records.append({'mechanism': 'chronology-theater', 'native_id': native, 'path': path,
+                                         'scene': scene, 'room': ROOMS.get(scene.stem, scene.stem),
+                                         'evidence': [path],
+                                         'data': {'title': field(text, 'title'), 'topic_count': len(acts), 'acts': acts}})
                     bindings.append(native)
+                elif cls.endswith('.CosmologyController'):
+                    selected = topic_selectors.get(component_id, set())
+                    initial = self.resolve(reference(component, 'scenario'))
+                    refs = re.search(r'^  scenarios:\n((?:  - \{[^}\n]+\}\n?)+)', component, re.M)
+                    alternatives = [self.resolve(ref) for ref in re.findall(r'\{([^}]+)\}', refs[1] if refs else '')]
+                    found = set()
+                    for path in dict.fromkeys([initial]+alternatives):
+                        if not path or not path.is_file():
+                            self.warnings.append({'path': str(scene), 'message': 'Λείπει συνδεδεμένο θέμα θρησκειών.'})
+                            continue
+                        text = self.read_text(path)
+                        native = field(text, 'scenarioId')
+                        if path != initial and native not in selected:
+                            continue
+                        traditions = [{key: field(row, key) for key in
+                                       ('cardId', 'stationId', 'displayName', 'cardTitle', 'statement',
+                                        'sourceLabel', 'sourceUrl', 'hint', 'interpretation')}
+                                      for row in list_rows(text, 'traditions')]
+                        if not native or not traditions or any(not t['cardId'] or not t['stationId'] for t in traditions):
+                            self.warnings.append({'path': str(path), 'message': 'Ελλιπή δεδομένα συνδεδεμένου θέματος θρησκειών.'})
+                            continue
+                        self.records.append({'mechanism': 'cosmology-comparison', 'native_id': native,
+                                             'path': path, 'scene': scene, 'evidence': [path],
+                                             'room': ROOMS.get(scene.stem, scene.stem),
+                                             'data': {'title': field(text, 'title'), 'instructions': field(text, 'instructions'),
+                                                      'reflection': field(text, 'reflection'), 'traditions': traditions,
+                                                      'topic_count': len(traditions)}})
+                        bindings.append(native)
+                        found.add(native)
+                    if selected - found:
+                        self.warnings.append({'path': str(scene), 'message': 'Θέματα επιλογέα χωρίς συνδεδεμένα δεδομένα: '+', '.join(sorted(selected - found))})
                 elif cls.endswith('.ConcentricPuzzleController'):
                     path = self.resolve(reference(component, 'initialLesson'))
                     data = self.json(path) if path and path.is_file() else {}

@@ -414,6 +414,12 @@ class Builder:
                         'παρατηρεί την ανάδυση του θέματος και το ιστορικό περιβάλλον και βλέπει τη σχετική προβολή. '
                         'Μπορεί να επανεπισκεφτεί ολοκληρωμένους σταθμούς ή να αρχίσει νέα πορεία.')
                 modes = ['καθοδηγούμενη περιήγηση', 'ιστορική ακολουθία', 'παρατήρηση', 'συζήτηση']
+            elif record['mechanism'] == 'chronology-theater':
+                label = 'Unity VR · Θέατρο · '+title
+                note = ('Από τις Δραστηριότητες του Παρατηρητηρίου ανοίγει το θέατρο. '
+                        'Ο μαθητής λύνει το συρόμενο παζλ και στη συνέχεια παρακολουθεί την ανάγνωση και την ερμηνεία '
+                        f"σε {count} σκηνές ({', '.join(data['acts'])}).")
+                modes = ['παζλ εικόνας', 'ακρόαση', 'μελέτη πηγών', 'ερμηνεία']
             elif record['mechanism'] == 'historical-gears':
                 label = 'Unity VR · Μηχανισμός του Χρόνου · Τρία γρανάζια'
                 note = ('Στο Παρατηρητήριο του Χρόνου ο μαθητής αναζητά τρία γρανάζια με σύμβολα βιβλίου, '
@@ -438,11 +444,12 @@ class Builder:
                         'Με την ολοκλήρωση κάθε θέματος εμφανίζονται η ερμηνεία και το ερώτημα αιτιολόγησης.')
                 modes = ['στόχευση χειρογράφων', 'αντιστοίχιση καρτών', 'σταδιακή αποκάλυψη εικόνας', 'αιτιολόγηση']
             elif record['mechanism'] == 'cosmology-comparison':
-                label = 'Unity VR · Τέσσερις αφηγήσεις για τον κόσμο'
+                label = ('Unity VR · Τέσσερις αφηγήσεις για τον κόσμο' if native == 'world_religions_cosmology'
+                         else 'Unity VR · '+title)
                 traditions = ', '.join(t['displayName'] for t in data['traditions'])
                 note = (f"Στο δωμάτιο {record['room']} ο μαθητής επιλέγει μία από τις {count} κάρτες πηγών "
                         'και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. '
-                        f'Οι αφηγήσεις αφορούν: {traditions}. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται '
+                        f'Οι κάρτες αφορούν τις εξής παραδόσεις. {traditions}. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται '
                         'μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες.')
                 modes = ['μελέτη πηγών', 'αντιστοίχιση', 'σταδιακή αποκάλυψη εικόνας', 'σύγκριση']
             elif record['mechanism'] == 'reconstruction':
@@ -657,18 +664,22 @@ class Builder:
                 s['notes'].append(evidence)
         for f in cache.get('html_files',[]):
             local=ROOT/'imports/html'/f"{f['id']}.html"
-            if not local.is_file() and f['title']=='jerusalem-quiz.html':
-                local=self.apps/'jerusalem-shadow-fulfillment-quiz/jerusalem-quiz.html'
-                embedded=[]
-            if local.is_file():
-                self.source(local,'Drive HTML',f['id'])
-                text=local.read_text()
-                try:
-                    embedded = extract_lessons(text)
-                except (ValueError,KeyError,TypeError):
-                    self.warnings.append({'path':str(local),'message':'Δεν διαβάζονται τα ενσωματωμένα δεδομένα μαθήματος.'})
+            if not local.is_file():
+                self.warnings.append({'path': str(local), 'message': 'Λείπει το αντίγραφο του HTML από το Drive: '+f['title']})
+                continue
+            self.source(local, 'Drive HTML', f['id'])
+            text = self.read_text(local)
+            exclusion = self.rules.get('drive_html_exclusions', {}).get(f['id'], {})
+            if exclusion.get('sha256') == self.audit[str(local.resolve())]:
+                self.classified_exclusions.append({'path': str(local), 'reason': exclusion['reason']})
+                continue
+            try:
+                embedded = extract_lessons(text)
+            except (ValueError, KeyError, TypeError, AttributeError):
+                embedded = []
             if not embedded:
-                embedded=[{'id':f['id'],'title':f['title']}]
+                self.warnings.append({'path': str(local), 'message': 'Δεν αναγνωρίστηκαν δεδομένα μαθήματος στο HTML: '+f['title']})
+                continue
             for data in embedded:
                 native=data.get('lesson_id') or data.get('id')
                 sid=(self.config.get('html_scenario_links',{}).get(native)
@@ -698,10 +709,15 @@ class Builder:
                     'historical-selector': 'Επιλογή ενός από τέσσερα ιστορικά περιβάλλοντα, αναζήτηση των σημείων του και μελέτη των αντίστοιχων κειμένων.',
                     'music-mindmap': 'Μελέτη κειμένου και ύμνου στην ίδια εικόνα, σύνδεση εννοιών και σταδιακή αποκάλυψη των αποσπασμάτων.',
                     'biography-music': 'Εξερεύνηση οκτώ σκηνών από τον βίο του αγίου Λουκά, σύνδεση λέξεων με την εικόνα και χωριστή ανάγνωση του ύμνου.',
+                    'biography-relations': 'Οκτώ βιογραφικές σκηνές, σύνθεση προτάσεων και ανάγνωση του ύμνου. Η ενότητα «Σχέσεις» συνδέει αποσπάσματα της εικόνας με ρήματα.',
+                    'illustrated-levels': 'Ο μαθητής συνδέει κάρτες με τις σκηνές του βίου, αναγνωρίζει βιβλικά πρότυπα και αντιστοιχίζει τα αποσπάσματα του απολυτικίου με την εικόνα.',
+                    'world-religions-study': 'Πέντε χωριστές διαδρομές για τον Ιουδαϊσμό, το Ισλάμ, τον Ινδουισμό, τον Βουδισμό και την αρχαία ελληνική θρησκεία. Κάθε διαδρομή εξετάζει γνώση της αλήθειας, δημιουργία, θείο, μετά θάνατον ζωή και σημασία των πράξεων.',
+                    'reading-cross-references': 'Μελέτη σχολιασμένων αντιστοιχιών ανάμεσα στον Πέμπτο Θεολογικό Λόγο του Γρηγορίου, τέσσερις βιβλικές πηγές και τρεις ύμνους της Πεντηκοστής. Επιλογή φράσης για να φωτιστούν τα παράλληλα χωρία.',
                     'text-music-relay': 'Δύο διαδρομές στην ίδια εφαρμογή: μελέτη της Προς Διόγνητον επιστολής και ανάγνωση του ύμνου «Δός μοι τούτον τον ξένον», με συνδέσεις στην εικόνα.',
                     'meaning-melody': 'Σύνδεση τριών εννοιών με τις φράσεις «δοξάσατε», «ἀπαντήσατε», «ὑψώθητε» και κατόπιν αντιστοίχιση των μουσικών αποσπασμάτων με τον ύμνο.'
                 }.get(mechanism)
-                if mechanism in {'music-mindmap', 'biography-music', 'text-music-relay'} and not data.get('audio_available'):
+                summary = self.rules.get('html_activity_notes', {}).get(native, summary)
+                if mechanism in {'music-mindmap', 'biography-music', 'biography-relations', 'text-music-relay'} and not data.get('audio_available'):
                     summary += ' Η ελεγμένη έκδοση περιλαμβάνει το κείμενο του ύμνου, χωρίς ενσωματωμένη ακρόαση.'
                 if not summary:
                     summary = ('Από το πεδίο «Υλικό» επίλεξε «'+label+'».' if data.get('concept_canvas') else
@@ -709,11 +725,14 @@ class Builder:
                                'Αντιστοίχιση καρτών και σταδιακή αποκάλυψη της εικόνας.')
                 if mechanism == 'concentric-rings': label = 'Ομόκεντροι δακτύλιοι · '+label
                 elif mechanism == 'cosmology-threads': label = 'Κλωστές · '+label
+                elif mechanism == 'biography-relations': label += ' · Βίος, ύμνος και σχέσεις'
+                elif mechanism in {'illuminated-biography', 'illustrated-levels'} and data.get('subtitle'):
+                    label += ' · '+data['subtitle']
                 private = f.get('teacher_download_only', True)
                 if private:
                     summary += ' Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.'
-                a = self.activity(s,'quiz' if data.get('exercises') else 'html','HTML · '+label,f['url'],path=local if local.is_file() else None,
-                              app='drive-html' if local.is_file() else None,native_id=native,modified_at=f.get('modified_time'),
+                a = self.activity(s,'quiz' if data.get('exercises') else 'html','HTML · '+label,f['url'],path=local,
+                              app='drive-html',native_id=native,modified_at=f.get('modified_time'),
                               identity_key='drive:'+f['id']+':'+native, note=summary,
                               exercise_count=data.get('activity_count'), download_only=private,
                               availability_status='authenticated-download' if private else 'drive-download',
@@ -724,9 +743,11 @@ class Builder:
                     if a.get('local_url'): a['local_url'] = '/launch/'+previous
                 if private: a.pop('local_url', None)
                 self.html_units[a['id']] = data
-                if data.get('audience'):
-                    self.set_audience(s, data['audience'])
-                s['modes']+=['αντιστοίχιση','αιτιολόγηση']
+                self.set_audience(s, data.get('audience') or data.get('schoolSource', {}).get('label'))
+                if mechanism == 'reading-cross-references':
+                    s['modes'] += ['μελέτη πηγών', 'ερμηνεία']
+                else:
+                    s['modes'] += ['αντιστοίχιση', 'αιτιολόγηση']
                 if not s['objectives'] and data.get('subtitle'):
                     s['objectives']=[data['subtitle']]
                 evidence=self.config.get('html_link_evidence',{}).get(native)
@@ -817,6 +838,13 @@ class Builder:
                     elif check == 'activity-ids':
                         same = bool(record and source.get('activity_ids')
                                     == [a['id'] for a in record['data'].get('activities', [])])
+                    elif check == 'world-topic-content':
+                        axis = rule['target_native_id'].removeprefix('world_religions_')
+                        html_cards = {scene.get('cardId'): scene.get('vrStatement')
+                                      for religion in source.get('religions', []) for scene in religion['scenes']
+                                      if scene['id'] == axis}
+                        same = bool(record and html_cards == {t['cardId']: t['statement']
+                                                             for t in record['data']['traditions']})
                     if not same:
                         self.warnings.append({'path': str(ROOT/'source-rules.json'), 'message': 'Το περιεχόμενο HTML και Unity δεν τεκμηριώνει πλέον την ίδια δραστηριότητα: '+activity['native_id']})
                         continue
@@ -825,6 +853,9 @@ class Builder:
                                   'url': base+'?material='+target['id']+'#activity/'+quote(target_scenario['scenario_id'], safe='')})
                 if links:
                     activity['unity_counterparts'] = links
+                elif source.get('mechanism') in {'biography-relations', 'illuminated-biography',
+                                                 'illustrated-levels', 'reading-cross-references'}:
+                    activity['unity_note'] = 'Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση.'
                 elif activity.get('native_id') == 'na_agapate_ta_dentra':
                     activity['unity_note'] = 'Χρήση στην τάξη. Δεν εντοπίστηκε συγκεκριμένη αποθηκευμένη ανάθεση αυτής της δραστηριότητας στο Unity.'
 

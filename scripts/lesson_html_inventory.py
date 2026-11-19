@@ -148,6 +148,10 @@ def extract_lessons(text):
         tag = attrs.get('id')
         if tag in {'lesson-data', 'initial-scenario', 'additional-scenarios', 'default-scenario'}:
             data = json.loads(value)
+            levels = data.get('levels') if isinstance(data, dict) else None
+            if isinstance(levels, list) and levels and all(level.get('scenes') for level in levels):
+                data.update(mechanism='illustrated-levels',
+                            activity_count=sum(len(level['scenes']) for level in levels))
             records += data.get('scenarios', [data]) if isinstance(data, dict) else data
         if tag == 'resource-data':
             resources = json.loads(value)
@@ -159,7 +163,10 @@ def extract_lessons(text):
             for name in ('LESSON_CONTENT', 'LUKE_CONTENT'):
                 content = assigned_lesson(value, name)
                 if isinstance(content, dict) and content.get('id'):
-                    mechanism = ('biography-music' if name == 'LUKE_CONTENT' else
+                    relations = name == 'LUKE_CONTENT' and content.get('biographySentences') and re.search(
+                        r'\bwindow\.LUKE_RELATIONS\s*=', value)
+                    mechanism = ('biography-relations' if relations else
+                                 'biography-music' if name == 'LUKE_CONTENT' else
                                  'text-music-relay' if content.get('levels') else
                                  'music-mindmap' if content.get('hymn') or content.get('hymnText') else
                                  'image-mindmap')
@@ -167,6 +174,19 @@ def extract_lessons(text):
                     if content.get('levels'):
                         groups = [scene for level in content['levels'].values() for scene in level.get('scenes', [])]
                     records.append({**content, 'mechanism': mechanism, 'activity_count': len(groups)})
+            for name in ('PHILOTHEI_CONTENT', 'ATHANASIUS_CONTENT', 'GREGORY_CONTENT', 'CHRYSOSTOM_CONTENT'):
+                content = assigned_lesson(value, name)
+                if isinstance(content, dict) and content.get('id') and content.get('scenes'):
+                    records.append({**content, 'mechanism': 'illuminated-biography',
+                                    'activity_count': len(content['scenes'])})
+            world = assigned_lesson(value, 'WORLD_LESSON')
+            if isinstance(world, dict) and world.get('lessonId') and world.get('religions'):
+                records.append({**world, 'id': world['lessonId'], 'mechanism': 'world-religions-study',
+                                'activity_count': sum(len(religion['scenes']) for religion in world['religions'])})
+            library = assigned_lesson(value, 'PATRISTIC_DEMO_LIBRARY')
+            if isinstance(library, dict) and library.get('id') and library.get('views'):
+                records.append({**library, 'mechanism': 'reading-cross-references',
+                                'activity_count': len(library['views'])})
             history = literal_declaration(value, 'DATA')
             if isinstance(history, dict) and history.get('cities'):
                 records.append({**history, 'id': 'historical-worlds', 'mechanism': 'historical-selector',
@@ -196,7 +216,7 @@ def extract_lessons(text):
         if record.get('scenes') and record.get('groups') and not record.get('mechanism'):
             record = {**record, 'mechanism': 'image-mindmap', 'activity_count': len(record['groups'])}
         record = {**record, 'id': native}
-        if record.get('mechanism') in {'meaning-melody', 'music-mindmap', 'biography-music', 'text-music-relay'}:
+        if record.get('mechanism') in {'meaning-melody', 'music-mindmap', 'biography-music', 'biography-relations', 'text-music-relay'}:
             record['audio_available'] = 'data:audio/' in text
         if not record.get('activity_count'):
             record['activity_count'] = len(record.get('items', record.get('exercises', []))) or None

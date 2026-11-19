@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T18:11:50.310284Z",
+  "generated_at": "2026-11-19T18:15:49.784440Z",
   "grades": [
     "Α΄ Γυμνασίου",
     "Β΄ Γυμνασίου",
@@ -20,22 +20,22 @@
       "revision": 33
     },
     "google_drive": {
-      "checked_at": "2026-11-10T17:55:46.406Z",
+      "checked_at": "2026-11-19T18:03:45.636Z",
       "folder": {
         "id": "1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv",
-        "name": "ChatGPT",
+        "title": "Υλικό μαθημάτων",
         "url": "https://drive.google.com/drive/folders/1rGbtfbCkTcNP19R1ghnEAgb87dLeR3Uv"
       },
       "mode": "connector-snapshot"
     },
     "source_refresh": {
-      "run_id": "6b705c87-3f3f-456f-a2a1-05805f8423cd",
-      "checked_at": "2026-11-10T17:55:46.406Z",
+      "run_id": "85e74cb7-8444-4624-8fcb-abe0684ecf5f",
+      "checked_at": "2026-11-19T18:01:48.499546Z",
       "status": "verified",
       "github_repositories": 9,
-      "drive_folders": 10,
+      "drive_folders": 14,
       "drive_slides": 27,
-      "drive_html": 21
+      "drive_html": 30
     }
   },
   "source_files": [],
@@ -154,6 +154,73 @@
       ]
     },
     {
+      "scenario_id": "html:1zKL9yrX9C9agatnY2YapIVqxPoClmK-_:saint-philothei-journey",
+      "title": "Αγία Φιλοθέη",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [
+        "Από την περιουσία στην προσφορά"
+      ],
+      "modes": [
+        "αντιστοίχιση",
+        "αιτιολόγηση"
+      ],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-14T17:45:45.416Z."
+      ],
+      "source_groups": [
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1zKL9yrX9C9agatnY2YapIVqxPoClmK-_"
+        },
+        {
+          "system": "drive-html",
+          "path": "1zKL9yrX9C9agatnY2YapIVqxPoClmK-_.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "b5acca9ac44ddd9aafcb",
+          "kind": "html",
+          "label": "HTML · Αγία Φιλοθέη · Από την περιουσία στην προσφορά",
+          "url": "https://drive.google.com/file/d/1zKL9yrX9C9agatnY2YapIVqxPoClmK-_/view?usp=drivesdk",
+          "note": "Οκτώ σκηνές από το σχολικό κείμενο της Γαλάτειας Γρηγοριάδου–Σουρέλη. Ο μαθητής συνθέτει προτάσεις για τη διαδρομή της Ρηγούλας και συνδέει στην εικόνα τη μάθηση, τη φιλοξενία και την προστασία των ευάλωτων με πράξεις προσφοράς. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "saint-philothei-journey",
+          "modified_at": "2026-11-14T17:45:45.416Z",
+          "exercise_count": 8,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1zKL9yrX9C9agatnY2YapIVqxPoClmK-_",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1zKL9yrX9C9agatnY2YapIVqxPoClmK-_",
+          "unity_note": "Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση."
+        }
+      ]
+    },
+    {
       "scenario_id": "html:1Ko8gjsGL-vHako6sN4ngfolgt5i6yFdJ:saint-luke-journey",
       "title": "Άγιος Λουκάς ο Ιατρός",
       "subject": "Θρησκευτικά",
@@ -182,6 +249,7 @@
       "application_status": "proposal",
       "aliases": [],
       "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-14T08:50:31.298Z.",
         "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-04T16:36:00.777Z."
       ],
       "source_groups": [
@@ -189,6 +257,16 @@
         "drive-html"
       ],
       "sources": [
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1JV061u24ezhbv4sEBduPVZ7R866zmiDS"
+        },
+        {
+          "system": "drive-html",
+          "path": "1JV061u24ezhbv4sEBduPVZ7R866zmiDS.html",
+          "locator": ""
+        },
         {
           "system": "Drive HTML",
           "path": "google-drive.json",
@@ -201,6 +279,23 @@
         }
       ],
       "activities": [
+        {
+          "id": "20bc1abc468fe4417df3",
+          "kind": "html",
+          "label": "HTML · Άγιος Λουκάς ο Ιατρός · Βίος, ύμνος και σχέσεις",
+          "url": "https://drive.google.com/file/d/1JV061u24ezhbv4sEBduPVZ7R866zmiDS/view?usp=drivesdk",
+          "note": "Οκτώ βιογραφικές σκηνές, σύνθεση προτάσεων και ανάγνωση του ύμνου. Η ενότητα «Σχέσεις» συνδέει αποσπάσματα της εικόνας με ρήματα. Η ελεγμένη έκδοση περιλαμβάνει το κείμενο του ύμνου, χωρίς ενσωματωμένη ακρόαση. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "saint-luke-journey",
+          "modified_at": "2026-11-14T08:50:31.298Z",
+          "exercise_count": 8,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1JV061u24ezhbv4sEBduPVZ7R866zmiDS",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1JV061u24ezhbv4sEBduPVZ7R866zmiDS",
+          "unity_note": "Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση."
+        },
         {
           "id": "9582ee9ca7d1bf1bae8b",
           "kind": "html",
@@ -287,7 +382,7 @@
           "media_id": "SLD-029",
           "drive_id": "1KQHzl3Gyty29dr7x142ja3RnwDRJJztDuIYNBuduqzg",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-17T10:33:06.382Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -841,13 +936,13 @@
           "id": "4a3febfaa7dc005d9654",
           "kind": "slides",
           "label": "Από τη Σκιά στην Αλήθεια — Νεοβυζαντινή παρουσίαση",
-          "url": "https://docs.google.com/presentation/d/1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk/edit?usp=drivesdk",
+          "url": "https://docs.google.com/presentation/d/1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk/edit",
           "note": "",
           "app": null,
           "native_id": "",
           "drive_id": "1lzzSOomCxTwdWUqonLCmE1IRAv8iSmdt66w5iZVfBHk",
           "slide_count": 15,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-03T06:14:03.548Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -1100,7 +1195,7 @@
           "media_id": "SLD-018",
           "drive_id": "1kmnmtbIiGHRrPHlaKNaJ_QJPtuPZXSzGALTppAGILY0",
           "slide_count": 12,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-10T05:03:20.284Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -1416,7 +1511,7 @@
           "kind": "vr",
           "label": "Unity VR · Τέσσερις αφηγήσεις για τον κόσμο",
           "url": "",
-          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 4 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι αφηγήσεις αφορούν: Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 4 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι κάρτες αφορούν τις εξής παραδόσεις. Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
           "app": "Unity VR",
           "native_id": "world_religions_cosmology",
           "room": "Θρησκείες του κόσμου",
@@ -1748,15 +1843,20 @@
       "grades": [],
       "grade_status": "unconfirmed",
       "audience_source": null,
-      "objectives": [],
+      "objectives": [
+        "Ένας ποιητής επίσκοπος"
+      ],
       "modes": [
         "ανάγνωση",
         "συζήτηση",
-        "παρατήρηση"
+        "παρατήρηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
       ],
       "formats": [
         "Digital Book",
-        "Slides"
+        "Slides",
+        "HTML"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -1769,10 +1869,14 @@
       "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
       "application_status": "proposal",
       "aliases": [],
-      "notes": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-15T07:14:23.752Z."
+      ],
       "source_groups": [
         "Digital Book",
-        "Google Drive"
+        "Google Drive",
+        "Drive HTML",
+        "drive-html"
       ],
       "sources": [
         {
@@ -1784,6 +1888,16 @@
           "system": "Google Drive",
           "path": "google-drive.json",
           "locator": "files/1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1EF93icHz4FVDF6Gm3eU-gJmohDgOKPGN"
+        },
+        {
+          "system": "drive-html",
+          "path": "1EF93icHz4FVDF6Gm3eU-gJmohDgOKPGN.html",
+          "locator": ""
         }
       ],
       "activities": [
@@ -1809,9 +1923,26 @@
           "media_id": "SLD-021",
           "drive_id": "1-pu-kgksqc3H9J25c_1GnVqE2tWYRoSTdC_PVpoSXDI",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:25:22.015Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "b3a02fd3fd3eeace3375",
+          "kind": "html",
+          "label": "HTML · Άγιος Γρηγόριος ο Θεολόγος · Ένας ποιητής επίσκοπος",
+          "url": "https://drive.google.com/file/d/1EF93icHz4FVDF6Gm3eU-gJmohDgOKPGN/view?usp=drivesdk",
+          "note": "Οκτώ βιογραφικές σκηνές για τη φιλία με τον Βασίλειο, την άσκηση, τη διακονία και την ειρήνη. Ακολουθούν συνδέσεις με τον Πέμπτο Θεολογικό Λόγο για το Άγιο Πνεύμα. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "saint-gregory-theologian-journey",
+          "modified_at": "2026-11-15T07:14:23.752Z",
+          "exercise_count": 8,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1EF93icHz4FVDF6Gm3eU-gJmohDgOKPGN",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1EF93icHz4FVDF6Gm3eU-gJmohDgOKPGN",
+          "unity_note": "Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση."
         }
       ]
     },
@@ -1883,7 +2014,7 @@
           "media_id": "SLD-026",
           "drive_id": "17v72Sbvei8ZObDkfTC3qRDPtPHhqzPWFkpw3maiam0A",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:24:56.917Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -3207,7 +3338,7 @@
           "media_id": "SLD-011",
           "drive_id": "1obhHzxFimu8ecB2zpNyAu73Ogv7RB3CuJaeOn0yxmcg",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-15T15:15:24.175Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3281,7 +3412,7 @@
           "media_id": "SLD-012",
           "drive_id": "1kDEzeQsCObnfHM-wT5zmYKm-4TbjtbcrZQ8PA7cVTe8",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-11T05:57:01.161Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3355,7 +3486,7 @@
           "media_id": "SLD-013",
           "drive_id": "1ejwL1HZJAQttNUaotQkV6WnvN9J-klXd0AtsdW40gow",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-11T05:55:42.464Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3429,7 +3560,7 @@
           "media_id": "SLD-014",
           "drive_id": "1A_LBWURpBkRsCZGIqxt03Wog2jLGLQRrwqpoX8aRpFc",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-11T14:45:46.081Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3503,7 +3634,7 @@
           "media_id": "SLD-016",
           "drive_id": "1MsqGzOOau_juVcOB1xCpaFWc02iCjoznisHGEyK29I4",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-11T14:46:02.732Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -3522,7 +3653,11 @@
         "συζήτηση",
         "παρατήρηση",
         "καθοδηγούμενη περιήγηση",
-        "ιστορική ακολουθία"
+        "ιστορική ακολουθία",
+        "παζλ εικόνας",
+        "ακρόαση",
+        "μελέτη πηγών",
+        "ερμηνεία"
       ],
       "formats": [
         "Digital Book",
@@ -3591,6 +3726,31 @@
           "system": "Unity VR",
           "path": "PaulApostolicJourney.asset",
           "locator": ""
+        },
+        {
+          "system": "Unity VR",
+          "path": "Room_chronology.unity",
+          "locator": "chronology-theater"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Paul_Island_Theater.asset",
+          "locator": "chronology-theater"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Paul_Teachings_Theater.prefab",
+          "locator": "chronology-theater"
+        },
+        {
+          "system": "Unity VR",
+          "path": "ChronologyTheaterController.cs",
+          "locator": "chronology-theater"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Paul_Island_Theater.asset",
+          "locator": ""
         }
       ],
       "activities": [
@@ -3616,7 +3776,7 @@
           "media_id": "SLD-017",
           "drive_id": "1BRyBNBs7QR6YynGDH98TcEldOOrkR2KDtbrDVmil8zI",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-11T14:46:18.578Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -3633,6 +3793,21 @@
           "exercise_count": 5,
           "stage_count": 0,
           "reveal_mode": "chronology-journey",
+          "availability_status": "scene-bound"
+        },
+        {
+          "id": "d4217ba43c01b999a5a8",
+          "kind": "vr",
+          "label": "Unity VR · Θέατρο · Οι διδασκαλίες του Παύλου — με τον Δημήτρη",
+          "url": "",
+          "note": "Από τις Δραστηριότητες του Παρατηρητηρίου ανοίγει το θέατρο. Ο μαθητής λύνει το συρόμενο παζλ και στη συνέχεια παρακολουθεί την ανάγνωση και την ερμηνεία σε 5 σκηνές (Δαμασκός, Φίλιπποι, Αθήνα, Έφεσος, Ρώμη). Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "paul_teachings_theater",
+          "room": "Παρατηρητήριο του Χρόνου",
+          "scene_name": "Room_chronology",
+          "exercise_count": 5,
+          "stage_count": 0,
+          "reveal_mode": "chronology-theater",
           "availability_status": "scene-bound"
         }
       ]
@@ -3705,7 +3880,7 @@
           "media_id": "SLD-015",
           "drive_id": "1eN_jyEiGJ28XEHs5qgn6p9sYiARaCfZmny9oti10xXg",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-11T14:46:30.711Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4230,6 +4405,106 @@
       ]
     },
     {
+      "scenario_id": "html:1s3TMJZm0cgXeOS12YqzEKSTbEkTaWhol:world_religions_five_axes_v1",
+      "title": "Θρησκείες του κόσμου · Πέντε διαδρομές μελέτης",
+      "subject": "Θρησκευτικά",
+      "grades": [
+        "Β΄ Λυκείου"
+      ],
+      "grade_status": "source",
+      "audience_source": "Χριστιανισμός και Θρησκεύματα · Β΄ Λυκείου",
+      "objectives": [],
+      "modes": [
+        "αντιστοίχιση",
+        "αιτιολόγηση"
+      ],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-11T19:40:57.885Z."
+      ],
+      "source_groups": [
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1s3TMJZm0cgXeOS12YqzEKSTbEkTaWhol"
+        },
+        {
+          "system": "drive-html",
+          "path": "1s3TMJZm0cgXeOS12YqzEKSTbEkTaWhol.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "af1d820f5e5b51e3dadd",
+          "kind": "html",
+          "label": "HTML · Θρησκείες του κόσμου · Πέντε διαδρομές μελέτης",
+          "url": "https://drive.google.com/file/d/1s3TMJZm0cgXeOS12YqzEKSTbEkTaWhol/view?usp=drivesdk",
+          "note": "Πέντε χωριστές διαδρομές για τον Ιουδαϊσμό, το Ισλάμ, τον Ινδουισμό, τον Βουδισμό και την αρχαία ελληνική θρησκεία. Κάθε διαδρομή εξετάζει γνώση της αλήθειας, δημιουργία, θείο, μετά θάνατον ζωή και σημασία των πράξεων. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "world_religions_five_axes_v1",
+          "modified_at": "2026-11-11T19:40:57.885Z",
+          "exercise_count": 25,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1s3TMJZm0cgXeOS12YqzEKSTbEkTaWhol",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1s3TMJZm0cgXeOS12YqzEKSTbEkTaWhol",
+          "unity_counterparts": [
+            {
+              "activity_id": "eb026c845b687fb0adbc",
+              "scenario_id": "unity:world_religions_revelation_search",
+              "label": "Unity VR · Πώς γνωρίζεται η αλήθεια;",
+              "relationship": "Συνέχεια στο Unity ανά θέμα",
+              "note": "Στον χώρο συγκρίνονται οι πέντε ήδη μελετημένες κάρτες για τους τρόπους γνώσης της αλήθειας.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=eb026c845b687fb0adbc#activity/unity%3Aworld_religions_revelation_search"
+            },
+            {
+              "activity_id": "0632b8bcad4b8377d87e",
+              "scenario_id": "unity:world_religions_divine",
+              "label": "Unity VR · Πώς κατανοείται το θείο;",
+              "relationship": "Συνέχεια στο Unity ανά θέμα",
+              "note": "Οι πέντε παραδόσεις εξετάζονται πλάι πλάι ως προς το πώς κατανοούν το θείο.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=0632b8bcad4b8377d87e#activity/unity%3Aworld_religions_divine"
+            },
+            {
+              "activity_id": "c32f7b48084cb5e484c2",
+              "scenario_id": "unity:world_religions_afterlife",
+              "label": "Unity VR · Τι προσδοκάται μετά τον θάνατο;",
+              "relationship": "Συνέχεια στο Unity ανά θέμα",
+              "note": "Οι πέντε κάρτες επανέρχονται για σύγκριση των προσδοκιών μετά τον θάνατο.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=c32f7b48084cb5e484c2#activity/unity%3Aworld_religions_afterlife"
+            },
+            {
+              "activity_id": "eff5cf746457a678353c",
+              "scenario_id": "unity:world_religions_judgement",
+              "label": "Unity VR · Ποια σημασία έχουν οι πράξεις;",
+              "relationship": "Συνέχεια στο Unity ανά θέμα",
+              "note": "Με τις πέντε γνωστές κάρτες, ο μαθητής συγκρίνει τη σημασία των πράξεων στις παραδόσεις.",
+              "url": "https://dporpatonelis-crypto.github.io/Browser-vr/?material=eff5cf746457a678353c#activity/unity%3Aworld_religions_judgement"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "scenario_id": "sculpture:spiritual-freedom",
       "title": "Ίαση των παθών και πνευματική ελευθερία",
       "subject": "Δόγμα και βίωμα · Η πνευματική ελευθερία",
@@ -4473,17 +4748,17 @@
         {
           "system": "Google Drive",
           "path": "google-drive.json",
+          "locator": "files/1yqoZgkbgzXRP180EnZB6bNkszlz9ANEf9fqyKs3O-wI"
+        },
+        {
+          "system": "Google Drive",
+          "path": "google-drive.json",
           "locator": "files/1bmGS2wus29BdFD20ASYGDGa-lUps35vi5RQx6MfBFN8"
         },
         {
           "system": "Google Drive",
           "path": "google-drive.json",
           "locator": "files/1c6L0_nHnFeu2qUP6atJRzEjjncb1ntFdkkieVD2R8h4"
-        },
-        {
-          "system": "Google Drive",
-          "path": "google-drive.json",
-          "locator": "files/1yqoZgkbgzXRP180EnZB6bNkszlz9ANEf9fqyKs3O-wI"
         }
       ],
       "activities": [
@@ -4509,7 +4784,7 @@
           "media_id": "SLD-036",
           "drive_id": "1c6L0_nHnFeu2qUP6atJRzEjjncb1ntFdkkieVD2R8h4",
           "slide_count": 20,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-31T20:28:27.677Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -4535,7 +4810,7 @@
           "media_id": "SLD-037",
           "drive_id": "1bmGS2wus29BdFD20ASYGDGa-lUps35vi5RQx6MfBFN8",
           "slide_count": 6,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-31T20:28:33.763Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -4561,7 +4836,7 @@
           "media_id": "SLD-038",
           "drive_id": "1yqoZgkbgzXRP180EnZB6bNkszlz9ANEf9fqyKs3O-wI",
           "slide_count": 20,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-11-02T17:26:30.706Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4699,7 +4974,7 @@
           "media_id": "SLD-028",
           "drive_id": "1DUD6KwTy-r_4ANWNn9JeaKt6q6781ae33O8iYUZkOJg",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-17T10:33:03.016Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4712,15 +4987,20 @@
       "grades": [],
       "grade_status": "unconfirmed",
       "audience_source": null,
-      "objectives": [],
+      "objectives": [
+        "Ο λόγος που γίνεται πράξη"
+      ],
       "modes": [
         "ανάγνωση",
         "συζήτηση",
-        "παρατήρηση"
+        "παρατήρηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
       ],
       "formats": [
         "Digital Book",
-        "Slides"
+        "Slides",
+        "HTML"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -4733,10 +5013,14 @@
       "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
       "application_status": "proposal",
       "aliases": [],
-      "notes": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-16T17:52:23.823Z."
+      ],
       "source_groups": [
         "Digital Book",
-        "Google Drive"
+        "Google Drive",
+        "Drive HTML",
+        "drive-html"
       ],
       "sources": [
         {
@@ -4748,6 +5032,16 @@
           "system": "Google Drive",
           "path": "google-drive.json",
           "locator": "files/11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1SqG5OG-8d9I2AN9p2Bd8Cvnw3U_qqW_g"
+        },
+        {
+          "system": "drive-html",
+          "path": "1SqG5OG-8d9I2AN9p2Bd8Cvnw3U_qqW_g.html",
+          "locator": ""
         }
       ],
       "activities": [
@@ -4773,9 +5067,91 @@
           "media_id": "SLD-022",
           "drive_id": "11fmo246q6mjeShNpHVjEvVgF9pWMOCJSf08av_V6k4o",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:26:09.383Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "ffd8b7b97048be4971d1",
+          "kind": "html",
+          "label": "HTML · Άγιος Ιωάννης ο Χρυσόστομος · Ο λόγος που γίνεται πράξη",
+          "url": "https://drive.google.com/file/d/1SqG5OG-8d9I2AN9p2Bd8Cvnw3U_qqW_g/view?usp=drivesdk",
+          "note": "Οκτώ στάσεις από την Αντιόχεια ως την εξορία. Ο μαθητής συνδέει εικόνες από τη διδασκαλία του Χρυσοστόμου με τη φροντίδα των φτωχών, την άσκηση και τη στάση του απέναντι στην αδικία. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "saint-john-chrysostom-journey",
+          "modified_at": "2026-11-16T17:52:23.823Z",
+          "exercise_count": 8,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1SqG5OG-8d9I2AN9p2Bd8Cvnw3U_qqW_g",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1SqG5OG-8d9I2AN9p2Bd8Cvnw3U_qqW_g",
+          "unity_note": "Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση."
+        }
+      ]
+    },
+    {
+      "scenario_id": "html:1tpIQP05eSAb0avF0jiGjj3P4arrDZoJi:gregory-scripture-and-pentecost-hymns-v1",
+      "title": "Κείμενο, Γραφή και ύμνοι",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "μελέτη πηγών",
+        "ερμηνεία"
+      ],
+      "formats": [
+        "HTML"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-15T18:01:07.918Z."
+      ],
+      "source_groups": [
+        "Drive HTML",
+        "drive-html"
+      ],
+      "sources": [
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1tpIQP05eSAb0avF0jiGjj3P4arrDZoJi"
+        },
+        {
+          "system": "drive-html",
+          "path": "1tpIQP05eSAb0avF0jiGjj3P4arrDZoJi.html",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "67eb42fc72804b74b9ad",
+          "kind": "html",
+          "label": "HTML · Κείμενο, Γραφή και ύμνοι",
+          "url": "https://drive.google.com/file/d/1tpIQP05eSAb0avF0jiGjj3P4arrDZoJi/view?usp=drivesdk",
+          "note": "Μελέτη σχολιασμένων αντιστοιχιών ανάμεσα στον Πέμπτο Θεολογικό Λόγο του Γρηγορίου, τέσσερις βιβλικές πηγές και τρεις ύμνους της Πεντηκοστής. Επιλογή φράσης για να φωτιστούν τα παράλληλα χωρία. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "gregory-scripture-and-pentecost-hymns-v1",
+          "modified_at": "2026-11-15T18:01:07.918Z",
+          "exercise_count": 4,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1tpIQP05eSAb0avF0jiGjj3P4arrDZoJi",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1tpIQP05eSAb0avF0jiGjj3P4arrDZoJi",
+          "unity_note": "Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση."
         }
       ]
     },
@@ -4899,7 +5275,7 @@
           "media_id": "SLD-023",
           "drive_id": "182OzPqkDnsGhHZDfiZJAd9MxhGQ0ZSYqnuXQxBO_wuc",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:25:33.435Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4973,7 +5349,7 @@
           "media_id": "SLD-024",
           "drive_id": "19uju6p4oHNCbUTEJWvhGwhhOOsGBukZynxBwHg0lrt4",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:25:11.661Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -4986,15 +5362,20 @@
       "grades": [],
       "grade_status": "unconfirmed",
       "audience_source": null,
-      "objectives": [],
+      "objectives": [
+        "Ένας αγωνιστής ιεράρχης"
+      ],
       "modes": [
         "ανάγνωση",
         "συζήτηση",
-        "παρατήρηση"
+        "παρατήρηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
       ],
       "formats": [
         "Digital Book",
-        "Slides"
+        "Slides",
+        "HTML"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -5007,10 +5388,14 @@
       "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
       "application_status": "proposal",
       "aliases": [],
-      "notes": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-18T16:43:18.274Z."
+      ],
       "source_groups": [
         "Digital Book",
-        "Google Drive"
+        "Google Drive",
+        "Drive HTML",
+        "drive-html"
       ],
       "sources": [
         {
@@ -5022,6 +5407,16 @@
           "system": "Google Drive",
           "path": "google-drive.json",
           "locator": "files/1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1S1JYGSV3QapsuzXYPdVQeJtxYFDidoGK"
+        },
+        {
+          "system": "drive-html",
+          "path": "1S1JYGSV3QapsuzXYPdVQeJtxYFDidoGK.html",
+          "locator": ""
         }
       ],
       "activities": [
@@ -5047,9 +5442,26 @@
           "media_id": "SLD-019",
           "drive_id": "1zXQhZYZlY3pziPxnG6ek4OXj66eUcUhAllS4cP2rXq8",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:24:41.955Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "b7d5a574cbad93c0b19b",
+          "kind": "html",
+          "label": "HTML · Μέγας Αθανάσιος · Ένας αγωνιστής ιεράρχης",
+          "url": "https://drive.google.com/file/d/1S1JYGSV3QapsuzXYPdVQeJtxYFDidoGK/view?usp=drivesdk",
+          "note": "Οκτώ στάσεις από την Αλεξάνδρεια και τη Σύνοδο της Νίκαιας ως τις εξορίες και τα συγγράμματα. Ο μαθητής συνδέει φράσεις του απολυτικίου με γεγονότα του βίου και με τη διαμάχη για τη σχέση του Υιού με τον Πατέρα. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "saint-athanasius-journey",
+          "modified_at": "2026-11-18T16:43:18.274Z",
+          "exercise_count": 8,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1S1JYGSV3QapsuzXYPdVQeJtxYFDidoGK",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1S1JYGSV3QapsuzXYPdVQeJtxYFDidoGK",
+          "unity_note": "Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση."
         }
       ]
     },
@@ -5060,15 +5472,20 @@
       "grades": [],
       "grade_status": "unconfirmed",
       "audience_source": null,
-      "objectives": [],
+      "objectives": [
+        "Βίος · Βιβλικά πρότυπα · Απολυτίκιο"
+      ],
       "modes": [
         "ανάγνωση",
         "συζήτηση",
-        "παρατήρηση"
+        "παρατήρηση",
+        "αντιστοίχιση",
+        "αιτιολόγηση"
       ],
       "formats": [
         "Digital Book",
-        "Slides"
+        "Slides",
+        "HTML"
       ],
       "duration": null,
       "duration_status": "unconfirmed",
@@ -5081,10 +5498,14 @@
       "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
       "application_status": "proposal",
       "aliases": [],
-      "notes": [],
+      "notes": [
+        "Το HTML παραμένει ενεργή εργασία. Αντίγραφο ανάγνωσης της έκδοσης 2026-11-13T22:00:36.446Z."
+      ],
       "source_groups": [
         "Digital Book",
-        "Google Drive"
+        "Google Drive",
+        "Drive HTML",
+        "drive-html"
       ],
       "sources": [
         {
@@ -5096,6 +5517,16 @@
           "system": "Google Drive",
           "path": "google-drive.json",
           "locator": "files/1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4"
+        },
+        {
+          "system": "Drive HTML",
+          "path": "google-drive.json",
+          "locator": "html_files/1UonwbIbqUl-D72SH7J90vJN8neuh_Tye"
+        },
+        {
+          "system": "drive-html",
+          "path": "1UonwbIbqUl-D72SH7J90vJN8neuh_Tye.html",
+          "locator": ""
         }
       ],
       "activities": [
@@ -5121,9 +5552,26 @@
           "media_id": "SLD-020",
           "drive_id": "1U1ZBEVCOuIr8D4q1bW7SnitbTye-vqZPh9dFDDma_S4",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:25:46.410Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        },
+        {
+          "id": "dae08ffdf4e3917378ca",
+          "kind": "html",
+          "label": "HTML · Μέγας Βασίλειος · Βίος · Βιβλικά πρότυπα · Απολυτίκιο",
+          "url": "https://drive.google.com/file/d/1UonwbIbqUl-D72SH7J90vJN8neuh_Tye/view?usp=drivesdk",
+          "note": "Ο μαθητής συνδέει κάρτες με τις σκηνές του βίου, αναγνωρίζει βιβλικά πρότυπα και αντιστοιχίζει τα αποσπάσματα του απολυτικίου με την εικόνα. Ιδιωτικό HTML. Κατέβασέ το από το Drive με τον λογαριασμό σου και άνοιξέ το τοπικά στον browser.",
+          "app": "drive-html",
+          "native_id": "megas-vasileios",
+          "modified_at": "2026-11-13T22:00:36.446Z",
+          "exercise_count": 22,
+          "download_only": true,
+          "availability_status": "authenticated-download",
+          "drive_id": "1UonwbIbqUl-D72SH7J90vJN8neuh_Tye",
+          "drive_html": true,
+          "download_url": "https://drive.google.com/uc?export=download&id=1UonwbIbqUl-D72SH7J90vJN8neuh_Tye",
+          "unity_note": "Χρήση στην τάξη. Η αντιστοίχιση με συγκεκριμένη δραστηριότητα Unity παραμένει προς επιβεβαίωση."
         }
       ]
     },
@@ -5591,6 +6039,138 @@
           "room": "Παρατηρητήριο του Χρόνου",
           "scene_name": "Room_chronology",
           "exercise_count": 8,
+          "stage_count": 0,
+          "reveal_mode": "chronology-journey",
+          "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:patristic_journey",
+      "title": "Οι Πατέρες της Εκκλησίας — με τον Δημήτρη",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "καθοδηγούμενη περιήγηση",
+        "ιστορική ακολουθία",
+        "παρατήρηση",
+        "συζήτηση"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "Room_chronology.unity",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "PatristicJourney.asset",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "athanasius.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "basil.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "gregory-theologian.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "john-chrysostom.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "cyril.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "maximus.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "john-damascene.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "symeon.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "palamas.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "sophrony.mp4",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "PatristicMediterraneanTheme.asset",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "Patristic_Journey.prefab",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "ChronologyJourneyController.cs",
+          "locator": "chronology-journey"
+        },
+        {
+          "system": "Unity VR",
+          "path": "PatristicJourney.asset",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "7691b71274c0d270506f",
+          "kind": "vr",
+          "label": "Unity VR · Πορεία στον Χρόνο · Οι Πατέρες της Εκκλησίας — με τον Δημήτρη",
+          "url": "",
+          "note": "Από το χειρόγραφο Δραστηριότητες ο μαθητής επιλέγει «Οι Πατέρες της Εκκλησίας — με τον Δημήτρη». Με τη μανιβέλα προχωρά σε 10 σταθμούς του χάρτη: μεταφέρεται στον σταθμό, παρατηρεί την ανάδυση του θέματος και το ιστορικό περιβάλλον και βλέπει τη σχετική προβολή. Μπορεί να επανεπισκεφτεί ολοκληρωμένους σταθμούς ή να αρχίσει νέα πορεία. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "patristic_journey",
+          "room": "Παρατηρητήριο του Χρόνου",
+          "scene_name": "Room_chronology",
+          "exercise_count": 10,
           "stage_count": 0,
           "reveal_mode": "chronology-journey",
           "availability_status": "scene-bound"
@@ -6099,7 +6679,7 @@
           "media_id": "SLD-010",
           "drive_id": "1knOyKV-Y--uiukPz-u_Ny29PLHK2cv7doeZBJogoQgQ",
           "slide_count": 10,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-10T16:46:30.583Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -6386,15 +6966,87 @@
           "id": "a6bbe5f6b9564e21f888",
           "kind": "slides",
           "label": "Ιδεολογία και Πίστη — Χρονολόγιο και Κέντρα",
-          "url": "https://docs.google.com/presentation/d/1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA/edit?usp=drivesdk",
+          "url": "https://docs.google.com/presentation/d/1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA/edit",
           "note": "",
           "app": null,
           "native_id": "",
           "drive_id": "1oOedN3sdgElYLPsS-z6YgPy4VyeLly0wm_-FeyE9gNA",
           "slide_count": 6,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-09-25T20:06:31.232Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:world_religions_judgement",
+      "title": "Ποια σημασία έχουν οι πράξεις;",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "μελέτη πηγών",
+        "αντιστοίχιση",
+        "σταδιακή αποκάλυψη εικόνας",
+        "σύγκριση"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "Room_world_religions.unity",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_judgement.asset",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CosmologyController.cs",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_judgement.asset",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "eff5cf746457a678353c",
+          "kind": "vr",
+          "label": "Unity VR · Ποια σημασία έχουν οι πράξεις;",
+          "url": "",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 5 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι κάρτες αφορούν τις εξής παραδόσεις. Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Βουδισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "world_religions_judgement",
+          "room": "Θρησκείες του κόσμου",
+          "scene_name": "Room_world_religions",
+          "exercise_count": 5,
+          "stage_count": 0,
+          "reveal_mode": "cosmology-comparison",
+          "availability_status": "scene-bound"
         }
       ]
     },
@@ -6717,6 +7369,150 @@
       ]
     },
     {
+      "scenario_id": "unity:world_religions_revelation_search",
+      "title": "Πώς γνωρίζεται η αλήθεια;",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "μελέτη πηγών",
+        "αντιστοίχιση",
+        "σταδιακή αποκάλυψη εικόνας",
+        "σύγκριση"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "Room_world_religions.unity",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_revelation_search.asset",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CosmologyController.cs",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_revelation_search.asset",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "eb026c845b687fb0adbc",
+          "kind": "vr",
+          "label": "Unity VR · Πώς γνωρίζεται η αλήθεια;",
+          "url": "",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 5 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι κάρτες αφορούν τις εξής παραδόσεις. Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Βουδισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "world_religions_revelation_search",
+          "room": "Θρησκείες του κόσμου",
+          "scene_name": "Room_world_religions",
+          "exercise_count": 5,
+          "stage_count": 0,
+          "reveal_mode": "cosmology-comparison",
+          "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:world_religions_divine",
+      "title": "Πώς κατανοείται το θείο;",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "μελέτη πηγών",
+        "αντιστοίχιση",
+        "σταδιακή αποκάλυψη εικόνας",
+        "σύγκριση"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "Room_world_religions.unity",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_divine.asset",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CosmologyController.cs",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_divine.asset",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "0632b8bcad4b8377d87e",
+          "kind": "vr",
+          "label": "Unity VR · Πώς κατανοείται το θείο;",
+          "url": "",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 5 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι κάρτες αφορούν τις εξής παραδόσεις. Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Βουδισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "world_religions_divine",
+          "room": "Θρησκείες του κόσμου",
+          "scene_name": "Room_world_religions",
+          "exercise_count": 5,
+          "stage_count": 0,
+          "reveal_mode": "cosmology-comparison",
+          "availability_status": "scene-bound"
+        }
+      ]
+    },
+    {
       "scenario_id": "unity:jerusalem_theotokos_hymn",
       "title": "Σκιά και Πλήρωση — Η Θεοτόκος στην υμνολογία",
       "subject": "Θρησκευτικά",
@@ -6841,7 +7637,7 @@
           "media_id": "SLD-009",
           "drive_id": "11ClrcJz1wGMjZTBhl0hEiIIF2Sq0_nWPE73GAhcNdnE",
           "slide_count": 6,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-08T17:49:43.102Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -6856,7 +7652,7 @@
           "media_id": "SLD-027",
           "drive_id": "1tGtzUA6LYmHZ4T2yoQxvImcH3XSoL4_VpcPkB_jXfUs",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-16T16:33:22.265Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },
@@ -7015,7 +7811,7 @@
           "media_id": "SLD-025",
           "drive_id": "1xl11UJ30u5q7G9aRwJ3mmclVbqY1b7T4Ork2II6UMwg",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-13T16:25:58.850Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         }
@@ -7071,6 +7867,78 @@
           "app": "Unity VR",
           "native_id": "generic_socratic",
           "room": "Room_library, Room_temple, Room_agora"
+        }
+      ]
+    },
+    {
+      "scenario_id": "unity:world_religions_afterlife",
+      "title": "Τι προσδοκάται μετά τον θάνατο;",
+      "subject": "Θρησκευτικά",
+      "grades": [],
+      "grade_status": "unconfirmed",
+      "audience_source": null,
+      "objectives": [],
+      "modes": [
+        "μελέτη πηγών",
+        "αντιστοίχιση",
+        "σταδιακή αποκάλυψη εικόνας",
+        "σύγκριση"
+      ],
+      "formats": [
+        "Unity VR"
+      ],
+      "duration": null,
+      "duration_status": "unconfirmed",
+      "cognitive_difficulty": null,
+      "cognitive_status": "unconfirmed",
+      "technical_difficulty": null,
+      "technical_status": "unconfirmed",
+      "readiness": "available",
+      "readiness_note": "",
+      "pedagogical_application": "Πρόταση: παρατηρήστε το διαθέσιμο υλικό, κρατήστε ένα ερώτημα και επιστρέψτε στο κείμενο για συζήτηση.",
+      "application_status": "proposal",
+      "aliases": [],
+      "notes": [],
+      "source_groups": [
+        "Unity VR"
+      ],
+      "sources": [
+        {
+          "system": "Unity VR",
+          "path": "Room_world_religions.unity",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_afterlife.asset",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "CosmologyController.cs",
+          "locator": "cosmology-comparison"
+        },
+        {
+          "system": "Unity VR",
+          "path": "world_religions_afterlife.asset",
+          "locator": ""
+        }
+      ],
+      "activities": [
+        {
+          "id": "c32f7b48084cb5e484c2",
+          "kind": "vr",
+          "label": "Unity VR · Τι προσδοκάται μετά τον θάνατο;",
+          "url": "",
+          "note": "Στο δωμάτιο Θρησκείες του κόσμου ο μαθητής επιλέγει μία από τις 5 κάρτες πηγών και στοχεύει με τόξο τον κύκλο της αντίστοιχης παράδοσης. Η σωστή σύνδεση φωτίζει τη δική της εικόνα. Οι κάρτες αφορούν τις εξής παραδόσεις. Ιουδαϊσμός, Ισλάμ, Ινδουισμός, Βουδισμός, Αρχαία ελληνική θρησκεία. Στο τέλος εμφανίζεται συγκριτική εικόνα και ζητείται μία ομοιότητα και μία διαφορά, με τεκμηρίωση από τις κάρτες. Επιβεβαιώθηκε από τα τρέχοντα αρχεία και την ανάθεση στη σκηνή· δεν ελέγχθηκε σε φυσικό Quest.",
+          "app": "Unity VR",
+          "native_id": "world_religions_afterlife",
+          "room": "Θρησκείες του κόσμου",
+          "scene_name": "Room_world_religions",
+          "exercise_count": 5,
+          "stage_count": 0,
+          "reveal_mode": "cosmology-comparison",
+          "availability_status": "scene-bound"
         }
       ]
     },
@@ -7625,7 +8493,7 @@
           "media_id": "SLD-034",
           "drive_id": "1z3aTR6G9M6K2DbyN9Izi6HxJewJvkt4sqIKyHXgQYvM",
           "slide_count": 7,
-          "checked_at": "2026-11-10T17:55:46.406Z",
+          "checked_at": "2026-11-19T18:03:45.636Z",
           "modified_at": "2026-10-22T17:32:41.123Z",
           "access_note": "Ανοίγει με τα υπάρχοντα δικαιώματα Google Drive."
         },

@@ -45,13 +45,14 @@ class RegistryTests(unittest.TestCase):
         self.assertTrue({f['id'] for f in snapshot['files']} <= ids)
 
     def test_html_embedded_scenarios_are_not_duplicate_container_records(self):
-        self.assertFalse(any(s.startswith('html:') for s in self.scenarios))
         expected={'book:lesson-004':'revelation_map','sculpture:spiritual-freedom':'spiritual_healing',
                   'book:lesson-005':'two_ways_of_knowing','sb:20261002_palaia-kai-kaini-diathiki-enotita':'dentro_diathikis',
                   'unity:jerusalem_pentecost_hymn':'jerusalem_pentecost_hymn','unity:byzantium_fall_restoration':'byzantium_fall_restoration',
                   'unity:jerusalem_theotokos_hymn':'jerusalem_theotokos_hymn'}
         for sid,native in expected.items():
-            self.assertTrue(any(a.get('app')=='drive-html' and a['native_id']==native for a in self.scenarios[sid]['activities']),sid)
+            matches = [s['scenario_id'] for s in self.scenarios.values() for a in s['activities']
+                       if a.get('app') == 'drive-html' and a['native_id'] == native]
+            self.assertEqual([sid], matches)
 
     def test_missing_metadata_stays_unconfirmed(self):
         s=self.scenarios['book:abraham-journey']

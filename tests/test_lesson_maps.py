@@ -15,6 +15,7 @@ from lesson_records import PlanStore
 from server import EvaluationStore, MissionServer
 from scripts.export_site import portable_registry, copy_public_ui
 from scripts.export_lesson_map_transfer import export_transfer
+from scripts.curate_ready_materials import build as build_ready_materials
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -218,6 +219,36 @@ class MapTests(unittest.TestCase):
         stale=self.payload(document_id=first['document_id'],previous_version_id=first['id']);stale['document']=copy.deepcopy(first['document']);stale['document']['title']='Κοινή αλλαγή'
         self.maps.save(stale,self.registry)
         with self.assertRaises(CanvasConflict):self.maps.save({**stale,'request_id':str(uuid.uuid4())},self.registry)
+
+    def test_planet_map_round_trip_and_repeatable_html_package(self):
+        root = Path(self.temp.name)
+        html = root/'activity.html'
+        html.write_bytes(b'<!doctype html><button>A ready activity</button>')
+        manifest = root/'manifest.json'
+        workspace_id, theme_id = str(uuid.uuid4()), str(uuid.uuid4())
+        theme = {'id': theme_id, 'title': 'Πλανήτης', 'icon': '✦', 'artwork': 'judgement',
+                 'box': {'x': .2, 'y': .2, 'w': .3, 'h': .4}}
+        workspace = {'schema_version': 1, 'title': 'Χριστιανισμός', 'grade': 'Β΄ Λυκείου',
+                     'visual_theme': 'planets', 'themes': [theme], 'lessons': [], 'connections': []}
+        row, _ = self.maps.save(self.payload(document_id=workspace_id, kind='workspace', document=workspace), self.registry)
+        self.assertEqual('judgement', next(iter(self.maps.latest()))['document']['themes'][0]['artwork'])
+        self.assertEqual('planets', row['document']['visual_theme'])
+        with self.assertRaisesRegex(ValueError, 'εικόνα πλανήτη'):
+            validate_document('workspace', {**workspace, 'themes': [{**theme, 'artwork': '../private'}]}, self.registry)
+
+        lesson = {'key': 'activity', 'theme_id': theme_id, 'title': 'Δραστηριότητα',
+                  'scenario_id': 'book:lesson-004', 'materials': [{'file': html.name, 'building': 'html', 'label': 'HTML'}]}
+        manifest.write_text(json.dumps({**workspace, 'key': 'planets-test', 'workspace_id': workspace_id, 'lessons': [lesson]}))
+        output = root/'package.json'
+        build_ready_materials(manifest, root, output)
+        first = output.read_bytes()
+        bundle = json.loads(first)
+        material = next(b for b in bundle['documents'][0][1]['document']['buildings'] if b['id'] == 'html')['materials'][0]
+        self.assertEqual('html', material['type'])
+        self.assertEqual(bundle['assets'][0]['id'], material['asset_id'])
+        self.assertEqual('text/html', bundle['assets'][0]['mime'])
+        build_ready_materials(manifest, root, output)
+        self.assertEqual(first, output.read_bytes())
 
     def test_teacher_relations_validate_sources_and_keep_historical_evidence(self):
         left=self.payload();left['document']['buildings'][0]['materials']=[{'id':str(uuid.uuid4()),'type':'text','label':'Τεκμήριο','text':'Προσφορά'}]

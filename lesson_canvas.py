@@ -20,6 +20,8 @@ from urllib.parse import urlsplit
 from lesson_records import identity
 
 BUILDINGS = ('text', 'images', 'mindmap', 'html', 'synthesis')
+MAP_THEMES = ('default', 'jerusalem', 'mediterranean', 'planets')
+PLANET_ARTWORK = ('search', 'creation', 'trinity', 'judgement')
 MAX_DOCUMENT = 1024 * 1024
 MAX_ASSET = 25 * 1024 * 1024
 MIMES = {'image/png', 'image/jpeg', 'image/webp', 'application/pdf', 'text/html'}
@@ -135,7 +137,12 @@ def validate_document(kind, data, registry, document_id=None):
     if kind == 'workspace':
         themes = []
         for t in items(data.get('themes', []), 80):
-            themes.append({'id': identity(t.get('id')), 'title': short(t.get('title', '')), 'icon': short(t.get('icon', '📚'), 20), 'box': box(t.get('box'))})
+            theme = {'id': identity(t.get('id')), 'title': short(t.get('title', '')), 'icon': short(t.get('icon', '📚'), 20), 'box': box(t.get('box'))}
+            if 'artwork' in t:
+                if t['artwork'] not in PLANET_ARTWORK:
+                    raise ValueError('Άγνωστη εικόνα πλανήτη.')
+                theme['artwork'] = t['artwork']
+            themes.append(theme)
         ids = {t['id'] for t in themes}
         if len(ids) != len(themes):
             raise ValueError('Διπλή ταυτότητα θεματικής.')
@@ -150,7 +157,7 @@ def validate_document(kind, data, registry, document_id=None):
             raise ValueError('Διπλή ταυτότητα μαθήματος.')
         result.update(themes=themes, lessons=lessons, connections=links(data.get('connections', []), ids))
         if 'visual_theme' in data:
-            if data['visual_theme'] not in ('default', 'jerusalem', 'mediterranean'):
+            if data['visual_theme'] not in MAP_THEMES:
                 raise ValueError('Άγνωστη εικονογράφηση χάρτη.')
             result['visual_theme'] = data['visual_theme']
         if 'lesson_relations' in data:

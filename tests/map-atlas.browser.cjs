@@ -15,12 +15,12 @@ const close=p=>p.locator('dialog[open] .lm-close').last().click();
   const snapshot=async()=> (await p.request.get(base+'/api/lesson-maps')).json();
   const before=await snapshot(),old=new Map(latest(before).map(v=>[v.document_id,v.document]));
   await p.goto(base+'/#map');await p.locator('.lm-island').first().waitFor();check('legacy A route opens the existing five islands',await p.locator('.lm-island').count()===5);
-  for(const name of ['b-jerusalem','b-mediterranean']){await p.locator('#lm-transfer-file').setInputFiles(path.resolve('storage/publish/'+name+'.lessonmap.json'));await submit(p,'Μεταφορά');await p.getByText('Αποθηκεύτηκε ιδιωτικά.',{exact:false}).waitFor({timeout:120000});}
+  for(const name of ['b-jerusalem','b-mediterranean']){await p.locator('[data-action="import"]').click();await p.locator('#lm-transfer-file').setInputFiles(path.resolve('storage/publish/'+name+'.lessonmap.json'));await submit(p,'Μεταφορά');await p.getByText('Αποθηκεύτηκε ιδιωτικά.',{exact:false}).waitFor({timeout:120000});}
   const initial=await snapshot(),rows=latest(initial);
   check('two maps and three cities are added once',rows.filter(r=>r.kind==='workspace').length===3&&rows.filter(r=>r.kind==='canvas').length===13);
   check('every pre-existing A document remains byte-for-byte equivalent', [...old].every(([id,doc])=>JSON.stringify(rows.find(r=>r.document_id===id).document)===JSON.stringify(doc)));
   check('asset identity index contains metadata without payload',Object.values(initial.asset_metadata).every(m=>m.sha256&&!m.base64));
-  for(const name of ['b-jerusalem','b-mediterranean']){await p.locator('#lm-transfer-file').setInputFiles(path.resolve('storage/publish/'+name+'.lessonmap.json'));await p.getByText('Οι χάρτες υπάρχουν ήδη στον ιδιωτικό χώρο και διατηρήθηκαν.',{exact:true}).waitFor();}
+  for(const name of ['b-jerusalem','b-mediterranean']){await p.locator('[data-action="import"]').click();await p.locator('#lm-transfer-file').setInputFiles(path.resolve('storage/publish/'+name+'.lessonmap.json'));await p.getByText('Οι χάρτες υπάρχουν ήδη στον ιδιωτικό χώρο και διατηρήθηκαν.',{exact:true}).waitFor();}
   check('repeat import produces no extra versions',(await snapshot()).versions.length===initial.versions.length);
   await p.locator('[data-map-grade]').selectOption('Β΄ Γυμνασίου');await p.locator('.lm-style-jerusalem').waitFor();
   check('B picker offers two maps and Jerusalem starts with two islands',await p.locator('[data-map-select] option').count()===2&&await p.locator('.lm-island').count()===2);

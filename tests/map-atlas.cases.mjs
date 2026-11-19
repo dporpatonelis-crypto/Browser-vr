@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
-import {lmNewCanvas,lmNewWorkspace,lmCurateTransfer,lmVisibleWorkspace,LM_WORKSPACE_ID} from '../public/lesson-map-domain.mjs';
+import {lmNewCanvas,lmNewWorkspace,lmCurateTransfer,lmVisibleWorkspace,lmValidateTransfer,LM_WORKSPACE_ID} from '../public/lesson-map-domain.mjs';
 import {lmRoute,lmParseRoute,lmMemberships,lmAtlasIndex,lmMaterialIdentities,lmOpenAtlas} from '../public/lesson-map-atlas.mjs';
 
 const reg={scenarios:[]},sid='example',id=randomUUID(),b=randomUUID(),c=randomUUID();
@@ -46,6 +46,18 @@ test('curation creates a new styled workspace from existing city references and 
 });
 test('the teacher atlas cannot open in public or presentation mode',async()=>{
   await lmOpenAtlas({privateMode:false,edit:true});await lmOpenAtlas({privateMode:true,edit:false});
+});
+
+test('planet curation preserves safe artwork keys and rejects a file path',()=>{
+  const workspaceId=randomUUID(),themeId=randomUUID();
+  const theme={id:themeId,title:'Δημιουργία',icon:'✦',artwork:'creation',box:{x:.2,y:.1,w:.3,h:.45}};
+  const bundle={format:'lesson-map-transfer',schema_version:1,documents:[],assets:[],
+    curation:{workspace_id:workspaceId,grade:'Β΄ Λυκείου',title:'Χριστιανισμός',visual_theme:'planets',
+      themes:[theme],placements:[{id:randomUUID(),theme_id:themeId,canvas_id:id}]}};
+  const curated=lmCurateTransfer(lmValidateTransfer(bundle),docs());
+  assert.equal(curated.get(workspaceId).document.themes[0].artwork,'creation');
+  theme.artwork='../../private/creation';
+  assert.throws(()=>lmValidateTransfer(bundle),/εικόνα πλανήτη/);
 });
 
 test('a stored original and its direct Drive link share identity while a PDF extract stays distinct',()=>{

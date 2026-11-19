@@ -46,3 +46,145 @@
 @media(max-width:760px){.lm-header{flex-wrap:wrap;padding:12px}.lm-context{width:100%}.lm-map-picker{flex:1;min-width:100px}.lm-map-picker select{width:100%;max-width:100%}.lm-atlas.lm-viewer .lm-dialog-body{padding:12px}.lm-atlas-maps{grid-template-columns:1fr}.lm-shared-notice{padding:9px 12px}}
 
 .lm-saving .lm-viewport{pointer-events:none}
+
+.lm-transfer-picker {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #d7c8e8;
+  border-radius: 14px;
+  background: #fff;
+}
+.lm-transfer-picker input { width: 100%; min-width: 0; }
+
+/* The planets and their cities share the same coordinate system as the islands. */
+.lm-style-planets {
+  --planet-glow: #a9bce8;
+  --planet-land: #18283f;
+}
+.lm-style-planets[data-planet-surface="search"], .lm-planet[data-planet-artwork="search"] {
+  --planet-glow: #f1bc77;
+  --planet-land: #33233d;
+}
+.lm-style-planets[data-planet-surface="creation"], .lm-planet[data-planet-artwork="creation"] {
+  --planet-glow: #91e0c5;
+  --planet-land: #173b38;
+}
+.lm-style-planets[data-planet-surface="trinity"], .lm-planet[data-planet-artwork="trinity"] {
+  --planet-glow: #f2d393;
+  --planet-land: #293651;
+}
+.lm-style-planets[data-planet-surface="judgement"], .lm-planet[data-planet-artwork="judgement"] {
+  --planet-glow: #e6c3aa;
+  --planet-land: #242c49;
+}
+.lm-style-planets .lm-header {
+  background: linear-gradient(105deg,#10192c,#192641 70%,#102332);
+  border-color: #394c6a;
+}
+.lm-style-planets .lm-brand strong { color: #f8f4ec; }
+.lm-style-planets .lm-brand small,
+.lm-style-planets .lm-map-picker,
+.lm-style-planets .lm-privacy { color: #c7d4ed; }
+.lm-style-planets .lm-context { display: flex; }
+.lm-style-planets .lm-viewport {
+  background-color: #091323;
+  background-image:
+    radial-gradient(ellipse at 21% 26%,#33436788,transparent 54%),
+    radial-gradient(ellipse at 81% 78%,#23455f88,transparent 55%),
+    radial-gradient(circle,#d9e7ff9c 0 1px,transparent 1.5px),
+    radial-gradient(circle,#9eacc77a 0 1px,transparent 1.5px);
+  background-size: auto,auto,65px 79px,113px 91px;
+  background-position: center,center,7px 11px,31px 43px;
+  box-shadow: inset 0 0 90px #0007;
+}
+.lm-style-planets.lm-city .lm-viewport {
+  background-color: var(--planet-land);
+  background-image: radial-gradient(ellipse at 50% 48%,var(--planet-land),#0b1529 86%);
+}
+.lm-planet .lm-sprite { filter: drop-shadow(0 12px 30px #0009); }
+.lm-planet-fallback {
+  top: 2%;
+  left: 50%;
+  width: min(90%,410px);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 24%,#a5c1e3,#526e9a 42%,#1c2a46 77%);
+}
+.lm-style-planets .lm-planet .lm-node-content {
+  bottom: 14%;
+  left: 12%;
+  right: 12%;
+  gap: 5px;
+}
+.lesson-map.lm-style-planets .lm-node-title {
+  border: 1px solid var(--planet-glow);
+  border-radius: 10px;
+  background: #0d182ef5;
+  color: #fff8eb;
+  text-shadow: none;
+  box-shadow: 0 4px 12px #050b1980;
+}
+.lesson-map.lm-style-planets .lm-planet .lm-node-title {
+  padding: 8px 14px;
+  font-size: 28px;
+}
+.lm-style-planets .lm-node-title > span { color: var(--planet-glow); }
+.lesson-map.lm-style-planets .lm-planet .lm-island-lessons > button {
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 46px;
+  border: 1px solid #f8ead5;
+  border-radius: 8px;
+  background: #fff6e8;
+  color: #19243c;
+  font-size: 21px;
+}
+.lm-style-planets .lm-planet .lm-island-lessons > button:hover { background: #fffdf3; }
+.lm-planet-ground {
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  top: -230px;
+  width: 1600px;
+  height: 1450px;
+  transform: translateX(-50%);
+  object-fit: contain;
+  opacity: .32;
+  mask-image: radial-gradient(ellipse at 50% 46%,#000 15%,#000b 49%,transparent 72%);
+  pointer-events: none;
+}
+.lm-style-planets .lm-city-paths path { stroke: var(--planet-glow); opacity: .24; }
+.lm-style-planets .lm-plaza {
+  background: radial-gradient(ellipse,#0c172bea 39%,#0c172bda 61%,transparent 72%);
+  filter: none;
+}
+.lm-style-planets .lm-plaza > h2 { color: #fff8ea; font-size: 31px; }
+.lm-style-planets .lm-plaza > span,
+.lm-style-planets .lm-plaza > small { color: var(--planet-glow); }
+.lm-style-planets .lm-plaza > small {
+  font-size: 17px;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+.lm-style-planets .lm-building .lm-sprite { filter: drop-shadow(0 12px 12px #050b19b3); }
+.lm-style-planets .lm-canvas-caption {
+  color: #f5eada;
+  background: #101e33e6;
+  border: 1px solid #93a9cf72;
+}
+.lm-style-planets .lm-planet-cities { flex-wrap: wrap; }
+.lm-style-planets .lm-planet-cities > button {
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+}
+@media (max-width: 700px) {
+  .lm-style-planets.lm-archipelago .lm-viewport { height: clamp(280px,47dvh,450px); }
+  .lm-style-planets .lm-planet-cities { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); padding-inline: 10px; }
+}

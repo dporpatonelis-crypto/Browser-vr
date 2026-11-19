@@ -1,5 +1,7 @@
 /** Lesson maps share the existing owner-only folder and append-only history. */
 const MAP_BUILDINGS_ = ['text','images','mindmap','html','synthesis'];
+const MAP_THEMES_ = ['default','jerusalem','mediterranean','planets'];
+const PLANET_ARTWORK_ = ['search','creation','trinity','judgement'];
 function mapText_(value,max) {if(typeof value!=='string'||value.length>(max||240)||value.includes('\0'))throw new Error('Μη έγκυρο κείμενο χάρτη.');return value;}
 function mapList_(value,max) {if(!Array.isArray(value)||value.length>(max||500))throw new Error('Μη έγκυρη λίστα χάρτη.');return value;}
 function mapPoint_(p,min,max) {
@@ -36,14 +38,22 @@ function validateLessonMap_(kind,data,documentId) {
   if(!result.title.trim())throw new Error('Δώσε τίτλο στον χάρτη.');
   const scenarios=new Map(lessonCanvasRegistry_().scenarios.map(s=>[s.scenario_id,s]));
   if(kind==='workspace') {
-    const themes=mapList_(data.themes,80).map(t=>({id:uuid_(t.id),title:mapText_(t.title),icon:mapText_(t.icon||'📚',20),box:mapBox_(t.box)})),ids=new Set(themes.map(t=>t.id));
+    const themes=mapList_(data.themes,80).map(t=>{
+      const theme={id:uuid_(t.id),title:mapText_(t.title),icon:mapText_(t.icon||'📚',20),box:mapBox_(t.box)};
+      if('artwork' in t){
+        if(!PLANET_ARTWORK_.includes(t.artwork))throw new Error('Άγνωστη εικόνα πλανήτη.');
+        theme.artwork=t.artwork;
+      }
+      return theme;
+    });
+    const ids=new Set(themes.map(t=>t.id));
     if(ids.size!==themes.length)throw new Error('Διπλή ταυτότητα θεματικής.');
     const lessons=mapList_(data.lessons).map(l=>{
       if(!ids.has(l.theme_id)||(l.scenario_id&&!scenarios.has(l.scenario_id)))throw new Error('Επίλεξε υπαρκτή θεματική και μάθημα.');
       return {id:uuid_(l.id),theme_id:l.theme_id,title:mapText_(l.title),scenario_id:l.scenario_id||null,canvas_id:l.canvas_id?uuid_(l.canvas_id):null};
     });
     if(new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error('Διπλή ταυτότητα μαθήματος.');
-    if(data.visual_theme!=null){if(!['default','jerusalem','mediterranean'].includes(data.visual_theme))throw new Error('Άγνωστη εικονογράφηση χάρτη.');result.visual_theme=data.visual_theme;}
+    if(data.visual_theme!=null){if(!MAP_THEMES_.includes(data.visual_theme))throw new Error('Άγνωστη εικονογράφηση χάρτη.');result.visual_theme=data.visual_theme;}
     if(data.lesson_relations!=null){
       result.lesson_relations=mapList_(data.lesson_relations,500).map(r=>{
         if(!['proposed','confirmed','dismissed'].includes(r.status)||r.from_canvas_id===r.to_canvas_id)throw new Error('Μη έγκυρη διδακτική σύνδεση.');
@@ -135,10 +145,11 @@ function registerLessonCanvas(data){assertOwner_();if(!data||data.kind!=='canvas
 function canvasAssetInfo_(id,folder){const files=folder.getFilesByName('map-asset-'+uuid_(id)+'.json');if(!files.hasNext())throw new Error('Δεν βρέθηκε το ιδιωτικό αρχείο.');return JSON.parse(files.next().getBlob().getDataAsString('UTF-8'));}
 function uploadCanvasAsset(form){
   assertOwner_();if(!form?.file||!form.asset_id)throw new Error('Επίλεξε αρχείο.');
-  const id=uuid_(form.asset_id),blob=form.file,bytes=blob.getBytes(),unsigned=bytes.map(b=>(b+256)%256),name=mapText_(blob.getName().replace(/^.*[\\/]/,''),180),ext=name.split('.').pop().toLowerCase();
+  const id=uuid_(form.asset_id),blob=form.file,bytes=blob.getBytes(),name=mapText_(blob.getName().replace(/^.*[\\/]/,''),180),ext=name.split('.').pop().toLowerCase();
   const mime=({png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',pdf:'application/pdf',html:'text/html',htm:'text/html'})[ext];
   if(!mime||!bytes.length||bytes.length>25*1024*1024)throw new Error('Επίλεξε εικόνα, PDF ή αυτοτελές HTML έως 25 MB.');
-  const ascii=unsigned.slice(0,4096).map(b=>String.fromCharCode(b)).join('');
+  const unsigned=bytes.slice(0,4096).map(b=>(b+256)%256);
+  const ascii=unsigned.map(b=>String.fromCharCode(b)).join('');
   const valid={'image/png':unsigned.slice(0,8).join(',')==='137,80,78,71,13,10,26,10','image/jpeg':unsigned[0]===255&&unsigned[1]===216&&unsigned[2]===255,'image/webp':ascii.startsWith('RIFF')&&ascii.slice(8,12)==='WEBP','application/pdf':ascii.startsWith('%PDF-'),'text/html':/<(?:!doctype\s+html|html|head|body)\b/i.test(ascii)}[mime];
   if(!valid)throw new Error('Το περιεχόμενο δεν αντιστοιχεί στον τύπο αρχείου.');
   const sha=Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,bytes).map(b=>((b+256)%256).toString(16).padStart(2,'0')).join(''),metadata={id,name,mime,size:bytes.length,sha256:sha};

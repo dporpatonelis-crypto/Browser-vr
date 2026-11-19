@@ -9,6 +9,14 @@ export const LM_VERBS = ['προεικονίζει','φανερώνει','ερμ
 export const LM_WORKSPACE_ID = 'd15602cc-a42b-4c76-9577-0535b43cfa01';
 export const LM_PILOT_ID = 'd15602cc-a42b-4c76-9577-0535b43cfa02';
 export const LM_PILOT_SCENARIO = 'html:1jiGpW-SNz_pIEP_fOdUyyOlqKu315LxD:eikona-talanta-loukas';
+export const LM_MAP_THEMES = ['default', 'jerusalem', 'mediterranean', 'planets'];
+export const LM_PLANET_ARTWORK = Object.freeze({
+  search: 'Αναζήτηση και Αποκάλυψη',
+  creation: 'Δημιουργία',
+  trinity: 'Τριαδικό δόγμα και βίωμα',
+  judgement: 'Θάνατος και Κρίση',
+});
+export const lmPlanetArtwork = value => typeof value === 'string' && Object.hasOwn(LM_PLANET_ARTWORK, value) ? value : '';
 export const lmId = () => crypto.randomUUID?.() ?? '10000000-1000-4000-8000-100000000000'.replace(/[018]/g,c=>(Number(c)^crypto.getRandomValues(new Uint8Array(1))[0]&15>>Number(c)/4).toString(16));
 export const lmClone = value => JSON.parse(JSON.stringify(value));
 export const lmEscape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -142,8 +150,12 @@ export function lmValidateTransfer(value) {
     const c=value.curation;
     if(!uuid.test(c.workspace_id)||!Array.isArray(c.themes)||c.themes.length>80||!Array.isArray(c.placements)||c.placements.length>100||value.documents.some(([,r])=>r.kind!=='canvas'))throw Error('Μη έγκυρη κατανομή υλικού.');
     const themes=new Set(),placements=new Set();
-    if(c.visual_theme&&!['default','jerusalem','mediterranean'].includes(c.visual_theme)||c.title&&typeof c.title!=='string'||c.grade&&typeof c.grade!=='string')throw Error('Μη έγκυρα στοιχεία χάρτη.');
-    for(const t of c.themes){if(!uuid.test(t.id)||themes.has(t.id)||typeof t.title!=='string'||!t.title.trim()||t.title.length>240||typeof t.icon!=='string'||t.icon.length>20||!t.box||!['x','y','w','h'].every(k=>Number.isFinite(t.box[k]))||Math.abs(t.box.x)>5||Math.abs(t.box.y)>5||t.box.w<.05||t.box.h<.05||t.box.w>2||t.box.h>2)throw Error('Μη έγκυρη θεματική της κατανομής.');themes.add(t.id);}
+    if(c.visual_theme&&!LM_MAP_THEMES.includes(c.visual_theme)||c.title&&typeof c.title!=='string'||c.grade&&typeof c.grade!=='string')throw Error('Μη έγκυρα στοιχεία χάρτη.');
+    for(const t of c.themes){
+      if(!uuid.test(t.id)||themes.has(t.id)||typeof t.title!=='string'||!t.title.trim()||t.title.length>240||typeof t.icon!=='string'||t.icon.length>20||!t.box||!['x','y','w','h'].every(k=>Number.isFinite(t.box[k]))||Math.abs(t.box.x)>5||Math.abs(t.box.y)>5||t.box.w<.05||t.box.h<.05||t.box.w>2||t.box.h>2)throw Error('Μη έγκυρη θεματική της κατανομής.');
+      if('artwork' in t&&!lmPlanetArtwork(t.artwork))throw Error('Άγνωστη εικόνα πλανήτη.');
+      themes.add(t.id);
+    }
     for(const p of c.placements){if(!uuid.test(p.id)||!uuid.test(p.canvas_id)||!themes.has(p.theme_id)||placements.has(p.canvas_id))throw Error('Μη έγκυρη πόλη της κατανομής.');placements.add(p.canvas_id);}
   }
   return value;

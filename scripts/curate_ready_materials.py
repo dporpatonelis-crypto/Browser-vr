@@ -57,17 +57,26 @@ def build(manifest_path, source_root, output, registry_path=None):
                 if not path.is_relative_to(source_root):
                     raise ValueError('Το αρχείο υλικού πρέπει να βρίσκεται στον κατάλογο πηγών.')
                 payload = path.read_bytes()
-                provenance = entry['provenance']
-                key = '|'.join(str(provenance.get(k, '')) for k in ('drive_id', 'page', 'variant'))
-                aid = stable('asset:' + key + ':' + hashlib.sha256(payload).hexdigest())
-                mime = mimetypes.guess_type(path.name)[0]
+                digest = hashlib.sha256(payload).hexdigest()
+                mime = mimetypes.guess_type(path.name)[0] or ''
                 name = entry.get('asset_name', path.name)
+                if mime == 'text/html':
+                    if entry['building'] != 'html' or not lesson.get('scenario_id'):
+                        raise ValueError('Το αυτοτελές HTML χρειάζεται υπάρχον μάθημα και το Εργαστήριο.')
+                    aid = stable(f'asset:html:{name}:{digest}')
+                    mid = entry.get('material_id') or stable(f'material:html:{did}:{aid}')
+                    material.update(id=mid, type='html', asset_id=aid)
+                elif mime.startswith('image/'):
+                    provenance = entry['provenance']
+                    key = '|'.join(str(provenance.get(k, '')) for k in ('drive_id', 'page', 'variant'))
+                    aid = stable('asset:' + key + ':' + digest)
+                    material.update(id=entry.get('material_id') or stable('material:' + key), asset_id=aid, provenance=provenance)
+                else:
+                    raise ValueError('Το πακέτο έτοιμου υλικού δέχεται εικόνες και αυτοτελή HTML.')
                 metadata = asset_metadata(aid, name, mime, payload)
-                if not mime.startswith('image/'):
-                    raise ValueError('Η κατανομή έτοιμων εικόνων δέχεται μόνο εικόνες· όχι ολόκληρα βιβλία.')
                 assets[aid] = {**metadata, 'base64': base64.b64encode(payload).decode()}
-                material.update(id=entry.get('material_id') or stable('material:' + key), asset_id=aid, provenance=provenance)
-                first_source = first_source or metadata
+                if mime.startswith('image/'):
+                    first_source = first_source or metadata
             else:
                 sid, activity_id = entry['scenario_id'], entry['activity_id']
                 activity = next(a for a in scenarios[sid]['activities'] if a['id'] == activity_id)

@@ -108,14 +108,18 @@ export async function lmShowViewer(owner,building,start=0) {
     try {
       let url=m.url,blob=null,activity=null;
       if(m.activity_id)activity=owner.registry.scenarios.find(s=>s.scenario_id===m.source_scenario_id)?.activities.find(a=>a.id===m.activity_id);
-      if(activity&&!m.asset_id){url=activity.download_url||activity.url;}
+      if(activity&&!m.asset_id){
+        const useDownload=activity.download_only||m.type==='pdf'||m.type==='image';
+        url=useDownload?(activity.download_url||activity.url):(activity.url||activity.download_url);
+      }
       if(m.asset_id){blob=await owner.readAsset(m.asset_id);url=URL.createObjectURL(blob);owner.objectURLs.add(url);viewerURLs.add(url);}
       if(destroyed||epoch!==mediaEpoch)return;
       const external=lmSafeURL(url)?`<a href="${lmEscape(url)}" target="_blank" rel="noopener noreferrer">${activity?.download_only?'Λήψη από το Drive':'Άνοιγμα σε νέα καρτέλα'} ↗</a>`:blob?`<a href="${url}" download="${lmEscape(m.label)}">Λήψη αρχείου ↓</a>`:'';
       if(m.type==='text'){
         body.innerHTML=`<article class="lm-reading"><h3>${lmEscape(m.label)}</h3><div>${lmEscape(m.text).replaceAll('\n','<br>')}</div></article>`;
       }else if(activity?.download_only&&!blob){
-        body.innerHTML=`<div class="lm-empty"><span>🔒</span><h3>${lmEscape(m.label)}</h3><p>Άνοιξε τη λήψη με τον λογαριασμό σου στο Drive. Μπορείς επίσης να εισαγάγεις το ληφθέν αυτοτελές HTML στον ιδιωτικό χάρτη.</p>${external}</div>`;
+        const help=activity.note||'Άνοιξε τη λήψη με τον λογαριασμό σου στο Drive.';
+        body.innerHTML=`<div class="lm-empty"><span>🔒</span><h3>${lmEscape(m.label)}</h3><p>${lmEscape(help)}</p>${external}</div>`;
       }else if(m.type==='image'){
         body.innerHTML=`<div class="lm-image-tools"><button data-fit-image>Προβολή όλης της εικόνας</button><button data-image-tool="pan" aria-pressed="true">Περιήγηση</button><button data-image-tool="stroke" aria-pressed="false">✎ Γραμμή</button><button data-image-tool="relation" aria-pressed="false">🔗 Σύνδεση</button><button data-image-tool="region" aria-pressed="false">▧ Περιοχή</button><button data-undo-annotation>Αναίρεση γραμμής</button><button data-clear-annotations>Καθαρισμός</button><button data-reveal-image>Αποκάλυψη εικόνας</button></div><div class="lm-region-buttons"></div><div class="lm-image-viewport"><div class="lm-image-page"><img src="${lmEscape(url)}" alt="${lmEscape(m.label)}" draggable="false"><svg class="lm-image-overlay" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-label="Σημειώσεις και συνδέσεις εικόνας"></svg><div class="lm-image-curtain" hidden>✦</div></div></div><div class="lm-resource-link">${external}<button data-cover>Κάλυψη εικόνας</button></div>`;
         body.querySelector('img').onerror=()=>{status.textContent='Η εικόνα δεν φορτώθηκε. Έλεγξε τον σύνδεσμο ή εισήγαγε το αρχείο.';};

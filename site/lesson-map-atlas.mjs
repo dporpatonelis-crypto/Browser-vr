@@ -4,7 +4,8 @@ import {lmForm,lmModal,lmShowViewer} from './lesson-map-viewers.mjs';
 export const LM_STYLES={
   default:{title:'Νησίδες γνώσης',folder:''},
   jerusalem:{title:'Ιεροσόλυμα',folder:'jerusalem/'},
-  mediterranean:{title:'Μεσόγειος',folder:'mediterranean/'}
+  mediterranean:{title:'Μεσόγειος',folder:'mediterranean/'},
+  planets:{title:'Πλανήτες',folder:'planets/'}
 };
 export function lmRoute(workspaceId=LM_WORKSPACE_ID,canvasId='',versionId=''){
   const base=workspaceId===LM_WORKSPACE_ID?'#map':'#map/'+workspaceId;

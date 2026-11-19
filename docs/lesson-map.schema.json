@@ -69,6 +69,14 @@
               },
               "box": {
                 "$ref": "#/$defs/box"
+            },
+            "artwork": {
+              "enum": [
+                "search",
+                "creation",
+                "trinity",
+                "judgement"
+              ]
               }
             },
             "additionalProperties": false
@@ -123,7 +131,8 @@
           "enum": [
             "default",
             "jerusalem",
-            "mediterranean"
+            "mediterranean",
+            "planets"
           ]
         },
         "lesson_relations": {

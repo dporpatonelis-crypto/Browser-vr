@@ -46,7 +46,7 @@ const close=page=>page.locator('dialog[open] .lm-close').last().click();
     check('withdrawn draft remains editable with five buildings',await page.locator('.lm-building').count()===5);await page.locator('[data-action="home"]').click();
     if(process.env.READY_MATERIAL_PACKAGE){
       const bundle=path.resolve(process.env.READY_MATERIAL_PACKAGE);
-      await page.locator('#lm-transfer-file').setInputFiles(bundle);await submit(page,'Μεταφορά');await page.getByText('Αποθηκεύτηκε ιδιωτικά.',{exact:false}).waitFor({timeout:120000});
+      await page.locator('[data-action="import"]').click();await page.locator('#lm-transfer-file').setInputFiles(bundle);await submit(page,'Μεταφορά');await page.getByText('Αποθηκεύτηκε ιδιωτικά.',{exact:false}).waitFor({timeout:120000});
       check('curated package produces five populated islands',await page.locator('.lm-island').count()===5);
       const titles=await page.locator('.lm-island [data-node-select]').allTextContents();
       check('A-grade allocation excludes the empty New Testament island',titles.some(t=>t.includes('Αγία Γραφή'))&&!titles.some(t=>t.includes('Καινή Διαθήκη')));
@@ -59,7 +59,7 @@ const close=page=>page.locator('dialog[open] .lm-close').last().click();
       await page.locator('dialog[open] [data-next]').click();await page.waitForFunction(()=>document.querySelector('.lm-image-page img')?.naturalWidth===1448);
       check('PDF concept map is the full embedded image rather than a clipped page crop');
       await page.locator('[data-fit-image]').click();await page.screenshot({path:path.join(out,'ready-philothei-concept.png'),fullPage:true});await close(page);await page.locator('[data-action="home"]').click();
-      const count=all.length;await page.locator('#lm-transfer-file').setInputFiles(bundle);await page.getByText('Οι χάρτες υπάρχουν ήδη στον ιδιωτικό χώρο και διατηρήθηκαν.',{exact:true}).waitFor();
+      const count=all.length;await page.locator('[data-action="import"]').click();await page.locator('#lm-transfer-file').setInputFiles(bundle);await page.getByText('Οι χάρτες υπάρχουν ήδη στον ιδιωτικό χώρο και διατηρήθηκαν.',{exact:true}).waitFor();
       check('repeated package import adds no material or saved versions',(await snapshot(page)).versions.length===count);
       await page.screenshot({path:path.join(out,'ready-archipelago-desktop.png'),fullPage:true});
     }

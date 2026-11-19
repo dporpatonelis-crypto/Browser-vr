@@ -258,3 +258,18 @@ test('teacher relation sources survive later removal and remain private map data
   w.visual_theme='../../private';assert.throws(()=>context.validateLessonMap_('workspace',w,wid),/εικονογράφηση/);
   assert.equal(JSON.stringify(context.lessonCanvasRegistry_()).includes('Ελεγμένη πρόταση'),false);
 });
+
+test('planet artwork survives cloud storage and rejects arbitrary image paths',()=>{
+  const {context,storage}=environment();
+  const workspace=lmNewWorkspace({scenarios:[]});
+  workspace.visual_theme='planets';
+  workspace.grade='Β΄ Λυκείου';
+  workspace.themes[0].artwork='trinity';
+  context.saveLessonMap({request_id:randomUUID(),document_id:randomUUID(),kind:'workspace',document:workspace});
+  const saved=environment(storage).context.listLessonMaps().versions[0].document;
+  assert.equal(saved.visual_theme,'planets');
+  assert.equal(saved.themes[0].artwork,'trinity');
+  assert.equal(saved.themes[1].artwork,undefined);
+  workspace.themes[0].artwork=['trinity'];
+  assert.throws(()=>context.validateLessonMap_('workspace',workspace,randomUUID()),/εικόνα πλανήτη/);
+});

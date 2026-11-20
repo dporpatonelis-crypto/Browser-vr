@@ -77,6 +77,11 @@ def build(manifest_path, source_root, output, registry_path=None):
                 assets[aid] = {**metadata, 'base64': base64.b64encode(payload).decode()}
                 if mime.startswith('image/'):
                     first_source = first_source or metadata
+            elif 'url' in entry:
+                if entry['building'] != 'html' or not lesson.get('scenario_id') or not isinstance(entry['url'], str) or not entry['url']:
+                    raise ValueError('Ο σύνδεσμος HTML χρειάζεται υπάρχον μάθημα και το Εργαστήριο.')
+                url = entry['url']
+                material.update(id=stable(f'material:html-url:{did}:{url}'), type='html', url=url)
             else:
                 sid, activity_id = entry['scenario_id'], entry['activity_id']
                 activity = next(a for a in scenarios[sid]['activities'] if a['id'] == activity_id)
@@ -97,7 +102,9 @@ def build(manifest_path, source_root, output, registry_path=None):
                                     'keywords': [], 'related_scenario_ids': sorted(related), 'exercise_regions': []}
         doc = validate_document('canvas', doc, registry, did)
         documents.append([did, {'kind': 'canvas', 'document': doc}])
-        placements.append({'id': stable('placement:' + (workspace_id + ':' if workspace_id != template['workspace_id'] else '') + did), 'canvas_id': did, 'theme_id': lesson['theme_id']})
+        placements.append({'id': stable('placement:' + (workspace_id + ':' if workspace_id != template['workspace_id'] else '') + did),
+                           'canvas_id': did, 'theme_id': lesson['theme_id'],
+                           **({'period': lesson['period']} if 'period' in lesson else {})})
     bundle = {'format': 'lesson-map-transfer', 'schema_version': 1, 'documents': documents,
               'assets': list(assets.values()), 'curation': {'workspace_id': workspace_id,
                                                          'themes': manifest['themes'], 'placements': placements,

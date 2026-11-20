@@ -69,14 +69,22 @@
               },
               "box": {
                 "$ref": "#/$defs/box"
-            },
-            "artwork": {
-              "enum": [
-                "search",
-                "creation",
-                "trinity",
-                "judgement"
-              ]
+              },
+              "artwork": {
+                "enum": [
+                  "search",
+                  "creation",
+                  "trinity",
+                  "judgement",
+                  "trinitarian",
+                  "christology",
+                  "byzantine-tradition",
+                  "modern-fathers"
+                ]
+              },
+              "period": {
+                "type": "string",
+                "maxLength": 60
               }
             },
             "additionalProperties": false
@@ -116,6 +124,10 @@
                   "string",
                   "null"
                 ]
+              },
+              "period": {
+                "type": "string",
+                "maxLength": 60
               }
             },
             "additionalProperties": false
@@ -132,7 +144,8 @@
             "default",
             "jerusalem",
             "mediterranean",
-            "planets"
+            "planets",
+            "byzantium"
           ]
         },
         "lesson_relations": {

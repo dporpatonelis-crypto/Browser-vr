@@ -1,7 +1,8 @@
 /** Lesson maps share the existing owner-only folder and append-only history. */
 const MAP_BUILDINGS_ = ['text','images','mindmap','html','synthesis'];
-const MAP_THEMES_ = ['default','jerusalem','mediterranean','planets'];
+const MAP_THEMES_ = ['default','jerusalem','mediterranean','planets','byzantium'];
 const PLANET_ARTWORK_ = ['search','creation','trinity','judgement'];
+const BYZANTIUM_ARTWORK_ = ['trinitarian','christology','byzantine-tradition','modern-fathers'];
 function mapText_(value,max) {if(typeof value!=='string'||value.length>(max||240)||value.includes('\0'))throw new Error('Μη έγκυρο κείμενο χάρτη.');return value;}
 function mapList_(value,max) {if(!Array.isArray(value)||value.length>(max||500))throw new Error('Μη έγκυρη λίστα χάρτη.');return value;}
 function mapPoint_(p,min,max) {
@@ -41,16 +42,20 @@ function validateLessonMap_(kind,data,documentId) {
     const themes=mapList_(data.themes,80).map(t=>{
       const theme={id:uuid_(t.id),title:mapText_(t.title),icon:mapText_(t.icon||'📚',20),box:mapBox_(t.box)};
       if('artwork' in t){
-        if(!PLANET_ARTWORK_.includes(t.artwork))throw new Error('Άγνωστη εικόνα πλανήτη.');
+        if(!PLANET_ARTWORK_.includes(t.artwork)&&!BYZANTIUM_ARTWORK_.includes(t.artwork)){
+          throw new Error(data.visual_theme==='planets'?'Άγνωστη εικόνα πλανήτη.':'Άγνωστη εικονογράφηση θεματικής.');
+        }
         theme.artwork=t.artwork;
       }
+      if('period' in t)theme.period=mapText_(t.period,60);
       return theme;
     });
     const ids=new Set(themes.map(t=>t.id));
     if(ids.size!==themes.length)throw new Error('Διπλή ταυτότητα θεματικής.');
     const lessons=mapList_(data.lessons).map(l=>{
       if(!ids.has(l.theme_id)||(l.scenario_id&&!scenarios.has(l.scenario_id)))throw new Error('Επίλεξε υπαρκτή θεματική και μάθημα.');
-      return {id:uuid_(l.id),theme_id:l.theme_id,title:mapText_(l.title),scenario_id:l.scenario_id||null,canvas_id:l.canvas_id?uuid_(l.canvas_id):null};
+      return {id:uuid_(l.id),theme_id:l.theme_id,title:mapText_(l.title),scenario_id:l.scenario_id||null,canvas_id:l.canvas_id?uuid_(l.canvas_id):null,
+        ...'period' in l?{period:mapText_(l.period,60)}:{}};
     });
     if(new Set(lessons.map(l=>l.id)).size!==lessons.length)throw new Error('Διπλή ταυτότητα μαθήματος.');
     if(data.visual_theme!=null){if(!MAP_THEMES_.includes(data.visual_theme))throw new Error('Άγνωστη εικονογράφηση χάρτη.');result.visual_theme=data.visual_theme;}

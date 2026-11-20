@@ -273,3 +273,23 @@ test('planet artwork survives cloud storage and rejects arbitrary image paths',(
   workspace.themes[0].artwork=['trinity'];
   assert.throws(()=>context.validateLessonMap_('workspace',workspace,randomUUID()),/εικόνα πλανήτη/);
 });
+
+test('saved Byzantine periods and city dates survive reopening a private workspace link', () => {
+  const {context, storage} = environment();
+  const workspaceId = randomUUID();
+  const workspace = lmNewWorkspace({scenarios: []});
+  workspace.visual_theme = 'byzantium';
+  const theme = workspace.themes[0];
+  theme.artwork = 'byzantine-tradition';
+  theme.period = '8ος–14ος αι.';
+  workspace.lessons = [{id: randomUUID(), theme_id: theme.id, title: 'Δοκιμή', period: '8ος αι.'}];
+  context.saveLessonMap({request_id: randomUUID(), document_id: workspaceId, kind: 'workspace', document: workspace});
+  const reopened = environment(storage).context;
+  const saved = reopened.listLessonMaps().versions[0].document;
+  assert.equal(saved.themes[0].artwork, 'byzantine-tradition');
+  assert.equal(saved.themes[0].period, '8ος–14ος αι.');
+  assert.equal(saved.lessons[0].period, '8ος αι.');
+  const open = parameters => JSON.parse(reopened.doGet({parameter: parameters}).slice(6, -7)).initial;
+  assert.deepEqual(open({view: 'map', workspace: workspaceId}), {view: 'map', workspaceId});
+  assert.deepEqual(open({view: 'map', workspace: 'invalid'}), {view: 'map'});
+});

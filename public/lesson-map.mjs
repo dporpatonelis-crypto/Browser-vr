@@ -1,4 +1,4 @@
-import {LM_BUILDINGS,LM_VERBS,LM_WORKSPACE_ID,LM_PILOT_ID,LM_PILOT_SCENARIO,LM_PLANET_ARTWORK,lmPlanetArtwork,lmId,lmClone,lmEscape,lmNewCanvas,lmNewWorkspace,lmLatest,lmFit,lmZoom,lmCurve,lmConnectionLabel,lmSafeURL,lmMaterialType,lmClamp,lmValidateTransfer,lmAssetIDs,lmCanvasReady,lmVisibleWorkspace,lmCurateTransfer} from './lesson-map-domain.mjs';
+import {LM_BUILDINGS,LM_VERBS,LM_WORKSPACE_ID,LM_PILOT_ID,LM_PILOT_SCENARIO,LM_PLANET_ARTWORK,lmPlanetArtwork,LM_BYZANTIUM_ARTWORK,lmByzantiumArtwork,lmChronologyArrow,lmId,lmClone,lmEscape,lmNewCanvas,lmNewWorkspace,lmLatest,lmFit,lmZoom,lmCurve,lmConnectionLabel,lmSafeURL,lmMaterialType,lmClamp,lmValidateTransfer,lmAssetIDs,lmCanvasReady,lmVisibleWorkspace,lmCurateTransfer} from './lesson-map-domain.mjs';
 import {lmModal,lmForm,lmShowViewer} from './lesson-map-viewers.mjs';
 import {niStartImport,niEnrich} from './lesson-import.mjs';
 import {LM_STYLES,lmRoute,lmWorkspaces,lmMemberships,lmOpenAtlas} from './lesson-map-atlas.mjs';
@@ -28,6 +28,7 @@ export class LessonMap {
   get viewKey(){return this.workspaceId+':'+this.current;}
   get style(){return LM_STYLES[this.workspace?.visual_theme]||LM_STYLES.default;}
   get planetary(){return this.workspace?.visual_theme==='planets';}
+  get chronological(){return this.workspace?.visual_theme==='byzantium';}
   get cityPlanet(){
     if(!this.planetary||this.kind!=='canvas')return null;
     const placement=this.workspace.lessons.find(lesson=>lesson.canvas_id===this.current);
@@ -160,35 +161,38 @@ export class LessonMap {
     this.open(lesson.canvas_id);
   }
   catalogueMaterial(sid,a){return {id:lmId(),label:a.label,type:'html',text:'',url:'',asset_id:'',activity_id:a.id,source_scenario_id:sid,page_start:1,page_end:1};}
-  planetArtworkField(artwork=''){
-    if(!this.planetary)return '';
-    const options=Object.entries(LM_PLANET_ARTWORK).map(([key,title])=>
+  themeDetails(artwork='',period=''){
+    if(!this.planetary&&!this.chronological)return '';
+    const images=this.planetary?LM_PLANET_ARTWORK:LM_BYZANTIUM_ARTWORK;
+    const options=Object.entries(images).map(([key,title])=>
       `<option value="${key}" ${key===artwork?'selected':''}>${lmEscape(title)}</option>`);
-    return `<label>Εικόνα πλανήτη<select name="artwork"><option value="">Απλός πλανήτης</option>${options.join('')}</select></label>`;
+    const periodField=this.chronological?`<label>Χρονική περίοδος<input name="period" maxlength="60" value="${lmEscape(period)}"></label>`:'';
+    return `<label>${this.planetary?'Εικόνα πλανήτη':'Εικόνα νησίδας'}<select name="artwork"><option value="">${this.planetary?'Απλός πλανήτης':'Προεπιλεγμένη εικόνα'}</option>${options.join('')}</select></label>${periodField}`;
   }
   themeFields(){
     const label=this.planetary?'Πλανήτης':'Θεματική';
     const newLabel=this.planetary?'Νέος πλανήτης':'Νέα θεματική';
     const titleLabel=this.planetary?'Τίτλος νέου πλανήτη':'Τίτλος νέας θεματικής';
     return `<label>${label}<select name="theme_id">${this.workspace.themes.map(t=>`<option value="${t.id}" ${t.id===this.selected?'selected':''}>${lmEscape(t.title)}</option>`).join('')}<option value="new">＋ ${newLabel}</option></select></label>
-      <label>${titleLabel} <span>(αν επιλέξεις «${newLabel}»)</span><input name="new_theme_title" maxlength="120"></label>${this.planetArtworkField()}`;
+      <label>${titleLabel} <span>(αν επιλέξεις «${newLabel}»)</span><input name="new_theme_title" maxlength="120"></label>${this.themeDetails()}`;
   }
-  newTheme(title,icon,artwork){
+  newTheme(title,icon,artwork,period){
     return {id:lmId(),title,icon,box:{x:.25+this.workspace.themes.length*.08,y:.4,w:.32,h:.4},
-      ...(lmPlanetArtwork(artwork)?{artwork}:{})};
+      ...(lmPlanetArtwork(artwork)||lmByzantiumArtwork(artwork)?{artwork}:{}),
+      ...(period?.trim()?{period:period.trim()}:{})};
   }
   resolveTheme(values){
     if(values.theme_id!=='new')return this.workspace.themes.find(t=>t.id===values.theme_id);
     if(!values.new_theme_title?.trim())throw Error(this.planetary?'Συμπλήρωσε τον τίτλο του νέου πλανήτη.':'Συμπλήρωσε τον τίτλο της νέας θεματικής.');
-    return this.newTheme(values.new_theme_title.trim(),this.planetary?'✦':'📚',values.artwork);
+    return this.newTheme(values.new_theme_title.trim(),this.planetary?'✦':'📚',values.artwork,values.period);
   }
   async addTheme(){
     const title=this.planetary?'Νέος πλανήτης':'Νέα θεματική';
     const subject=this.planetary?'Ο πλανήτης':'Η νησίδα';
     const values=await lmForm(this.host,title,`<p>${subject} θα εμφανιστεί μαζί με το πρώτο μάθημα που έχει υλικό.</p>
       <label>Τίτλος<input name="title" maxlength="120" required></label>
-      <label>Σύμβολο<input name="icon" maxlength="20" value="${this.planetary?'✦':'📚'}"></label>${this.planetArtworkField()}`,'Πρώτο μάθημα →');
-    if(values)await this.addLesson(this.newTheme(values.title,values.icon,values.artwork));
+      <label>Σύμβολο<input name="icon" maxlength="20" value="${this.planetary?'✦':'📚'}"></label>${this.themeDetails()}`,'Πρώτο μάθημα →');
+    if(values)await this.addLesson(this.newTheme(values.title,values.icon,values.artwork,values.period));
   }
   async addLesson(newTheme=null){
     const v=await lmForm(this.host,'Προσθήκη μαθήματος',`${newTheme?`<p>${this.planetary?'Πλανήτης':'Θεματική'} <strong>${lmEscape(newTheme.title)}</strong></p>`:this.themeFields()}<label>Υπάρχον μάθημα<select name="scenario_id"><option value="">Νέο πρόχειρο μάθημα</option>${this.registry.scenarios.map(s=>`<option value="${lmEscape(s.scenario_id)}">${lmEscape(s.title)}</option>`).join('')}</select></label><label>Δικός μου τίτλος <span>(προαιρετικό για υπάρχον μάθημα)</span><input name="title" maxlength="240"></label><p>Η πόλη εμφανίζεται στον χάρτη όταν έχει τουλάχιστον ένα υλικό. Τα κενά πρόχειρα παραμένουν στα αποθηκευμένα μαθήματα.</p>`,'Συνέχεια');if(!v)return;
@@ -210,15 +214,19 @@ export class LessonMap {
   async editTitle(){
     const target=this.selected?this.nodes.find(n=>n.id===this.selected):this.document;
     if(!target)return;
-    const artwork=this.kind==='workspace'&&this.selected?this.planetArtworkField(target.artwork):'';
+    const details=this.kind==='workspace'&&this.selected?this.themeDetails(target.artwork,target.period):'';
     const values=await lmForm(this.host,'Τίτλος και σύμβολο',`<label>Τίτλος<input name="title" value="${lmEscape(target.title)}" maxlength="240" required></label>
-      ${'icon'in target?`<label>Σύμβολο<input name="icon" value="${lmEscape(target.icon)}" maxlength="20"></label>`:''}${artwork}`);
+      ${'icon'in target?`<label>Σύμβολο<input name="icon" value="${lmEscape(target.icon)}" maxlength="20"></label>`:''}${details}`);
     if(values)this.change(()=>{
       target.title=values.title;
       if('icon'in target)target.icon=values.icon;
-      if(artwork){
-        if(lmPlanetArtwork(values.artwork))target.artwork=values.artwork;
+      if(details){
+        if(lmPlanetArtwork(values.artwork)||lmByzantiumArtwork(values.artwork))target.artwork=values.artwork;
         else delete target.artwork;
+      }
+      if('period' in values){
+        if(values.period.trim())target.period=values.period.trim();
+        else delete target.period;
       }
     });
   }
@@ -286,6 +294,7 @@ export class LessonMap {
   worldMarkup(){
     const workspace=this.kind==='workspace',nodes=this.nodes,doc=this.document;
     const planets=workspace&&this.planetary;
+    const chronology=workspace&&this.chronological;
     const visible=n=>this.nodeVisible(n);
     const allowed=workspace?new Set(nodes.map(n=>n.id)):new Set(this.revealOrder.slice(0,this.revealCount));
     const connections=this.showConnections?doc.connections.filter(c=>c.visible&&nodes.some(n=>n.id===c.from&&visible(n)&&allowed.has(n.id))&&nodes.some(n=>n.id===c.to&&visible(n)&&allowed.has(n.id))):[];
@@ -293,23 +302,34 @@ export class LessonMap {
     const paths=connections.map(c=>{const a=nodes.find(n=>n.id===c.from),b=nodes.find(n=>n.id===c.to),p=lmCurve(a.box,b.box),label=lmConnectionLabel(p,nodes.map(n=>n.box),placedLabels);return `<g data-connection="${c.id}"><path d="${p.d}"/><foreignObject x="${label.x-140}" y="${label.y-26}" width="280" height="90"><button xmlns="http://www.w3.org/1999/xhtml" class="lm-thread-label" data-explain="${c.id}">${lmEscape(c.verb)}</button></foreignObject></g>`;}).join('');
     const artwork=lmPlanetArtwork(this.cityPlanet?.artwork);
     const planetGround=artwork?`<img class="lm-planet-ground" src="${lmEscape(this.spriteURL(artwork))}" alt="" draggable="false">`:'';
+    const timeline=chronology&&nodes.length>1?`<svg class="lm-chronology" viewBox="0 0 1600 900" aria-hidden="true">
+      <defs><marker id="lm-chronology-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z"/>
+      </marker></defs>
+      ${nodes.slice(1).map((next,i)=>`<path data-chronology-from="${nodes[i].id}" data-chronology-to="${next.id}"
+        d="${lmChronologyArrow(nodes[i].box,next.box)}" marker-end="url(#lm-chronology-arrow)"/>`).join('')}
+      </svg>`:'';
     const deco=workspace
-      ? (planets?'':`<div class="lm-sea-decor lm-sea-a">${this.workspace.visual_theme==='jerusalem'?'🫒':'⛵'}</div><div class="lm-sea-decor lm-sea-b">✧</div>`)
+      ? (planets||chronology?'':`<div class="lm-sea-decor lm-sea-a">${this.workspace.visual_theme==='jerusalem'?'🫒':'⛵'}</div><div class="lm-sea-decor lm-sea-b">✧</div>`)
       : `${planetGround}<div class="lm-plaza"><span aria-hidden="true">✦</span><h2>${lmEscape(doc.title)}</h2><small>${lmEscape(this.cityPlanet?.title||'Πολιτεία γνώσης')}</small></div>
         <svg class="lm-city-paths" viewBox="0 0 1600 900" aria-hidden="true"><path d="M800 180 Q800 450 1320 420 M800 450 Q600 480 260 420 M800 450 Q800 550 1120 750 M800 450 Q600 600 500 750"/></svg>`;
-    return `${deco}<svg class="lm-threads" viewBox="0 0 1600 900" aria-label="Σχέσεις εννοιών">${paths}</svg>${nodes.filter(visible).map(n=>{
+    return `${deco}${timeline}<svg class="lm-threads" viewBox="0 0 1600 900" aria-label="Σχέσεις εννοιών">${paths}</svg>${nodes.filter(visible).map(n=>{
       const b=n.box,selected=this.selected===n.id||this.connectFrom===n.id,unrevealed=!this.edit&&!allowed.has(n.id);
       const content=workspace?this.visibleWorkspace.lessons.filter(l=>l.theme_id===n.id):n.materials;
-      const sprite=planets?lmPlanetArtwork(n.artwork):workspace?'island':LM_BUILDINGS.find(d=>d.id===n.id).sprite;
+      const sprite=planets?lmPlanetArtwork(n.artwork):chronology?(lmByzantiumArtwork(n.artwork)||'trinitarian'):workspace?'island':LM_BUILDINGS.find(d=>d.id===n.id).sprite;
       const image=sprite?`<img class="lm-sprite" src="${lmEscape(this.spriteURL(sprite))}" alt="" draggable="false">`
         :'<span class="lm-sprite lm-planet-fallback" aria-hidden="true"></span>';
-      const cities=workspace?`<div class="lm-island-lessons">${content.map(lesson=>
-        `<button data-open-lesson="${lesson.id}">${lmEscape(lesson.title)} <span>↗</span></button>`).join('')}</div>`:'';
+      const cities=workspace?`<div class="lm-island-lessons">${content.map(lesson=>{
+        const period=chronology&&lesson.period?`<small>${lmEscape(lesson.period)}</small>`:'';
+        return chronology?`<button data-open-lesson="${lesson.id}"><span class="lm-city-label">${lmEscape(lesson.title)}${period}</span><span aria-hidden="true">↗</span></button>`
+          :`<button data-open-lesson="${lesson.id}">${lmEscape(lesson.title)} <span>↗</span></button>`;
+      }).join('')}</div>`:'';
       const buildingButton=!workspace?`<button class="lm-building-open" data-open-building="${n.id}">${content.length?`${content.length} ${content.length===1?'μέσο':'μέσα'} · Άνοιγμα`:(n.id==='synthesis'&&doc.connections.length?'Οι σχέσεις μας · Άνοιγμα':this.edit?'＋ Προσθήκη υλικού':'Άνοιγμα')}</button>`:'';
       return `<section class="lm-node ${workspace?'lm-island':'lm-building'} ${planets?'lm-planet':''} ${selected?'lm-selected':''} ${unrevealed?'lm-unrevealed':''} ${n.hidden?'lm-hidden-building':''}"
         data-lm-node="${n.id}" ${planets?`data-planet-artwork="${sprite}"`:''}
         style="left:${b.x*1600}px;top:${b.y*900}px;width:${b.w*1600}px;height:${b.h*900}px" aria-label="${lmEscape(n.title)}">
         ${image}<div class="lm-node-content"><button class="lm-node-title" data-node-select="${n.id}"><span>${lmEscape(n.icon)}</span>${lmEscape(n.title)}</button>
+        ${chronology&&n.period?`<small class="lm-island-period">${lmEscape(n.period)}</small>`:''}
         ${unrevealed?'<div class="lm-unrevealed-label">✦</div>':workspace?cities:buildingButton}</div>
         ${this.edit?`<button class="lm-drag" data-drag-node="${n.id}" aria-label="Μετακίνηση: ${lmEscape(n.title)}">⠿</button><button class="lm-resize" data-resize-node="${n.id}" aria-label="Αλλαγή μεγέθους: ${lmEscape(n.title)}">↘</button>`:''}</section>`;
     }).join('')}`;
@@ -319,6 +339,15 @@ export class LessonMap {
     if(workspace&&this.planetary){
       const cities=this.visibleWorkspace.lessons.map(lesson=>`<button data-open-lesson="${lesson.id}">${lmEscape(lesson.title)}</button>`);
       return `<nav class="lm-quick-nav lm-planet-cities" aria-label="Γρήγορη επιλογή πόλης">${cities.join('')}</nav>`;
+    }
+    if(workspace&&this.chronological){
+      const map=this.visibleWorkspace;
+      const periods=map.themes.map(theme=>`<section class="lm-byzantium-nav-period">
+        <h3>${lmEscape(theme.title)} ${theme.period?`<small>${lmEscape(theme.period)}</small>`:''}</h3>
+        <div>${map.lessons.filter(lesson=>lesson.theme_id===theme.id).map(lesson=>
+          `<button data-open-lesson="${lesson.id}">${lmEscape(lesson.title)}${lesson.period?`<small>${lmEscape(lesson.period)}</small>`:''}</button>`).join('')}</div>
+      </section>`);
+      return `<nav class="lm-byzantium-nav" aria-label="Χρονολογική επιλογή πόλης">${periods.join('')}</nav>`;
     }
     const nodes=this.nodes.filter(n=>this.nodeVisible(n));
     return `<nav class="lm-quick-nav" aria-label="Γρήγορη επιλογή ${workspace?'θεματικών':'οικοδομημάτων'}">${nodes.map(n=>`<button data-quick="${n.id}">${lmEscape(n.icon)} ${lmEscape(n.title)}</button>`).join('')}</nav>`;
@@ -413,8 +442,19 @@ export class LessonMap {
         const view=this.views.get(this.viewKey),dx=(e.clientX-g.x)/view.zoom/1600,dy=(e.clientY-g.y)/view.zoom/900;
         g.node.box=g.type==='node'?{...g.box,x:lmClamp(g.box.x+dx,-5,5),y:lmClamp(g.box.y+dy,-5,5)}:{...g.box,w:lmClamp(g.box.w+dx,.15,1.5),h:lmClamp(g.box.h+dy,.18,1.5)};
         const n=this.host.querySelector(`[data-lm-node="${g.id}"]`),b=g.node.box;n.style.left=b.x*1600+'px';n.style.top=b.y*900+'px';n.style.width=b.w*1600+'px';n.style.height=b.h*900+'px';
-        const placed=[];
-        this.host.querySelectorAll('[data-connection]').forEach(el=>{const c=this.document.connections.find(c=>c.id===el.dataset.connection),p=lmCurve(this.nodes.find(n=>n.id===c.from).box,this.nodes.find(n=>n.id===c.to).box),label=lmConnectionLabel(p,this.nodes.map(n=>n.box),placed);el.querySelector('path').setAttribute('d',p.d);el.querySelector('foreignObject').setAttribute('x',label.x-140);el.querySelector('foreignObject').setAttribute('y',label.y-26);});
+        const nodes=this.nodes,placed=[];
+        const boxFor=id=>nodes.find(node=>node.id===id).box;
+        this.host.querySelectorAll('[data-connection]').forEach(el=>{
+          const c=this.document.connections.find(c=>c.id===el.dataset.connection);
+          const path=lmCurve(boxFor(c.from),boxFor(c.to));
+          const label=lmConnectionLabel(path,nodes.map(node=>node.box),placed);
+          el.querySelector('path').setAttribute('d',path.d);
+          el.querySelector('foreignObject').setAttribute('x',label.x-140);
+          el.querySelector('foreignObject').setAttribute('y',label.y-26);
+        });
+        this.host.querySelectorAll('[data-chronology-from]').forEach(path=>{
+          path.setAttribute('d',lmChronologyArrow(boxFor(path.dataset.chronologyFrom),boxFor(path.dataset.chronologyTo)));
+        });
       }
     });
     const end=e=>{pointers.delete(e.pointerId);if(!g)return;if(g.type==='node'||g.type==='resize'){this.undoStack.push(g.before);this.redoStack=[];this.pending.clear();this.notice='Η διάταξη άλλαξε.';g=null;this.render();return;}if(pointers.size===0)g=null;else{const p=[...pointers.values()][0];g={type:'pan',x:p.x,y:p.y,view:{...this.views.get(this.viewKey)}};}};

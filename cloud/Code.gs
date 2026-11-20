@@ -12,12 +12,17 @@ function assertOwner_() {
   }
 }
 
+const UUID_PATTERN_ = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 function doGet(e) {
   assertOwner_();
   const parameters = e && e.parameter || {};
   const initial = {};
   const privateCatalog = lessonCanvasRegistry_();
-  if(parameters.view==='map')initial.view='map';
+  if(parameters.view==='map') {
+    initial.view='map';
+    if(typeof parameters.workspace==='string'&&UUID_PATTERN_.test(parameters.workspace))initial.workspaceId=uuid_(parameters.workspace);
+  }
   if (privateCatalog.scenarios.some(s => s.scenario_id === parameters.scenario)) {
     initial.scenario = parameters.scenario;
     initial.view = parameters.view==='map'?'map':parameters.view === 'evaluate' ? 'evaluate' : 'activity';
@@ -170,7 +175,7 @@ function contextFields_(data) {
   return {class_profile:profile.trim(), time_slot:slot, lesson_date:day};
 }
 function uuid_(value) {
-  if (typeof value !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)) throw new Error('Χρειάζεται έγκυρο μοναδικό αναγνωριστικό.');
+  if (typeof value !== 'string' || !UUID_PATTERN_.test(value)) throw new Error('Χρειάζεται έγκυρο μοναδικό αναγνωριστικό.');
   return value.toLowerCase();
 }
 function selectMaterials_(ids, scenario, plan) {

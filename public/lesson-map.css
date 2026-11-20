@@ -188,3 +188,134 @@
   .lm-style-planets.lm-archipelago .lm-viewport { height: clamp(280px,47dvh,450px); }
   .lm-style-planets .lm-planet-cities { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); padding-inline: 10px; }
 }
+
+.lm-style-byzantium {
+  --byzantine-ink: #311d21;
+  --byzantine-gold: #e3bf77;
+}
+.lm-style-byzantium .lm-header {
+  background: linear-gradient(112deg,#fff3da,#fffdf3 56%,#f0ddbc);
+  border-color: #ddc095;
+}
+.lm-style-byzantium .lm-viewport {
+  background-color: #1d5961;
+  background-image: radial-gradient(ellipse at 50% 38%,#71a69783,transparent 62%),
+    repeating-radial-gradient(ellipse at 0% 100%,transparent 0 46px,#caedda26 47px 48px,transparent 50px 78px);
+}
+.lm-style-byzantium.lm-city .lm-viewport {
+  background-color: #e8d1a5;
+  background-image: radial-gradient(ellipse at 48% 48%,#fff8e2,transparent 68%),
+    repeating-linear-gradient(34deg,#8a553412 0 1px,transparent 3px 36px);
+}
+.lm-chronology {
+  position: absolute;
+  inset: 0;
+  width: 1600px;
+  height: 900px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+}
+.lm-chronology > path {
+  fill: none;
+  stroke: #ffe2a3;
+  stroke-width: 10;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 2px #12383e);
+}
+.lm-chronology marker path { fill: #ffe2a3; }
+.lm-style-byzantium .lm-sprite { filter: drop-shadow(0 12px 10px #33251d50); }
+.lm-style-byzantium .lm-island .lm-node-content {
+  bottom: 0;
+  inset-inline: 5%;
+  gap: 4px;
+}
+.lesson-map.lm-style-byzantium .lm-node-title {
+  border-radius: 12px;
+  border-color: var(--byzantine-gold);
+  color: var(--byzantine-ink);
+}
+.lesson-map.lm-style-byzantium .lm-island .lm-node-title {
+  background: #3d2730;
+  color: #fff5db;
+  font-size: 35px;
+  padding: 9px 17px;
+  box-shadow: 0 3px 9px #192d2b80;
+}
+.lm-style-byzantium .lm-island .lm-node-title > span { display: none; }
+.lm-island-period {
+  color: #fff3d2;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  background: #25494b;
+  border: 1px solid #e3bf77;
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.lm-style-byzantium .lm-island-lessons {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 6px;
+  max-height: 168px;
+  overflow: auto;
+}
+.lesson-map.lm-style-byzantium .lm-island-lessons > button {
+  min-height: 55px;
+  min-width: 0;
+  border-radius: 10px;
+  border-color: #d7ae71;
+  color: var(--byzantine-ink);
+  background: #fff7e3;
+  padding: 6px 11px;
+  line-height: 1.12;
+}
+.lm-style-byzantium .lm-island-lessons > button:only-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+.lm-style-byzantium .lm-island-lessons > button > span {
+  font-size: 22px;
+  color: #653745;
+}
+.lm-style-byzantium .lm-island-lessons > button > .lm-city-label {
+  font-size: 22px;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+.lm-city-label small,
+.lm-byzantium-nav small {
+  display: block;
+  font-size: .78em;
+  color: #6b4c27;
+  margin-top: 2px;
+}
+.lm-style-byzantium .lm-plaza > h2 { color: var(--byzantine-ink); }
+.lm-style-byzantium .lm-building-open { border-color: var(--byzantine-gold); }
+.lm-byzantium-nav { display: none; }
+
+@media (max-width: 760px) {
+  .lm-style-byzantium.lm-archipelago .lm-viewport { height: clamp(280px,46dvh,425px); }
+  .lm-byzantium-nav {
+    display: grid;
+    gap: 12px;
+    padding: 12px;
+    background: #fbf3e2;
+  }
+  .lm-byzantium-nav-period > h3 {
+    color: var(--byzantine-ink);
+    font-size: 14px;
+    margin: 0 0 6px;
+  }
+  .lm-byzantium-nav-period > div {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 6px;
+  }
+  .lm-byzantium-nav-period button {
+    min-height: 46px;
+    padding: 6px;
+    font-size: 13px;
+    white-space: normal;
+  }
+}

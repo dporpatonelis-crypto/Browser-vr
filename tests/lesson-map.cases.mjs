@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {lmNewWorkspace,lmNewCanvas,lmLatest,lmFit,lmZoom,lmCurve,lmPoint,lmSafeURL,lmMaterialType,lmValidateTransfer,lmVisibleWorkspace,lmCurateTransfer,lmCanvasReady,LM_WORKSPACE_ID,LM_BUILDINGS} from '../public/lesson-map-domain.mjs';
+import {lmNewWorkspace,lmNewCanvas,lmLatest,lmFit,lmZoom,lmCurve,lmChronologyArrow,lmPoint,lmSafeURL,lmMaterialType,lmValidateTransfer,lmVisibleWorkspace,lmCurateTransfer,lmCanvasReady,LM_WORKSPACE_ID,LM_BUILDINGS} from '../public/lesson-map-domain.mjs';
 import {niBuildCanvas,niFindMaterials,niMaterialTarget,niExistingImport} from '../public/lesson-import-domain.mjs';
 import {niDarkPanels,niPrintedPixels} from '../public/lesson-notes-regions.mjs';
 import {readFileSync} from 'node:fs';
@@ -22,6 +22,14 @@ test('fit includes extended islands and relation curves follow node centers',()=
   const boxes=[{x:-.5,y:0,w:.3,h:.4},{x:1.4,y:.8,w:.3,h:.4}],v=lmFit(boxes,1000,600);
   for(const b of boxes){assert.ok(b.x*1600*v.zoom+v.x>=0);assert.ok((b.x+b.w)*1600*v.zoom+v.x<=1000);}
   const before=lmCurve(boxes[0],boxes[1]);const after=lmCurve({...boxes[0],x:.3},boxes[1]);assert.notEqual(before.d,after.d);
+});
+test('chronology arrows stay outside their islands and adapt to moved or overlapping boxes', () => {
+  const first = {x: 0, y: 0, w: 0.25, h: 0.4};
+  const second = {...first, x: 0.5};
+  assert.equal(lmChronologyArrow(first, second), 'M410,180 L790,180');
+  assert.equal(lmChronologyArrow(second, first), 'M790,180 L410,180');
+  assert.notEqual(lmChronologyArrow(first, {...second, y: 0.4}), lmChronologyArrow(first, second));
+  assert.equal(lmChronologyArrow({...first, w: 0.6}, second), '');
 });
 test('image points are normalized against the displayed image and clamped',()=>{
   const rect={left:100,top:50,width:800,height:400};assert.deepEqual(lmPoint(300,150,rect),{x:.25,y:.25});assert.deepEqual(lmPoint(50,900,rect),{x:0,y:1});
@@ -104,6 +112,34 @@ test('curation merges into current canvas and placement, preserving edits and av
   assert.equal(changes.get(LM_WORKSPACE_ID).document.lessons[0].id,w.lessons[0].id);assert.equal(changes.get(LM_WORKSPACE_ID).document.lessons[0].theme_id,w.themes[4].id);
   for(const pair of changes)docs.set(...pair);
   assert.equal(lmCurateTransfer(bundle,docs).size,0);
+});
+test('Byzantine curation keeps dates and recognizes an existing link to the same HTML', () => {
+  const workspaceId = crypto.randomUUID();
+  const canvasId = crypto.randomUUID();
+  const theme = {...lmNewWorkspace().themes[0], title: 'Χριστολογία', artwork: 'christology', period: '5ος–7ος αι.'};
+  const canvas = lmNewCanvas('Δοκιμή', 's');
+  const material = {id: crypto.randomUUID(), type: 'html', url: 'https://example.org/activity.html'};
+  canvas.buildings.find(b => b.id === 'html').materials.push(material);
+  const bundle = {
+    format: 'lesson-map-transfer', schema_version: 1, assets: [],
+    documents: [[canvasId, {kind: 'canvas', document: canvas}]],
+    curation: {
+      workspace_id: workspaceId, visual_theme: 'byzantium', themes: [theme],
+      placements: [{id: crypto.randomUUID(), canvas_id: canvasId, theme_id: theme.id, period: '7ος αι.'}],
+    },
+  };
+  const existing = structuredClone(canvas);
+  Object.assign(existing.buildings.find(b => b.id === 'html').materials[0], {
+    id: crypto.randomUUID(), label: 'Δικός μου τίτλος', url: 'https://EXAMPLE.org/activity.html',
+  });
+  const documents = new Map([[canvasId, {kind: 'canvas', document: existing}]]);
+  const changes = lmCurateTransfer(lmValidateTransfer(bundle), documents);
+  assert.equal(changes.size, 1);
+  const {document: workspace} = changes.get(workspaceId);
+  assert.equal(workspace.themes[0].period, '5ος–7ος αι.');
+  assert.equal(workspace.lessons[0].period, '7ος αι.');
+  for (const pair of changes) documents.set(...pair);
+  assert.equal(lmCurateTransfer(bundle, documents).size, 0);
 });
 test('curation registers an existing private draft without replacing its images, HTML or layout',()=>{
   const cid=crypto.randomUUID(),w=lmNewWorkspace(),old=lmNewCanvas('Αγία Φιλοθέη'),mid=crypto.randomUUID(),oldAsset=crypto.randomUUID();

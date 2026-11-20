@@ -386,7 +386,7 @@ async function boot() {
     if (cloud) state.service=true;
     else if (!catalogueMode) { try {const h=await getJson('api/health');state.service=h.service==='teaching-mission-control';} catch {} }
     [state.registry,state.models]=await Promise.all([getJson(state.service?'api/registry':'data/scenario-registry.json'),getJson(state.service?'api/models':'data/pedagogical-models.json')]);
-    if (cloud?.initial) { const i=cloud.initial;state.selected=i.scenario||null;state.view=i.view||'select';state.grade=i.grade||state.grade;state.section=i.section||'';state.modelId=i.modelId||state.modelId; }
+    if (cloud?.initial) { const i=cloud.initial;state.selected=i.scenario||null;state.view=i.view||'select';state.grade=i.grade||state.grade;state.section=i.section||'';state.modelId=i.modelId||state.modelId;state.mapWorkspaceId=i.workspaceId||''; }
     if(!state.registry.grades.includes(state.grade)){state.grade='';state.section='';}
     if(!state.models.models.some(m=>m.id===state.modelId))state.modelId=state.models.models[0].id;
     const mapMatch=lmParseRoute(location.hash);if(mapMatch){state.view='map';state.mapCanvasId=mapMatch.canvasId;state.mapVersionId=mapMatch.versionId;state.mapWorkspaceId=mapMatch.workspaceId;}

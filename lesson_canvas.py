@@ -20,8 +20,9 @@ from urllib.parse import urlsplit
 from lesson_records import identity
 
 BUILDINGS = ('text', 'images', 'mindmap', 'html', 'synthesis')
-MAP_THEMES = ('default', 'jerusalem', 'mediterranean', 'planets')
+MAP_THEMES = ('default', 'jerusalem', 'mediterranean', 'planets', 'byzantium')
 PLANET_ARTWORK = ('search', 'creation', 'trinity', 'judgement')
+BYZANTIUM_ARTWORK = ('trinitarian', 'christology', 'byzantine-tradition', 'modern-fathers')
 MAX_DOCUMENT = 1024 * 1024
 MAX_ASSET = 25 * 1024 * 1024
 MIMES = {'image/png', 'image/jpeg', 'image/webp', 'application/pdf', 'text/html'}
@@ -139,9 +140,12 @@ def validate_document(kind, data, registry, document_id=None):
         for t in items(data.get('themes', []), 80):
             theme = {'id': identity(t.get('id')), 'title': short(t.get('title', '')), 'icon': short(t.get('icon', '📚'), 20), 'box': box(t.get('box'))}
             if 'artwork' in t:
-                if t['artwork'] not in PLANET_ARTWORK:
-                    raise ValueError('Άγνωστη εικόνα πλανήτη.')
+                if t['artwork'] not in PLANET_ARTWORK + BYZANTIUM_ARTWORK:
+                    message = 'Άγνωστη εικόνα πλανήτη.' if data.get('visual_theme') == 'planets' else 'Άγνωστη εικονογράφηση θεματικής.'
+                    raise ValueError(message)
                 theme['artwork'] = t['artwork']
+            if 'period' in t:
+                theme['period'] = short(t['period'], 60)
             themes.append(theme)
         ids = {t['id'] for t in themes}
         if len(ids) != len(themes):
@@ -152,7 +156,8 @@ def validate_document(kind, data, registry, document_id=None):
             if l.get('theme_id') not in ids or (sid and sid not in scenarios):
                 raise ValueError('Επίλεξε υπαρκτή θεματική και μάθημα.')
             lessons.append({'id': identity(l.get('id')), 'theme_id': l['theme_id'], 'title': short(l.get('title', '')),
-                            'scenario_id': sid, 'canvas_id': identity(l['canvas_id']) if l.get('canvas_id') else None})
+                            'scenario_id': sid, 'canvas_id': identity(l['canvas_id']) if l.get('canvas_id') else None,
+                            **({'period': short(l['period'], 60)} if 'period' in l else {})})
         if len({l['id'] for l in lessons}) != len(lessons):
             raise ValueError('Διπλή ταυτότητα μαθήματος.')
         result.update(themes=themes, lessons=lessons, connections=links(data.get('connections', []), ids))

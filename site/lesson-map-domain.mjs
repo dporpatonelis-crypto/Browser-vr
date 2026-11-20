@@ -9,7 +9,7 @@ export const LM_VERBS = ['προεικονίζει','φανερώνει','ερμ
 export const LM_WORKSPACE_ID = 'd15602cc-a42b-4c76-9577-0535b43cfa01';
 export const LM_PILOT_ID = 'd15602cc-a42b-4c76-9577-0535b43cfa02';
 export const LM_PILOT_SCENARIO = 'html:1jiGpW-SNz_pIEP_fOdUyyOlqKu315LxD:eikona-talanta-loukas';
-export const LM_MAP_THEMES = ['default', 'jerusalem', 'mediterranean', 'planets'];
+export const LM_MAP_THEMES = ['default', 'jerusalem', 'mediterranean', 'planets', 'byzantium'];
 export const LM_PLANET_ARTWORK = Object.freeze({
   search: 'Αναζήτηση και Αποκάλυψη',
   creation: 'Δημιουργία',
@@ -17,6 +17,13 @@ export const LM_PLANET_ARTWORK = Object.freeze({
   judgement: 'Θάνατος και Κρίση',
 });
 export const lmPlanetArtwork = value => typeof value === 'string' && Object.hasOwn(LM_PLANET_ARTWORK, value) ? value : '';
+export const LM_BYZANTIUM_ARTWORK = Object.freeze({
+  trinitarian: 'Βασιλική',
+  christology: 'Αίθουσα συνόδου',
+  'byzantine-tradition': 'Βυζαντινή μονή',
+  'modern-fathers': 'Νεότερο εργαστήριο αγιογραφίας',
+});
+export const lmByzantiumArtwork = value => typeof value === 'string' && Object.hasOwn(LM_BYZANTIUM_ARTWORK, value) ? value : '';
 export const lmId = () => crypto.randomUUID?.() ?? '10000000-1000-4000-8000-100000000000'.replace(/[018]/g,c=>(Number(c)^crypto.getRandomValues(new Uint8Array(1))[0]&15>>Number(c)/4).toString(16));
 export const lmClone = value => JSON.parse(JSON.stringify(value));
 export const lmEscape = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -56,6 +63,23 @@ export function lmCurve(a,b) {
   const from={x:(a.x+a.w/2)*1600,y:(a.y+a.h/2)*900},to={x:(b.x+b.w/2)*1600,y:(b.y+b.h/2)*900};
   const bend=Math.min(150,Math.hypot(to.x-from.x,to.y-from.y)*.22);
   return {d:`M${from.x},${from.y} C${from.x},${from.y-bend} ${to.x},${to.y-bend} ${to.x},${to.y}`,x:(from.x+to.x)/2,y:(from.y+to.y)/2-bend*.75};
+}
+export function lmChronologyArrow(fromBox, toBox) {
+  const fromX = (fromBox.x + fromBox.w / 2) * 1600;
+  const fromY = (fromBox.y + fromBox.h / 2) * 900;
+  const dx = (toBox.x + toBox.w / 2) * 1600 - fromX;
+  const dy = (toBox.y + toBox.h / 2) * 900 - fromY;
+  const distance = Math.hypot(dx, dy);
+  if (!distance) return '';
+  const edge = box => Math.min(box.w * 800 / Math.abs(dx), box.h * 450 / Math.abs(dy));
+  const first = edge(fromBox);
+  const last = 1 - edge(toBox);
+  const gap = (last - first) * distance;
+  if (gap < 24) return '';
+  const margin = Math.min(10, gap / 6) / distance;
+  const start = first + margin;
+  const end = last - margin;
+  return `M${fromX + dx * start},${fromY + dy * start} L${fromX + dx * end},${fromY + dy * end}`;
 }
 export function lmConnectionLabel(curve,boxes,placed=[]) {
   const bands=boxes.map(b=>({x:b.x*1600,y:(b.y+b.h*.6)*900,w:b.w*1600,h:b.h*.4*900}));
@@ -97,6 +121,8 @@ export function lmVisibleWorkspace(workspace,documents,registry) {
 export function lmMaterialKey(m) {
   if(m.activity_id)return 'activity:'+m.source_scenario_id+':'+m.activity_id;
   if(m.provenance)return 'source:'+m.provenance.drive_id+':'+(m.provenance.page||'')+':'+(m.provenance.variant||'');
+  const url=m.type==='html'&&!m.asset_id&&lmSafeURL(m.url);
+  if(url)return 'html:'+url;
   return m.asset_id?'asset:'+m.asset_id:'material:'+m.id;
 }
 /** Add curated material to the teacher's latest documents, preserving their layout and edits. */
@@ -129,11 +155,13 @@ export function lmCurateTransfer(bundle,documents) {
     if(canvas?.kind!=='canvas')throw Error('Λείπει το αποθηκευμένο μάθημα της κατανομής.');
     const doc=canvas.document,old=workspace.lessons.find(l=>l.canvas_id===cid||(doc.scenario_id&&l.scenario_id===doc.scenario_id));
     if(old){old.canvas_id=cid;old.theme_id=p.theme_id;old.scenario_id=doc.scenario_id;}
-    else workspace.lessons.push({id:p.id,canvas_id:cid,theme_id:p.theme_id,title:doc.title,scenario_id:doc.scenario_id});
+    else workspace.lessons.push({id:p.id,canvas_id:cid,theme_id:p.theme_id,title:doc.title,scenario_id:doc.scenario_id,
+      ...(p.period?{period:p.period}:{})});
   }
   next.set(curation.workspace_id,{kind:'workspace',document:workspace});
   return new Map([...next].filter(([id,row])=>JSON.stringify(row)!==JSON.stringify(documents.get(id))));
 }
+const invalidPeriod = row => 'period' in row && (typeof row.period !== 'string' || row.period.length > 60 || row.period.includes('\0'));
 export function lmValidateTransfer(value) {
   const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if(!value||value.format!=='lesson-map-transfer'||value.schema_version!==1||!Array.isArray(value.documents)||value.documents.length>100||!Array.isArray(value.assets)||value.assets.length>500)throw Error('Επίλεξε έγκυρο ιδιωτικό πακέτο μεταφοράς χάρτη.');
@@ -153,10 +181,13 @@ export function lmValidateTransfer(value) {
     if(c.visual_theme&&!LM_MAP_THEMES.includes(c.visual_theme)||c.title&&typeof c.title!=='string'||c.grade&&typeof c.grade!=='string')throw Error('Μη έγκυρα στοιχεία χάρτη.');
     for(const t of c.themes){
       if(!uuid.test(t.id)||themes.has(t.id)||typeof t.title!=='string'||!t.title.trim()||t.title.length>240||typeof t.icon!=='string'||t.icon.length>20||!t.box||!['x','y','w','h'].every(k=>Number.isFinite(t.box[k]))||Math.abs(t.box.x)>5||Math.abs(t.box.y)>5||t.box.w<.05||t.box.h<.05||t.box.w>2||t.box.h>2)throw Error('Μη έγκυρη θεματική της κατανομής.');
-      if('artwork' in t&&!lmPlanetArtwork(t.artwork))throw Error('Άγνωστη εικόνα πλανήτη.');
+      if('artwork' in t&&!lmPlanetArtwork(t.artwork)&&!lmByzantiumArtwork(t.artwork)){
+        throw Error(c.visual_theme==='planets'?'Άγνωστη εικόνα πλανήτη.':'Άγνωστη εικονογράφηση θεματικής.');
+      }
+      if(invalidPeriod(t))throw Error('Μη έγκυρη χρονική περίοδος.');
       themes.add(t.id);
     }
-    for(const p of c.placements){if(!uuid.test(p.id)||!uuid.test(p.canvas_id)||!themes.has(p.theme_id)||placements.has(p.canvas_id))throw Error('Μη έγκυρη πόλη της κατανομής.');placements.add(p.canvas_id);}
+    for(const p of c.placements){if(!uuid.test(p.id)||!uuid.test(p.canvas_id)||!themes.has(p.theme_id)||placements.has(p.canvas_id)||invalidPeriod(p))throw Error('Μη έγκυρη πόλη της κατανομής.');placements.add(p.canvas_id);}
   }
   return value;
 }
